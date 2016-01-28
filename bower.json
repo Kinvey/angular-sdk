@@ -1,0 +1,22 @@
+{
+  "name": "kinvey-angular-lib",
+  "version": "0.0.0",
+  "description": "Kinvey JavaScript Library for Angular.",
+  "homepage": "https://www.kinvey.com",
+  "license": "Apache-2.0",
+  "authors": [
+    "Kinvey, Inc."
+  ],
+  "main": "kinvey.min.js",
+  "keywords": [
+    "Kinvey",
+    "JavaScript",
+    "Angular",
+    "Ionic"
+  ],
+  "ignore": [
+    "**/.*",
+    "package.json",
+    "README.md"
+  ]
+}
