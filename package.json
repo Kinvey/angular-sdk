@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-lib",
-  "version": "0.0.0",
+  "version": "1.6.6",
   "description": "Kinvey JavaScript Library for Angular.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -16,6 +16,7 @@
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
   ],
+  "main": "./kinvey.min.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/kinvey-angular-lib"
