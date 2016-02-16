@@ -1,7 +1,7 @@
 # Kinvey
 [Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.
 
-This node module makes it very easy to connect your PhoneGap/Cordova app with Kinvey.
+This node module makes it very easy to connect your Angular app with Kinvey.
 
 ## How to use
 
@@ -38,7 +38,7 @@ Kinvey.ping().then(function(response) {
 ```
 
 ## What’s next?
-You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/phonegap/guides/users) or [Data store guide](http://devcenter.kinvey.com/phonegap/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/phonegap/samples) to go straight to working projects.
+You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/angular-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/angular-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/angular-v3.0/samples) to go straight to working projects.
 
 ## License
 
