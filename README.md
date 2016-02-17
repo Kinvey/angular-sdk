@@ -1,7 +1,7 @@
 # Kinvey
 [Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.
 
-This node module makes it very easy to connect your Angular app with Kinvey.
+This node and bower module makes it very easy to connect your Angular app with Kinvey.
 
 ## How to use
 
@@ -15,16 +15,36 @@ You can install the module using npm:
 npm install kinvey-angular --save
 ```
 
+or
+
+```bash
+bower install kinvey-angular-lib --save
+```
+
 ### 3. Configure the library
-Now, the library is available for use in your project. Import the library in your code using `require`. Next, use `Kinvey.init` to configure your app:
+Now, the library is available for use in your project.
+
+If you installed the library with npm, import the library in your code using `require`.
 
 ```javascript
 var Kinvey = require('kinvey-angular');
+```
+
+If you installed the library with bower, add a script tag to your main html file.
+
+```html
+<script src="bower_components/kinvey-angular-lib/dist/kinvey.min.js"></script>
+```
+
+Next, use `Kinvey.init` to configure your app:
+
+```javascript
 Kinvey.init({
     appKey: '<appKey>',
     appSecret: '<appSecret>'
 });
 ```
+
 
 ### 4. Verify Set Up
 You can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the library can communicate with your app.
