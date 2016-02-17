@@ -12,13 +12,13 @@ To use the library, sign up for Kinvey if you have not already done so. Go to th
 You can install the module using npm:
 
 ```bash
-npm install kinvey-angular --save
+npm install kinvey-angular@beta --save
 ```
 
 or
 
 ```bash
-bower install kinvey-angular-lib --save
+bower install kinvey-angular-lib#3.0.0-beta.5 --save
 ```
 
 ### 3. Configure the library
