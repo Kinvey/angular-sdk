@@ -2,10 +2,18 @@ const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({
   camelize: true
 });
+const browserify = require('browserify');
 const del = require('del');
+const exorcist = require('exorcist');
+const source = require('vinyl-source-stream');
+const transform = require('vinyl-transform');
 
-// Lint our source code
-createLintTask('lint', function() {
+function errorHandler(err) {
+  $.util.log(err.toString());
+  this.emit('end');
+}
+
+gulp.task('lint', function() {
   return gulp.src('src/**/*.js')
     .pipe($.eslint())
     .pipe($.eslint.format())
@@ -26,16 +34,18 @@ gulp.task('transpile', function() {
 
 gulp.task('build', ['clean', 'lint'], function () {
   return browserify({
-    debug: true // turns on/off source mapping
+    debug: true, // turns on/off source mapping
     entries: 'src/ngKinvey.js'
   })
-  .transform('babelify')
-  .transform('envify', {})
+  .transform('babelify', {
+    comments: false,
+    presets: ['es2015', 'stage-2']
+  })
   .bundle()
   .pipe($.plumber())
   .pipe(source('kinvey.js'))
   .pipe(transform(function() {
-    return exorcist('dist/kinvey.js.map'));
+    return exorcist('dist/kinvey.js.map');
   }))
   .pipe(gulp.dest('dist'))
   .on('error', errorHandler);
