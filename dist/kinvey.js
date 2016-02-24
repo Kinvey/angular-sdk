@@ -1,7 +1,7 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Kinvey = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
   "name": "kinvey-angular",
-  "version": "3.0.0-beta.7",
+  "version": "3.0.0-beta.8",
   "description": "Kinvey JavaScript Library for Angular.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -6406,7 +6406,7 @@ var CacheStore = function (_NetworkStore) {
           cache: response.data
         };
 
-        result.network = _this2.syncCount().then(function (count) {
+        result.networkPromise = _this2.syncCount().then(function (count) {
           if (count > 0) {
             return _this2.push().then(function () {
               return _this2.syncCount();
@@ -6509,7 +6509,7 @@ var CacheStore = function (_NetworkStore) {
           cache: response.data
         };
 
-        result.network = _this3.syncCount().then(function (count) {
+        result.networkPromise = _this3.syncCount().then(function (count) {
           if (count > 0) {
             return _this3.push().then(function () {
               return _this3.syncCount();
@@ -6584,7 +6584,7 @@ var CacheStore = function (_NetworkStore) {
           cache: response.data
         };
 
-        result.network = _this4.syncCount().then(function (count) {
+        result.networkPromise = _this4.syncCount().then(function (count) {
           if (count > 0) {
             return _this4.push().then(function () {
               return _this4.syncCount();
@@ -6658,7 +6658,7 @@ var CacheStore = function (_NetworkStore) {
           cache: response.data
         };
 
-        result.network = _this5.syncCount().then(function (count) {
+        result.networkPromise = _this5.syncCount().then(function (count) {
           if (count > 0) {
             return _this5.push().then(function () {
               return _this5.syncCount();
@@ -10277,6 +10277,7 @@ function byteCount(str) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.Kinvey = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -10326,7 +10327,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var appdataNamespace = "appdata" || 'appdata';
 
-var Kinvey = function () {
+var Kinvey = exports.Kinvey = function () {
   function Kinvey() {
     _classCallCheck(this, Kinvey);
   }
@@ -10384,9 +10385,6 @@ var Kinvey = function () {
   return Kinvey;
 }();
 
-exports.default = Kinvey;
-
-
 Kinvey.Aggregation = _aggregation2.default;
 Kinvey.AuthorizationGrant = _enums.AuthorizationGrant;
 Kinvey.Command = _command2.default;
@@ -10397,7 +10395,6 @@ Kinvey.Log = _log2.default;
 Kinvey.Metadata = _metadata2.default;
 Kinvey.Promise = Promise;
 Kinvey.Query = _query2.default;
-Kinvey.ReadPolicy = _enums.ReadPolicy;
 Kinvey.SocialIdentity = _enums.SocialIdentity;
 Kinvey.Sync = _sync2.default;
 Kinvey.User = _user.User;
@@ -10523,21 +10520,13 @@ var AngularHttpMiddleware = exports.AngularHttpMiddleware = function (_KinveyMid
 },{"../../core/enums":7,"../../core/rack/middleware":14,"lodash/isEmpty":359,"lodash/isString":368,"lodash/result":382}],45:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _kinvey = require('../../kinvey');
-
-var _kinvey2 = _interopRequireDefault(_kinvey);
 
 var _networkRack = require('../../core/rack/racks/networkRack');
 
 var _http = require('../../core/rack/middleware/http');
 
 var _http2 = require('./http');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global angular:false */
 
@@ -10548,7 +10537,7 @@ ngKinvey.provider('$kinvey', function () {
     var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
     // Initialize the library
-    return _kinvey2.default.init(options);
+    return _kinvey.Kinvey.init(options);
   };
 
   this.$get = ['$q', '$http', function ($q, $http) {
@@ -10557,17 +10546,12 @@ ngKinvey.provider('$kinvey', function () {
     networkRack.swap(_http.HttpMiddleware, new _http2.AngularHttpMiddleware($http));
 
     // Replace Promise with $q
-    _kinvey2.default.Promise = $q;
+    _kinvey.Kinvey.Promise = $q;
 
     // Return the library
-    return _kinvey2.default;
+    return _kinvey.Kinvey;
   }];
 });
-
-/**
- * @private
- */
-exports.default = ngKinvey;
 },{"../../core/rack/middleware/http":16,"../../core/rack/racks/networkRack":26,"../../kinvey":43,"./http":44}],46:[function(require,module,exports){
 var asn1 = exports;
 
