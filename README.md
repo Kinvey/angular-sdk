@@ -12,13 +12,13 @@ To use the library, sign up for Kinvey if you have not already done so. Go to th
 You can install the module using npm:
 
 ```bash
-npm install kinvey-angular@beta --save
+npm install kinvey-angular-sdk --save
 ```
 
 or
 
 ```bash
-bower install kinvey-angular-lib#3.0.0-beta.7 --save
+bower install kinvey-angular-sdk#3.0.0-beta.7 --save
 ```
 
 ### 3. Configure the library
@@ -27,13 +27,13 @@ Now, the library is available for use in your project.
 If you installed the library with npm, import the library in your code using `require`.
 
 ```javascript
-var Kinvey = require('kinvey-angular');
+var Kinvey = require('kinvey-angular-sdk');
 ```
 
 If you installed the library with bower, add a script tag to your main html file.
 
 ```html
-<script src="bower_components/kinvey-angular-lib/dist/kinvey.min.js"></script>
+<script src="bower_components/kinvey-angular-sdk/dist/kinvey.min.js"></script>
 ```
 
 Next, use `Kinvey.init` to configure your app:
