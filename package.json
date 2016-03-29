@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.8",
+  "version": "3.0.0-beta.12",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -23,7 +23,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "kinvey-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
+    "kinvey-sdk-core": "3.0.0-beta.12",
     "lodash": "^4.3.0"
   },
   "devDependencies": {
