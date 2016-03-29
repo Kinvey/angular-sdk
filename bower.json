@@ -1,7 +1,7 @@
 {
   "name": "kinvey-angular-sdk",
   "version": "3.0.0-beta.8",
-  "description": "Kinvey JavaScript Library for Angular.",
+  "description": "Kinvey JavaScript Library for AngularJS applications.",
   "homepage": "https://www.kinvey.com",
   "license": "Apache-2.0",
   "authors": [
@@ -11,8 +11,7 @@
   "keywords": [
     "Kinvey",
     "JavaScript",
-    "Angular",
-    "Ionic"
+    "Angular"
   ],
   "ignore": [
     "**/.*",
