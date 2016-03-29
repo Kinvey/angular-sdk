@@ -23,7 +23,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "kinvey-sdk-core": "3.0.0-beta.12",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.12",
     "lodash": "^4.3.0"
   },
   "devDependencies": {
@@ -64,7 +64,8 @@
   ],
   "browserify": {
     "transform": [["babelify", {
-      "presets": ["es2015", "stage-2"]
+      "presets": ["es2015", "stage-2"],
+      "ignore": "/\/node_modules\/(?!kinvey-javascript-sdk-core\/)/"
     }]]
   }
 }
