@@ -16,7 +16,7 @@
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
   ],
-  "main": "./src/index.js",
+  "main": "./dist/kinvey.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/kinvey-angular-sdk"
@@ -62,11 +62,5 @@
     "Kinvey",
     "JavaScript",
     "Angular"
-  ],
-  "browserify": {
-    "transform": [["babelify", {
-      "presets": ["es2015", "stage-2"],
-      "ignore": "/\/node_modules\/(?!kinvey-javascript-sdk-core\/)/"
-    }]]
-  }
+  ]
 }
