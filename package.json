@@ -16,7 +16,7 @@
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
   ],
-  "main": "./src/index.js",
+  "main": "./es5/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/kinvey-angular-sdk"
@@ -37,8 +37,8 @@
     "envify": "^3.4.0",
     "eslint-config-airbnb": "^6.0.0",
     "eslint-plugin-react": "^4.2.3",
-    "exorcist": "^0.4.0",
     "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.2",
     "gulp-bump": "^1.0.0",
     "gulp-eslint": "^2.0.0",
     "gulp-git": "^1.7.0",
@@ -52,8 +52,7 @@
     "run-sequence": "^1.1.5",
     "semver-regex": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "vinyl-transform": "^1.0.0"
+    "vinyl-source-stream": "^1.1.0"
   },
   "engines": {
     "node": ">=4.0"
