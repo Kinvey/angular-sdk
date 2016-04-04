@@ -32,7 +32,7 @@ gulp.task('lint', function() {
 });
 
 gulp.task('clean', function(done) {
-  return del(['es5', 'dist'], done);
+  return del(['build', 'dist'], done);
 });
 
 gulp.task('build', ['clean', 'lint'], function() {
@@ -40,13 +40,13 @@ gulp.task('build', ['clean', 'lint'], function() {
     .pipe(sourcemaps.init())
     .pipe(babel())
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('./es5'))
+    .pipe(gulp.dest('./build'))
 });
 
 gulp.task('bundle', ['build'], function() {
   return browserify({
     debug: false, // turns on/off source mapping
-    entries: './es5/index.js'
+    entries: './build/index.js'
   })
     .bundle()
     .pipe(plumber())

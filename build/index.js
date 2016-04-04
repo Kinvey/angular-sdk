@@ -9,7 +9,8 @@ var _provider = require('./provider');
 var ngKinvey = angular.module('kinvey', []);
 ngKinvey.provider('$kinvey', _provider.KinveyProvider);
 
-exports.default = {
+var _module = {
   name: 'kinvey'
 };
+exports.default = _module;
 //# sourceMappingURL=index.js.map

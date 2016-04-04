@@ -9,17 +9,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _kinveyJavascriptSdkCore = require('kinvey-javascript-sdk-core');
 
-var _rack = require('kinvey-javascript-sdk-core/src/rack/rack');
+var _rack = require('kinvey-javascript-sdk-core/build/rack/rack');
 
-var _serialize = require('kinvey-javascript-sdk-core/src/rack/middleware/serialize');
+var _serialize = require('kinvey-javascript-sdk-core/build/rack/middleware/serialize');
 
 var _http = require('./http');
 
-var _popup = require('kinvey-javascript-sdk-core/src/utils/popup');
+var _popup = require('kinvey-javascript-sdk-core/build/utils/popup');
 
 var _popup2 = require('./popup');
 
-var _device = require('kinvey-javascript-sdk-core/src/utils/device');
+var _device = require('kinvey-javascript-sdk-core/build/utils/device');
 
 var _device2 = require('./device');
 
