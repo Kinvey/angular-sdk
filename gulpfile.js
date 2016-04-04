@@ -39,7 +39,8 @@ gulp.task('clean', function(done) {
 gulp.task('build', ['clean', 'lint'], function() {
   return browserify({
     debug: true, // turns on/off source mapping
-    entries: './src/index.js'
+    entries: './src/index.js',
+    standalone: 'Kinvey'
   })
     .transform('babelify', {
       comments: false,
