@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Kinvey = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var querystring = require('querystring')
   , extend = require('extend')
   , url = require('url')
@@ -32182,7 +32182,7 @@ module.exports={
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
   ],
-  "main": "./dist/kinvey.js",
+  "main": "./src/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/kinvey-angular-sdk"
@@ -32510,6 +32510,5 @@ var KinveyProvider = exports.KinveyProvider = function () {
   return KinveyProvider;
 }();
 
-},{"./device":249,"./http":250,"./popup":252,"kinvey-javascript-sdk-core":23,"kinvey-javascript-sdk-core/src/rack/middleware/serialize":32,"kinvey-javascript-sdk-core/src/rack/rack":38,"kinvey-javascript-sdk-core/src/utils/device":53,"kinvey-javascript-sdk-core/src/utils/popup":55}]},{},[251])(251)
-});
+},{"./device":249,"./http":250,"./popup":252,"kinvey-javascript-sdk-core":23,"kinvey-javascript-sdk-core/src/rack/middleware/serialize":32,"kinvey-javascript-sdk-core/src/rack/rack":38,"kinvey-javascript-sdk-core/src/utils/device":53,"kinvey-javascript-sdk-core/src/utils/popup":55}]},{},[251])
 //# sourceMappingURL=kinvey.js.map
