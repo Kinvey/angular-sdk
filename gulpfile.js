@@ -144,5 +144,5 @@ gulp.task('release', function() {
 });
 
 gulp.task('default', function() {
-  runSequence('build');
+  runSequence('bundle');
 });
