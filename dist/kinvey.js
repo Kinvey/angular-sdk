@@ -32805,7 +32805,7 @@ function hasOwnProperty(obj, prop) {
 },{"./support/isBuffer":257,"_process":240,"inherits":19}],259:[function(require,module,exports){
 module.exports={
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.12",
+  "version": "3.0.0-beta.14",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -32828,7 +32828,7 @@ module.exports={
   },
   "scripts": {},
   "dependencies": {
-    "kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#master",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.14",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
