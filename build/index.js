@@ -13,4 +13,3 @@ var _module = {
   name: 'kinvey'
 };
 exports.default = _module;
-//# sourceMappingURL=index.js.map

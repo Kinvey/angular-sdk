@@ -79,4 +79,3 @@ var PopupAdapter = exports.PopupAdapter = function () {
 
   return PopupAdapter;
 }();
-//# sourceMappingURL=popup.js.map
