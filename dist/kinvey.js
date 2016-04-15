@@ -20686,6 +20686,7 @@ var SyncStore = exports.SyncStore = function (_CacheStore) {
       });
 
       if (entity[idAttribute]) {
+        request.method = _enums.HttpMethod.PUT;
         request.url = _url2.default.format({
           protocol: this.client.protocol,
           host: this.client.host,
@@ -21020,11 +21021,19 @@ var _babybird = require('babybird');
 
 var _babybird2 = _interopRequireDefault(_babybird);
 
-var _datastore = require('./stores/datastore');
+var _enums = require('./enums');
 
 var _errors = require('./errors');
 
 var _metadata = require('./metadata');
+
+var _local = require('./requests/local');
+
+var _network = require('./requests/network');
+
+var _url = require('url');
+
+var _url2 = _interopRequireDefault(_url);
 
 var _map = require('lodash/map');
 
@@ -21050,6 +21059,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var appdataNamespace = process.env.KINVEY_DATASTORE_NAMESPACE || 'appdata';
 var syncCollectionName = process.env.KINVEY_SYNC_COLLECTION_NAME || 'kinvey_sync';
 var idAttribute = process.env.KINVEY_ID_ATTRIBUTE || '_id';
 var kmdAttribute = process.env.KINVEY_KMD_ATTRIBUTE || '_kmd';
@@ -21064,7 +21074,22 @@ var SyncManager = exports.SyncManager = function () {
     value: function count(query) {
       var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-      var promise = this.syncStore.find(query, options).then(function (syncEntities) {
+      var request = new _local.LocalRequest({
+        method: _enums.HttpMethod.GET,
+        url: _url2.default.format({
+          protocol: this.client.protocol,
+          host: this.client.host,
+          pathname: this._pathname
+        }),
+        properties: options.properties,
+        query: query,
+        timeout: options.timeout,
+        client: this.client
+      });
+
+      var promise = request.execute().then(function (response) {
+        return response.data;
+      }).then(function (syncEntities) {
         var size = (0, _reduce2.default)(syncEntities, function (sum, entity) {
           return sum + entity.size;
         }, 0);
@@ -21087,7 +21112,19 @@ var SyncManager = exports.SyncManager = function () {
         return _babybird2.default.resolve(null);
       }
 
-      var promise = this.syncStore.findById(name, options).catch(function (error) {
+      var request = new _local.LocalRequest({
+        method: _enums.HttpMethod.GET,
+        url: _url2.default.format({
+          protocol: this.client.protocol,
+          host: this.client.host,
+          pathname: this._pathname + '/' + name
+        }),
+        properties: options.properties,
+        timeout: options.timeout,
+        client: this.client
+      });
+
+      var promise = request.execute().catch(function (error) {
         if (error instanceof _errors.NotFoundError) {
           return {
             _id: name,
@@ -21097,6 +21134,8 @@ var SyncManager = exports.SyncManager = function () {
         }
 
         throw error;
+      }).then(function (response) {
+        return response.data;
       }).then(function (syncEntity) {
         if (!(0, _isArray2.default)(entities)) {
           entities = [entities];
@@ -21114,7 +21153,19 @@ var SyncManager = exports.SyncManager = function () {
           }
         });
 
-        return _this.syncStore.save(syncEntity);
+        var request = new _local.LocalRequest({
+          method: _enums.HttpMethod.PUT,
+          url: _url2.default.format({
+            protocol: _this.client.protocol,
+            host: _this.client.host,
+            pathname: _this._pathname
+          }),
+          properties: options.properties,
+          timeout: options.timeout,
+          data: syncEntity,
+          client: _this.client
+        });
+        return request.execute();
       }).then(function () {
         return null;
       });
@@ -21128,7 +21179,20 @@ var SyncManager = exports.SyncManager = function () {
 
       var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-      var promise = this.syncStore.find(query, options).then(function (syncEntities) {
+      var request = new _local.LocalRequest({
+        method: _enums.HttpMethod.GET,
+        url: _url2.default.format({
+          protocol: this.client.protocol,
+          host: this.client.host,
+          pathname: this._pathname
+        }),
+        properties: options.properties,
+        timeout: options.timeout,
+        client: this.client
+      });
+      var promise = request.execute().then(function (response) {
+        return response.data;
+      }).then(function (syncEntities) {
         var promise = new _babybird2.default(function (resolve, reject) {
           (0, _mapSeries2.default)(syncEntities, function (syncEntity, callback) {
             var collectionName = syncEntity._id;
@@ -21139,10 +21203,6 @@ var SyncManager = exports.SyncManager = function () {
             var batchSize = 100;
             var i = 0;
 
-            var collectionNetworkStore = _datastore.DataStore.getInstance(collectionName, _datastore.DataStoreType.Network);
-            var collectionSyncStore = _datastore.DataStore.getInstance(collectionName, _datastore.DataStoreType.Sync);
-            collectionSyncStore.disableSync();
-
             var batchSync = function batchSync() {
               var batchIds = ids.slice(i, i + batchSize);
               i += batchSize;
@@ -21150,7 +21210,20 @@ var SyncManager = exports.SyncManager = function () {
               var save = [];
               var remove = [];
               var promises = (0, _map2.default)(batchIds, function (id) {
-                var promise = collectionSyncStore.findById(id).then(function (entity) {
+                var request = new _local.LocalRequest({
+                  method: _enums.HttpMethod.GET,
+                  url: _url2.default.format({
+                    protocol: _this2.client.protocol,
+                    host: _this2.client.host,
+                    pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName + '/' + id
+                  }),
+                  properties: options.properties,
+                  timeout: options.timeout,
+                  client: _this2.client
+                });
+                var promise = request.execute().then(function (response) {
+                  return response.data;
+                }).then(function (entity) {
                   save.push(entity);
                   return entity;
                 }).catch(function (error) {
@@ -21170,15 +21243,62 @@ var SyncManager = exports.SyncManager = function () {
                   var originalId = entity[idAttribute];
                   delete entity[kmdAttribute];
 
+                  var request = new _network.NetworkRequest({
+                    method: _enums.HttpMethod.PUT,
+                    url: _url2.default.format({
+                      protocol: _this2.client.protocol,
+                      host: _this2.client.host,
+                      pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName + '/' + originalId
+                    }),
+                    properties: options.properties,
+                    timeout: options.timeout,
+                    data: entity,
+                    client: _this2.client
+                  });
+
                   if (metadata.isLocal()) {
                     delete entity[idAttribute];
+                    request.method = _enums.HttpMethod.POST;
+                    request.url = _url2.default.format({
+                      protocol: _this2.client.protocol,
+                      host: _this2.client.host,
+                      pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName
+                    });
+                    request.data = entity;
                   }
 
-                  return collectionNetworkStore.save(entity, options).then(function (entity) {
-                    return collectionSyncStore.save(entity, options);
+                  return request.execute().then(function (request) {
+                    return request.data;
+                  }).then(function (entity) {
+                    var request = new _local.LocalRequest({
+                      method: _enums.HttpMethod.PUT,
+                      url: _url2.default.format({
+                        protocol: _this2.client.protocol,
+                        host: _this2.client.host,
+                        pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName + '/' + entity[idAttribute]
+                      }),
+                      properties: options.properties,
+                      timeout: options.timeout,
+                      data: entity,
+                      client: _this2.client
+                    });
+                    return request.execute().then(function (response) {
+                      return response.data;
+                    });
                   }).then(function (entity) {
                     if (metadata.isLocal()) {
-                      return collectionSyncStore.removeById(originalId, options).then(function () {
+                      var _request = new _local.LocalRequest({
+                        method: _enums.HttpMethod.DELETE,
+                        url: _url2.default.format({
+                          protocol: _this2.client.protocol,
+                          host: _this2.client.host,
+                          pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName + '/' + originalId
+                        }),
+                        properties: options.properties,
+                        timeout: options.timeout,
+                        client: _this2.client
+                      });
+                      return _request.execute().then(function () {
                         return entity;
                       });
                     }
@@ -21212,7 +21332,19 @@ var SyncManager = exports.SyncManager = function () {
                 });
 
                 var removed = (0, _map2.default)(remove, function (id) {
-                  var promise = collectionNetworkStore.removeById(id, options).then(function () {
+                  var request = new _network.NetworkRequest({
+                    method: _enums.HttpMethod.DELETE,
+                    url: _url2.default.format({
+                      protocol: _this2.client.protocol,
+                      host: _this2.client.host,
+                      pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collectionName + '/' + id
+                    }),
+                    properties: options.properties,
+                    timeout: options.timeout,
+                    client: _this2.client
+                  });
+
+                  var promise = request.execute().then(function () {
                     syncSize = syncSize - 1;
                     delete entities[id];
                     return {
@@ -21279,7 +21411,20 @@ var SyncManager = exports.SyncManager = function () {
               }).then(function (result) {
                 syncEntity.size = syncSize;
                 syncEntity.entities = entities;
-                return _this2.syncStore.save(syncEntity, options).then(function () {
+
+                var request = new _local.LocalRequest({
+                  method: _enums.HttpMethod.PUT,
+                  url: _url2.default.format({
+                    protocol: _this2.client.protocol,
+                    host: _this2.client.host,
+                    pathname: _this2._pathname + '/' + syncEntity[idAttribute]
+                  }),
+                  properties: options.properties,
+                  timeout: options.timeout,
+                  data: syncEntity,
+                  client: _this2.client
+                });
+                return request.execute().then(function () {
                   return result;
                 });
               });
@@ -21305,18 +21450,16 @@ var SyncManager = exports.SyncManager = function () {
       return promise;
     }
   }, {
-    key: 'syncStore',
+    key: '_pathname',
     get: function get() {
-      var syncStore = _datastore.DataStore.getInstance(syncCollectionName, _datastore.DataStoreType.Sync);
-      syncStore.disableSync();
-      return syncStore;
+      return '/' + appdataNamespace + '/' + this.client.appKey + '/' + syncCollectionName;
     }
   }]);
 
   return SyncManager;
 }();
 }).call(this,require('_process'))
-},{"./errors":26,"./metadata":29,"./stores/datastore":50,"_process":250,"async/mapSeries":70,"babybird":9,"lodash/forEach":206,"lodash/isArray":211,"lodash/map":231,"lodash/reduce":236}],56:[function(require,module,exports){
+},{"./enums":25,"./errors":26,"./metadata":29,"./requests/local":44,"./requests/network":45,"_process":250,"async/mapSeries":70,"babybird":9,"lodash/forEach":206,"lodash/isArray":211,"lodash/map":231,"lodash/reduce":236,"url":265}],56:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -22434,7 +22577,7 @@ function nested(obj, dotProperty, value) {
  * @private
  */
 function isDefined(obj) {
-  return !!obj;
+  return obj !== undefined && obj !== null;
 }
 
 /**
