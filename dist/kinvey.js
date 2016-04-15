@@ -13421,7 +13421,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var activeUserCollectionName = process.env.KINVEY_ACTIVE_USER_COLLECTION_NAME || 'kinvey_activeUser';
 var activeSocialIdentityTokenCollectionName = process.env.KINVEY_ACTIVE_SOCIAL_IDENTITY_TOKEN_COLLECTION_NAME || 'kinvey_activeSocialIdentityToken';
-var _sharedInstance = void 0;
+var _sharedInstance = Symbol();
 
 /**
  * The Client class stores information regarding your application. You can create mutiple clients
@@ -13606,7 +13606,7 @@ var Client = exports.Client = function () {
     key: 'init',
     value: function init(options) {
       var client = new Client(options);
-      _sharedInstance = client;
+      this[_sharedInstance] = client;
       return client;
     }
 
@@ -13621,7 +13621,7 @@ var Client = exports.Client = function () {
   }, {
     key: 'sharedInstance',
     value: function sharedInstance() {
-      var client = _sharedInstance;
+      var client = this[_sharedInstance];
 
       if (!client) {
         throw new _errors.KinveyError('You have not initialized the library. ' + 'Please call Kinvey.init() to initialize the library.');
@@ -16753,8 +16753,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var sharedCacheRackInstance = void 0;
-var sharedNetworkRackInstance = void 0;
+var sharedCacheRackInstance = Symbol();
+var sharedNetworkRackInstance = Symbol();
 
 /**
  * @private
@@ -16973,11 +16973,11 @@ var CacheRack = exports.CacheRack = function (_KinveyRack) {
   _createClass(CacheRack, null, [{
     key: 'sharedInstance',
     value: function sharedInstance() {
-      var instance = sharedCacheRackInstance;
+      var instance = this[sharedCacheRackInstance];
 
       if (!instance) {
         instance = new CacheRack();
-        sharedCacheRackInstance = instance;
+        this[sharedCacheRackInstance] = instance;
       }
 
       return instance;
@@ -17010,11 +17010,11 @@ var NetworkRack = exports.NetworkRack = function (_KinveyRack2) {
   _createClass(NetworkRack, null, [{
     key: 'sharedInstance',
     value: function sharedInstance() {
-      var instance = sharedNetworkRackInstance;
+      var instance = this[sharedNetworkRackInstance];
 
       if (!instance) {
         instance = new NetworkRack();
-        sharedNetworkRackInstance = instance;
+        this[sharedNetworkRackInstance] = instance;
       }
 
       return instance;
