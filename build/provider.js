@@ -28,27 +28,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var KinveyProvider = exports.KinveyProvider = function () {
   function KinveyProvider() {
     _classCallCheck(this, KinveyProvider);
+
+    // Use Http middleware after the Serialize middleware
+    var networkRack = _rack.NetworkRack.sharedInstance();
+    networkRack.useAfter(_serialize.SerializeMiddleware, new _http.HttpMiddleware());
+
+    // Use Device Adapter
+    _device.Device.use(new _device2.DeviceAdapter());
+
+    // Use Popup Adapter
+    _popup.Popup.use(new _popup2.PopupAdapter());
   }
 
   _createClass(KinveyProvider, [{
-    key: 'init',
-    value: function init() {
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-      // Use Http middleware after the Serialize middleware
-      var networkRack = _rack.NetworkRack.sharedInstance();
-      networkRack.useAfter(_serialize.SerializeMiddleware, new _http.HttpMiddleware());
-
-      // Use Device Adapter
-      _device.Device.use(new _device2.DeviceAdapter());
-
-      // Use Popup Adapter
-      _popup.Popup.use(new _popup2.PopupAdapter());
-
-      // Initialize Kinvey
-      return _kinveyJavascriptSdkCore.Kinvey.init(options);
-    }
-  }, {
     key: '$get',
     value: function $get() {
       return _kinveyJavascriptSdkCore.Kinvey;
