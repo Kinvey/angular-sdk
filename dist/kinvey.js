@@ -271,6 +271,12 @@ var KinveyProvider = exports.KinveyProvider = function () {
   }
 
   _createClass(KinveyProvider, [{
+    key: 'init',
+    value: function init(options) {
+      // Initialize Kinvey
+      return _kinveyJavascriptSdkCore.Kinvey.init(options);
+    }
+  }, {
     key: '$get',
     value: function $get() {
       return _kinveyJavascriptSdkCore.Kinvey;
