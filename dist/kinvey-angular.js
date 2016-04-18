@@ -139,7 +139,9 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _aggregation = __webpack_require__(8);
+	var _errors = __webpack_require__(8);
+
+	var _aggregation = __webpack_require__(14);
 
 	var _client = __webpack_require__(127);
 
@@ -179,6 +181,7 @@
 	  _createClass(Kinvey, null, [{
 	    key: 'init',
 
+
 	    /**
 	     * Initializes the library with your app's information.
 	     *
@@ -201,8 +204,15 @@
 	     * });
 	     */
 	    value: function init(options) {
-	      var client = _client.Client.init(options);
-	      return client;
+	      if (!options.appKey && !options.appId) {
+	        throw new _errors.KinveyError('No App Key was provided. ' + 'Unable to create a new Client without an App Key.');
+	      }
+
+	      if (!options.appSecret && !options.masterSecret) {
+	        throw new _errors.KinveyError('No App Secret or Master Secret was provided. ' + 'Unable to create a new Client without an App Key.');
+	      }
+
+	      this._client = _client.Client.init(options);
 	    }
 
 	    /**
@@ -230,6 +240,15 @@
 	        return response.data;
 	      });
 	      return promise;
+	    }
+	  }, {
+	    key: 'client',
+	    get: function get() {
+	      if (!this._client) {
+	        throw new _errors.KinveyError('You have not initialized the library. ' + 'Please call Kinvey.init() to initialize the library.');
+	      }
+
+	      return this._client;
 	    }
 	  }]);
 
@@ -1661,249 +1680,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Aggregation = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _errors = __webpack_require__(9);
-
-	var _query2 = __webpack_require__(15);
-
-	var _result = __webpack_require__(126);
-
-	var _result2 = _interopRequireDefault(_result);
-
-	var _assign = __webpack_require__(115);
-
-	var _assign2 = _interopRequireDefault(_assign);
-
-	var _forEach = __webpack_require__(17);
-
-	var _forEach2 = _interopRequireDefault(_forEach);
-
-	var _isObject = __webpack_require__(14);
-
-	var _isObject2 = _interopRequireDefault(_isObject);
-
-	var _isString = __webpack_require__(37);
-
-	var _isString2 = _interopRequireDefault(_isString);
-
-	var _isFunction = __webpack_require__(13);
-
-	var _isFunction2 = _interopRequireDefault(_isFunction);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var Aggregation = function () {
-	  function Aggregation(options) {
-	    _classCallCheck(this, Aggregation);
-
-	    options = (0, _assign2.default)({
-	      query: null,
-	      initial: {},
-	      key: {},
-	      reduce: function () {}.toString()
-	    }, options);
-
-	    this.query(options.query);
-	    this._initial = options.initial;
-	    this._key = options.key;
-	    this._reduce = options.reduce;
-	  }
-
-	  _createClass(Aggregation, [{
-	    key: 'by',
-	    value: function by(field) {
-	      this._key[field] = true;
-	      return this;
-	    }
-	  }, {
-	    key: 'initial',
-	    value: function initial(objectOrKey, value) {
-	      if (typeof value === 'undefined' && !(0, _isObject2.default)(objectOrKey)) {
-	        throw new _errors.KinveyError('objectOrKey argument must be an Object.');
-	      }
-
-	      if ((0, _isObject2.default)(objectOrKey)) {
-	        this._initial = objectOrKey;
-	      } else {
-	        this._initial[objectOrKey] = value;
-	      }
-
-	      return this;
-	    }
-	  }, {
-	    key: 'query',
-	    value: function query(_query) {
-	      if (_query && !(_query instanceof _query2.Query)) {
-	        _query = new _query2.Query((0, _result2.default)(_query, 'toJSON', _query));
-	      }
-
-	      this._query = _query;
-	      return this;
-	    }
-	  }, {
-	    key: 'process',
-	    value: function process() {
-	      var entities = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-
-	      var groups = {};
-	      var response = [];
-	      var aggregation = this.toJSON();
-	      var reduce = aggregation.reduce.replace(/function[\s\S]*?\([\s\S]*?\)/, '');
-	      aggregation.reduce = new Function(['doc', 'out'], reduce); // eslint-disable-line no-new-func
-
-	      if (this._query) {
-	        entities = this._query.process(entities);
-	      }
-
-	      (0, _forEach2.default)(entities, function (entity) {
-	        var group = {};
-	        var entityNames = Object.keys(entity);
-
-	        (0, _forEach2.default)(entityNames, function (name) {
-	          group[name] = entity[name];
-	        });
-
-	        var key = JSON.stringify(group);
-	        if (!groups[key]) {
-	          groups[key] = group;
-	          var attributes = Object.keys(aggregation.initial);
-
-	          (0, _forEach2.default)(attributes, function (attr) {
-	            groups[key][attr] = aggregation.initial[attr];
-	          });
-	        }
-
-	        aggregation.reduce(entity, groups[key]);
-	      });
-
-	      var segments = Object.keys(groups);
-	      (0, _forEach2.default)(segments, function (segment) {
-	        response.push(groups[segment]);
-	      });
-
-	      return response;
-	    }
-	  }, {
-	    key: 'reduce',
-	    value: function reduce(fn) {
-	      if ((0, _isFunction2.default)(fn)) {
-	        fn = fn.toString();
-	      }
-
-	      if (!(0, _isString2.default)(fn)) {
-	        throw new _errors.KinveyError('fn argument must be of type function or string.');
-	      }
-
-	      this._reduce = fn;
-	      return this;
-	    }
-	  }, {
-	    key: 'toJSON',
-	    value: function toJSON() {
-	      var json = {
-	        key: this._key,
-	        initial: this._initial,
-	        reduce: this._reduce,
-	        condition: this._query ? this._query.toJSON().filter : {},
-	        query: this._query ? this._query.toJSON() : null
-	      };
-
-	      return json;
-	    }
-	  }], [{
-	    key: 'count',
-	    value: function count() {
-	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      var aggregation = new Aggregation();
-
-	      if (field) {
-	        aggregation.by(field);
-	      }
-
-	      aggregation.initial({ result: 0 });
-	      aggregation.reduce(function (doc, out) {
-	        out.result += 1;
-	        return out;
-	      });
-	      return aggregation;
-	    }
-	  }, {
-	    key: 'sum',
-	    value: function sum() {
-	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      field = field.replace('\'', '\\\'');
-
-	      var aggregation = new Aggregation();
-	      aggregation.initial({ result: 0 });
-	      aggregation.reduce('function(doc, out) { ' + (' out.result += doc["' + field + '"]; ') + '}');
-	      return aggregation;
-	    }
-	  }, {
-	    key: 'min',
-	    value: function min() {
-	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      field = field.replace('\'', '\\\'');
-
-	      var aggregation = new Aggregation();
-	      aggregation.initial({ result: Infinity });
-	      aggregation.reduce('function(doc, out) { ' + (' out.result = Math.min(out.result, doc["' + field + '"]); ') + '}');
-	      return aggregation;
-	    }
-	  }, {
-	    key: 'max',
-	    value: function max() {
-	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      field = field.replace('\'', '\\\'');
-
-	      var aggregation = new Aggregation();
-	      aggregation.initial({ result: -Infinity });
-	      aggregation.reduce('function(doc, out) { ' + (' out.result = Math.max(out.result, doc["' + field + '"]); ') + '}');
-	      return aggregation;
-	    }
-	  }, {
-	    key: 'average',
-	    value: function average() {
-	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-
-	      field = field.replace('\'', '\\\'');
-
-	      var aggregation = new Aggregation();
-	      aggregation.initial({ count: 0, result: 0 });
-	      aggregation.reduce('function(doc, out) { ' + (' out.result = (out.result * out.count + doc["' + field + '"]) / (out.count + 1);') + ' out.count += 1;' + '}');
-	      return aggregation;
-	    }
-	  }]);
-
-	  return Aggregation;
-	}();
-
-	exports.Aggregation = Aggregation;
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 	exports.NoResponseError = exports.NotFoundError = exports.NetworkConnectionError = exports.KinveyError = exports.InvalidCredentialsError = exports.InsufficientCredentialsError = exports.ActiveUserError = undefined;
 
-	var _util = __webpack_require__(10);
+	var _util = __webpack_require__(9);
 
 	var _util2 = _interopRequireDefault(_util);
 
-	var _isFunction = __webpack_require__(13);
+	var _isFunction = __webpack_require__(12);
 
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 
@@ -1947,7 +1730,7 @@
 	var NoResponseError = exports.NoResponseError = Error.extend('NoResponseError');
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global, process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -2475,7 +2258,7 @@
 	}
 	exports.isPrimitive = isPrimitive;
 
-	exports.isBuffer = __webpack_require__(11);
+	exports.isBuffer = __webpack_require__(10);
 
 	function objectToString(o) {
 	  return Object.prototype.toString.call(o);
@@ -2519,7 +2302,7 @@
 	 *     prototype.
 	 * @param {function} superCtor Constructor function to inherit prototype from.
 	 */
-	exports.inherits = __webpack_require__(12);
+	exports.inherits = __webpack_require__(11);
 
 	exports._extend = function(origin, add) {
 	  // Don't do anything if add isn't an object
@@ -2540,7 +2323,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(3)))
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = function isBuffer(arg) {
@@ -2551,7 +2334,7 @@
 	}
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	if (typeof Object.create === 'function') {
@@ -2580,10 +2363,10 @@
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(14);
+	var isObject = __webpack_require__(13);
 
 	/** `Object#toString` result references. */
 	var funcTag = '[object Function]',
@@ -2629,7 +2412,7 @@
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/**
@@ -2664,6 +2447,242 @@
 
 	module.exports = isObject;
 
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Aggregation = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _errors = __webpack_require__(8);
+
+	var _query2 = __webpack_require__(15);
+
+	var _result = __webpack_require__(126);
+
+	var _result2 = _interopRequireDefault(_result);
+
+	var _assign = __webpack_require__(115);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _forEach = __webpack_require__(17);
+
+	var _forEach2 = _interopRequireDefault(_forEach);
+
+	var _isObject = __webpack_require__(13);
+
+	var _isObject2 = _interopRequireDefault(_isObject);
+
+	var _isString = __webpack_require__(37);
+
+	var _isString2 = _interopRequireDefault(_isString);
+
+	var _isFunction = __webpack_require__(12);
+
+	var _isFunction2 = _interopRequireDefault(_isFunction);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Aggregation = function () {
+	  function Aggregation(options) {
+	    _classCallCheck(this, Aggregation);
+
+	    options = (0, _assign2.default)({
+	      query: null,
+	      initial: {},
+	      key: {},
+	      reduce: function () {}.toString()
+	    }, options);
+
+	    this.query(options.query);
+	    this._initial = options.initial;
+	    this._key = options.key;
+	    this._reduce = options.reduce;
+	  }
+
+	  _createClass(Aggregation, [{
+	    key: 'by',
+	    value: function by(field) {
+	      this._key[field] = true;
+	      return this;
+	    }
+	  }, {
+	    key: 'initial',
+	    value: function initial(objectOrKey, value) {
+	      if (typeof value === 'undefined' && !(0, _isObject2.default)(objectOrKey)) {
+	        throw new _errors.KinveyError('objectOrKey argument must be an Object.');
+	      }
+
+	      if ((0, _isObject2.default)(objectOrKey)) {
+	        this._initial = objectOrKey;
+	      } else {
+	        this._initial[objectOrKey] = value;
+	      }
+
+	      return this;
+	    }
+	  }, {
+	    key: 'query',
+	    value: function query(_query) {
+	      if (_query && !(_query instanceof _query2.Query)) {
+	        _query = new _query2.Query((0, _result2.default)(_query, 'toJSON', _query));
+	      }
+
+	      this._query = _query;
+	      return this;
+	    }
+	  }, {
+	    key: 'process',
+	    value: function process() {
+	      var entities = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
+
+	      var groups = {};
+	      var response = [];
+	      var aggregation = this.toJSON();
+	      var reduce = aggregation.reduce.replace(/function[\s\S]*?\([\s\S]*?\)/, '');
+	      aggregation.reduce = new Function(['doc', 'out'], reduce); // eslint-disable-line no-new-func
+
+	      if (this._query) {
+	        entities = this._query.process(entities);
+	      }
+
+	      (0, _forEach2.default)(entities, function (entity) {
+	        var group = {};
+	        var entityNames = Object.keys(entity);
+
+	        (0, _forEach2.default)(entityNames, function (name) {
+	          group[name] = entity[name];
+	        });
+
+	        var key = JSON.stringify(group);
+	        if (!groups[key]) {
+	          groups[key] = group;
+	          var attributes = Object.keys(aggregation.initial);
+
+	          (0, _forEach2.default)(attributes, function (attr) {
+	            groups[key][attr] = aggregation.initial[attr];
+	          });
+	        }
+
+	        aggregation.reduce(entity, groups[key]);
+	      });
+
+	      var segments = Object.keys(groups);
+	      (0, _forEach2.default)(segments, function (segment) {
+	        response.push(groups[segment]);
+	      });
+
+	      return response;
+	    }
+	  }, {
+	    key: 'reduce',
+	    value: function reduce(fn) {
+	      if ((0, _isFunction2.default)(fn)) {
+	        fn = fn.toString();
+	      }
+
+	      if (!(0, _isString2.default)(fn)) {
+	        throw new _errors.KinveyError('fn argument must be of type function or string.');
+	      }
+
+	      this._reduce = fn;
+	      return this;
+	    }
+	  }, {
+	    key: 'toJSON',
+	    value: function toJSON() {
+	      var json = {
+	        key: this._key,
+	        initial: this._initial,
+	        reduce: this._reduce,
+	        condition: this._query ? this._query.toJSON().filter : {},
+	        query: this._query ? this._query.toJSON() : null
+	      };
+
+	      return json;
+	    }
+	  }], [{
+	    key: 'count',
+	    value: function count() {
+	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      var aggregation = new Aggregation();
+
+	      if (field) {
+	        aggregation.by(field);
+	      }
+
+	      aggregation.initial({ result: 0 });
+	      aggregation.reduce(function (doc, out) {
+	        out.result += 1;
+	        return out;
+	      });
+	      return aggregation;
+	    }
+	  }, {
+	    key: 'sum',
+	    value: function sum() {
+	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      field = field.replace('\'', '\\\'');
+
+	      var aggregation = new Aggregation();
+	      aggregation.initial({ result: 0 });
+	      aggregation.reduce('function(doc, out) { ' + (' out.result += doc["' + field + '"]; ') + '}');
+	      return aggregation;
+	    }
+	  }, {
+	    key: 'min',
+	    value: function min() {
+	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      field = field.replace('\'', '\\\'');
+
+	      var aggregation = new Aggregation();
+	      aggregation.initial({ result: Infinity });
+	      aggregation.reduce('function(doc, out) { ' + (' out.result = Math.min(out.result, doc["' + field + '"]); ') + '}');
+	      return aggregation;
+	    }
+	  }, {
+	    key: 'max',
+	    value: function max() {
+	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      field = field.replace('\'', '\\\'');
+
+	      var aggregation = new Aggregation();
+	      aggregation.initial({ result: -Infinity });
+	      aggregation.reduce('function(doc, out) { ' + (' out.result = Math.max(out.result, doc["' + field + '"]); ') + '}');
+	      return aggregation;
+	    }
+	  }, {
+	    key: 'average',
+	    value: function average() {
+	      var field = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
+	      field = field.replace('\'', '\\\'');
+
+	      var aggregation = new Aggregation();
+	      aggregation.initial({ count: 0, result: 0 });
+	      aggregation.reduce('function(doc, out) { ' + (' out.result = (out.result * out.count + doc["' + field + '"]) / (out.count + 1);') + ' out.count += 1;' + '}');
+	      return aggregation;
+	    }
+	  }]);
+
+	  return Aggregation;
+	}();
+
+	exports.Aggregation = Aggregation;
 
 /***/ },
 /* 15 */
@@ -2702,7 +2721,7 @@
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _isObject = __webpack_require__(14);
+	var _isObject = __webpack_require__(13);
 
 	var _isObject2 = _interopRequireDefault(_isObject);
 
@@ -3372,7 +3391,7 @@
 
 	var _forEach2 = _interopRequireDefault(_forEach);
 
-	var _isFunction = __webpack_require__(13);
+	var _isFunction = __webpack_require__(12);
 
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 
@@ -3885,7 +3904,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var getLength = __webpack_require__(32),
-	    isFunction = __webpack_require__(13),
+	    isFunction = __webpack_require__(12),
 	    isLength = __webpack_require__(34);
 
 	/**
@@ -4789,9 +4808,9 @@
 /* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(13),
+	var isFunction = __webpack_require__(12),
 	    isHostObject = __webpack_require__(61),
-	    isObject = __webpack_require__(14),
+	    isObject = __webpack_require__(13),
 	    toSource = __webpack_require__(62);
 
 	/**
@@ -5275,7 +5294,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseIsEqualDeep = __webpack_require__(78),
-	    isObject = __webpack_require__(14),
+	    isObject = __webpack_require__(13),
 	    isObjectLike = __webpack_require__(35);
 
 	/**
@@ -6032,7 +6051,7 @@
 /* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(14);
+	var isObject = __webpack_require__(13);
 
 	/**
 	 * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -7424,7 +7443,7 @@
 	var eq = __webpack_require__(49),
 	    isArrayLike = __webpack_require__(31),
 	    isIndex = __webpack_require__(38),
-	    isObject = __webpack_require__(14);
+	    isObject = __webpack_require__(13);
 
 	/**
 	 * Checks if the given arguments are from an iteratee call.
@@ -7607,8 +7626,8 @@
 /* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(13),
-	    isObject = __webpack_require__(14),
+	var isFunction = __webpack_require__(12),
+	    isObject = __webpack_require__(13),
 	    isSymbol = __webpack_require__(106);
 
 	/** Used as references for various `Number` constants. */
@@ -7734,7 +7753,7 @@
 /* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(14);
+	var isObject = __webpack_require__(13);
 
 	/** `Object#toString` result references. */
 	var regexpTag = '[object RegExp]';
@@ -7779,7 +7798,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var castPath = __webpack_require__(102),
-	    isFunction = __webpack_require__(13),
+	    isFunction = __webpack_require__(12),
 	    isKey = __webpack_require__(107);
 
 	/**
@@ -7849,7 +7868,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _sync = __webpack_require__(128);
 
@@ -7875,7 +7894,7 @@
 
 	var activeUserCollectionName = process.env.KINVEY_ACTIVE_USER_COLLECTION_NAME || 'kinvey_activeUser';
 	var activeSocialIdentityTokenCollectionName = process.env.KINVEY_ACTIVE_SOCIAL_IDENTITY_TOKEN_COLLECTION_NAME || 'kinvey_activeSocialIdentityToken';
-	var _sharedInstance = Symbol();
+	var _sharedInstance = null;
 
 	/**
 	 * The Client class stores information regarding your application. You can create mutiple clients
@@ -7914,14 +7933,6 @@
 	      protocol: process.env.KINVEY_API_PROTOCOL || 'https:',
 	      host: process.env.KINVEY_API_HOST || 'baas.kinvey.com'
 	    }, options);
-
-	    if (!options.appKey && !options.appId) {
-	      throw new _errors.KinveyError('No App Key was provided. ' + 'Unable to create a new Client without an App Key.');
-	    }
-
-	    if (!options.appSecret && !options.masterSecret) {
-	      throw new _errors.KinveyError('No App Secret or Master Secret was provided. ' + 'Unable to create a new Client without an App Key.');
-	    }
 
 	    if (options.hostname && (0, _isString2.default)(options.hostname)) {
 	      var hostnameParsed = _url2.default.parse(options.hostname);
@@ -8060,7 +8071,7 @@
 	    key: 'init',
 	    value: function init(options) {
 	      var client = new Client(options);
-	      this[_sharedInstance] = client;
+	      _sharedInstance = client;
 	      return client;
 	    }
 
@@ -8075,13 +8086,11 @@
 	  }, {
 	    key: 'sharedInstance',
 	    value: function sharedInstance() {
-	      var client = this[_sharedInstance];
-
-	      if (!client) {
+	      if (!_sharedInstance) {
 	        throw new _errors.KinveyError('You have not initialized the library. ' + 'Please call Kinvey.init() to initialize the library.');
 	      }
 
-	      return client;
+	      return _sharedInstance;
 	    }
 	  }]);
 
@@ -8108,7 +8117,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _metadata = __webpack_require__(130);
 
@@ -8647,7 +8656,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _isPlainObject = __webpack_require__(131);
 
@@ -8837,7 +8846,7 @@
 
 	var _rack = __webpack_require__(140);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _response = __webpack_require__(223);
 
@@ -11320,30 +11329,16 @@
 	});
 	exports.Device = undefined;
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _object = __webpack_require__(16);
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
 	 * @private
 	 */
-
-	var Device = exports.Device = function () {
-	  function Device() {
-	    _classCallCheck(this, Device);
+	var Device = exports.Device = {
+	  toJSON: function toJSON() {
+	    throw new Error('method unsupported');
 	  }
-
-	  _createClass(Device, [{
-	    key: 'toJSON',
-	    value: function toJSON() {
-	      throw new Error('method unsupported');
-	    }
-	  }]);
-
-	  return Device;
-	}();
+	};
 
 	Device.use = (0, _object.use)(['toJSON']);
 
@@ -11360,7 +11355,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _isPlainObject = __webpack_require__(131);
 
@@ -12125,7 +12120,7 @@
 
 	var _query = __webpack_require__(15);
 
-	var _aggregation = __webpack_require__(8);
+	var _aggregation = __webpack_require__(14);
 
 	var _indexeddb = __webpack_require__(145);
 
@@ -12135,7 +12130,7 @@
 
 	var _websql = __webpack_require__(196);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _log = __webpack_require__(199);
 
@@ -12438,7 +12433,7 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _forEach = __webpack_require__(17);
 
@@ -12452,7 +12447,7 @@
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _isFunction = __webpack_require__(13);
+	var _isFunction = __webpack_require__(12);
 
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 
@@ -16125,7 +16120,7 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _keyBy = __webpack_require__(148);
 
@@ -16448,7 +16443,7 @@
 	    assignMergeValue = __webpack_require__(154),
 	    baseMergeDeep = __webpack_require__(155),
 	    isArray = __webpack_require__(36),
-	    isObject = __webpack_require__(14),
+	    isObject = __webpack_require__(13),
 	    isTypedArray = __webpack_require__(92),
 	    keysIn = __webpack_require__(182);
 
@@ -16530,8 +16525,8 @@
 	    isArguments = __webpack_require__(29),
 	    isArray = __webpack_require__(36),
 	    isArrayLikeObject = __webpack_require__(30),
-	    isFunction = __webpack_require__(13),
-	    isObject = __webpack_require__(14),
+	    isFunction = __webpack_require__(12),
+	    isObject = __webpack_require__(13),
 	    isPlainObject = __webpack_require__(131),
 	    isTypedArray = __webpack_require__(92),
 	    toPlainObject = __webpack_require__(181);
@@ -16628,7 +16623,7 @@
 	    isArray = __webpack_require__(36),
 	    isBuffer = __webpack_require__(179),
 	    isHostObject = __webpack_require__(61),
-	    isObject = __webpack_require__(14),
+	    isObject = __webpack_require__(13),
 	    keys = __webpack_require__(23);
 
 	/** `Object#toString` result references. */
@@ -17337,7 +17332,7 @@
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(14);
+	var isObject = __webpack_require__(13);
 
 	/** Built-in value references. */
 	var objectCreate = Object.create;
@@ -17706,7 +17701,7 @@
 
 	var _promiseQueue2 = _interopRequireDefault(_promiseQueue);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _fastMemoryCache = __webpack_require__(192);
 
@@ -18294,7 +18289,7 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _map = __webpack_require__(197);
 
@@ -18308,7 +18303,7 @@
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
-	var _isFunction = __webpack_require__(13);
+	var _isFunction = __webpack_require__(12);
 
 	var _isFunction2 = _interopRequireDefault(_isFunction);
 
@@ -21737,7 +21732,7 @@
 	    isArray = __webpack_require__(36),
 	    isArrayLike = __webpack_require__(31),
 	    isBuffer = __webpack_require__(179),
-	    isFunction = __webpack_require__(13),
+	    isFunction = __webpack_require__(12),
 	    isObjectLike = __webpack_require__(35),
 	    isString = __webpack_require__(37),
 	    keys = __webpack_require__(23);
@@ -21829,7 +21824,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _assign = __webpack_require__(115);
 
@@ -22021,7 +22016,7 @@
 
 	var _rack = __webpack_require__(140);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _enums = __webpack_require__(129);
 
@@ -22697,7 +22692,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _isString = __webpack_require__(37);
 
@@ -22876,11 +22871,11 @@
 
 	var _local = __webpack_require__(132);
 
-	var _aggregation = __webpack_require__(8);
+	var _aggregation = __webpack_require__(14);
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _query = __webpack_require__(15);
 
@@ -23361,7 +23356,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _local = __webpack_require__(132);
 
@@ -23369,7 +23364,7 @@
 
 	var _query = __webpack_require__(15);
 
-	var _aggregation = __webpack_require__(8);
+	var _aggregation = __webpack_require__(14);
 
 	var _log = __webpack_require__(199);
 
@@ -24283,11 +24278,11 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _aggregation = __webpack_require__(8);
+	var _aggregation = __webpack_require__(14);
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _client = __webpack_require__(127);
 
@@ -24832,7 +24827,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _query3 = __webpack_require__(15);
 
@@ -25479,7 +25474,7 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _networkstore = __webpack_require__(243);
 
@@ -25642,7 +25637,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _url = __webpack_require__(214);
 
@@ -25987,7 +25982,7 @@
 
 	var _metadata = __webpack_require__(130);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _mic = __webpack_require__(262);
 
@@ -26009,7 +26004,7 @@
 
 	var _result2 = _interopRequireDefault(_result);
 
-	var _isObject = __webpack_require__(14);
+	var _isObject = __webpack_require__(13);
 
 	var _isObject2 = _interopRequireDefault(_isObject);
 
@@ -27019,7 +27014,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _isPlainObject = __webpack_require__(131);
 
@@ -27241,7 +27236,7 @@
 
 	var _enums = __webpack_require__(129);
 
-	var _errors = __webpack_require__(9);
+	var _errors = __webpack_require__(8);
 
 	var _network = __webpack_require__(224);
 
