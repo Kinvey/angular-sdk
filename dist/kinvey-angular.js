@@ -7859,7 +7859,7 @@
 /* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -7894,7 +7894,7 @@
 
 	var activeUserCollectionName = process.env.KINVEY_ACTIVE_USER_COLLECTION_NAME || 'kinvey_activeUser';
 	var activeSocialIdentityTokenCollectionName = process.env.KINVEY_ACTIVE_SOCIAL_IDENTITY_TOKEN_COLLECTION_NAME || 'kinvey_activeSocialIdentityToken';
-	var _sharedInstance = null;
+	global.Kinvey = global.Kinvey || {};
 
 	/**
 	 * The Client class stores information regarding your application. You can create mutiple clients
@@ -8071,7 +8071,7 @@
 	    key: 'init',
 	    value: function init(options) {
 	      var client = new Client(options);
-	      _sharedInstance = client;
+	      global.Kinvey.sharedClientInstance = client;
 	      return client;
 	    }
 
@@ -8086,17 +8086,17 @@
 	  }, {
 	    key: 'sharedInstance',
 	    value: function sharedInstance() {
-	      if (!_sharedInstance) {
+	      if (!global.Kinvey.sharedClientInstance) {
 	        throw new _errors.KinveyError('You have not initialized the library. ' + 'Please call Kinvey.init() to initialize the library.');
 	      }
 
-	      return _sharedInstance;
+	      return global.Kinvey.sharedClientInstance;
 	    }
 	  }]);
 
 	  return Client;
 	}();
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ },
 /* 128 */
