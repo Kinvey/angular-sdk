@@ -55,7 +55,7 @@ gulp.task('bundle', ['build'], function() {
       resolve: {
         alias: {
           device$: path.resolve(__dirname, 'build/device.js'),
-          popup: path.resolve(__dirname, 'build/popup.js')
+          popup$: path.resolve(__dirname, 'build/popup.js')
         }
       }
     }, webpack))
