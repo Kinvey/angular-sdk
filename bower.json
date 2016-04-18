@@ -7,7 +7,7 @@
   "authors": [
     "Kinvey, Inc."
   ],
-  "main": "./dist/kinvey.min.js",
+  "main": "./dist/kinvey-angular.min.js",
   "keywords": [
     "Kinvey",
     "JavaScript",
