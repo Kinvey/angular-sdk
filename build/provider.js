@@ -15,6 +15,8 @@ var _serialize = require('kinvey-javascript-sdk-core/build/rack/middleware/seria
 
 var _http = require('./http');
 
+var _push = require('./push');
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var KinveyProvider = exports.KinveyProvider = function () {
@@ -24,6 +26,9 @@ var KinveyProvider = exports.KinveyProvider = function () {
     // Use Http middleware after the Serialize middleware
     var networkRack = _rack.NetworkRack.sharedInstance();
     networkRack.useAfter(_serialize.SerializeMiddleware, new _http.HttpMiddleware());
+
+    // Add Push module to Kinvey
+    _kinveyJavascriptSdkCore.Kinvey.Push = _push.Push;
   }
 
   _createClass(KinveyProvider, [{
