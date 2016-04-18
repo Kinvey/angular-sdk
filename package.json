@@ -48,10 +48,13 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
     "gulp-util": "^3.0.6",
+    "json-loader": "^0.5.4",
     "run-sequence": "^1.1.5",
     "semver-regex": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "webpack": "^1.13.0",
+    "webpack-stream": "^3.1.0"
   },
   "engines": {
     "node": ">=4.0"
