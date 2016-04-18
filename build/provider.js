@@ -15,14 +15,6 @@ var _serialize = require('kinvey-javascript-sdk-core/build/rack/middleware/seria
 
 var _http = require('./http');
 
-var _popup = require('kinvey-javascript-sdk-core/build/utils/popup');
-
-var _popup2 = require('./popup');
-
-var _device = require('kinvey-javascript-sdk-core/build/utils/device');
-
-var _device2 = require('./device');
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var KinveyProvider = exports.KinveyProvider = function () {
@@ -32,12 +24,6 @@ var KinveyProvider = exports.KinveyProvider = function () {
     // Use Http middleware after the Serialize middleware
     var networkRack = _rack.NetworkRack.sharedInstance();
     networkRack.useAfter(_serialize.SerializeMiddleware, new _http.HttpMiddleware());
-
-    // Use Device Adapter
-    _device.Device.use(new _device2.DeviceAdapter());
-
-    // Use Popup Adapter
-    _popup.Popup.use(new _popup2.PopupAdapter());
   }
 
   _createClass(KinveyProvider, [{

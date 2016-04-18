@@ -19,6 +19,7 @@ var semverRegex = require('semver-regex');
 var spawn = require('child_process').spawn;
 var webpack = require('webpack');
 var gulpWebpack = require('webpack-stream');
+var path = require('path');
 
 function errorHandler(err) {
   util.log(err.toString());
@@ -50,6 +51,12 @@ gulp.task('bundle', ['build'], function() {
       output: {
         path: __dirname + '/dist',
         filename: 'kinvey-angular.js'
+      },
+      resolve: {
+        alias: {
+          '/utils/device': path.resolve(__dirname, 'build/device.js'),
+          '/utils/popup': path.resolve(__dirname, 'build/popup.js')
+        }
       }
     }, webpack))
     .pipe(gulp.dest('./dist'))
