@@ -41,6 +41,8 @@ var Popup = exports.Popup = function (_EventEmitter) {
     value: function open() {
       var _this2 = this;
 
+      var url = arguments.length <= 0 || arguments[0] === undefined ? '/' : arguments[0];
+
       this.eventListeners = {
         loadHandler: (0, _bind2.default)(this.loadHandler, this),
         closeHandler: (0, _bind2.default)(this.closeHandler, this)
@@ -48,7 +50,7 @@ var Popup = exports.Popup = function (_EventEmitter) {
 
       var promise = new Promise(function (resolve, reject) {
         if ((0, _utils.isBrowser)()) {
-          _this2.popup = global.open(_this2.url, '_blank', 'toolbar=no,location=no');
+          _this2.popup = global.open(url, '_blank', 'toolbar=no,location=no');
 
           if (_this2.popup) {
             _this2.interval = setInterval(function () {
@@ -68,7 +70,7 @@ var Popup = exports.Popup = function (_EventEmitter) {
             return reject(new Error('The popup was blocked.'));
           }
         } else {
-          _this2.popup = global.open(_this2.url, '_blank', 'location=yes');
+          _this2.popup = global.open(url, '_blank', 'location=yes');
 
           if (_this2.popup) {
             _this2.popup.addEventListener('loadstart', _this2.eventListeners.loadHandler);

@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.15",
+  "version": "3.0.0-beta.16",
   "description": "Kinvey JavaScript Library for AngularJS applications.",
   "homepage": "https://www.kinvey.com",
   "license": "Apache-2.0",
