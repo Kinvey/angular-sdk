@@ -23,7 +23,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "kinvey-javascript-sdk-core": "3.0.0-beta.15",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.16",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
