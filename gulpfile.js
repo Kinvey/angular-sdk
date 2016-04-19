@@ -72,12 +72,12 @@ gulp.task('uploadS3', ['build'], function () {
   var version = packageJSON.version;
 
   gulp.src([
-    'dist/kinvey.js',
-    'dist/kinvey.min.js'
+    'dist/kinvey-angular.js',
+    'dist/kinvey-angular.min.js'
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey.js', rename({ basename: `kinvey-angular-${version}` })))
-    .pipe(gulpif('kinvey.min.js', rename({ basename: `kinvey-angular-${version}.min` })))
+    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-${version}` })))
+    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-${version}.min` })))
     .pipe(gulp.dest('./sample'));
 });
 
