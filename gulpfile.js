@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var eslint = require('gulp-eslint');
 var util = require('gulp-util');
 var plumber = require('gulp-plumber');
-var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var git = require('gulp-git');
@@ -18,6 +17,9 @@ var source = require('vinyl-source-stream');
 var runSequence = require('run-sequence');
 var semverRegex = require('semver-regex');
 var spawn = require('child_process').spawn;
+var webpack = require('webpack');
+var gulpWebpack = require('webpack-stream');
+var path = require('path');
 
 function errorHandler(err) {
   util.log(err.toString());
@@ -37,22 +39,28 @@ gulp.task('clean', function(done) {
 
 gulp.task('build', ['clean', 'lint'], function() {
   return gulp.src('src/**/*.js')
-    .pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./build'))
 });
 
 gulp.task('bundle', ['build'], function() {
-  return browserify({
-    debug: false, // turns on/off source mapping
-    entries: './build/index.js'
-  })
-    .bundle()
-    .pipe(plumber())
-    .pipe(source('kinvey.js'))
+  return gulp.src('./build/index.js')
+    .pipe(gulpWebpack({
+      context: __dirname + '/build',
+      entry: './index.js',
+      output: {
+        path: __dirname + '/dist',
+        filename: 'kinvey-angular.js'
+      },
+      resolve: {
+        alias: {
+          device$: path.resolve(__dirname, 'build/device.js'),
+          popup$: path.resolve(__dirname, 'build/popup.js')
+        }
+      }
+    }, webpack))
     .pipe(gulp.dest('./dist'))
-    .pipe(rename('kinvey.min.js'))
+    .pipe(rename('kinvey-angular.min.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest('./dist'))
@@ -64,12 +72,12 @@ gulp.task('uploadS3', ['build'], function () {
   var version = packageJSON.version;
 
   gulp.src([
-    'dist/kinvey.js',
-    'dist/kinvey.min.js'
+    'dist/kinvey-angular.js',
+    'dist/kinvey-angular.min.js'
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey.js', rename({ basename: `kinvey-angular-${version}` })))
-    .pipe(gulpif('kinvey.min.js', rename({ basename: `kinvey-angular-${version}.min` })))
+    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-${version}` })))
+    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-${version}.min` })))
     .pipe(gulp.dest('./sample'));
 });
 

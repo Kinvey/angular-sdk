@@ -2,10 +2,7 @@ import { Kinvey } from 'kinvey-javascript-sdk-core';
 import { NetworkRack } from 'kinvey-javascript-sdk-core/build/rack/rack';
 import { SerializeMiddleware } from 'kinvey-javascript-sdk-core/build/rack/middleware/serialize';
 import { HttpMiddleware } from './http';
-import { Popup } from 'kinvey-javascript-sdk-core/build/utils/popup';
-import { PopupAdapter } from './popup';
-import { Device } from 'kinvey-javascript-sdk-core/build/utils/device';
-import { DeviceAdapter } from './device';
+import { Push } from './push';
 
 export class KinveyProvider {
   constructor() {
@@ -13,14 +10,12 @@ export class KinveyProvider {
     const networkRack = NetworkRack.sharedInstance();
     networkRack.useAfter(SerializeMiddleware, new HttpMiddleware());
 
-    // Use Device Adapter
-    Device.use(new DeviceAdapter());
-
-    // Use Popup Adapter
-    Popup.use(new PopupAdapter());
+    // Add Push module to Kinvey
+    Kinvey.Push = Push;
   }
 
-  init(options = {}) {
+  init(options) {
+    // Initialize Kinvey
     return Kinvey.init(options);
   }
 
