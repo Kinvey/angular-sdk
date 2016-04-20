@@ -11427,7 +11427,7 @@
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.0.0-beta.16",
+		"version": "3.0.0-beta.17",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -11451,7 +11451,7 @@
 		"scripts": {},
 		"dependencies": {
 			"babybird": "0.0.1",
-			"kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
+			"kinvey-javascript-sdk-core": "3.0.0-beta.17",
 			"lodash": "^4.0.0"
 		},
 		"devDependencies": {
