@@ -7850,7 +7850,7 @@
 /* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -7883,9 +7883,10 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var activeUserCollectionName = process.env.KINVEY_ACTIVE_USER_COLLECTION_NAME || 'kinvey_activeUser';
-	var activeSocialIdentityTokenCollectionName = process.env.KINVEY_ACTIVE_SOCIAL_IDENTITY_TOKEN_COLLECTION_NAME || 'kinvey_activeSocialIdentityToken';
-	global.Kinvey = global.Kinvey || {};
+	var userCollectionName = process.env.KINVEY_USER_COLLECTION_NAME || 'kinvey_user';
+	var socialIdentityCollectionName = process.env.KINVEY_SOCIAL_IDENTITY_COLLECTION_NAME || 'kinvey_socialIdentity';
+	var pushCollectionName = process.env.KINVEY_PUSH_COLLECTION_NAME || 'kinvey_push';
+	var _sharedInstance = null;
 
 	/**
 	 * The Client class stores information regarding your application. You can create mutiple clients
@@ -7969,50 +7970,14 @@
 	  }
 
 	  _createClass(Client, [{
-	    key: 'getActiveUserData',
-	    value: function getActiveUserData() {
-	      return _localStorage2.default.get('' + this.appKey + activeUserCollectionName);
-	    }
-	  }, {
-	    key: 'setActiveUserData',
-	    value: function setActiveUserData(data) {
-	      if (data) {
-	        try {
-	          return _localStorage2.default.set('' + this.appKey + activeUserCollectionName, data);
-	        } catch (error) {
-	          return false;
-	        }
-	      }
+	    key: 'toJSON',
 
-	      return _localStorage2.default.remove('' + this.appKey + activeUserCollectionName);
-	    }
-	  }, {
-	    key: 'getActiveSocialIdentity',
-	    value: function getActiveSocialIdentity() {
-	      return _localStorage2.default.get('' + this.appKey + activeSocialIdentityTokenCollectionName);
-	    }
-	  }, {
-	    key: 'setActiveSocialIdentity',
-	    value: function setActiveSocialIdentity(socialIdentity) {
-	      if (socialIdentity) {
-	        try {
-	          return _localStorage2.default.set('' + this.appKey + activeSocialIdentityTokenCollectionName, socialIdentity);
-	        } catch (error) {
-	          return false;
-	        }
-	      }
-
-	      return _localStorage2.default.remove('' + this.appKey + activeSocialIdentityTokenCollectionName);
-	    }
 
 	    /**
 	     * Returns an object containing all the information for this Client.
 	     *
 	     * @return {Object} JSON
 	     */
-
-	  }, {
-	    key: 'toJSON',
 	    value: function toJSON() {
 	      var json = {
 	        protocol: this.protocol,
@@ -8058,11 +8023,59 @@
 	        host: this.host
 	      });
 	    }
+	  }, {
+	    key: 'user',
+	    get: function get() {
+	      return _localStorage2.default.get('' + this.appKey + userCollectionName);
+	    },
+	    set: function set(data) {
+	      if (data) {
+	        try {
+	          return _localStorage2.default.set('' + this.appKey + userCollectionName, data);
+	        } catch (error) {
+	          return false;
+	        }
+	      }
+
+	      return _localStorage2.default.remove('' + this.appKey + userCollectionName);
+	    }
+	  }, {
+	    key: 'socialIdentity',
+	    get: function get() {
+	      return _localStorage2.default.get('' + this.appKey + socialIdentityCollectionName);
+	    },
+	    set: function set(socialIdentity) {
+	      if (socialIdentity) {
+	        try {
+	          return _localStorage2.default.set('' + this.appKey + socialIdentityCollectionName, socialIdentity);
+	        } catch (error) {
+	          return false;
+	        }
+	      }
+
+	      return _localStorage2.default.remove('' + this.appKey + socialIdentityCollectionName);
+	    }
+	  }, {
+	    key: 'push',
+	    get: function get() {
+	      return _localStorage2.default.get('' + this.appKey + pushCollectionName);
+	    },
+	    set: function set(data) {
+	      if (data) {
+	        try {
+	          return _localStorage2.default.set('' + this.appKey + pushCollectionName, data);
+	        } catch (error) {
+	          return false;
+	        }
+	      }
+
+	      return _localStorage2.default.remove('' + this.appKey + pushCollectionName);
+	    }
 	  }], [{
 	    key: 'init',
 	    value: function init(options) {
 	      var client = new Client(options);
-	      global.Kinvey.sharedClientInstance = client;
+	      _sharedInstance = client;
 	      return client;
 	    }
 
@@ -8077,17 +8090,17 @@
 	  }, {
 	    key: 'sharedInstance',
 	    value: function sharedInstance() {
-	      if (!global.Kinvey.sharedClientInstance) {
+	      if (!_sharedInstance) {
 	        throw new _errors.KinveyError('You have not initialized the library. ' + 'Please call Kinvey.init() to initialize the library.');
 	      }
 
-	      return global.Kinvey.sharedClientInstance;
+	      return _sharedInstance;
 	    }
 	  }]);
 
 	  return Client;
 	}();
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
 /* 128 */
@@ -8222,6 +8235,14 @@
 	      }).then(function (response) {
 	        return response.data;
 	      }).then(function (syncEntity) {
+	        if (!syncEntity) {
+	          syncEntity = {
+	            _id: name,
+	            entities: {},
+	            size: 0
+	          };
+	        }
+
 	        if (!(0, _isArray2.default)(entities)) {
 	          entities = [entities];
 	        }
@@ -9075,15 +9096,15 @@
 	   * @returns {Object}
 	   */
 	  session: function session(client) {
-	    var activeUserData = client.getActiveUserData();
+	    var activeUser = client.user;
 
-	    if (!activeUserData) {
+	    if (!activeUser) {
 	      throw new Error('There is not an active user.');
 	    }
 
 	    return {
 	      scheme: 'Kinvey',
-	      credentials: activeUserData[kmdAttribute].authtoken
+	      credentials: activeUser[kmdAttribute].authtoken
 	    };
 	  }
 	};
@@ -11423,7 +11444,7 @@
 		},
 		"scripts": {},
 		"dependencies": {
-			"kinvey-javascript-sdk-core": "3.0.0-beta.16",
+			"kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
 			"lodash": "^4.0.0"
 		},
 		"devDependencies": {
@@ -11477,20 +11498,18 @@
 	exports.isBrowser = isBrowser;
 	exports.isiOS = isiOS;
 	exports.isAndroid = isAndroid;
-	var device = global.device || {};
-
 	function isBrowser() {
-	  var platform = device.platform;
+	  var platform = global.device.platform;
 	  return platform === 'browser' || !platform;
 	}
 
 	function isiOS() {
-	  var platform = device.platform;
+	  var platform = global.device.platform;
 	  return platform === 'iOS';
 	}
 
 	function isAndroid() {
-	  var platform = device.platform;
+	  var platform = global.device.platform;
 	  return platform === 'Android';
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
@@ -18770,7 +18789,7 @@
 	  };
 	};
 
-	_loglevel2.default.setLevel(_loglevel2.default.levels.ERROR);
+	_loglevel2.default.setDefaultLevel(_loglevel2.default.levels.SILENT);
 	exports.Log = _loglevel2.default;
 
 /***/ },
@@ -22384,12 +22403,12 @@
 	        if (error instanceof _errors.InvalidCredentialsError && _this2.automaticallyRefreshAuthToken) {
 	          var _ret = function () {
 	            _this2.automaticallyRefreshAuthToken = false;
-	            var activeSocialIdentity = _this2.client.getActiveSocialIdentity();
+	            var socialIdentity = _this2.client.socialIdentity;
 
 	            // Refresh MIC Auth Token
-	            if (activeSocialIdentity && activeSocialIdentity.identity === micIdentity) {
+	            if (socialIdentity && socialIdentity.identity === micIdentity) {
 	              // Refresh the token
-	              var token = activeSocialIdentity.token;
+	              var token = socialIdentity.token;
 	              var request = new NetworkRequest({
 	                method: _enums.HttpMethod.POST,
 	                headers: {
@@ -22397,15 +22416,15 @@
 	                },
 	                authType: _enums.AuthType.App,
 	                url: _url2.default.format({
-	                  protocol: activeSocialIdentity.client.protocol,
-	                  host: activeSocialIdentity.client.host,
+	                  protocol: socialIdentity.client.protocol,
+	                  host: socialIdentity.client.host,
 	                  pathname: tokenPathname
 	                }),
 	                properties: _this2.properties,
 	                data: {
 	                  grant_type: 'refresh_token',
 	                  client_id: token.audience,
-	                  redirect_uri: activeSocialIdentity.redirectUri,
+	                  redirect_uri: socialIdentity.redirectUri,
 	                  refresh_token: token.refresh_token
 	                }
 	              });
@@ -22416,10 +22435,10 @@
 	                  return response.data;
 	                }).then(function (token) {
 	                  // Login the user with the new token
-	                  var activeUserData = _this2.client.getActiveUserData();
-	                  var socialIdentity = activeUserData[socialIdentityAttribute];
-	                  socialIdentity[activeSocialIdentity.identity] = token;
-	                  activeUserData[socialIdentityAttribute] = socialIdentity;
+	                  var activeUser = _this2.client.user;
+	                  var socialIdentity = activeUser[socialIdentityAttribute];
+	                  socialIdentity[socialIdentity.identity] = token;
+	                  activeUser[socialIdentityAttribute] = socialIdentity;
 
 	                  var request = new NetworkRequest({
 	                    method: _enums.HttpMethod.POST,
@@ -22430,7 +22449,7 @@
 	                      pathname: '/' + usersNamespace + '/' + _this2.client.appKey + '/login'
 	                    }),
 	                    properties: _this2.properties,
-	                    data: activeUserData,
+	                    data: activeUser,
 	                    timeout: _this2.timeout,
 	                    client: _this2.client
 	                  });
@@ -22438,13 +22457,13 @@
 	                  return request.execute();
 	                }).then(function (response) {
 	                  // Store the new data
-	                  _this2.client.setActiveUserData(response.data);
-	                  _this2.client.setActiveSocialIdentity({
-	                    identity: activeSocialIdentity.identity,
-	                    redirectUri: activeSocialIdentity.redirectUri,
-	                    token: response.data[socialIdentityAttribute][activeSocialIdentity.identity],
-	                    client: activeSocialIdentity.client
-	                  });
+	                  _this2.client.user = response.data;
+	                  _this2.client.socialIdentity = {
+	                    identity: socialIdentity.identity,
+	                    redirectUri: socialIdentity.redirectUri,
+	                    token: response.data[socialIdentityAttribute][socialIdentity.identity],
+	                    client: socialIdentity.client
+	                  };
 
 	                  // Execute the original request
 	                  return _this2.execute();
@@ -26731,12 +26750,12 @@
 
 	        throw err;
 	      }).then(function () {
-	        _this5.client.setActiveSocialIdentity({
+	        _this5.client.socialIdentity = {
 	          identity: identity,
 	          token: _this5._socialIdentity[identity],
 	          redirectUri: options.redirectUri,
 	          client: options.micClient
-	        });
+	        };
 	        return _this5;
 	      });
 
@@ -26762,10 +26781,10 @@
 
 	        return _this6.update(data, options);
 	      }).then(function () {
-	        var activeSocialIdentity = _this6.client.getActiveSocialIdentity();
+	        var socialIdentity = _this6.client.socialIdentity;
 
-	        if (activeSocialIdentity.identity === identity) {
-	          _this6.client.setActiveSocialIdentity(null);
+	        if (socialIdentity.identity === identity) {
+	          _this6.client.socialIdentity = null;
 	        }
 
 	        return _this6;
@@ -27142,7 +27161,7 @@
 	    value: function getActiveUser() {
 	      var client = arguments.length <= 0 || arguments[0] === undefined ? _client.Client.sharedInstance() : arguments[0];
 
-	      var data = client.getActiveUserData();
+	      var data = client.user;
 	      var user = null;
 
 	      if (data) {
@@ -27179,7 +27198,7 @@
 	      var client = arguments.length <= 1 || arguments[1] === undefined ? _client.Client.sharedInstance() : arguments[1];
 
 	      var data = (0, _result2.default)(user, 'toJSON', user);
-	      client.setActiveUserData(data);
+	      client.user = data;
 	      return User.getActiveUser(client);
 	    }
 	  }, {
@@ -35797,57 +35816,71 @@
 
 	var _url2 = _interopRequireDefault(_url);
 
+	var _bind = __webpack_require__(269);
+
+	var _bind2 = _interopRequireDefault(_bind);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 	var pushNamespace = process.env.KINVEY_PUSH_NAMESPACE || 'push';
 	var notificationEvent = process.env.KINVEY_NOTIFICATION_EVENT || 'notification';
 	var deviceCollectionName = process.env.KINVEY_DEVICE_COLLECTION_NAME || 'kinvey_device';
-	var emitter = new _events.EventEmitter();
-	var phonegapPush = null;
 
-	var Push = exports.Push = function () {
+	var Push = exports.Push = function (_EventEmitter) {
+	  _inherits(Push, _EventEmitter);
+
 	  function Push() {
 	    _classCallCheck(this, Push);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Push).call(this));
+
+	    _this.client = _client.Client.sharedInstance();
+	    _this.eventListeners = {
+	      notificationListener: (0, _bind2.default)(_this.notificationListener, _this)
+	    };
+
+	    var pushOptions = _this.client.push;
+	    if (pushOptions && typeof global.PushNotification === 'undefined') {
+	      _this.phonegapPush = global.PushNotification.init(pushOptions);
+	      _this.phonegapPush.on(notificationEvent, _this.eventListeners.notificationListener);
+	    }
+	    return _this;
 	  }
 
-	  _createClass(Push, null, [{
-	    key: 'listeners',
-	    value: function listeners() {
-	      return emitter.listeners(notificationEvent);
-	    }
-	  }, {
-	    key: 'onNotification',
-	    value: function onNotification(listener) {
-	      return emitter.on(notificationEvent, listener);
-	    }
-	  }, {
-	    key: 'onceNotification',
-	    value: function onceNotification(listener) {
-	      return emitter.once(notificationEvent, listener);
-	    }
-	  }, {
-	    key: 'removeListener',
-	    value: function removeListener(listener) {
-	      return emitter.removeListener(notificationEvent, listener);
-	    }
-	  }, {
-	    key: 'removeAllListeners',
-	    value: function removeAllListeners() {
-	      return emitter.removeAllListeners(notificationEvent);
-	    }
-	  }, {
+	  _createClass(Push, [{
 	    key: 'isSupported',
 	    value: function isSupported() {
 	      return (0, _utils.isiOS)() || (0, _utils.isAndroid)();
 	    }
 	  }, {
+	    key: 'onNotification',
+	    value: function onNotification(listener) {
+	      return this.on(notificationEvent, listener);
+	    }
+	  }, {
+	    key: 'onceNotification',
+	    value: function onceNotification(listener) {
+	      return this.once(notificationEvent, listener);
+	    }
+	  }, {
+	    key: 'notificationListener',
+	    value: function notificationListener(data) {
+	      this.emit(notificationEvent, data);
+	    }
+	  }, {
 	    key: 'register',
 	    value: function register() {
+	      var _this2 = this;
+
 	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      if (!Push.isSupported()) {
+	      if (!this.isSupported()) {
 	        return Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
 	      }
 
@@ -35865,30 +35898,37 @@
 
 	      var promise = new Promise(function (resolve, reject) {
 	        if (typeof global.PushNotification === 'undefined') {
-	          return reject(new _errors.KinveyError('PhoneGap Push Notification Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap/guides/push#ProjectSetUp for ' + 'setting up your project.'));
+	          return reject(new _errors.KinveyError('PhoneGap Push Notification Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap-v3.0/guides/push#ProjectSetUp for help with ' + 'setting up your project.'));
 	        }
 
-	        phonegapPush = global.PushNotification.init(options);
+	        if (_this2.phonegapPush) {
+	          _this2.phonegapPush.off(notificationEvent, _this2.eventListeners.notificationListener);
+	        }
 
-	        phonegapPush.on('registration', function (data) {
-	          resolve(data.registrationId);
+	        return global.PushNotification.hasPermission(function (data) {
+	          if (!data.isEnabled) {
+	            return reject(new _errors.KinveyError('Permission for push notifications has not been granted by the user.'));
+	          }
+
+	          _this2.phonegapPush = global.PushNotification.init(options);
+
+	          _this2.phonegapPush.on('registration', function (data) {
+	            resolve(data.registrationId);
+	          });
+
+	          _this2.phonegapPush.on('error', function (error) {
+	            reject(new _errors.KinveyError('An error occurred registering this device for push notifications.', error));
+	          });
+
+	          return _this2;
 	        });
-
-	        phonegapPush.on('notification', function (data) {
-	          emitter.emit(notificationEvent, data);
-	        });
-
-	        phonegapPush.on('error', function (error) {
-	          reject(new _errors.KinveyError('An error occurred registering this device for push notifications.', error));
-	        });
-
-	        return phonegapPush;
 	      }).then(function (deviceId) {
 	        if (!deviceId) {
 	          throw new _errors.KinveyError('Unable to retrieve the device id to register this device for push notifications.');
 	        }
 
 	        var store = _datastore.DataStore.getInstance(deviceCollectionName, _datastore.DataStoreType.Sync);
+	        store.client = _this2.client;
 	        store.disableSync();
 	        return store.findById(deviceId).catch(function (error) {
 	          if (error instanceof _errors.NotFoundError) {
@@ -35898,17 +35938,17 @@
 	          throw error;
 	        }).then(function (entity) {
 	          if (entity && options.force !== true) {
+	            _this2.phonegapPush.on(notificationEvent, _this2.eventListeners.notificationListener);
 	            return entity;
 	          }
 
-	          var user = _user.User.getActiveUser();
-	          var client = _client.Client.sharedInstance();
+	          var user = _user.User.getActiveUser(_this2.client);
 	          var request = new _network.NetworkRequest({
 	            method: _enums.HttpMethod.POST,
 	            url: _url2.default.format({
-	              protocol: client.protocol,
-	              host: client.host,
-	              pathname: '/' + pushNamespace + '/' + client.appKey + '/register-device'
+	              protocol: _this2.client.protocol,
+	              host: _this2.client.host,
+	              pathname: _this2._pathname + '/register-device'
 	            }),
 	            properties: options.properties,
 	            authType: user ? _enums.AuthType.Session : _enums.AuthType.Master,
@@ -35922,6 +35962,10 @@
 	          });
 	          return request.execute().then(function () {
 	            return store.save({ _id: deviceId, registered: true });
+	          }).then(function (response) {
+	            _this2.phonegapPush.on(notificationEvent, _this2.eventListeners.notificationListener);
+	            _this2.client.push = options;
+	            return response;
 	          });
 	        });
 	      });
@@ -35931,17 +35975,36 @@
 	  }, {
 	    key: 'unregister',
 	    value: function unregister() {
+	      var _this3 = this;
+
 	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      if (!Push.isSupported()) {
+	      if (!this.isSupported()) {
 	        return Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
 	      }
 
 	      var store = _datastore.DataStore.getInstance(deviceCollectionName, _datastore.DataStoreType.Sync);
+	      store.client = this.client;
 	      store.disableSync();
-	      var query = new _query.Query();
-	      query.equalsTo('registered', true);
-	      var promise = store.find(query).then(function (data) {
+
+	      var promise = new Promise(function (resolve, reject) {
+	        if (_this3.phonegapPush) {
+	          _this3.phonegapPush.unregister(function () {
+	            _this3.phonegapPush = null;
+	            resolve();
+	          }, function () {
+	            reject(new _errors.KinveyError('Unable to unregister with the PhoneGap Push Plugin.'));
+	          });
+	        }
+
+	        resolve();
+	      });
+
+	      promise = promise.then(function () {
+	        var query = new _query.Query();
+	        query.equalsTo('registered', true);
+	        return store.find(query);
+	      }).then(function (data) {
 	        if (data.length === 1) {
 	          return data[0]._id;
 	        }
@@ -35949,17 +36012,16 @@
 	        return undefined;
 	      }).then(function (deviceId) {
 	        if (!deviceId) {
-	          throw new _errors.KinveyError('This device has not been registered.');
+	          throw new _errors.KinveyError('This device has not been registered for push notifications.');
 	        }
 
-	        var user = _user.User.getActiveUser();
-	        var client = _client.Client.sharedInstance();
+	        var user = _user.User.getActiveUser(_this3.client);
 	        var request = new _network.NetworkRequest({
 	          method: _enums.HttpMethod.POST,
 	          url: _url2.default.format({
-	            protocol: client.protocol,
-	            host: client.host,
-	            pathname: '/' + pushNamespace + '/' + client.appKey + '/unregister-device'
+	            protocol: _this3.client.protocol,
+	            host: _this3.client.host,
+	            pathname: _this3._pathname + '/unregister-device'
 	          }),
 	          properties: options.properties,
 	          authType: user ? _enums.AuthType.Session : _enums.AuthType.Master,
@@ -35973,6 +36035,7 @@
 	        });
 	        return request.execute().then(function (response) {
 	          return store.removeById(deviceId).then(function () {
+	            _this3.client.push = null;
 	            return response.data;
 	          });
 	        });
@@ -35980,10 +36043,27 @@
 
 	      return promise;
 	    }
+	  }, {
+	    key: '_pathname',
+	    get: function get() {
+	      return '/' + pushNamespace + '/' + this.client.appKey;
+	    }
+	  }, {
+	    key: 'client',
+	    get: function get() {
+	      return this._client;
+	    },
+	    set: function set(client) {
+	      if (!client) {
+	        throw new _errors.KinveyError('$kinvey.Push much have a client defined.');
+	      }
+
+	      this._client = client;
+	    }
 	  }]);
 
 	  return Push;
-	}();
+	}(_events.EventEmitter);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), (function() { return this; }())))
 
 /***/ }
