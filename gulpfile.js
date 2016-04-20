@@ -9,7 +9,6 @@ var git = require('gulp-git');
 var gulpif = require('gulp-if');
 var prompt = require('gulp-prompt');
 var bump = require('gulp-bump');
-var browserify = require('browserify');
 var babel = require('gulp-babel');
 var buffer = require('vinyl-buffer');
 var del = require('del');
@@ -50,7 +49,7 @@ gulp.task('bundle', ['build'], function() {
       entry: './index.js',
       output: {
         path: __dirname + '/dist',
-        filename: 'kinvey-angular.js'
+        filename: 'kinvey-angular-sdk.js'
       },
       resolve: {
         alias: {
@@ -60,7 +59,7 @@ gulp.task('bundle', ['build'], function() {
       }
     }, webpack))
     .pipe(gulp.dest('./dist'))
-    .pipe(rename('kinvey-angular.min.js'))
+    .pipe(rename('kinvey-angular-sdk.min.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(gulp.dest('./dist'))
@@ -72,12 +71,12 @@ gulp.task('uploadS3', ['build'], function () {
   var version = packageJSON.version;
 
   gulp.src([
-    'dist/kinvey-angular.js',
-    'dist/kinvey-angular.min.js'
+    'dist/kinvey-angular-sdk.js',
+    'dist/kinvey-angular-sdk.min.js'
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-${version}` })))
-    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-${version}.min` })))
+    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-sdk-${version}` })))
+    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-sdk-${version}.min` })))
     .pipe(gulp.dest('./sample'));
 });
 

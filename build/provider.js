@@ -26,16 +26,19 @@ var KinveyProvider = exports.KinveyProvider = function () {
     // Use Http middleware after the Serialize middleware
     var networkRack = _rack.NetworkRack.sharedInstance();
     networkRack.useAfter(_serialize.SerializeMiddleware, new _http.HttpMiddleware());
-
-    // Add Push module to Kinvey
-    _kinveyJavascriptSdkCore.Kinvey.Push = _push.Push;
   }
 
   _createClass(KinveyProvider, [{
     key: 'init',
     value: function init(options) {
       // Initialize Kinvey
-      return _kinveyJavascriptSdkCore.Kinvey.init(options);
+      var client = _kinveyJavascriptSdkCore.Kinvey.init(options);
+
+      // Add Push module to Kinvey
+      _kinveyJavascriptSdkCore.Kinvey.Push = new _push.Push();
+
+      // Return the client
+      return client;
     }
   }, {
     key: '$get',
