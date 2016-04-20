@@ -1,4 +1,7 @@
 ## Changelog
+### 3.0.0-beta.17 (2016-04-20)
+* Bugfix (MLIBZ-1016): Fix bug that prevented push from not working on iOS devices.
+
 ### 3.0.0-beta.16 (2016-04-19)
 * Bugfix: Use url provided to popup open function to open popup.
 
