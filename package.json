@@ -23,6 +23,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "babybird": "0.0.1",
     "kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
     "lodash": "^4.0.0"
   },
