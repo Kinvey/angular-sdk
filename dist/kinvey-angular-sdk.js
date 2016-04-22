@@ -19212,41 +19212,41 @@
 	module.exports = {
 		"_args": [
 			[
-				"kinvey-javascript-sdk-core@git://github.com/Kinvey/javascript-sdk-core.git#develop",
+				"kinvey-javascript-sdk-core@3.0.0-beta.18",
 				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
-		"_from": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
-		"_id": "kinvey-javascript-sdk-core@3.0.0-beta.17",
+		"_from": "kinvey-javascript-sdk-core@3.0.0-beta.18",
+		"_id": "kinvey-javascript-sdk-core@3.0.0-beta.18",
 		"_inCache": true,
 		"_installable": true,
 		"_location": "/kinvey-javascript-sdk-core",
+		"_nodeVersion": "4.4.2",
+		"_npmOperationalInternal": {
+			"host": "packages-16-east.internal.npmjs.com",
+			"tmp": "tmp/kinvey-javascript-sdk-core-3.0.0-beta.18.tgz_1461346673981_0.17243794514797628"
+		},
+		"_npmUser": {
+			"email": "thomas.conner@me.com",
+			"name": "thomas.conner"
+		},
+		"_npmVersion": "3.8.7",
 		"_phantomChildren": {},
 		"_requested": {
-			"hosted": {
-				"directUrl": "https://raw.githubusercontent.com/Kinvey/javascript-sdk-core/develop/package.json",
-				"gitUrl": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
-				"httpsUrl": "git+https://github.com/Kinvey/javascript-sdk-core.git#develop",
-				"shortcut": "github:Kinvey/javascript-sdk-core#develop",
-				"ssh": "git@github.com:Kinvey/javascript-sdk-core.git#develop",
-				"sshUrl": "git+ssh://git@github.com/Kinvey/javascript-sdk-core.git#develop",
-				"type": "github"
-			},
 			"name": "kinvey-javascript-sdk-core",
-			"raw": "kinvey-javascript-sdk-core@git://github.com/Kinvey/javascript-sdk-core.git#develop",
-			"rawSpec": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
+			"raw": "kinvey-javascript-sdk-core@3.0.0-beta.18",
+			"rawSpec": "3.0.0-beta.18",
 			"scope": null,
-			"spec": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
-			"type": "hosted"
+			"spec": "3.0.0-beta.18",
+			"type": "version"
 		},
 		"_requiredBy": [
 			"/",
 			"/kinvey-phonegap-sdk"
 		],
-		"_resolved": "git://github.com/Kinvey/javascript-sdk-core.git#c370c29b82e112938786c68f6de101330447583e",
-		"_shasum": "c95fa7c7006912b3b5251d2ed76fe8309d39d73e",
+		"_shasum": "4862413fe713f412270988268b682fb32f5788ca",
 		"_shrinkwrap": null,
-		"_spec": "kinvey-javascript-sdk-core@git://github.com/Kinvey/javascript-sdk-core.git#develop",
+		"_spec": "kinvey-javascript-sdk-core@3.0.0-beta.18",
 		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey, Inc."
@@ -19335,14 +19335,24 @@
 			"watchify": "^3.0.0",
 			"webpack": "^1.13.0"
 		},
-		"gitHead": "c370c29b82e112938786c68f6de101330447583e",
+		"directories": {},
+		"dist": {
+			"shasum": "4862413fe713f412270988268b682fb32f5788ca",
+			"tarball": "https://registry.npmjs.org/kinvey-javascript-sdk-core/-/kinvey-javascript-sdk-core-3.0.0-beta.18.tgz"
+		},
+		"gitHead": "ef33593d9196f18586eecdc65923d08af8a52dcf",
 		"homepage": "https://github.com/Kinvey/javascript-sdk-core#readme",
 		"license": "MIT",
 		"main": "./build/kinvey.js",
+		"maintainers": [
+			{
+				"email": "thomas.conner@me.com",
+				"name": "thomas.conner"
+			}
+		],
 		"name": "kinvey-javascript-sdk-core",
 		"optionalDependencies": {},
-		"readme": "# Kinvey JavaScript Core SDK\n\nThis sdk is a standalone sdk designed for JavaScript-based platforms. The sdk acts as a client for the Kinvey REST API and can be used for building JavaScript-based apps.\n\n## Building\nThe simplest way to build the sdk is by running `gulp`. This will also perform [testing](#Testing).\nMore advanced tasks are available.\n\n* `gulp sandbox`: build the sdk without performing any [testing](#Testing).\n* `gulp build`: build the sdk without performing a code audit or [testing](#Testing).\n* `gulp watch`: auto-build the sdk when you modify a file.\n* `gulp clean`: remove temporary files created by the build process.\n\n### Flags\nThe following flags are available when running `gulp`:\n\n* `--platform=<angular|html5|node|phonegap>`: tailor to a specific platform. Defaults to `html5`.\n\n## Testing\nTesting is part of the [build process](#Building). You can run the tests without (re-)building the sdk using `gulp test`.\n\nDepending on the platform, however, a test set-up may be required.\n\n### HTML5\nOptional, but recommended: run `grunt client-tests` to spin up instances of Firefox and Google Chrome for automated testing.\n\n### Node.js\nThe tests will be executed against the current version of Node.js available on the machine. There node version managers, like [`nvm`](https://github.com/creationix/nvm), to easily switch between Node.js versions.\n\n## Releasing\nThe workflow for releasing a new version of the sdk is as follows:\n\n1. Commit all changes.\n2. Increment the [package](package.json) version. See [Version Management](#VersionManagement) below.\n3. Update the [Changelog](CHANGELOG.md).\n4. Run `gulp release --platform=<platform>` replacing `<platform>` with angular, html5, node, or phonegap. See [Flags](#Flags) above.\n5. Update the [DevCenter](https://github.com/Kinvey/devcenter).\n6. Optional: update [sample apps](https://github.com/KinveyApps).\n\n### Version Management\nUpdating the sdk version should follow [Semantic Version 2.0.0](http://semver.org/):\n\n* Major (x.0.0): when making incompatible API changes.\n* Minor (3.x.0): when adding functionality in a backwards-compatible manner.\n* Patch (3.0.x): when making backwards-compatible bug fixes or enhancements.\n\n## License\n\n    Copyright 2016 Kinvey, Inc.\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n",
-		"readmeFilename": "README.md",
+		"readme": "ERROR: No README data found!",
 		"repository": {
 			"type": "git",
 			"url": "git+https://github.com/Kinvey/javascript-sdk-core.git"
@@ -19353,7 +19363,7 @@
 			"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -r ./test/mocks --recursive test",
 			"test:ci": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -r ./test/mocks --recursive test"
 		},
-		"version": "3.0.0-beta.17"
+		"version": "3.0.0-beta.18"
 	};
 
 /***/ },
@@ -44307,17 +44317,17 @@
 	exports.isiOS = isiOS;
 	exports.isAndroid = isAndroid;
 	function isBrowser() {
-	  var platform = global.device.platform;
+	  var platform = !!global.device ? global.device.platform : undefined;
 	  return platform === 'browser' || !platform;
 	}
 
 	function isiOS() {
-	  var platform = global.device.platform;
+	  var platform = !!global.device ? global.device.platform : undefined;
 	  return platform === 'iOS';
 	}
 
 	function isAndroid() {
-	  var platform = global.device.platform;
+	  var platform = !!global.device ? global.device.platform : undefined;
 	  return platform === 'Android';
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
