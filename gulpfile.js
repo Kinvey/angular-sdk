@@ -46,16 +46,15 @@ gulp.task('bundle', ['build'], function() {
   return gulp.src('./build/index.js')
     .pipe(gulpWebpack({
       context: __dirname + '/build',
-      entry: './index.js',
+      entry: ['babel-polyfill', './index.js'],
       output: {
         path: __dirname + '/dist',
         filename: 'kinvey-angular-sdk.js'
       },
-      resolve: {
-        alias: {
-          device$: path.resolve(__dirname, 'build/device.js'),
-          popup$: path.resolve(__dirname, 'build/popup.js')
-        }
+      module: {
+        loaders: [
+          { test: /\.json$/, loader: 'json' }
+        ]
       }
     }, webpack))
     .pipe(gulp.dest('./dist'))

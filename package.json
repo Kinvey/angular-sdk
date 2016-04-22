@@ -1,17 +1,12 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.17",
+  "version": "3.0.0-beta.18",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
     "url": "http://support.kinvey.com"
   },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://raw.github.com/Kinvey/kinvey-angular-sdk/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "author": "Kinvey, Inc.",
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
@@ -23,8 +18,10 @@
   },
   "scripts": {},
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
     "babybird": "0.0.1",
-    "kinvey-javascript-sdk-core": "3.0.0-beta.17",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.18",
+    "kinvey-phonegap-sdk": "3.0.0-beta.19",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
@@ -34,6 +31,7 @@
     "browserify": "^13.0.0",
     "del": "^2.0.2",
     "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-react": "^4.3.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",
