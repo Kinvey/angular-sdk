@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.17",
+  "version": "3.0.0-beta.18",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -20,8 +20,8 @@
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "babybird": "0.0.1",
-    "kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
-    "kinvey-phonegap-sdk": "git://github.com/Kinvey/phonegap-sdk.git#develop",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.18",
+    "kinvey-phonegap-sdk": "3.0.0-beta.19",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
