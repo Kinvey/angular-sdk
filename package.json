@@ -6,12 +6,7 @@
   "bugs": {
     "url": "http://support.kinvey.com"
   },
-  "licenses": [
-    {
-      "type": "Apache-2.0",
-      "url": "https://raw.github.com/Kinvey/kinvey-angular-sdk/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "author": "Kinvey, Inc.",
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
@@ -23,8 +18,10 @@
   },
   "scripts": {},
   "dependencies": {
+    "babel-polyfill": "^6.7.4",
     "babybird": "0.0.1",
-    "kinvey-javascript-sdk-core": "3.0.0-beta.17",
+    "kinvey-javascript-sdk-core": "git://github.com/Kinvey/javascript-sdk-core.git#develop",
+    "kinvey-phonegap-sdk": "git://github.com/Kinvey/phonegap-sdk.git#develop",
     "lodash": "^4.0.0"
   },
   "devDependencies": {
@@ -34,6 +31,7 @@
     "browserify": "^13.0.0",
     "del": "^2.0.2",
     "eslint-config-airbnb": "^7.0.0",
+    "eslint-plugin-jsx-a11y": "^0.6.2",
     "eslint-plugin-react": "^4.3.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",

@@ -15,7 +15,7 @@ var _serialize = require('kinvey-javascript-sdk-core/build/rack/middleware/seria
 
 var _http = require('./http');
 
-var _push = require('./push');
+var _push = require('kinvey-phonegap-sdk/build/push');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
