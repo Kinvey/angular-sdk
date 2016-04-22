@@ -46,7 +46,7 @@ gulp.task('bundle', ['build'], function() {
   return gulp.src('./build/index.js')
     .pipe(gulpWebpack({
       context: __dirname + '/build',
-      entry: ['./index.js'],
+      entry: ['babel-polyfill', './index.js'],
       output: {
         path: __dirname + '/dist',
         filename: 'kinvey-angular-sdk.js'
