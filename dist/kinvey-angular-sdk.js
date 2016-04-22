@@ -19244,7 +19244,7 @@
 			"/kinvey-phonegap-sdk"
 		],
 		"_resolved": "git://github.com/Kinvey/javascript-sdk-core.git#c370c29b82e112938786c68f6de101330447583e",
-		"_shasum": "9d757d3ccd818e782654c5d2555531a8c7158a18",
+		"_shasum": "c95fa7c7006912b3b5251d2ed76fe8309d39d73e",
 		"_shrinkwrap": null,
 		"_spec": "kinvey-javascript-sdk-core@git://github.com/Kinvey/javascript-sdk-core.git#develop",
 		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
@@ -44003,6 +44003,8 @@
 
 	var _babybird2 = _interopRequireDefault(_babybird);
 
+	var _device = __webpack_require__(429);
+
 	var _errors = __webpack_require__(299);
 
 	var _events = __webpack_require__(557);
@@ -44062,19 +44064,26 @@
 	    _this.client = _client.Client.sharedInstance();
 	    notificationEventListener = (0, _bind2.default)(_this.notificationListener, _this);
 
-	    _this.deviceReady = new _babybird2.default(function (resolve) {
-	      var onDeviceReady = (0, _bind2.default)(function () {
-	        document.removeEventListener('deviceready', onDeviceReady);
-	        resolve();
-	      }, _this);
+	    if ((0, _device.isPhoneGap)()) {
+	      _this.deviceReady = new _babybird2.default(function (resolve) {
+	        var onDeviceReady = (0, _bind2.default)(function () {
+	          document.removeEventListener('deviceready', onDeviceReady);
+	          resolve();
+	        }, _this);
 
-	      document.addEventListener('deviceready', onDeviceReady, false);
-	      _this.deviceReady = new _babybird2.default(function () {});
-	    }).then(function () {
-	      var pushOptions = _this.client.push;
-	      if (pushOptions) {
-	        _this.phonegapPush = global.PushNotification.init(pushOptions);
-	        _this.phonegapPush.on(notificationEvent, notificationEventListener);
+	        document.addEventListener('deviceready', onDeviceReady, false);
+	      });
+	    } else {
+	      _this.deviceReady = _babybird2.default.resolve();
+	    }
+
+	    _this.deviceReady = _this.deviceReady.then(function () {
+	      if (_this.isSupported()) {
+	        var pushOptions = _this.client.push;
+	        if (pushOptions) {
+	          _this.phonegapPush = global.PushNotification.init(pushOptions);
+	          _this.phonegapPush.on(notificationEvent, notificationEventListener);
+	        }
 	      }
 	    });
 	    return _this;
