@@ -25,6 +25,31 @@ function errorHandler(err) {
   this.emit('end');
 }
 
+var VERSION = require('./package.json').version;
+
+var DEV_HEADER = (
+  '/**\n' +
+  ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
+  ' *\n' +
+  ' * The source tree of this library can be found at\n' +
+  ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
+  ' */\n'
+);
+
+var FULL_HEADER = (
+  '/**\n' +
+  ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
+  ' *\n' +
+  ' * Copyright (c) 2012-present, Kinvey, LLC.\n' +
+  ' * All rights reserved.\n' +
+  ' *\n' +
+  ' * The source tree of this library can be found at\n' +
+  ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
+  ' * This source code is licensed under the Apache-style license found in the\n' +
+  ' * LICENSE file in the root directory of this source tree.\n' +
+  ' */\n'
+);
+
 gulp.task('lint', function() {
   return gulp.src('src/**/*.js')
     .pipe(eslint())
@@ -46,7 +71,7 @@ gulp.task('bundle', ['build'], function() {
   return gulp.src('./build/index.js')
     .pipe(gulpWebpack({
       context: __dirname + '/build',
-      entry: ['babel-polyfill', './index.js'],
+      entry: ['babel-regenerator-runtime/runtime.js', './index.js'],
       output: {
         path: __dirname + '/dist',
         filename: 'kinvey-angular-sdk.js'

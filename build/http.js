@@ -11,6 +11,12 @@ var _get = function get(object, property, receiver) { if (object === null) objec
 
 var _middleware = require('kinvey-javascript-sdk-core/build/rack/middleware');
 
+var _device = require('./device');
+
+var _device2 = _interopRequireDefault(_device);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -37,6 +43,10 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
       var _this2 = this;
 
       return _get(Object.getPrototypeOf(HttpMiddleware.prototype), 'handle', this).call(this, request).then(function () {
+        // Add the device information
+        request.headers['X-Kinvey-Device-Information'] = JSON.stringify(_device2.default.toJSON());
+
+        // Send the request with $http
         var promise = _this2.$http({
           url: request.url,
           method: request.method,
