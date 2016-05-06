@@ -19,6 +19,10 @@ var spawn = require('child_process').spawn;
 var webpack = require('webpack');
 var gulpWebpack = require('webpack-stream');
 var path = require('path');
+var s3 = require('gulp-s3-upload')({
+  accessKeyId: process.env.ACCESSKEYID,
+  secretAccessKey: process.env.SECRETACCESSKEY
+});
 
 function errorHandler(err) {
   util.log(err.toString());
@@ -101,77 +105,15 @@ gulp.task('uploadS3', ['build'], function () {
     .pipe(plumber())
     .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-sdk-${version}` })))
     .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-sdk-${version}.min` })))
-    .pipe(gulp.dest('./sample'));
-});
-
-gulp.task('commit', function() {
-  return gulp.src('./')
-    .pipe(prompt.prompt({
-      type: 'input',
-      name: 'message',
-      message: 'What would you like to say for the commit message?',
-      validate: function(message) {
-        if (message && message.trim() !== '') {
-          return true;
-        }
-
-        return false;
-      }
-    }, function(res) {
-      gulp.src('./*')
-        .pipe(git.add())
-        .pipe(git.commit(res.message));
+    .pipe(s3({
+      Bucket: 'kinvey-downloads/js'
+    }, {
+      maxRetries: 5
     }));
-});
-
-gulp.task('bump', function() {
-  var packageJSON = require('./package.json');
-  var version = packageJSON.version;
-
-  return gulp.src('./')
-    .pipe(prompt.prompt({
-      type: 'input',
-      name: 'version',
-      message: `The current version is ${version}. What is the new version?`,
-      validate: function(version) {
-        return semverRegex().test(version);
-      }
-    }, function(res) {
-      gulp.src(['bower.json', 'package.json'])
-        .pipe(bump({ version: res.version }))
-        .pipe(gulp.dest('./'));
-    }));
-});
-
-gulp.task('tag', ['bump'], function(done) {
-  var packageJSON = require('./package.json');
-  var version = packageJSON.version;
-
-  git.tag(version, null, function (err) {
-    if (err) {
-      errorHandler(err);
-    }
-
-    done(err);
-  });
-});
-
-gulp.task('push', function(done) {
-  git.push('origin', 'master', { args: '--follow-tags -f' }, function(error) {
-    if (error) {
-      errorHandler(error);
-    }
-
-    done(error);
-  });
-});
-
-gulp.task('publish', function(done) {
-  spawn('publish', ['publish'], { stdio: 'inherit' }).on('close', done);
 });
 
 gulp.task('release', function() {
-  runSequence('uploadS3', 'commit', 'tag', ['push', 'publish']);
+  runSequence('bundle', 'uploadS3');
 });
 
 gulp.task('default', function() {
