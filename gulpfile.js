@@ -29,30 +29,30 @@ function errorHandler(err) {
   this.emit('end');
 }
 
-var VERSION = require('./package.json').version;
+// var VERSION = require('./package.json').version;
 
-var DEV_HEADER = (
-  '/**\n' +
-  ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
-  ' *\n' +
-  ' * The source tree of this library can be found at\n' +
-  ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
-  ' */\n'
-);
+// var DEV_HEADER = (
+//   '/**\n' +
+//   ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
+//   ' *\n' +
+//   ' * The source tree of this library can be found at\n' +
+//   ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
+//   ' */\n'
+// );
 
-var FULL_HEADER = (
-  '/**\n' +
-  ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
-  ' *\n' +
-  ' * Copyright (c) 2012-present, Kinvey, LLC.\n' +
-  ' * All rights reserved.\n' +
-  ' *\n' +
-  ' * The source tree of this library can be found at\n' +
-  ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
-  ' * This source code is licensed under the Apache-style license found in the\n' +
-  ' * LICENSE file in the root directory of this source tree.\n' +
-  ' */\n'
-);
+// var FULL_HEADER = (
+//   '/**\n' +
+//   ' * Kinvey JavaScript SDK v' + VERSION + '\n' +
+//   ' *\n' +
+//   ' * Copyright (c) 2012-present, Kinvey, LLC.\n' +
+//   ' * All rights reserved.\n' +
+//   ' *\n' +
+//   ' * The source tree of this library can be found at\n' +
+//   ' *   https://github.com/Kinvey/JavaScript-SDK\n' +
+//   ' * This source code is licensed under the Apache-style license found in the\n' +
+//   ' * LICENSE file in the root directory of this source tree.\n' +
+//   ' */\n'
+// );
 
 gulp.task('lint', function() {
   return gulp.src('src/**/*.js')
@@ -103,8 +103,8 @@ gulp.task('uploadS3', ['build'], function () {
     'dist/kinvey-angular-sdk.min.js'
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-sdk-${version}` })))
-    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-sdk-${version}.min` })))
+    .pipe(gulpif('kinvey-angular.js', rename({ basename: 'kinvey-angular-sdk-' + version })))
+    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: 'kinvey-angular-sdk-' + version + '.min' })))
     .pipe(s3({
       Bucket: 'kinvey-downloads/js'
     }, {
@@ -113,6 +113,7 @@ gulp.task('uploadS3', ['build'], function () {
 });
 
 gulp.task('release', function() {
+  // add tag, commit, and publish tasks
   runSequence('bundle', 'uploadS3');
 });
 
