@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.18",
+  "version": "3.0.0-beta.22",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -11,7 +11,7 @@
   "contributors": [
     "Thomas Conner <thomas@kinvey.com>"
   ],
-  "main": "./build/index.js",
+  "main": "./es5/index.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/kinvey-angular-sdk"
