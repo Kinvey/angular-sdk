@@ -1,19 +1,16 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.HttpMiddleware = undefined;
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-var _middleware = require('kinvey-javascript-sdk-core/build/rack/middleware');
-
-var _device = require('./device');
+var _device = require('kinvey-phonegap-sdk/es5/device');
 
 var _device2 = _interopRequireDefault(_device);
+
+var _package = require('../package.json');
+
+var _package2 = _interopRequireDefault(_package);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,56 +20,44 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var $injector = angular.injector(['ng']);
+/**
+ * @private
+ */
 
-var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
-  _inherits(HttpMiddleware, _KinveyMiddleware);
+var Device = function (_PhoneGapDevice) {
+  _inherits(Device, _PhoneGapDevice);
 
-  function HttpMiddleware() {
-    _classCallCheck(this, HttpMiddleware);
+  function Device() {
+    _classCallCheck(this, Device);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HttpMiddleware).call(this, 'Kinvey Angular Http Middleware'));
-
-    _this.$http = $injector.get('$http');
-    return _this;
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Device).apply(this, arguments));
   }
 
-  _createClass(HttpMiddleware, [{
-    key: 'handle',
-    value: function handle(request) {
-      var _this2 = this;
+  _createClass(Device, null, [{
+    key: 'toJSON',
+    value: function toJSON() {
+      var json = _get(Object.getPrototypeOf(Device), 'toJSON', this).call(this);
 
-      return _get(Object.getPrototypeOf(HttpMiddleware.prototype), 'handle', this).call(this, request).then(function () {
-        // Add the device information
-        request.headers['X-Kinvey-Device-Information'] = JSON.stringify(_device2.default.toJSON());
+      // Add angular information
+      json.library = {
+        name: 'angular',
+        version: global.angular.version.full
+      };
 
-        // Send the request with $http
-        var promise = _this2.$http({
-          url: request.url,
-          method: request.method,
-          headers: request.headers,
-          data: request.data
-        }).then(function (response) {
-          request.response = {
-            statusCode: response.status,
-            headers: response.headers(),
-            data: response.data
-          };
+      // Add sdk information
+      json.kinveySDK = {
+        name: _package2.default.name,
+        version: _package2.default.version
+      };
 
-          return request;
-        }).catch(function (response) {
-          request.response = {
-            statusCode: response.status,
-            headers: response.headers(),
-            data: response.data
-          };
-
-          return request;
-        });
-        return promise;
-      });
+      return json;
     }
   }]);
 
-  return HttpMiddleware;
-}(_middleware.KinveyMiddleware);
+  return Device;
+}(_device2.default);
+
+// Expose the device class globally
+
+
+global.KinveyDevice = Device;

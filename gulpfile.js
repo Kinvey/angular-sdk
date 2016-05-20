@@ -62,20 +62,25 @@ gulp.task('lint', function() {
 });
 
 gulp.task('clean', function(done) {
-  return del(['build', 'dist'], done);
+  return del(['es5', 'dist'], done);
 });
 
 gulp.task('build', ['clean', 'lint'], function() {
   return gulp.src('src/**/*.js')
     .pipe(babel())
-    .pipe(gulp.dest('./build'))
+    .pipe(gulp.dest('./es5'))
 });
 
 gulp.task('bundle', ['build'], function() {
-  return gulp.src('./build/index.js')
+  return gulp.src('./es5/index.js')
     .pipe(gulpWebpack({
-      context: __dirname + '/build',
-      entry: ['babel-regenerator-runtime/runtime.js', './index.js'],
+      context: __dirname + '/es5',
+      entry: [
+        'babel-regenerator-runtime/runtime.js',
+        'kinvey-phonegap-sdk/es5/popup',
+        './device',
+        './index.js'
+      ],
       output: {
         path: __dirname + '/dist',
         filename: 'kinvey-angular-sdk.js'
@@ -106,10 +111,17 @@ gulp.task('uploadS3', ['build'], function () {
     .pipe(gulpif('kinvey-angular.js', rename({ basename: 'kinvey-angular-sdk-' + version })))
     .pipe(gulpif('kinvey-angular.min.js', rename({ basename: 'kinvey-angular-sdk-' + version + '.min' })))
     .pipe(s3({
-      Bucket: 'kinvey-downloads/js'
-    }, {
-      maxRetries: 5
-    }));
+      Bucket: 'kinvey-downloads/js',
+      uploadNewFilesOnly: true
+    }, function(error, data) {
+      if (error) {
+        console.log(error, error.stack);
+        return;
+      }
+
+      console.log(data);
+    }))
+    .on('error', errorHandler);
 });
 
 gulp.task('release', function() {
