@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.HttpMiddleware = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19,24 +18,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var $injector = angular.injector(['ng']);
 
-var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
-  _inherits(HttpMiddleware, _KinveyMiddleware);
+var AngularHttpMiddleware = function (_KinveyMiddleware) {
+  _inherits(AngularHttpMiddleware, _KinveyMiddleware);
 
-  function HttpMiddleware() {
-    _classCallCheck(this, HttpMiddleware);
+  function AngularHttpMiddleware() {
+    _classCallCheck(this, AngularHttpMiddleware);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(HttpMiddleware).call(this, 'Kinvey Angular Http Middleware'));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AngularHttpMiddleware).call(this, 'Kinvey Angular Http Middleware'));
 
     _this.$http = $injector.get('$http');
     return _this;
   }
 
-  _createClass(HttpMiddleware, [{
+  _createClass(AngularHttpMiddleware, [{
     key: 'handle',
     value: function handle(request) {
       var _this2 = this;
 
-      var promise = _get(Object.getPrototypeOf(HttpMiddleware.prototype), 'handle', this).call(this, request);
+      var promise = _get(Object.getPrototypeOf(AngularHttpMiddleware.prototype), 'handle', this).call(this, request);
       var url = request.url;
       var method = request.method;
       var headers = request.headers;
@@ -72,5 +71,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
     }
   }]);
 
-  return HttpMiddleware;
+  return AngularHttpMiddleware;
 }(_middleware.KinveyMiddleware);
+
+exports.default = AngularHttpMiddleware;
