@@ -21,7 +21,7 @@
     "babel-regenerator-runtime": "^6.5.0",
     "babybird": "0.0.1",
     "kinvey-javascript-sdk-core": "3.0.0-beta.22",
-    "kinvey-phonegap-sdk": "3.0.0-beta.22"
+    "kinvey-phonegap-sdk": "3.0.0-beta.23"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.0",
