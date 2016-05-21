@@ -38,6 +38,10 @@ var Device = function (_PhoneGapDevice) {
     value: function toJSON() {
       var json = _get(Object.getPrototypeOf(Device), 'toJSON', this).call(this);
 
+      if (Device.isBrowser()) {
+        json.platform.name = 'web browser';
+      }
+
       // Add angular information
       json.library = {
         name: 'angular',
