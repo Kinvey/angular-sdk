@@ -18,7 +18,7 @@ npm install kinvey-angular-sdk --save
 or
 
 ```bash
-bower install kinvey-angular-sdk#3.0.0-beta.23 --save
+bower install kinvey-angular-sdk#3.0.0-beta.24 --save
 ```
 
 ### 3. Configure the library
