@@ -45,7 +45,7 @@ gulp.task('bundle', ['build'], () => {
     + ' * <%= pkg.description %>\n'
     + ' * <%= pkg.homepage %>\n'
     + ' *\n'
-    + ' * Copyright (c) 2012-present, <%= pkg.author %>.\n'
+    + ' * Copyright (c) 2016, <%= pkg.author %>.\n'
     + ' * All rights reserved.\n'
     + ' *\n'
     + ' * Released under the <%= pkg.license %> license.\n'

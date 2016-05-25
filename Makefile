@@ -1,4 +1,4 @@
-PROJECT = "Kinvey PhoneGap SDK"
+PROJECT = "Kinvey Angular SDK"
 
 clean: ;@echo "Cleaning ${PROJECT}..."; \
 	rm -rf node_modules
@@ -9,10 +9,8 @@ install: ;@echo "Installing dependencies for ${PROJECT}..."; \
 test: ;@echo "Testing ${PROJECT}..."; \
 	npm run test:jenkins
 
-build: ;@echo "Releasing ${PROJECT}..."; \
+build: ;@echo "Building ${PROJECT}..."; \
 	./node_modules/.bin/gulp default
-	git add es5/\*.js
-	git commit -m "Update es5 and dist files."
 
 upload: ;@echo "Uploading ${PROJECT} to S3..."; \
 	./node_modules/.bin/gulp uploadS3
