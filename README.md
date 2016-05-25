@@ -12,7 +12,6 @@ The simplest way to build the sdk is by running `gulp`. More advanced tasks are 
 * `gulp build`: build the sdk
 * `gulp bundle`: bundle the sdk for dist
 * `gulp uploadS3`: upload dist files to AWS S3
-* `gulp release`: bundle and upload the sdk
 
 ### Flags
 The following flags are available when running `gulp bump`:
