@@ -8,7 +8,6 @@ import gulpif from 'gulp-if';
 import babel from 'gulp-babel';
 import buffer from 'gulp-buffer';
 import del from 'del';
-import runSequence from 'run-sequence';
 import webpack from 'webpack';
 import gulpWebpack from 'webpack-stream';
 import s3Upload from 'gulp-s3-upload';
@@ -115,8 +114,8 @@ gulp.task('uploadS3', ['build'], () => {
     'dist/kinvey-angular-sdk.min.js'
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey-angular.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}` })))
-    .pipe(gulpif('kinvey-angular.min.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}.min` })))
+    .pipe(gulpif('kinvey-angular-sdk.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}` })))
+    .pipe(gulpif('kinvey-angular-sdk.min.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}.min` })))
     .pipe(s3({
       Bucket: 'kinvey-downloads/js',
       uploadNewFilesOnly: true
@@ -129,10 +128,6 @@ gulp.task('uploadS3', ['build'], () => {
     }))
     .on('error', errorHandler);
   return stream;
-});
-
-gulp.task('release', () => {
-  runSequence('bundle', 'uploadS3');
 });
 
 gulp.task('default', ['bundle']);
