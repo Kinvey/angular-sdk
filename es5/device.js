@@ -3,14 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.AngularDevice = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 var _device = require('kinvey-phonegap-sdk/es5/device');
-
-var _device2 = _interopRequireDefault(_device);
 
 var _package = require('../package.json');
 
@@ -28,21 +27,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @private
  */
 
-var Device = function (_PhoneGapDevice) {
-  _inherits(Device, _PhoneGapDevice);
+var AngularDevice = exports.AngularDevice = function (_PhoneGapDevice) {
+  _inherits(AngularDevice, _PhoneGapDevice);
 
-  function Device() {
-    _classCallCheck(this, Device);
+  function AngularDevice() {
+    _classCallCheck(this, AngularDevice);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Device).apply(this, arguments));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AngularDevice).apply(this, arguments));
   }
 
-  _createClass(Device, null, [{
+  _createClass(AngularDevice, null, [{
     key: 'toJSON',
     value: function toJSON() {
-      var json = _get(Object.getPrototypeOf(Device), 'toJSON', this).call(this);
+      var json = _get(Object.getPrototypeOf(AngularDevice), 'toJSON', this).call(this);
 
-      if (Device.isBrowser()) {
+      if (AngularDevice.isBrowser()) {
         json.platform.name = 'web browser';
       }
 
@@ -62,11 +61,5 @@ var Device = function (_PhoneGapDevice) {
     }
   }]);
 
-  return Device;
-}(_device2.default);
-
-// Expose the device class globally
-
-
-exports.default = Device;
-global.KinveyDevice = Device;
+  return AngularDevice;
+}(_device.PhoneGapDevice);

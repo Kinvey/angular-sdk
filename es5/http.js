@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.AngularHttpMiddleware = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,7 +19,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var $injector = angular.injector(['ng']);
 
-var AngularHttpMiddleware = function (_KinveyMiddleware) {
+var AngularHttpMiddleware = exports.AngularHttpMiddleware = function (_KinveyMiddleware) {
   _inherits(AngularHttpMiddleware, _KinveyMiddleware);
 
   function AngularHttpMiddleware() {
@@ -47,7 +48,7 @@ var AngularHttpMiddleware = function (_KinveyMiddleware) {
         var promise = _this2.$http({
           url: url,
           method: method,
-          headers: headers,
+          headers: headers.toJSON(),
           data: body
         }).then(function (response) {
           request.response = {
@@ -73,5 +74,3 @@ var AngularHttpMiddleware = function (_KinveyMiddleware) {
 
   return AngularHttpMiddleware;
 }(_middleware.KinveyMiddleware);
-
-exports.default = AngularHttpMiddleware;
