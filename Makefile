@@ -9,17 +9,15 @@ install: ;@echo "Installing dependencies for ${PROJECT}..."; \
 test: ;@echo "Testing ${PROJECT}..."; \
 	npm run test:jenkins
 
-build: ;@echo "Building ${PROJECT}..."; \
-	./node_modules/.bin/gulp default
-
 upload: ;@echo "Uploading ${PROJECT} to S3..."; \
-	./node_modules/.bin/gulp uploadS3
+	./node_modules/.bin/gulp upload
 
 publish: ;@echo "Publishing ${PROJECT}..."; \
-	npm install ci-npm-publish
+	npm install -g ci-npm-publish
 	npm publish --npmuser ${NPMUSER} --npmemail ${NPMEMAIL} --npmpassword ${NPMPASSWORD}
+	npm uninstall -g ci-npm-publish
 
 audit: clean install test
-release: audit build upload publish
+release: audit upload publish
 
-.PHONY: clean install test build upload publish audit release
+.PHONY: clean install test upload publish audit release

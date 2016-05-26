@@ -101,7 +101,7 @@ gulp.task('bump', ['bumpVersion'], () => {
   return stream;
 });
 
-gulp.task('uploadS3', ['build'], () => {
+gulp.task('upload', ['bundle'], () => {
   const s3 = s3Upload({
     accessKeyId: process.env.S3ACCESSKEY,
     secretAccessKey: process.env.S3ACCESSSECRET
