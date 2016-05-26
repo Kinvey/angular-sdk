@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.24",
+  "version": "3.0.0-beta.25",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
