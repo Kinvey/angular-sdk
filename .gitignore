@@ -10,6 +10,7 @@ report.xml
 docs
 sample
 dist
+es5
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 *.iml
