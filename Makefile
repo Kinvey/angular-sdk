@@ -2,6 +2,7 @@ PROJECT = "Kinvey Angular SDK"
 
 clean: ;@echo "Cleaning ${PROJECT}..."; \
 	rm -rf node_modules
+	./node_modules/.bin/gulp clean
 
 install: ;@echo "Installing dependencies for ${PROJECT}..."; \
 	npm install
@@ -13,9 +14,7 @@ upload: ;@echo "Uploading ${PROJECT} to S3..."; \
 	./node_modules/.bin/gulp upload
 
 publish: ;@echo "Publishing ${PROJECT}..."; \
-	npm install -g ci-npm-publish
-	npm publish --npmuser ${NPMUSER} --npmemail ${NPMEMAIL} --npmpassword ${NPMPASSWORD}
-	npm uninstall -g ci-npm-publish
+	npm publish . --tag beta
 
 audit: clean install test
 release: audit upload publish
