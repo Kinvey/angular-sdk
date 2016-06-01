@@ -17,9 +17,10 @@
     "url": "git@github.com:Kinvey/kinvey-angular-sdk"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
-    "test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
-    "test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
+    "test:watch": "./node_modules/.bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
+    "test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
+    "prepublish": "./node_modules/.bin/gulp build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags"
   },
   "dependencies": {
