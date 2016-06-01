@@ -30,7 +30,12 @@ gulp.task('lint', () => {
   return stream;
 });
 
-gulp.task('clean', (done) => del(['es5', 'dist'], done));
+gulp.task('clean', (done) => del([
+  'es5',
+  'dist',
+  'coverage',
+  'test.tap'
+], done));
 
 gulp.task('build', ['clean', 'lint'], () => {
   const stream = gulp.src('src/**/*.js')
@@ -103,8 +108,8 @@ gulp.task('bump', ['bumpVersion'], () => {
 
 gulp.task('upload', ['bundle'], () => {
   const s3 = s3Upload({
-    accessKeyId: process.env.S3ACCESSKEY,
-    secretAccessKey: process.env.S3ACCESSSECRET
+    accessKeyId: process.env.S3_ACCESSKEYID,
+    secretAccessKey: process.env.S3_SECRETACCESSKEY
   });
 
   const stream = gulp.src([

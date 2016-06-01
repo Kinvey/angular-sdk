@@ -1,8 +1,8 @@
 PROJECT = "Kinvey Angular SDK"
 
 clean: ;@echo "Cleaning ${PROJECT}..."; \
-	rm -rf node_modules
 	./node_modules/.bin/gulp clean
+	rm -rf node_modules
 
 install: ;@echo "Installing dependencies for ${PROJECT}..."; \
 	npm install
