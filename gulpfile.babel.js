@@ -4,7 +4,6 @@ import util from 'gulp-util';
 import plumber from 'gulp-plumber';
 import uglify from 'gulp-uglify';
 import rename from 'gulp-rename';
-import gulpif from 'gulp-if';
 import babel from 'gulp-babel';
 import buffer from 'gulp-buffer';
 import del from 'del';
@@ -64,7 +63,7 @@ gulp.task('bundle', ['build'], () => {
         './index.js'
       ],
       output: {
-        filename: 'kinvey-angular-sdk.js'
+        filename: `kinvey-angular-sdk-${pkg.version}.js`
       },
       module: {
         loaders: [
@@ -74,7 +73,7 @@ gulp.task('bundle', ['build'], () => {
     }, webpack))
     .pipe(banner(header, { pkg: pkg }))
     .pipe(gulp.dest(`${__dirname}/dist`))
-    .pipe(rename('kinvey-angular-sdk.min.js'))
+    .pipe(rename(`kinvey-angular-sdk-${pkg.version}.min.js`))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(banner(header, { pkg: pkg }))
@@ -83,25 +82,18 @@ gulp.task('bundle', ['build'], () => {
   return stream;
 });
 
-gulp.task('bumpVersion', () => {
+gulp.task('bump', () => {
   if (!args.type && !args.version) {
     args.type = 'patch';
   }
 
-  const stream = gulp.src('./package.json')
+  const stream = gulp.src(['./package.json', './bower.json'])
     .pipe(bump({
       preid: 'beta',
       type: args.type,
       version: args.version
     }))
     .pipe(gulp.dest(`${__dirname}/`))
-    .on('error', errorHandler);
-  return stream;
-});
-
-gulp.task('bump', ['bumpVersion'], () => {
-  const stream = file('bump.txt', '', { src: true })
-    .pipe(gulp.dest(`${__dirname}/tmp`))
     .on('error', errorHandler);
   return stream;
 });
@@ -113,12 +105,10 @@ gulp.task('upload', ['bundle'], () => {
   });
 
   const stream = gulp.src([
-    'dist/kinvey-angular-sdk.js',
-    'dist/kinvey-angular-sdk.min.js'
+    `dist/kinvey-angular-sdk-${pkg.version}.js`,
+    `dist/kinvey-angular-sdk-${pkg.version}.min.js`,
   ])
     .pipe(plumber())
-    .pipe(gulpif('kinvey-angular-sdk.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}` })))
-    .pipe(gulpif('kinvey-angular-sdk.min.js', rename({ basename: `kinvey-angular-sdk-${pkg.version}.min` })))
     .pipe(s3({
       Bucket: 'kinvey-downloads/js',
       uploadNewFilesOnly: true

@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.25",
+  "version": "3.0.0-beta.26",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -47,9 +47,7 @@
     "gulp-buffer": "0.0.2",
     "gulp-bump": "^2.1.0",
     "gulp-eslint": "^2.0.0",
-    "gulp-file": "^0.3.0",
     "gulp-git": "^1.7.0",
-    "gulp-if": "^2.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-prompt": "^0.2.0",
     "gulp-rename": "^1.2.2",

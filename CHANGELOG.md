@@ -1,4 +1,7 @@
 ## Changelog
+### 3.0.0-beta.26 (2016-06-07)
+* Bugfix (MLIBZ-1134): Check that `global.device` is not `undefined`.
+
 ### 3.0.0-beta.17 (2016-04-20)
 * Bugfix (MLIBZ-1016): Fix bug that prevented push from not working on iOS devices.
 
