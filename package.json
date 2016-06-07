@@ -20,12 +20,11 @@
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
     "test:watch": "./node_modules/.bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
     "test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
-    "prepublish": "./node_modules/.bin/gulp build",
     "postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags"
   },
   "dependencies": {
-    "kinvey-javascript-sdk-core": "3.0.0-beta.24",
-    "kinvey-phonegap-sdk": "3.0.0-beta.28",
+    "kinvey-javascript-sdk-core": "3.0.0-beta.25",
+    "kinvey-phonegap-sdk": "3.0.0-beta.29",
     "regenerator-runtime": "^0.9.5"
   },
   "devDependencies": {
