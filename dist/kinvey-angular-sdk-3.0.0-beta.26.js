@@ -1,5 +1,5 @@
 /**
- * kinvey-angular-sdk v3.0.0-beta.24
+ * kinvey-angular-sdk v3.0.0-beta.26
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -832,15 +832,15 @@
 
 	var _provider2 = _interopRequireDefault(_provider);
 
-	var _rack = __webpack_require__(153);
+	var _rack = __webpack_require__(155);
 
-	var _http = __webpack_require__(220);
+	var _http = __webpack_require__(222);
 
-	var _http2 = __webpack_require__(340);
+	var _http2 = __webpack_require__(339);
 
-	var _device = __webpack_require__(305);
+	var _device = __webpack_require__(340);
 
-	var _popup = __webpack_require__(341);
+	var _popup = __webpack_require__(342);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -875,9 +875,7 @@
 
 	var _kinveyJavascriptSdkCore2 = _interopRequireDefault(_kinveyJavascriptSdkCore);
 
-	var _device = __webpack_require__(305);
-
-	var _push = __webpack_require__(309);
+	var _push = __webpack_require__(306);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -905,9 +903,7 @@
 	      var client = _get(Object.getPrototypeOf(AngularKinvey), 'init', this).call(this, options);
 
 	      // Add Push module to Kinvey
-	      if (_device.AngularDevice.isiOS() || _device.AngularDevice.isAndroid()) {
-	        this.Push = new _push.AngularPush();
-	      }
+	      this.Push = new _push.AngularPush();
 
 	      // Return the client
 	      return client;
@@ -958,39 +954,37 @@
 
 	var _aggregation = __webpack_require__(8);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _endpoint = __webpack_require__(147);
+	var _endpoint = __webpack_require__(149);
 
 	var _endpoint2 = _interopRequireDefault(_endpoint);
 
-	var _log = __webpack_require__(158);
+	var _log = __webpack_require__(160);
 
-	var _metadata = __webpack_require__(248);
+	var _metadata = __webpack_require__(250);
 
 	var _query = __webpack_require__(9);
 
-	var _datastore = __webpack_require__(250);
+	var _datastore = __webpack_require__(252);
 
-	var _filestore = __webpack_require__(297);
+	var _filestore = __webpack_require__(299);
 
-	var _sync = __webpack_require__(270);
+	var _sync = __webpack_require__(272);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _user = __webpack_require__(298);
+	var _user = __webpack_require__(300);
 
-	var _userstore = __webpack_require__(304);
+	var _mic = __webpack_require__(302);
 
-	var _mic = __webpack_require__(300);
+	var _network = __webpack_require__(249);
 
-	var _network = __webpack_require__(247);
+	var _request = __webpack_require__(150);
 
-	var _request = __webpack_require__(148);
-
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -1059,7 +1053,7 @@
 	      this.SocialIdentity = _mic.SocialIdentity;
 	      this.Sync = _sync2.default;
 	      this.User = _user.User;
-	      this.UserStore = _userstore.UserStore;
+	      this.UserStore = _user.UserStore;
 
 	      // Return the client
 	      return client;
@@ -1536,7 +1530,7 @@
 
 	var _query = __webpack_require__(9);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
@@ -1816,9 +1810,15 @@
 
 	var _forEach2 = _interopRequireDefault(_forEach);
 
+	var _findKey = __webpack_require__(135);
+
+	var _findKey2 = _interopRequireDefault(_findKey);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var unsupportedFilters = ['$nearSphere'];
 
 	var Query = function () {
 	  function Query(options) {
@@ -1877,8 +1877,19 @@
 	  }
 
 	  _createClass(Query, [{
-	    key: 'equalTo',
+	    key: 'isSupportedLocal',
+	    value: function isSupportedLocal() {
+	      var _this = this;
 
+	      var supported = true;
+
+	      (0, _forEach2.default)(unsupportedFilters, function (filter) {
+	        supported = !(0, _findKey2.default)(_this.filter, filter);
+	        return supported;
+	      });
+
+	      return supported;
+	    }
 
 	    /**
 	     * Adds an equal to filter to the query. Requires `field` to equal `value`.
@@ -1889,6 +1900,9 @@
 	     * @param   {*}             value     Value.
 	     * @returns {Query}                   The query.
 	     */
+
+	  }, {
+	    key: 'equalTo',
 	    value: function equalTo(field, value) {
 	      this.filter[field] = value;
 	      return this;
@@ -2103,12 +2117,9 @@
 	  }, {
 	    key: 'near',
 	    value: function near(field, coord, maxDistance) {
-	      if (!(0, _isArray2.default)(coord) || !coord[0] || !coord[1]) {
+	      if (!(0, _isArray2.default)(coord) || !(0, _isNumber2.default)(coord[0]) || !(0, _isNumber2.default)(coord[1])) {
 	        throw new Error('coord must be a [number, number]');
 	      }
-
-	      coord[0] = parseFloat(coord[0]);
-	      coord[1] = parseFloat(coord[1]);
 
 	      var result = this.addFilter(field, '$nearSphere', [coord[0], coord[1]]);
 
@@ -2222,7 +2233,7 @@
 	  }, {
 	    key: 'join',
 	    value: function join(operator, queries) {
-	      var _this = this;
+	      var _this2 = this;
 
 	      var that = this;
 	      var currentQuery = {};
@@ -2256,8 +2267,8 @@
 	      // assign `filter`. Instead, empty it without losing the reference.
 	      var members = Object.keys(this.filter);
 	      (0, _forEach2.default)(members, function (member) {
-	        currentQuery[member] = _this.filter[member];
-	        delete _this.filter[member];
+	        currentQuery[member] = _this2.filter[member];
+	        delete _this2.filter[member];
 	      });
 
 	      // `currentQuery` is the left-hand side query. Join with `queries`.
@@ -2277,19 +2288,31 @@
 	     */
 
 	  }, {
-	    key: '_process',
-	    value: function _process(data) {
-	      var _this2 = this;
+	    key: 'process',
+	    value: function process(data) {
+	      var _this3 = this;
+
+	      if (!this.isSupportedLocal()) {
+	        (function () {
+	          var message = 'This query is not able to run locally. The following filters are not supported' + ' locally:';
+
+	          (0, _forEach2.default)(unsupportedFilters, function (filter) {
+	            message = message + ' ' + filter;
+	          });
+
+	          throw new Error(message);
+	        })();
+	      }
 
 	      if (data) {
-	        var _ret = function () {
+	        var _ret2 = function () {
 	          // Validate arguments.
 	          if (!(0, _isArray2.default)(data)) {
 	            throw new Error('data argument must be of type: Array.');
 	          }
 
 	          // Apply the query
-	          var json = _this2.toJSON();
+	          var json = _this3.toJSON();
 	          data = (0, _sift2.default)(json.filter, data);
 
 	          // Remove fields
@@ -2350,7 +2373,7 @@
 	          };
 	        }();
 
-	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+	        if ((typeof _ret2 === 'undefined' ? 'undefined' : _typeof(_ret2)) === "object") return _ret2.v;
 	      }
 
 	      return data;
@@ -7366,6 +7389,86 @@
 /* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var baseFindKey = __webpack_require__(136),
+	    baseForOwn = __webpack_require__(14),
+	    baseIteratee = __webpack_require__(37);
+
+	/**
+	 * This method is like `_.find` except that it returns the key of the first
+	 * element `predicate` returns truthy for instead of the element itself.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 1.1.0
+	 * @category Object
+	 * @param {Object} object The object to search.
+	 * @param {Array|Function|Object|string} [predicate=_.identity]
+	 *  The function invoked per iteration.
+	 * @returns {string|undefined} Returns the key of the matched element,
+	 *  else `undefined`.
+	 * @example
+	 *
+	 * var users = {
+	 *   'barney':  { 'age': 36, 'active': true },
+	 *   'fred':    { 'age': 40, 'active': false },
+	 *   'pebbles': { 'age': 1,  'active': true }
+	 * };
+	 *
+	 * _.findKey(users, function(o) { return o.age < 40; });
+	 * // => 'barney' (iteration order is not guaranteed)
+	 *
+	 * // The `_.matches` iteratee shorthand.
+	 * _.findKey(users, { 'age': 1, 'active': true });
+	 * // => 'pebbles'
+	 *
+	 * // The `_.matchesProperty` iteratee shorthand.
+	 * _.findKey(users, ['active', false]);
+	 * // => 'fred'
+	 *
+	 * // The `_.property` iteratee shorthand.
+	 * _.findKey(users, 'active');
+	 * // => 'barney'
+	 */
+	function findKey(object, predicate) {
+	  return baseFindKey(object, baseIteratee(predicate, 3), baseForOwn);
+	}
+
+	module.exports = findKey;
+
+
+/***/ },
+/* 136 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of methods like `_.findKey` and `_.findLastKey`,
+	 * without support for iteratee shorthands, which iterates over `collection`
+	 * using `eachFunc`.
+	 *
+	 * @private
+	 * @param {Array|Object} collection The collection to search.
+	 * @param {Function} predicate The function invoked per iteration.
+	 * @param {Function} eachFunc The function to iterate over `collection`.
+	 * @returns {*} Returns the found element or its key, else `undefined`.
+	 */
+	function baseFindKey(collection, predicate, eachFunc) {
+	  var result;
+	  eachFunc(collection, function(value, key, collection) {
+	    if (predicate(value, key, collection)) {
+	      result = key;
+	      return false;
+	    }
+	  });
+	  return result;
+	}
+
+	module.exports = baseFindKey;
+
+
+/***/ },
+/* 137 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var castPath = __webpack_require__(104),
 	    isFunction = __webpack_require__(28),
 	    isKey = __webpack_require__(110),
@@ -7426,7 +7529,7 @@
 
 
 /***/ },
-/* 136 */
+/* 138 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -7439,9 +7542,9 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _storage = __webpack_require__(137);
+	var _storage = __webpack_require__(139);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -7650,7 +7753,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 137 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -7665,7 +7768,7 @@
 	exports.getSyncKey = getSyncKey;
 	exports.setSyncKey = setSyncKey;
 
-	var _localStorage = __webpack_require__(138);
+	var _localStorage = __webpack_require__(140);
 
 	var _localStorage2 = _interopRequireDefault(_localStorage);
 
@@ -7731,13 +7834,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 138 */
+/* 140 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 
-	var stub = __webpack_require__(139);
-	var tracking = __webpack_require__(140);
+	var stub = __webpack_require__(141);
+	var tracking = __webpack_require__(142);
 	var ls = 'localStorage' in global && global.localStorage ? global.localStorage : stub;
 
 	function accessor (key, value) {
@@ -7780,7 +7883,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 139 */
+/* 141 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7818,7 +7921,7 @@
 
 
 /***/ },
-/* 140 */
+/* 142 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -7878,7 +7981,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 141 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -7904,8 +8007,8 @@
 
 	'use strict';
 
-	var punycode = __webpack_require__(142);
-	var util = __webpack_require__(143);
+	var punycode = __webpack_require__(144);
+	var util = __webpack_require__(145);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -7980,7 +8083,7 @@
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(144);
+	    querystring = __webpack_require__(146);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && util.isObject(url) && url instanceof Url) return url;
@@ -8616,7 +8719,7 @@
 
 
 /***/ },
-/* 142 */
+/* 144 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -9151,7 +9254,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(133)(module), (function() { return this; }())))
 
 /***/ },
-/* 143 */
+/* 145 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9173,17 +9276,17 @@
 
 
 /***/ },
-/* 144 */
+/* 146 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(145);
-	exports.encode = exports.stringify = __webpack_require__(146);
+	exports.decode = exports.parse = __webpack_require__(147);
+	exports.encode = exports.stringify = __webpack_require__(148);
 
 
 /***/ },
-/* 145 */
+/* 147 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -9269,7 +9372,7 @@
 
 
 /***/ },
-/* 146 */
+/* 148 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -9339,7 +9442,7 @@
 
 
 /***/ },
-/* 147 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -9350,17 +9453,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
 	var _errors = __webpack_require__(6);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -9482,7 +9585,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 148 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global, Buffer) {'use strict';
@@ -9498,27 +9601,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _rack = __webpack_require__(153);
+	var _rack = __webpack_require__(155);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
 	var _errors = __webpack_require__(6);
 
-	var _urlPattern = __webpack_require__(239);
+	var _urlPattern = __webpack_require__(241);
 
 	var _urlPattern2 = _interopRequireDefault(_urlPattern);
 
-	var _qs = __webpack_require__(241);
+	var _qs = __webpack_require__(243);
 
 	var _qs2 = _interopRequireDefault(_qs);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _appendQuery = __webpack_require__(245);
+	var _appendQuery = __webpack_require__(247);
 
 	var _appendQuery2 = _interopRequireDefault(_appendQuery);
 
@@ -9526,7 +9629,7 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
@@ -9538,7 +9641,7 @@
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _isPlainObject = __webpack_require__(194);
+	var _isPlainObject = __webpack_require__(196);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
@@ -10473,10 +10576,10 @@
 
 	  return KinveyRequest;
 	}(Request);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }()), __webpack_require__(149).Buffer))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }()), __webpack_require__(151).Buffer))
 
 /***/ },
-/* 149 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Buffer, global) {/*!
@@ -10489,9 +10592,9 @@
 
 	'use strict'
 
-	var base64 = __webpack_require__(150)
-	var ieee754 = __webpack_require__(151)
-	var isArray = __webpack_require__(152)
+	var base64 = __webpack_require__(152)
+	var ieee754 = __webpack_require__(153)
+	var isArray = __webpack_require__(154)
 
 	exports.Buffer = Buffer
 	exports.SlowBuffer = SlowBuffer
@@ -12028,10 +12131,10 @@
 	  return i
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(149).Buffer, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(151).Buffer, (function() { return this; }())))
 
 /***/ },
-/* 150 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -12161,7 +12264,7 @@
 
 
 /***/ },
-/* 151 */
+/* 153 */
 /***/ function(module, exports) {
 
 	exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -12251,7 +12354,7 @@
 
 
 /***/ },
-/* 152 */
+/* 154 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -12262,7 +12365,7 @@
 
 
 /***/ },
-/* 153 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12276,25 +12379,25 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
-	var _cache = __webpack_require__(156);
+	var _cache = __webpack_require__(158);
 
-	var _parse = __webpack_require__(218);
+	var _parse = __webpack_require__(220);
 
-	var _serialize = __webpack_require__(219);
+	var _serialize = __webpack_require__(221);
 
-	var _http = __webpack_require__(220);
+	var _http = __webpack_require__(222);
 
-	var _findIndex = __webpack_require__(203);
+	var _findIndex = __webpack_require__(205);
 
 	var _findIndex2 = _interopRequireDefault(_findIndex);
 
-	var _reduce = __webpack_require__(216);
+	var _reduce = __webpack_require__(218);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
-	var _es6Symbol = __webpack_require__(221);
+	var _es6Symbol = __webpack_require__(223);
 
 	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
 
@@ -12625,7 +12728,7 @@
 	}(KinveyRack);
 
 /***/ },
-/* 154 */
+/* 156 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12639,7 +12742,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _asciiTree = __webpack_require__(155);
+	var _asciiTree = __webpack_require__(157);
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
@@ -12763,7 +12866,7 @@
 	}(Middleware);
 
 /***/ },
-/* 155 */
+/* 157 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -12820,7 +12923,7 @@
 	};
 
 /***/ },
-/* 156 */
+/* 158 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -12839,39 +12942,39 @@
 
 	var _aggregation = __webpack_require__(8);
 
-	var _indexeddb = __webpack_require__(157);
+	var _indexeddb = __webpack_require__(159);
 
 	var _indexeddb2 = _interopRequireDefault(_indexeddb);
 
-	var _localstorage = __webpack_require__(161);
+	var _localstorage = __webpack_require__(163);
 
-	var _memory = __webpack_require__(205);
+	var _memory = __webpack_require__(207);
 
-	var _websql = __webpack_require__(209);
+	var _websql = __webpack_require__(211);
 
 	var _errors = __webpack_require__(6);
 
-	var _log = __webpack_require__(158);
+	var _log = __webpack_require__(160);
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
-	var _request2 = __webpack_require__(148);
+	var _request2 = __webpack_require__(150);
 
-	var _response = __webpack_require__(212);
+	var _response = __webpack_require__(214);
 
-	var _promiseQueue = __webpack_require__(213);
+	var _promiseQueue = __webpack_require__(215);
 
 	var _promiseQueue2 = _interopRequireDefault(_promiseQueue);
 
-	var _map = __webpack_require__(210);
+	var _map = __webpack_require__(212);
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
-	var _reduce = __webpack_require__(216);
+	var _reduce = __webpack_require__(218);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
@@ -13024,7 +13127,7 @@
 	                }
 
 	                if (entities.length > 0 && query) {
-	                  entities = query._process(entities);
+	                  entities = query.process(entities);
 	                }
 
 	                return _context.abrupt('return', entities);
@@ -13527,7 +13630,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 157 */
+/* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -13540,7 +13643,7 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _log = __webpack_require__(158);
+	var _log = __webpack_require__(160);
 
 	var _forEach = __webpack_require__(11);
 
@@ -13567,7 +13670,7 @@
 	var dbCache = {};
 
 	if (typeof window !== 'undefined') {
-	  __webpack_require__(160); // eslint-disable-line global-require
+	  __webpack_require__(162); // eslint-disable-line global-require
 	}
 
 	var indexedDB = global.shimIndexedDB || global.indexedDB || global.webkitIndexedDB || global.mozIndexedDB || global.msIndexedDB;
@@ -14042,7 +14145,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 158 */
+/* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14052,7 +14155,7 @@
 	});
 	exports.Log = undefined;
 
-	var _loglevel = __webpack_require__(159);
+	var _loglevel = __webpack_require__(161);
 
 	var _loglevel2 = _interopRequireDefault(_loglevel);
 
@@ -14072,7 +14175,7 @@
 	exports.Log = _loglevel2.default;
 
 /***/ },
-/* 159 */
+/* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -14083,10 +14186,10 @@
 	*/
 	(function (root, definition) {
 	    "use strict";
-	    if (typeof module === 'object' && module.exports && "function" === 'function') {
-	        module.exports = definition();
-	    } else if (true) {
+	    if (true) {
 	        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (definition), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    } else if (typeof module === 'object' && module.exports) {
+	        module.exports = definition();
 	    } else {
 	        root.log = definition();
 	    }
@@ -14301,7 +14404,7 @@
 
 
 /***/ },
-/* 160 */
+/* 162 */
 /***/ function(module, exports) {
 
 	var idbModules = {  // jshint ignore:line
@@ -17647,7 +17750,7 @@
 
 
 /***/ },
-/* 161 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -17661,15 +17764,15 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _keyBy = __webpack_require__(162);
+	var _keyBy = __webpack_require__(164);
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
-	var _merge = __webpack_require__(166);
+	var _merge = __webpack_require__(168);
 
 	var _merge2 = _interopRequireDefault(_merge);
 
-	var _values = __webpack_require__(200);
+	var _values = __webpack_require__(202);
 
 	var _values2 = _interopRequireDefault(_values);
 
@@ -17677,7 +17780,7 @@
 
 	var _forEach2 = _interopRequireDefault(_forEach);
 
-	var _findIndex = __webpack_require__(203);
+	var _findIndex = __webpack_require__(205);
 
 	var _findIndex2 = _interopRequireDefault(_findIndex);
 
@@ -17942,10 +18045,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }())))
 
 /***/ },
-/* 162 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createAggregator = __webpack_require__(163);
+	var createAggregator = __webpack_require__(165);
 
 	/**
 	 * Creates an object composed of keys generated from the results of running
@@ -17984,11 +18087,11 @@
 
 
 /***/ },
-/* 163 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayAggregator = __webpack_require__(164),
-	    baseAggregator = __webpack_require__(165),
+	var arrayAggregator = __webpack_require__(166),
+	    baseAggregator = __webpack_require__(167),
 	    baseIteratee = __webpack_require__(37),
 	    isArray = __webpack_require__(32);
 
@@ -18013,7 +18116,7 @@
 
 
 /***/ },
-/* 164 */
+/* 166 */
 /***/ function(module, exports) {
 
 	/**
@@ -18041,7 +18144,7 @@
 
 
 /***/ },
-/* 165 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(13);
@@ -18068,10 +18171,10 @@
 
 
 /***/ },
-/* 166 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMerge = __webpack_require__(167),
+	var baseMerge = __webpack_require__(169),
 	    createAssigner = __webpack_require__(122);
 
 	/**
@@ -18113,17 +18216,17 @@
 
 
 /***/ },
-/* 167 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(40),
 	    arrayEach = __webpack_require__(12),
-	    assignMergeValue = __webpack_require__(168),
-	    baseMergeDeep = __webpack_require__(169),
+	    assignMergeValue = __webpack_require__(170),
+	    baseMergeDeep = __webpack_require__(171),
 	    isArray = __webpack_require__(32),
 	    isObject = __webpack_require__(29),
 	    isTypedArray = __webpack_require__(97),
-	    keysIn = __webpack_require__(196);
+	    keysIn = __webpack_require__(198);
 
 	/**
 	 * The base implementation of `_.merge` without support for multiple sources.
@@ -18169,7 +18272,7 @@
 
 
 /***/ },
-/* 168 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(45);
@@ -18194,20 +18297,20 @@
 
 
 /***/ },
-/* 169 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignMergeValue = __webpack_require__(168),
-	    baseClone = __webpack_require__(170),
-	    copyArray = __webpack_require__(173),
+	var assignMergeValue = __webpack_require__(170),
+	    baseClone = __webpack_require__(172),
+	    copyArray = __webpack_require__(175),
 	    isArguments = __webpack_require__(23),
 	    isArray = __webpack_require__(32),
 	    isArrayLikeObject = __webpack_require__(24),
 	    isFunction = __webpack_require__(28),
 	    isObject = __webpack_require__(29),
-	    isPlainObject = __webpack_require__(194),
+	    isPlainObject = __webpack_require__(196),
 	    isTypedArray = __webpack_require__(97),
-	    toPlainObject = __webpack_require__(195);
+	    toPlainObject = __webpack_require__(197);
 
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -18283,21 +18386,21 @@
 
 
 /***/ },
-/* 170 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(40),
 	    arrayEach = __webpack_require__(12),
 	    assignValue = __webpack_require__(120),
-	    baseAssign = __webpack_require__(171),
-	    cloneBuffer = __webpack_require__(172),
-	    copyArray = __webpack_require__(173),
-	    copySymbols = __webpack_require__(174),
-	    getAllKeys = __webpack_require__(177),
+	    baseAssign = __webpack_require__(173),
+	    cloneBuffer = __webpack_require__(174),
+	    copyArray = __webpack_require__(175),
+	    copySymbols = __webpack_require__(176),
+	    getAllKeys = __webpack_require__(179),
 	    getTag = __webpack_require__(92),
-	    initCloneArray = __webpack_require__(180),
-	    initCloneByTag = __webpack_require__(181),
-	    initCloneObject = __webpack_require__(192),
+	    initCloneArray = __webpack_require__(182),
+	    initCloneByTag = __webpack_require__(183),
+	    initCloneObject = __webpack_require__(194),
 	    isArray = __webpack_require__(32),
 	    isBuffer = __webpack_require__(132),
 	    isHostObject = __webpack_require__(61),
@@ -18428,7 +18531,7 @@
 
 
 /***/ },
-/* 171 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(121),
@@ -18451,7 +18554,7 @@
 
 
 /***/ },
-/* 172 */
+/* 174 */
 /***/ function(module, exports) {
 
 	/**
@@ -18475,7 +18578,7 @@
 
 
 /***/ },
-/* 173 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/**
@@ -18501,11 +18604,11 @@
 
 
 /***/ },
-/* 174 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(121),
-	    getSymbols = __webpack_require__(175);
+	    getSymbols = __webpack_require__(177);
 
 	/**
 	 * Copies own symbol properties of `source` to `object`.
@@ -18523,10 +18626,10 @@
 
 
 /***/ },
-/* 175 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var stubArray = __webpack_require__(176);
+	var stubArray = __webpack_require__(178);
 
 	/** Built-in value references. */
 	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
@@ -18553,7 +18656,7 @@
 
 
 /***/ },
-/* 176 */
+/* 178 */
 /***/ function(module, exports) {
 
 	/**
@@ -18582,11 +18685,11 @@
 
 
 /***/ },
-/* 177 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGetAllKeys = __webpack_require__(178),
-	    getSymbols = __webpack_require__(175),
+	var baseGetAllKeys = __webpack_require__(180),
+	    getSymbols = __webpack_require__(177),
 	    keys = __webpack_require__(17);
 
 	/**
@@ -18604,10 +18707,10 @@
 
 
 /***/ },
-/* 178 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(179),
+	var arrayPush = __webpack_require__(181),
 	    isArray = __webpack_require__(32);
 
 	/**
@@ -18630,7 +18733,7 @@
 
 
 /***/ },
-/* 179 */
+/* 181 */
 /***/ function(module, exports) {
 
 	/**
@@ -18656,7 +18759,7 @@
 
 
 /***/ },
-/* 180 */
+/* 182 */
 /***/ function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -18688,16 +18791,16 @@
 
 
 /***/ },
-/* 181 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(182),
-	    cloneDataView = __webpack_require__(183),
-	    cloneMap = __webpack_require__(184),
-	    cloneRegExp = __webpack_require__(187),
-	    cloneSet = __webpack_require__(188),
-	    cloneSymbol = __webpack_require__(190),
-	    cloneTypedArray = __webpack_require__(191);
+	var cloneArrayBuffer = __webpack_require__(184),
+	    cloneDataView = __webpack_require__(185),
+	    cloneMap = __webpack_require__(186),
+	    cloneRegExp = __webpack_require__(189),
+	    cloneSet = __webpack_require__(190),
+	    cloneSymbol = __webpack_require__(192),
+	    cloneTypedArray = __webpack_require__(193);
 
 	/** `Object#toString` result references. */
 	var boolTag = '[object Boolean]',
@@ -18774,7 +18877,7 @@
 
 
 /***/ },
-/* 182 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Uint8Array = __webpack_require__(88);
@@ -18796,10 +18899,10 @@
 
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(182);
+	var cloneArrayBuffer = __webpack_require__(184);
 
 	/**
 	 * Creates a clone of `dataView`.
@@ -18818,11 +18921,11 @@
 
 
 /***/ },
-/* 184 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addMapEntry = __webpack_require__(185),
-	    arrayReduce = __webpack_require__(186),
+	var addMapEntry = __webpack_require__(187),
+	    arrayReduce = __webpack_require__(188),
 	    mapToArray = __webpack_require__(89);
 
 	/**
@@ -18843,7 +18946,7 @@
 
 
 /***/ },
-/* 185 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/**
@@ -18864,7 +18967,7 @@
 
 
 /***/ },
-/* 186 */
+/* 188 */
 /***/ function(module, exports) {
 
 	/**
@@ -18896,7 +18999,7 @@
 
 
 /***/ },
-/* 187 */
+/* 189 */
 /***/ function(module, exports) {
 
 	/** Used to match `RegExp` flags from their coerced string values. */
@@ -18919,11 +19022,11 @@
 
 
 /***/ },
-/* 188 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addSetEntry = __webpack_require__(189),
-	    arrayReduce = __webpack_require__(186),
+	var addSetEntry = __webpack_require__(191),
+	    arrayReduce = __webpack_require__(188),
 	    setToArray = __webpack_require__(90);
 
 	/**
@@ -18944,7 +19047,7 @@
 
 
 /***/ },
-/* 189 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/**
@@ -18964,7 +19067,7 @@
 
 
 /***/ },
-/* 190 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Symbol = __webpack_require__(87);
@@ -18988,10 +19091,10 @@
 
 
 /***/ },
-/* 191 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(182);
+	var cloneArrayBuffer = __webpack_require__(184);
 
 	/**
 	 * Creates a clone of `typedArray`.
@@ -19010,10 +19113,10 @@
 
 
 /***/ },
-/* 192 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(193),
+	var baseCreate = __webpack_require__(195),
 	    getPrototype = __webpack_require__(19),
 	    isPrototype = __webpack_require__(35);
 
@@ -19034,7 +19137,7 @@
 
 
 /***/ },
-/* 193 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isObject = __webpack_require__(29);
@@ -19058,7 +19161,7 @@
 
 
 /***/ },
-/* 194 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var getPrototype = __webpack_require__(19),
@@ -19134,11 +19237,11 @@
 
 
 /***/ },
-/* 195 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(121),
-	    keysIn = __webpack_require__(196);
+	    keysIn = __webpack_require__(198);
 
 	/**
 	 * Converts `value` to a plain object flattening inherited enumerable string
@@ -19172,10 +19275,10 @@
 
 
 /***/ },
-/* 196 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseKeysIn = __webpack_require__(197),
+	var baseKeysIn = __webpack_require__(199),
 	    indexKeys = __webpack_require__(21),
 	    isIndex = __webpack_require__(34),
 	    isPrototype = __webpack_require__(35);
@@ -19233,11 +19336,11 @@
 
 
 /***/ },
-/* 197 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflect = __webpack_require__(198),
-	    iteratorToArray = __webpack_require__(199);
+	var Reflect = __webpack_require__(200),
+	    iteratorToArray = __webpack_require__(201);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -19275,7 +19378,7 @@
 
 
 /***/ },
-/* 198 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var root = __webpack_require__(64);
@@ -19287,7 +19390,7 @@
 
 
 /***/ },
-/* 199 */
+/* 201 */
 /***/ function(module, exports) {
 
 	/**
@@ -19311,10 +19414,10 @@
 
 
 /***/ },
-/* 200 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseValues = __webpack_require__(201),
+	var baseValues = __webpack_require__(203),
 	    keys = __webpack_require__(17);
 
 	/**
@@ -19351,10 +19454,10 @@
 
 
 /***/ },
-/* 201 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayMap = __webpack_require__(202);
+	var arrayMap = __webpack_require__(204);
 
 	/**
 	 * The base implementation of `_.values` and `_.valuesIn` which creates an
@@ -19376,7 +19479,7 @@
 
 
 /***/ },
-/* 202 */
+/* 204 */
 /***/ function(module, exports) {
 
 	/**
@@ -19403,10 +19506,10 @@
 
 
 /***/ },
-/* 203 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseFindIndex = __webpack_require__(204),
+	var baseFindIndex = __webpack_require__(206),
 	    baseIteratee = __webpack_require__(37),
 	    toInteger = __webpack_require__(126);
 
@@ -19465,7 +19568,7 @@
 
 
 /***/ },
-/* 204 */
+/* 206 */
 /***/ function(module, exports) {
 
 	/**
@@ -19495,7 +19598,7 @@
 
 
 /***/ },
-/* 205 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -19509,11 +19612,11 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _fastMemoryCache = __webpack_require__(206);
+	var _fastMemoryCache = __webpack_require__(208);
 
 	var _fastMemoryCache2 = _interopRequireDefault(_fastMemoryCache);
 
-	var _keyBy = __webpack_require__(162);
+	var _keyBy = __webpack_require__(164);
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
@@ -19521,11 +19624,11 @@
 
 	var _forEach2 = _interopRequireDefault(_forEach);
 
-	var _values = __webpack_require__(200);
+	var _values = __webpack_require__(202);
 
 	var _values2 = _interopRequireDefault(_values);
 
-	var _find = __webpack_require__(207);
+	var _find = __webpack_require__(209);
 
 	var _find2 = _interopRequireDefault(_find);
 
@@ -19790,7 +19893,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 206 */
+/* 208 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19870,11 +19973,11 @@
 
 
 /***/ },
-/* 207 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createFind = __webpack_require__(208),
-	    findIndex = __webpack_require__(203);
+	var createFind = __webpack_require__(210),
+	    findIndex = __webpack_require__(205);
 
 	/**
 	 * Iterates over elements of `collection`, returning the first element
@@ -19919,7 +20022,7 @@
 
 
 /***/ },
-/* 208 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseIteratee = __webpack_require__(37),
@@ -19955,7 +20058,7 @@
 
 
 /***/ },
-/* 209 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -19969,7 +20072,7 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _map = __webpack_require__(210);
+	var _map = __webpack_require__(212);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -20323,12 +20426,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }())))
 
 /***/ },
-/* 210 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayMap = __webpack_require__(202),
+	var arrayMap = __webpack_require__(204),
 	    baseIteratee = __webpack_require__(37),
-	    baseMap = __webpack_require__(211),
+	    baseMap = __webpack_require__(213),
 	    isArray = __webpack_require__(32);
 
 	/**
@@ -20383,7 +20486,7 @@
 
 
 /***/ },
-/* 211 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(13),
@@ -20411,7 +20514,7 @@
 
 
 /***/ },
-/* 212 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20429,13 +20532,13 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
 	var _assign = __webpack_require__(119);
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
@@ -20654,23 +20757,23 @@
 	}(Response);
 
 /***/ },
-/* 213 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {module.exports = process.env.PROMISE_QUEUE_COVERAGE ?
-	    __webpack_require__(214) :
-	    __webpack_require__(215);
+	    __webpack_require__(216) :
+	    __webpack_require__(217);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 214 */
+/* 216 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 215 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/* global define, Promise */
@@ -20854,13 +20957,13 @@
 
 
 /***/ },
-/* 216 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayReduce = __webpack_require__(186),
+	var arrayReduce = __webpack_require__(188),
 	    baseEach = __webpack_require__(13),
 	    baseIteratee = __webpack_require__(37),
-	    baseReduce = __webpack_require__(217),
+	    baseReduce = __webpack_require__(219),
 	    isArray = __webpack_require__(32);
 
 	/**
@@ -20911,7 +21014,7 @@
 
 
 /***/ },
-/* 217 */
+/* 219 */
 /***/ function(module, exports) {
 
 	/**
@@ -20940,7 +21043,7 @@
 
 
 /***/ },
-/* 218 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20954,7 +21057,7 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
@@ -21035,7 +21138,7 @@
 	}(_middleware.KinveyMiddleware);
 
 /***/ },
-/* 219 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -21049,7 +21152,7 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
@@ -21192,7 +21295,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 220 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21206,7 +21309,7 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21241,54 +21344,60 @@
 	}(_middleware.KinveyMiddleware);
 
 /***/ },
-/* 221 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(222)() ? Symbol : __webpack_require__(223);
+	module.exports = __webpack_require__(224)() ? Symbol : __webpack_require__(225);
 
 
 /***/ },
-/* 222 */
+/* 224 */
 /***/ function(module, exports) {
 
 	'use strict';
+
+	var validTypes = { object: true, symbol: true };
 
 	module.exports = function () {
 		var symbol;
 		if (typeof Symbol !== 'function') return false;
 		symbol = Symbol('test symbol');
 		try { String(symbol); } catch (e) { return false; }
-		if (typeof Symbol.iterator === 'symbol') return true;
 
-		// Return 'true' for polyfills
-		if (typeof Symbol.isConcatSpreadable !== 'object') return false;
-		if (typeof Symbol.iterator !== 'object') return false;
-		if (typeof Symbol.toPrimitive !== 'object') return false;
-		if (typeof Symbol.toStringTag !== 'object') return false;
-		if (typeof Symbol.unscopables !== 'object') return false;
+		// Return 'true' also for polyfills
+		if (!validTypes[typeof Symbol.iterator]) return false;
+		if (!validTypes[typeof Symbol.toPrimitive]) return false;
+		if (!validTypes[typeof Symbol.toStringTag]) return false;
 
 		return true;
 	};
 
 
 /***/ },
-/* 223 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// ES2015 Symbol polyfill for environments that do not support it (or partially support it_
+	// ES2015 Symbol polyfill for environments that do not support it (or partially support it)
 
 	'use strict';
 
-	var d              = __webpack_require__(224)
-	  , validateSymbol = __webpack_require__(237)
+	var d              = __webpack_require__(226)
+	  , validateSymbol = __webpack_require__(239)
 
 	  , create = Object.create, defineProperties = Object.defineProperties
 	  , defineProperty = Object.defineProperty, objPrototype = Object.prototype
-	  , NativeSymbol, SymbolPolyfill, HiddenSymbol, globalSymbols = create(null);
+	  , NativeSymbol, SymbolPolyfill, HiddenSymbol, globalSymbols = create(null)
+	  , isNativeSafe;
 
-	if (typeof Symbol === 'function') NativeSymbol = Symbol;
+	if (typeof Symbol === 'function') {
+		NativeSymbol = Symbol;
+		try {
+			String(NativeSymbol());
+			isNativeSafe = true;
+		} catch (ignore) {}
+	}
 
 	var generateName = (function () {
 		var created = create(null);
@@ -21324,6 +21433,7 @@
 	module.exports = SymbolPolyfill = function Symbol(description) {
 		var symbol;
 		if (this instanceof Symbol) throw new TypeError('TypeError: Symbol is not a constructor');
+		if (isNativeSafe) return NativeSymbol(description);
 		symbol = create(HiddenSymbol.prototype);
 		description = (description === undefined ? '' : String(description));
 		return defineProperties(symbol, {
@@ -21370,8 +21480,11 @@
 		toString: d(function () { return 'Symbol (' + validateSymbol(this).__description__ + ')'; }),
 		valueOf: d(function () { return validateSymbol(this); })
 	});
-	defineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toPrimitive, d('',
-		function () { return validateSymbol(this); }));
+	defineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toPrimitive, d('', function () {
+		var symbol = validateSymbol(this);
+		if (typeof symbol === 'symbol') return symbol;
+		return symbol.toString();
+	}));
 	defineProperty(SymbolPolyfill.prototype, SymbolPolyfill.toStringTag, d('c', 'Symbol'));
 
 	// Proper implementaton of toPrimitive and toStringTag for returned symbol instances
@@ -21387,15 +21500,15 @@
 
 
 /***/ },
-/* 224 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var assign        = __webpack_require__(225)
-	  , normalizeOpts = __webpack_require__(232)
-	  , isCallable    = __webpack_require__(233)
-	  , contains      = __webpack_require__(234)
+	var assign        = __webpack_require__(227)
+	  , normalizeOpts = __webpack_require__(234)
+	  , isCallable    = __webpack_require__(235)
+	  , contains      = __webpack_require__(236)
 
 	  , d;
 
@@ -21456,18 +21569,18 @@
 
 
 /***/ },
-/* 225 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(226)()
+	module.exports = __webpack_require__(228)()
 		? Object.assign
-		: __webpack_require__(227);
+		: __webpack_require__(229);
 
 
 /***/ },
-/* 226 */
+/* 228 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21482,13 +21595,13 @@
 
 
 /***/ },
-/* 227 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var keys  = __webpack_require__(228)
-	  , value = __webpack_require__(231)
+	var keys  = __webpack_require__(230)
+	  , value = __webpack_require__(233)
 
 	  , max = Math.max;
 
@@ -21510,18 +21623,18 @@
 
 
 /***/ },
-/* 228 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(229)()
+	module.exports = __webpack_require__(231)()
 		? Object.keys
-		: __webpack_require__(230);
+		: __webpack_require__(232);
 
 
 /***/ },
-/* 229 */
+/* 231 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21535,7 +21648,7 @@
 
 
 /***/ },
-/* 230 */
+/* 232 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21548,7 +21661,7 @@
 
 
 /***/ },
-/* 231 */
+/* 233 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21560,7 +21673,7 @@
 
 
 /***/ },
-/* 232 */
+/* 234 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21583,7 +21696,7 @@
 
 
 /***/ },
-/* 233 */
+/* 235 */
 /***/ function(module, exports) {
 
 	// Deprecated
@@ -21594,18 +21707,18 @@
 
 
 /***/ },
-/* 234 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	module.exports = __webpack_require__(235)()
+	module.exports = __webpack_require__(237)()
 		? String.prototype.contains
-		: __webpack_require__(236);
+		: __webpack_require__(238);
 
 
 /***/ },
-/* 235 */
+/* 237 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21619,7 +21732,7 @@
 
 
 /***/ },
-/* 236 */
+/* 238 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21632,12 +21745,12 @@
 
 
 /***/ },
-/* 237 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isSymbol = __webpack_require__(238);
+	var isSymbol = __webpack_require__(240);
 
 	module.exports = function (value) {
 		if (!isSymbol(value)) throw new TypeError(value + " is not a symbol");
@@ -21646,25 +21759,29 @@
 
 
 /***/ },
-/* 238 */
+/* 240 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	module.exports = function (x) {
-		return (x && ((typeof x === 'symbol') || (x['@@toStringTag'] === 'Symbol'))) || false;
+		if (!x) return false;
+		if (typeof x === 'symbol') return true;
+		if (!x.constructor) return false;
+		if (x.constructor.name !== 'Symbol') return false;
+		return (x[x.constructor.toStringTag] === 'Symbol');
 	};
 
 
 /***/ },
-/* 239 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// Generated by CoffeeScript 1.10.0
 	var slice = [].slice;
 
 	(function(root, factory) {
-	  if (('function' === "function") && (__webpack_require__(240) != null)) {
+	  if (('function' === "function") && (__webpack_require__(242) != null)) {
 	    return !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof exports !== "undefined" && exports !== null) {
 	    return module.exports = factory();
@@ -22099,7 +22216,7 @@
 
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {module.exports = __webpack_amd_options__;
@@ -22107,13 +22224,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, {}))
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Stringify = __webpack_require__(242);
-	var Parse = __webpack_require__(244);
+	var Stringify = __webpack_require__(244);
+	var Parse = __webpack_require__(246);
 
 	module.exports = {
 	    stringify: Stringify,
@@ -22122,12 +22239,12 @@
 
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Utils = __webpack_require__(243);
+	var Utils = __webpack_require__(245);
 
 	var arrayPrefixGenerators = {
 	    brackets: function brackets(prefix) {
@@ -22265,7 +22382,7 @@
 
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22435,12 +22552,12 @@
 
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var Utils = __webpack_require__(243);
+	var Utils = __webpack_require__(245);
 
 	var defaults = {
 	    delimiter: '&',
@@ -22608,12 +22725,12 @@
 
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var querystring = __webpack_require__(144)
-	  , extend = __webpack_require__(246)
-	  , url = __webpack_require__(141)
+	var querystring = __webpack_require__(146)
+	  , extend = __webpack_require__(248)
+	  , url = __webpack_require__(143)
 
 	module.exports = function appendQuery(uri, q) {
 	  var parts = url.parse(uri, true)
@@ -22653,7 +22770,7 @@
 
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports) {
 
 	var hasOwn = Object.prototype.hasOwnProperty;
@@ -22739,7 +22856,7 @@
 
 
 /***/ },
-/* 247 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -22753,17 +22870,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _rack = __webpack_require__(153);
+	var _rack = __webpack_require__(155);
 
 	var _errors = __webpack_require__(6);
 
-	var _response2 = __webpack_require__(212);
+	var _response2 = __webpack_require__(214);
 
-	var _storage = __webpack_require__(137);
+	var _storage = __webpack_require__(139);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -22993,7 +23110,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -23007,11 +23124,11 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _clone = __webpack_require__(249);
+	var _clone = __webpack_require__(251);
 
 	var _clone2 = _interopRequireDefault(_clone);
 
-	var _isPlainObject = __webpack_require__(194);
+	var _isPlainObject = __webpack_require__(196);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
@@ -23097,10 +23214,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 249 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseClone = __webpack_require__(170);
+	var baseClone = __webpack_require__(172);
 
 	/**
 	 * Creates a shallow clone of `value`.
@@ -23136,7 +23253,7 @@
 
 
 /***/ },
-/* 250 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -23154,39 +23271,39 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _cache = __webpack_require__(251);
+	var _cache = __webpack_require__(253);
 
 	var _cache2 = _interopRequireDefault(_cache);
 
-	var _deltafetch = __webpack_require__(252);
+	var _deltafetch = __webpack_require__(254);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _request8 = __webpack_require__(148);
+	var _request8 = __webpack_require__(150);
 
 	var _query4 = __webpack_require__(9);
 
-	var _observable = __webpack_require__(253);
+	var _observable = __webpack_require__(255);
 
-	var _metadata = __webpack_require__(248);
+	var _metadata = __webpack_require__(250);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _es6Symbol = __webpack_require__(221);
+	var _es6Symbol = __webpack_require__(223);
 
 	var _es6Symbol2 = _interopRequireDefault(_es6Symbol);
 
-	var _sync = __webpack_require__(270);
+	var _sync = __webpack_require__(272);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
-	var _differenceBy = __webpack_require__(279);
+	var _differenceBy = __webpack_require__(281);
 
 	var _differenceBy2 = _interopRequireDefault(_differenceBy);
 
-	var _keyBy = __webpack_require__(162);
+	var _keyBy = __webpack_require__(164);
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
@@ -23194,19 +23311,19 @@
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _filter = __webpack_require__(289);
+	var _filter = __webpack_require__(291);
 
 	var _filter2 = _interopRequireDefault(_filter);
 
-	var _map = __webpack_require__(210);
+	var _map = __webpack_require__(212);
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
@@ -23214,7 +23331,7 @@
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
-	var _xorWith = __webpack_require__(292);
+	var _xorWith = __webpack_require__(294);
 
 	var _xorWith2 = _interopRequireDefault(_xorWith);
 
@@ -24888,7 +25005,7 @@
 	                            break;
 	                          }
 
-	                          throw new _errors.KinveyError('Unable to pull data. You must push the pending sync items first.', 'Call store.push() to push the pending sync items before you pull new data.');
+	                          throw new _errors.KinveyError(count + ' items could not be pushed to the backend.' + ' You must push all pending sync items before new data is pulled.', 'Call push() on the data store instance to push the remaining sync items.');
 
 	                        case 5:
 	                          prevOnlineState = _this9.isOnline();
@@ -25254,7 +25371,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 251 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25267,13 +25384,13 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _rack = __webpack_require__(153);
+	var _rack = __webpack_require__(155);
 
 	var _errors = __webpack_require__(6);
 
-	var _response = __webpack_require__(212);
+	var _response = __webpack_require__(214);
 
 	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
@@ -25409,7 +25526,7 @@
 	exports.default = CacheRequest;
 
 /***/ },
-/* 252 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25427,33 +25544,33 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _cache = __webpack_require__(251);
+	var _cache = __webpack_require__(253);
 
 	var _cache2 = _interopRequireDefault(_cache);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _response = __webpack_require__(212);
+	var _response = __webpack_require__(214);
 
 	var _errors = __webpack_require__(6);
 
 	var _query3 = __webpack_require__(9);
 
-	var _keyBy = __webpack_require__(162);
+	var _keyBy = __webpack_require__(164);
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
-	var _reduce = __webpack_require__(216);
+	var _reduce = __webpack_require__(218);
 
 	var _reduce2 = _interopRequireDefault(_reduce);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
-	var _values = __webpack_require__(200);
+	var _values = __webpack_require__(202);
 
 	var _values2 = _interopRequireDefault(_values);
 
@@ -25652,7 +25769,7 @@
 	                            _query2 = new _query3.Query((0, _result2.default)(_this2.query, 'toJSON', _this2.query));
 
 	                            _query2.skip(0).limit(0);
-	                            response.data = _query2._process(response.data);
+	                            response.data = _query2.process(response.data);
 	                          }
 
 	                          return _context.abrupt('return', {
@@ -25737,7 +25854,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 253 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25749,9 +25866,9 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _Observable2 = __webpack_require__(254);
+	var _Observable2 = __webpack_require__(256);
 
-	var _toPromise2 = __webpack_require__(269);
+	var _toPromise2 = __webpack_require__(271);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25784,13 +25901,13 @@
 	}(_Observable2.Observable);
 
 /***/ },
-/* 254 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(255);
-	var toSubscriber_1 = __webpack_require__(256);
-	var $$observable = __webpack_require__(267);
+	var root_1 = __webpack_require__(257);
+	var toSubscriber_1 = __webpack_require__(258);
+	var $$observable = __webpack_require__(269);
 	/**
 	 * A representation of any set of values over any amount of time. This the most basic building block
 	 * of RxJS.
@@ -25929,7 +26046,7 @@
 	//# sourceMappingURL=Observable.js.map
 
 /***/ },
-/* 255 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {"use strict";
@@ -25953,12 +26070,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(133)(module), (function() { return this; }())))
 
 /***/ },
-/* 256 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Subscriber_1 = __webpack_require__(257);
-	var rxSubscriber_1 = __webpack_require__(266);
+	var Subscriber_1 = __webpack_require__(259);
+	var rxSubscriber_1 = __webpack_require__(268);
 	function toSubscriber(nextOrObserver, error, complete) {
 	    if (nextOrObserver) {
 	        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
@@ -25977,7 +26094,7 @@
 	//# sourceMappingURL=toSubscriber.js.map
 
 /***/ },
-/* 257 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25986,10 +26103,10 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var isFunction_1 = __webpack_require__(258);
-	var Subscription_1 = __webpack_require__(259);
-	var Observer_1 = __webpack_require__(265);
-	var rxSubscriber_1 = __webpack_require__(266);
+	var isFunction_1 = __webpack_require__(260);
+	var Subscription_1 = __webpack_require__(261);
+	var Observer_1 = __webpack_require__(267);
+	var rxSubscriber_1 = __webpack_require__(268);
 	/**
 	 * Implements the {@link Observer} interface and extends the
 	 * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -26231,7 +26348,7 @@
 	//# sourceMappingURL=Subscriber.js.map
 
 /***/ },
-/* 258 */
+/* 260 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26242,16 +26359,16 @@
 	//# sourceMappingURL=isFunction.js.map
 
 /***/ },
-/* 259 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var isArray_1 = __webpack_require__(260);
-	var isObject_1 = __webpack_require__(261);
-	var isFunction_1 = __webpack_require__(258);
-	var tryCatch_1 = __webpack_require__(262);
-	var errorObject_1 = __webpack_require__(263);
-	var UnsubscriptionError_1 = __webpack_require__(264);
+	var isArray_1 = __webpack_require__(262);
+	var isObject_1 = __webpack_require__(263);
+	var isFunction_1 = __webpack_require__(260);
+	var tryCatch_1 = __webpack_require__(264);
+	var errorObject_1 = __webpack_require__(265);
+	var UnsubscriptionError_1 = __webpack_require__(266);
 	/**
 	 * Represents a disposable resource, such as the execution of an Observable. A
 	 * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -26397,7 +26514,7 @@
 	//# sourceMappingURL=Subscription.js.map
 
 /***/ },
-/* 260 */
+/* 262 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26405,7 +26522,7 @@
 	//# sourceMappingURL=isArray.js.map
 
 /***/ },
-/* 261 */
+/* 263 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26416,11 +26533,11 @@
 	//# sourceMappingURL=isObject.js.map
 
 /***/ },
-/* 262 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var errorObject_1 = __webpack_require__(263);
+	var errorObject_1 = __webpack_require__(265);
 	var tryCatchTarget;
 	function tryCatcher() {
 	    try {
@@ -26440,7 +26557,7 @@
 	//# sourceMappingURL=tryCatch.js.map
 
 /***/ },
-/* 263 */
+/* 265 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26449,7 +26566,7 @@
 	//# sourceMappingURL=errorObject.js.map
 
 /***/ },
-/* 264 */
+/* 266 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26476,7 +26593,7 @@
 	//# sourceMappingURL=UnsubscriptionError.js.map
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26489,29 +26606,29 @@
 	//# sourceMappingURL=Observer.js.map
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(255);
+	var root_1 = __webpack_require__(257);
 	var Symbol = root_1.root.Symbol;
 	exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
 	    Symbol.for('rxSubscriber') : '@@rxSubscriber';
 	//# sourceMappingURL=rxSubscriber.js.map
 
 /***/ },
-/* 267 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 
-	module.exports = __webpack_require__(268)(global || window || this);
+	module.exports = __webpack_require__(270)(global || window || this);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 268 */
+/* 270 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -26536,11 +26653,11 @@
 
 
 /***/ },
-/* 269 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(255);
+	var root_1 = __webpack_require__(257);
 	/**
 	 * @param PromiseCtor
 	 * @return {Promise<T>}
@@ -26569,7 +26686,7 @@
 	//# sourceMappingURL=toPromise.js.map
 
 /***/ },
-/* 270 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -26577,32 +26694,33 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.SyncOperation = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _request2 = __webpack_require__(148);
+	var _request2 = __webpack_require__(150);
 
 	var _errors = __webpack_require__(6);
 
-	var _metadata = __webpack_require__(248);
-
-	var _cache = __webpack_require__(251);
+	var _cache = __webpack_require__(253);
 
 	var _cache2 = _interopRequireDefault(_cache);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _storage = __webpack_require__(137);
+	var _query = __webpack_require__(9);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _map = __webpack_require__(210);
+	var _map = __webpack_require__(212);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -26610,11 +26728,11 @@
 
 	var _isArray2 = _interopRequireDefault(_isArray);
 
-	var _orderBy = __webpack_require__(271);
+	var _orderBy = __webpack_require__(273);
 
 	var _orderBy2 = _interopRequireDefault(_orderBy);
 
-	var _sortedUniqBy = __webpack_require__(277);
+	var _sortedUniqBy = __webpack_require__(279);
 
 	var _sortedUniqBy2 = _interopRequireDefault(_sortedUniqBy);
 
@@ -26627,7 +26745,17 @@
 	var appdataNamespace = process.env.KINVEY_DATASTORE_NAMESPACE || 'appdata';
 	var syncCollectionName = process.env.KINVEY_SYNC_COLLECTION_NAME || 'kinvey_sync';
 	var idAttribute = process.env.KINVEY_ID_ATTRIBUTE || '_id';
-	var kmdAttribute = process.env.KINVEY_KMD_ATTRIBUTE || '_kmd';
+
+	/**
+	 * Enum for Sync Operations.
+	 */
+	var SyncOperation = {
+	  Create: _request2.RequestMethod.POST,
+	  Update: _request2.RequestMethod.PUT,
+	  Delete: _request2.RequestMethod.DELETE
+	};
+	Object.freeze(SyncOperation);
+	exports.SyncOperation = SyncOperation;
 
 	var Sync = function () {
 	  function Sync() {
@@ -26725,153 +26853,23 @@
 
 	      return count;
 	    }()
-
-	    /**
-	     * Save a sync entity to the sync table with a POST method.
-	     *
-	     * @param   {String}        collection                  Collection name for the entity.
-	     * @param   {Object|Array}  entity                      Entity to add to the sync table.
-	     * @param   {Object}        [options={}]                Options
-	     * @param   {Number}        [options.timeout]           Timeout for the request.
-	     * @return  {Promise}                                   Promise
-	     *
-	     * @example
-	     * var entity = {
-	     *   _id: '1',
-	     *   prop: 'value'
-	     * };
-	     * var sync = new Sync();
-	     * var promise = sync.save('collectionName', entities).then(function(entity) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
-	     */
-
 	  }, {
 	    key: 'addCreateOperation',
 	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(collection, entities) {
-	        var _this = this;
-
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(collection, entities) {
 	        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	        var singular;
-	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+	        return regeneratorRuntime.wrap(function _callee2$(_context2) {
 	          while (1) {
-	            switch (_context3.prev = _context3.next) {
+	            switch (_context2.prev = _context2.next) {
 	              case 0:
-	                singular = false;
+	                return _context2.abrupt('return', this.addOperation(SyncOperation.Create, collection, entities, options));
 
-	                // Check that a name was provided
-
-	                if (collection) {
-	                  _context3.next = 3;
-	                  break;
-	                }
-
-	                throw new _errors.SyncError('A name for a collection must be provided to add entities to the sync table.');
-
-	              case 3:
-
-	                // Cast the entities to an array
-	                if (!(0, _isArray2.default)(entities)) {
-	                  singular = true;
-	                  entities = [entities];
-	                }
-
-	                // Process the array of entities
-	                _context3.next = 6;
-	                return Promise.all((0, _map2.default)(entities, function () {
-	                  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(entity) {
-	                    var id, key, syncEntity, request;
-	                    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-	                      while (1) {
-	                        switch (_context2.prev = _context2.next) {
-	                          case 0:
-	                            if (entity) {
-	                              _context2.next = 2;
-	                              break;
-	                            }
-
-	                            return _context2.abrupt('return', null);
-
-	                          case 2:
-
-	                            // Validate that the entity has an id
-	                            id = entity[idAttribute];
-
-	                            if (id) {
-	                              _context2.next = 5;
-	                              break;
-	                            }
-
-	                            throw new _errors.SyncError('An entity is missing an _id. All entities must have an _id in order to be ' + 'added to the sync table.', entity);
-
-	                          case 5:
-
-	                            // Get the sync key, increment it by 1 and save
-	                            key = (0, _storage.getSyncKey)(_this.client) || 0;
-
-	                            key += 1;
-	                            (0, _storage.setSyncKey)(_this.client, key);
-
-	                            // Create the sync entity
-	                            syncEntity = {
-	                              key: key,
-	                              collection: collection,
-	                              state: {
-	                                method: _request2.RequestMethod.POST
-	                              },
-	                              entity: entity
-	                            };
-
-	                            // Validate that the entity has an id
-
-	                            if (id) {
-	                              _context2.next = 11;
-	                              break;
-	                            }
-
-	                            throw new _errors.SyncError('An entity is missing an _id. All entities must have an _id in order to be ' + 'added to the sync table.', entity);
-
-	                          case 11:
-
-	                            // Send a request to save the sync entity
-	                            request = new _cache2.default({
-	                              method: _request2.RequestMethod.POST,
-	                              url: _url2.default.format({
-	                                protocol: _this.client.protocol,
-	                                host: _this.client.host,
-	                                pathname: _this.pathname
-	                              }),
-	                              properties: options.properties,
-	                              body: syncEntity,
-	                              timeout: options.timeout
-	                            });
-	                            return _context2.abrupt('return', request.execute());
-
-	                          case 13:
-	                          case 'end':
-	                            return _context2.stop();
-	                        }
-	                      }
-	                    }, _callee2, _this);
-	                  }));
-
-	                  return function (_x8) {
-	                    return ref.apply(this, arguments);
-	                  };
-	                }()));
-
-	              case 6:
-	                return _context3.abrupt('return', singular ? entities[0] : entities);
-
-	              case 7:
+	              case 1:
 	              case 'end':
-	                return _context3.stop();
+	                return _context2.stop();
 	            }
 	          }
-	        }, _callee3, this);
+	        }, _callee2, this);
 	      }));
 
 	      function addCreateOperation(_x4, _x5, _x6) {
@@ -26883,176 +26881,75 @@
 	  }, {
 	    key: 'addUpdateOperation',
 	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(collection, entities) {
-	        var _this2 = this;
-
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(collection, entities) {
 	        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	        var singular;
-	        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
 	          while (1) {
-	            switch (_context5.prev = _context5.next) {
+	            switch (_context3.prev = _context3.next) {
 	              case 0:
-	                singular = false;
+	                return _context3.abrupt('return', this.addOperation(SyncOperation.Update, collection, entities, options));
 
-	                // Check that a name was provided
-
-	                if (collection) {
-	                  _context5.next = 3;
-	                  break;
-	                }
-
-	                throw new _errors.SyncError('A name for a collection must be provided to add entities to the sync table.');
-
-	              case 3:
-
-	                // Cast the entities to an array
-	                if (!(0, _isArray2.default)(entities)) {
-	                  singular = true;
-	                  entities = [entities];
-	                }
-
-	                // Process the array of entities
-	                _context5.next = 6;
-	                return Promise.all((0, _map2.default)(entities, function () {
-	                  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(entity) {
-	                    var id, key, syncEntity, request;
-	                    return regeneratorRuntime.wrap(function _callee4$(_context4) {
-	                      while (1) {
-	                        switch (_context4.prev = _context4.next) {
-	                          case 0:
-	                            if (entity) {
-	                              _context4.next = 2;
-	                              break;
-	                            }
-
-	                            return _context4.abrupt('return', null);
-
-	                          case 2:
-
-	                            // Validate that the entity has an id
-	                            id = entity[idAttribute];
-
-	                            if (id) {
-	                              _context4.next = 5;
-	                              break;
-	                            }
-
-	                            throw new _errors.SyncError('An entity is missing an _id. All entities must have an _id in order to be ' + 'added to the sync table.', entity);
-
-	                          case 5:
-
-	                            // Get the sync key, increment it by 1 and save
-	                            key = (0, _storage.getSyncKey)(_this2.client) || 0;
-
-	                            key += 1;
-	                            (0, _storage.setSyncKey)(_this2.client, key);
-
-	                            // Create the sync entity
-	                            syncEntity = {
-	                              key: key,
-	                              collection: collection,
-	                              state: {
-	                                method: _request2.RequestMethod.PUT
-	                              },
-	                              entity: entity
-	                            };
-
-	                            // Validate that the entity has an id
-
-	                            if (id) {
-	                              _context4.next = 11;
-	                              break;
-	                            }
-
-	                            throw new _errors.SyncError('An entity is missing an _id. All entities must have an _id in order to be ' + 'added to the sync table.', entity);
-
-	                          case 11:
-
-	                            // Send a request to save the sync entity
-	                            request = new _cache2.default({
-	                              method: _request2.RequestMethod.POST,
-	                              url: _url2.default.format({
-	                                protocol: _this2.client.protocol,
-	                                host: _this2.client.host,
-	                                pathname: _this2.pathname
-	                              }),
-	                              properties: options.properties,
-	                              body: syncEntity,
-	                              timeout: options.timeout
-	                            });
-	                            return _context4.abrupt('return', request.execute());
-
-	                          case 13:
-	                          case 'end':
-	                            return _context4.stop();
-	                        }
-	                      }
-	                    }, _callee4, _this2);
-	                  }));
-
-	                  return function (_x13) {
-	                    return ref.apply(this, arguments);
-	                  };
-	                }()));
-
-	              case 6:
-	                return _context5.abrupt('return', singular ? entities[0] : entities);
-
-	              case 7:
+	              case 1:
 	              case 'end':
-	                return _context5.stop();
+	                return _context3.stop();
 	            }
 	          }
-	        }, _callee5, this);
+	        }, _callee3, this);
 	      }));
 
-	      function addUpdateOperation(_x9, _x10, _x11) {
+	      function addUpdateOperation(_x8, _x9, _x10) {
 	        return ref.apply(this, arguments);
 	      }
 
 	      return addUpdateOperation;
 	    }()
-
-	    /**
-	     * Save a sync entity to the sync table with a DELETE method.
-	     *
-	     * @param   {String}        collection                  Collection name for the entity.
-	     * @param   {Object|Array}  entity                      Entity to add to the sync table.
-	     * @param   {Object}        [options={}]                Options
-	     * @param   {Number}        [options.timeout]           Timeout for the request.
-	     * @return  {Promise}                                   Promise
-	     *
-	     * @example
-	     * var entity = {
-	     *   _id: '1',
-	     *   prop: 'value'
-	     * };
-	     * var sync = new Sync();
-	     * var promise = sync.remove('collectionName', entities).then(function(entity) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
-	     */
-
 	  }, {
 	    key: 'addDeleteOperation',
 	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(collection, entities) {
-	        var _this3 = this;
-
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(collection, entities) {
 	        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-	        var singular;
-	        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+	        return regeneratorRuntime.wrap(function _callee4$(_context4) {
 	          while (1) {
-	            switch (_context7.prev = _context7.next) {
+	            switch (_context4.prev = _context4.next) {
+	              case 0:
+	                return _context4.abrupt('return', this.addOperation(SyncOperation.Delete, collection, entities, options));
+
+	              case 1:
+	              case 'end':
+	                return _context4.stop();
+	            }
+	          }
+	        }, _callee4, this);
+	      }));
+
+	      function addDeleteOperation(_x12, _x13, _x14) {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return addDeleteOperation;
+	    }()
+	  }, {
+	    key: 'addOperation',
+	    value: function () {
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee6() {
+	        var operation = arguments.length <= 0 || arguments[0] === undefined ? SyncOperation.Create : arguments[0];
+	        var collection = arguments[1];
+
+	        var _this = this;
+
+	        var entities = arguments[2];
+	        var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+	        var singular;
+	        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+	          while (1) {
+	            switch (_context6.prev = _context6.next) {
 	              case 0:
 	                singular = false;
 
 	                // Check that a name was provided
 
 	                if (collection) {
-	                  _context7.next = 3;
+	                  _context6.next = 3;
 	                  break;
 	                }
 
@@ -27067,20 +26964,20 @@
 	                }
 
 	                // Process the array of entities
-	                _context7.next = 6;
+	                _context6.next = 6;
 	                return Promise.all((0, _map2.default)(entities, function () {
-	                  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee6(entity) {
-	                    var id, key, syncEntity, request;
-	                    return regeneratorRuntime.wrap(function _callee6$(_context6) {
+	                  var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(entity) {
+	                    var id, query, findConfig, findRequest, response, syncEntities, syncEntity, request;
+	                    return regeneratorRuntime.wrap(function _callee5$(_context5) {
 	                      while (1) {
-	                        switch (_context6.prev = _context6.next) {
+	                        switch (_context5.prev = _context5.next) {
 	                          case 0:
 	                            if (entity) {
-	                              _context6.next = 2;
+	                              _context5.next = 2;
 	                              break;
 	                            }
 
-	                            return _context6.abrupt('return', null);
+	                            return _context5.abrupt('return', null);
 
 	                          case 2:
 
@@ -27088,7 +26985,7 @@
 	                            id = entity[idAttribute];
 
 	                            if (id) {
-	                              _context6.next = 5;
+	                              _context5.next = 5;
 	                              break;
 	                            }
 
@@ -27096,79 +26993,82 @@
 
 	                          case 5:
 
-	                            // Get the sync key, increment it by 1 and save
-	                            key = (0, _storage.getSyncKey)(_this3.client) || 0;
+	                            // Find an existing sync operation for the entity
+	                            query = new _query.Query().equalTo('entity._id', id);
+	                            findConfig = new _request2.KinveyRequestConfig({
+	                              method: _request2.RequestMethod.GET,
+	                              url: _url2.default.format({
+	                                protocol: _this.client.protocol,
+	                                host: _this.client.host,
+	                                pathname: _this.pathname
+	                              }),
+	                              properties: options.properties,
+	                              query: query,
+	                              timeout: options.timeout
+	                            });
+	                            findRequest = new _cache2.default(findConfig);
+	                            _context5.next = 10;
+	                            return findRequest.execute();
 
-	                            key += 1;
-	                            (0, _storage.setSyncKey)(_this3.client, key);
+	                          case 10:
+	                            response = _context5.sent;
+	                            syncEntities = response.data;
+	                            syncEntity = syncEntities.length === 1 ? syncEntities[0] : { collection: collection, state: {} };
 
-	                            // Create the sync entity
-	                            syncEntity = {
-	                              key: key,
-	                              collection: collection,
-	                              state: {
-	                                method: _request2.RequestMethod.DELETE
-	                              },
-	                              entity: entity
-	                            };
+	                            // Update the state
 
-	                            // Validate that the entity has an id
+	                            syncEntity.state = syncEntity.state || {};
+	                            syncEntity.state.method = operation;
 
-	                            if (id) {
-	                              _context6.next = 11;
-	                              break;
-	                            }
-
-	                            throw new _errors.SyncError('An entity is missing an _id. All entities must have an _id in order to be ' + 'added to the sync table.', entity);
-
-	                          case 11:
+	                            // Update the entity
+	                            syncEntity.entity = entity;
 
 	                            // Send a request to save the sync entity
 	                            request = new _cache2.default({
-	                              method: _request2.RequestMethod.POST,
+	                              method: _request2.RequestMethod.PUT,
 	                              url: _url2.default.format({
-	                                protocol: _this3.client.protocol,
-	                                host: _this3.client.host,
-	                                pathname: _this3.pathname
+	                                protocol: _this.client.protocol,
+	                                host: _this.client.host,
+	                                pathname: _this.pathname
 	                              }),
 	                              properties: options.properties,
 	                              body: syncEntity,
 	                              timeout: options.timeout
 	                            });
-	                            return _context6.abrupt('return', request.execute());
+	                            return _context5.abrupt('return', request.execute());
 
-	                          case 13:
+	                          case 18:
 	                          case 'end':
-	                            return _context6.stop();
+	                            return _context5.stop();
 	                        }
 	                      }
-	                    }, _callee6, _this3);
+	                    }, _callee5, _this);
 	                  }));
 
-	                  return function (_x18) {
+	                  return function (_x22) {
 	                    return ref.apply(this, arguments);
 	                  };
 	                }()));
 
 	              case 6:
-	                return _context7.abrupt('return', singular ? entities[0] : entities);
+	                return _context6.abrupt('return', singular ? entities[0] : entities);
 
 	              case 7:
 	              case 'end':
-	                return _context7.stop();
+	                return _context6.stop();
 	            }
 	          }
-	        }, _callee7, this);
+	        }, _callee6, this);
 	      }));
 
-	      function addDeleteOperation(_x14, _x15, _x16) {
+	      function addOperation(_x16, _x17, _x18, _x19) {
 	        return ref.apply(this, arguments);
 	      }
 
-	      return addDeleteOperation;
+	      return addOperation;
 	    }()
 
-	    /**
+	    /*
 	     * Sync entities with the network. A query can be provided to
 	     * sync a subset of entities.
 	     *
@@ -27189,24 +27089,24 @@
 	  }, {
 	    key: 'push',
 	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee14(query) {
-	        var _this4 = this;
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee12(query) {
+	        var _this2 = this;
 
 	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	        var syncResults, failedSyncEntities, batchSize, i, deleteRequest, response, syncEntities;
-	        return regeneratorRuntime.wrap(function _callee14$(_context14) {
+
+	        var batchSize, i, getRequest, response, syncEntities, _ret;
+
+	        return regeneratorRuntime.wrap(function _callee12$(_context12) {
 	          while (1) {
-	            switch (_context14.prev = _context14.next) {
+	            switch (_context12.prev = _context12.next) {
 	              case 0:
-	                syncResults = [];
-	                failedSyncEntities = [];
 	                batchSize = 100;
 	                i = 0;
 
 	                // Make a request for the pending sync entities
 
-	                deleteRequest = new _cache2.default({
-	                  method: _request2.RequestMethod.DELETE,
+	                getRequest = new _cache2.default({
+	                  method: _request2.RequestMethod.GET,
 	                  url: _url2.default.format({
 	                    protocol: this.client.protocol,
 	                    host: this.client.host,
@@ -27216,444 +27116,430 @@
 	                  query: query,
 	                  timeout: options.timeout
 	                });
-	                _context14.next = 7;
-	                return deleteRequest.execute();
+	                _context12.next = 5;
+	                return getRequest.execute();
 
-	              case 7:
-	                response = _context14.sent;
+	              case 5:
+	                response = _context12.sent;
 	                syncEntities = response.data;
 
 	                if (!(syncEntities.length > 0)) {
-	                  _context14.next = 11;
+	                  _context12.next = 11;
 	                  break;
 	                }
 
-	                return _context14.delegateYield(regeneratorRuntime.mark(function _callee13() {
-	                  var batchSync, putRequest;
-	                  return regeneratorRuntime.wrap(function _callee13$(_context13) {
-	                    while (1) {
-	                      switch (_context13.prev = _context13.next) {
-	                        case 0:
-	                          // Filter the sync entities so that we only perform
-	                          // one sync operation per unique entity.
-	                          syncEntities = (0, _orderBy2.default)(syncEntities, 'key', ['desc']);
-	                          syncEntities = (0, _sortedUniqBy2.default)(syncEntities, function (syncEntity) {
-	                            return syncEntity.entity[idAttribute];
-	                          });
+	                _ret = function () {
+	                  // Filter the sync entities so that we only perform
+	                  // one sync operation per unique entity.
+	                  syncEntities = (0, _orderBy2.default)(syncEntities, 'key', ['desc']);
+	                  syncEntities = (0, _sortedUniqBy2.default)(syncEntities, function (syncEntity) {
+	                    return syncEntity.entity[idAttribute];
+	                  });
 
-	                          // Sync the entities in batches to prevent exhausting
-	                          // available network connections
+	                  // Sync the entities in batches to prevent exhausting
+	                  // available network connections
+	                  var batchSync = function () {
+	                    var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(syncResults) {
+	                      var promise;
+	                      return regeneratorRuntime.wrap(function _callee11$(_context11) {
+	                        while (1) {
+	                          switch (_context11.prev = _context11.next) {
+	                            case 0:
+	                              promise = new Promise(function () {
+	                                var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee10(resolve) {
+	                                  var batch, results;
+	                                  return regeneratorRuntime.wrap(function _callee10$(_context10) {
+	                                    while (1) {
+	                                      switch (_context10.prev = _context10.next) {
+	                                        case 0:
+	                                          batch = syncEntities.slice(i, i + batchSize);
 
-	                          batchSync = function () {
-	                            var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee12(syncResults) {
-	                              var promise;
-	                              return regeneratorRuntime.wrap(function _callee12$(_context12) {
-	                                while (1) {
-	                                  switch (_context12.prev = _context12.next) {
-	                                    case 0:
-	                                      promise = new Promise(function () {
-	                                        var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee11(resolve) {
-	                                          var batch, results;
-	                                          return regeneratorRuntime.wrap(function _callee11$(_context11) {
-	                                            while (1) {
-	                                              switch (_context11.prev = _context11.next) {
-	                                                case 0:
-	                                                  batch = syncEntities.slice(i, i + batchSize);
+	                                          i += batchSize;
 
-	                                                  i += batchSize;
+	                                          // Get the results of syncing all of the entities
+	                                          _context10.next = 4;
+	                                          return Promise.all((0, _map2.default)(batch, function (syncEntity) {
+	                                            var collection = syncEntity.collection;
+	                                            var entity = syncEntity.entity;
+	                                            var originalId = entity[idAttribute];
+	                                            var method = syncEntity.state.method;
 
-	                                                  // Get the results of syncing all of the entities
-	                                                  _context11.next = 4;
-	                                                  return Promise.all((0, _map2.default)(batch, function (syncEntity) {
-	                                                    var collection = syncEntity.collection;
-	                                                    var entity = syncEntity.entity;
-	                                                    var metadata = new _metadata.Metadata(entity);
-	                                                    var originalId = entity[idAttribute];
-	                                                    var method = syncEntity.state.method;
+	                                            if (method === _request2.RequestMethod.DELETE) {
+	                                              // Remove the entity from the network.
+	                                              var request = new _network.NetworkRequest({
+	                                                method: _request2.RequestMethod.DELETE,
+	                                                authType: _request2.AuthType.Default,
+	                                                url: _url2.default.format({
+	                                                  protocol: _this2.client.protocol,
+	                                                  host: _this2.client.host,
+	                                                  pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                }),
+	                                                properties: options.properties,
+	                                                timeout: options.timeout,
+	                                                client: _this2.client
+	                                              });
+	                                              return request.execute().then(function () {
+	                                                // Remove the sync entity
+	                                                var config = new _request2.KinveyRequestConfig({
+	                                                  method: _request2.RequestMethod.DELETE,
+	                                                  url: _url2.default.format({
+	                                                    protocol: _this2.client.protocol,
+	                                                    host: _this2.client.host,
+	                                                    pathname: _this2.pathname + '/' + syncEntity[idAttribute]
+	                                                  }),
+	                                                  properties: options.properties,
+	                                                  timeout: options.timeout
+	                                                });
+	                                                var request = new _cache2.default(config);
+	                                                return request.execute();
+	                                              }).then(function () {
+	                                                // Return the result
+	                                                var result = { _id: originalId, entity: entity };
+	                                                return result;
+	                                              }).catch(function () {
+	                                                var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee7(error) {
+	                                                  var getNetworkRequest, originalEntity, putCacheRequest;
+	                                                  return regeneratorRuntime.wrap(function _callee7$(_context7) {
+	                                                    while (1) {
+	                                                      switch (_context7.prev = _context7.next) {
+	                                                        case 0:
+	                                                          if (!(error instanceof _errors.InsufficientCredentialsError)) {
+	                                                            _context7.next = 13;
+	                                                            break;
+	                                                          }
 
-	                                                    if (method === _request2.RequestMethod.DELETE) {
-	                                                      // Remove the entity from the network.
-	                                                      var request = new _network.NetworkRequest({
-	                                                        method: _request2.RequestMethod.DELETE,
-	                                                        authType: _request2.AuthType.Default,
-	                                                        url: _url2.default.format({
-	                                                          protocol: _this4.client.protocol,
-	                                                          host: _this4.client.host,
-	                                                          pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                        }),
-	                                                        properties: options.properties,
-	                                                        timeout: options.timeout,
-	                                                        client: _this4.client
-	                                                      });
-	                                                      return request.execute().then(function () {
-	                                                        var result = { _id: originalId, entity: entity };
-	                                                        return result;
-	                                                      }).catch(function () {
-	                                                        var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee8(error) {
-	                                                          var getNetworkRequest, originalEntity, putCacheRequest;
-	                                                          return regeneratorRuntime.wrap(function _callee8$(_context8) {
-	                                                            while (1) {
-	                                                              switch (_context8.prev = _context8.next) {
-	                                                                case 0:
-	                                                                  if (!(error instanceof _errors.NotFoundError) || !(error instanceof _errors.InsufficientCredentialsError)) {
-	                                                                    failedSyncEntities.push(syncEntity);
-	                                                                  }
+	                                                          _context7.prev = 1;
 
-	                                                                  // If the credentials used to authenticate this request are
-	                                                                  // not authorized to run the operation
+	                                                          // Try and reset the state of the entity
+	                                                          getNetworkRequest = new _network.NetworkRequest({
+	                                                            method: _request2.RequestMethod.GET,
+	                                                            authType: _request2.AuthType.Default,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout,
+	                                                            client: _this2.client
+	                                                          });
+	                                                          _context7.next = 5;
+	                                                          return getNetworkRequest.execute().then(function (response) {
+	                                                            return response.data;
+	                                                          });
 
-	                                                                  if (!(error instanceof _errors.InsufficientCredentialsError)) {
-	                                                                    _context8.next = 14;
-	                                                                    break;
-	                                                                  }
+	                                                        case 5:
+	                                                          originalEntity = _context7.sent;
+	                                                          putCacheRequest = new _cache2.default({
+	                                                            method: _request2.RequestMethod.PUT,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout,
+	                                                            body: originalEntity
+	                                                          });
+	                                                          _context7.next = 9;
+	                                                          return putCacheRequest.execute();
 
-	                                                                  _context8.prev = 2;
+	                                                        case 9:
+	                                                          _context7.next = 13;
+	                                                          break;
 
-	                                                                  // Try and reset the state of the entity
-	                                                                  getNetworkRequest = new _network.NetworkRequest({
-	                                                                    method: _request2.RequestMethod.GET,
-	                                                                    authType: _request2.AuthType.Default,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout,
-	                                                                    client: _this4.client
-	                                                                  });
-	                                                                  _context8.next = 6;
-	                                                                  return getNetworkRequest.execute().then(function (response) {
-	                                                                    return response.data;
-	                                                                  });
+	                                                        case 11:
+	                                                          _context7.prev = 11;
+	                                                          _context7.t0 = _context7['catch'](1);
 
-	                                                                case 6:
-	                                                                  originalEntity = _context8.sent;
-	                                                                  putCacheRequest = new _cache2.default({
-	                                                                    method: _request2.RequestMethod.PUT,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout,
-	                                                                    body: originalEntity
-	                                                                  });
-	                                                                  _context8.next = 10;
-	                                                                  return putCacheRequest.execute();
+	                                                        case 13:
+	                                                          return _context7.abrupt('return', {
+	                                                            _id: originalId,
+	                                                            entity: entity,
+	                                                            error: error
+	                                                          });
 
-	                                                                case 10:
-	                                                                  _context8.next = 14;
-	                                                                  break;
-
-	                                                                case 12:
-	                                                                  _context8.prev = 12;
-	                                                                  _context8.t0 = _context8['catch'](2);
-
-	                                                                case 14:
-	                                                                  return _context8.abrupt('return', {
-	                                                                    _id: originalId,
-	                                                                    entity: entity,
-	                                                                    error: error
-	                                                                  });
-
-	                                                                case 15:
-	                                                                case 'end':
-	                                                                  return _context8.stop();
-	                                                              }
-	                                                            }
-	                                                          }, _callee8, _this4, [[2, 12]]);
-	                                                        }));
-
-	                                                        return function (_x24) {
-	                                                          return ref.apply(this, arguments);
-	                                                        };
-	                                                      }());
-	                                                    } else if (method === _request2.RequestMethod.POST || method === _request2.RequestMethod.PUT) {
-	                                                      // Save the entity to the network.
-	                                                      var _request = new _network.NetworkRequest({
-	                                                        method: method,
-	                                                        authType: _request2.AuthType.Default,
-	                                                        url: _url2.default.format({
-	                                                          protocol: _this4.client.protocol,
-	                                                          host: _this4.client.host,
-	                                                          pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                        }),
-	                                                        properties: options.properties,
-	                                                        timeout: options.timeout,
-	                                                        body: entity,
-	                                                        client: _this4.client
-	                                                      });
-
-	                                                      // If the entity was created locally then delete the autogenerated _id,
-	                                                      // send a POST request, and update the url.
-	                                                      if (metadata.isLocal()) {
-	                                                        delete entity[idAttribute];
-	                                                        delete entity[kmdAttribute].local;
-	                                                        _request.method = _request2.RequestMethod.POST;
-	                                                        _request.url = _url2.default.format({
-	                                                          protocol: _this4.client.protocol,
-	                                                          host: _this4.client.host,
-	                                                          pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection
-	                                                        });
-	                                                        _request.body = entity;
+	                                                        case 14:
+	                                                        case 'end':
+	                                                          return _context7.stop();
 	                                                      }
-
-	                                                      return _request.execute().then(function (response) {
-	                                                        return response.data;
-	                                                      }).then(function () {
-	                                                        var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee9(entity) {
-	                                                          var putCacheRequest, deleteCacheRequest;
-	                                                          return regeneratorRuntime.wrap(function _callee9$(_context9) {
-	                                                            while (1) {
-	                                                              switch (_context9.prev = _context9.next) {
-	                                                                case 0:
-	                                                                  // Save the result of the network request locally.
-	                                                                  putCacheRequest = new _cache2.default({
-	                                                                    method: _request2.RequestMethod.PUT,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + entity[idAttribute]
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout,
-	                                                                    body: entity
-	                                                                  });
-	                                                                  _context9.next = 3;
-	                                                                  return putCacheRequest.execute().then(function (response) {
-	                                                                    return response.data;
-	                                                                  });
-
-	                                                                case 3:
-	                                                                  entity = _context9.sent;
-
-	                                                                  if (!metadata.isLocal()) {
-	                                                                    _context9.next = 8;
-	                                                                    break;
-	                                                                  }
-
-	                                                                  deleteCacheRequest = new _cache2.default({
-	                                                                    method: _request2.RequestMethod.DELETE,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout
-	                                                                  });
-	                                                                  _context9.next = 8;
-	                                                                  return deleteCacheRequest.execute();
-
-	                                                                case 8:
-	                                                                  return _context9.abrupt('return', {
-	                                                                    _id: originalId,
-	                                                                    entity: entity
-	                                                                  });
-
-	                                                                case 9:
-	                                                                case 'end':
-	                                                                  return _context9.stop();
-	                                                              }
-	                                                            }
-	                                                          }, _callee9, _this4);
-	                                                        }));
-
-	                                                        return function (_x25) {
-	                                                          return ref.apply(this, arguments);
-	                                                        };
-	                                                      }()).catch(function () {
-	                                                        var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee10(error) {
-	                                                          var getNetworkRequest, originalEntity, putCacheRequest;
-	                                                          return regeneratorRuntime.wrap(function _callee10$(_context10) {
-	                                                            while (1) {
-	                                                              switch (_context10.prev = _context10.next) {
-	                                                                case 0:
-	                                                                  if (!(error instanceof _errors.InsufficientCredentialsError)) {
-	                                                                    failedSyncEntities.push(syncEntity);
-	                                                                  }
-
-	                                                                  // If the credentials used to authenticate this request are
-	                                                                  // not authorized to run the operation then just remove the entity
-	                                                                  // from the sync table
-
-	                                                                  if (!(error instanceof _errors.InsufficientCredentialsError)) {
-	                                                                    _context10.next = 15;
-	                                                                    break;
-	                                                                  }
-
-	                                                                  _context10.prev = 2;
-
-	                                                                  if (metadata.isLocal()) {
-	                                                                    _context10.next = 11;
-	                                                                    break;
-	                                                                  }
-
-	                                                                  getNetworkRequest = new _network.NetworkRequest({
-	                                                                    method: _request2.RequestMethod.GET,
-	                                                                    authType: _request2.AuthType.Default,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout,
-	                                                                    client: _this4.client
-	                                                                  });
-	                                                                  _context10.next = 7;
-	                                                                  return getNetworkRequest.execute().then(function (response) {
-	                                                                    return response.data;
-	                                                                  });
-
-	                                                                case 7:
-	                                                                  originalEntity = _context10.sent;
-	                                                                  putCacheRequest = new _cache2.default({
-	                                                                    method: _request2.RequestMethod.PUT,
-	                                                                    url: _url2.default.format({
-	                                                                      protocol: _this4.client.protocol,
-	                                                                      host: _this4.client.host,
-	                                                                      pathname: '/' + appdataNamespace + '/' + _this4.client.appKey + '/' + collection + '/' + originalId
-	                                                                    }),
-	                                                                    properties: options.properties,
-	                                                                    timeout: options.timeout,
-	                                                                    body: originalEntity
-	                                                                  });
-	                                                                  _context10.next = 11;
-	                                                                  return putCacheRequest.execute();
-
-	                                                                case 11:
-	                                                                  _context10.next = 15;
-	                                                                  break;
-
-	                                                                case 13:
-	                                                                  _context10.prev = 13;
-	                                                                  _context10.t0 = _context10['catch'](2);
-
-	                                                                case 15:
-	                                                                  return _context10.abrupt('return', {
-	                                                                    _id: originalId,
-	                                                                    entity: entity,
-	                                                                    error: error
-	                                                                  });
-
-	                                                                case 16:
-	                                                                case 'end':
-	                                                                  return _context10.stop();
-	                                                              }
-	                                                            }
-	                                                          }, _callee10, _this4, [[2, 13]]);
-	                                                        }));
-
-	                                                        return function (_x26) {
-	                                                          return ref.apply(this, arguments);
-	                                                        };
-	                                                      }());
 	                                                    }
+	                                                  }, _callee7, _this2, [[1, 11]]);
+	                                                }));
 
-	                                                    return {
-	                                                      _id: originalId,
-	                                                      entity: entity,
-	                                                      error: new _errors.SyncError('Unable to sync the entity since the method was not recognized.', syncEntity)
-	                                                    };
-	                                                  }));
+	                                                return function (_x28) {
+	                                                  return ref.apply(this, arguments);
+	                                                };
+	                                              }());
+	                                            } else if (method === _request2.RequestMethod.POST || method === _request2.RequestMethod.PUT) {
+	                                              // Save the entity to the network.
+	                                              var _request = new _network.NetworkRequest({
+	                                                method: method,
+	                                                authType: _request2.AuthType.Default,
+	                                                url: _url2.default.format({
+	                                                  protocol: _this2.client.protocol,
+	                                                  host: _this2.client.host,
+	                                                  pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                }),
+	                                                properties: options.properties,
+	                                                timeout: options.timeout,
+	                                                body: entity,
+	                                                client: _this2.client
+	                                              });
 
-	                                                case 4:
-	                                                  results = _context11.sent;
-
-
-	                                                  // Concat the results
-	                                                  syncResults = syncResults.concat(results);
-
-	                                                  // Sync the remaining entities
-
-	                                                  if (!(i < syncEntities.length)) {
-	                                                    _context11.next = 8;
-	                                                    break;
-	                                                  }
-
-	                                                  return _context11.abrupt('return', resolve(batchSync(syncResults)));
-
-	                                                case 8:
-	                                                  return _context11.abrupt('return', resolve(syncResults));
-
-	                                                case 9:
-	                                                case 'end':
-	                                                  return _context11.stop();
+	                                              // If the entity was created locally then delete the autogenerated _id,
+	                                              // send a POST request, and update the url.
+	                                              if (method === _request2.RequestMethod.POST) {
+	                                                delete entity[idAttribute];
+	                                                _request.method = _request2.RequestMethod.POST;
+	                                                _request.url = _url2.default.format({
+	                                                  protocol: _this2.client.protocol,
+	                                                  host: _this2.client.host,
+	                                                  pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection
+	                                                });
+	                                                _request.body = entity;
 	                                              }
+
+	                                              return _request.execute().then(function (response) {
+	                                                return response.data;
+	                                              }).then(function () {
+	                                                var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee8(entity) {
+	                                                  var deleteConfig, deleteRequest, putCacheRequest, deleteCacheRequest;
+	                                                  return regeneratorRuntime.wrap(function _callee8$(_context8) {
+	                                                    while (1) {
+	                                                      switch (_context8.prev = _context8.next) {
+	                                                        case 0:
+	                                                          // Remove the sync entity
+	                                                          deleteConfig = new _request2.KinveyRequestConfig({
+	                                                            method: _request2.RequestMethod.DELETE,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: _this2.pathname + '/' + syncEntity[idAttribute]
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout
+	                                                          });
+	                                                          deleteRequest = new _cache2.default(deleteConfig);
+	                                                          _context8.next = 4;
+	                                                          return deleteRequest.execute();
+
+	                                                        case 4:
+
+	                                                          // Save the result of the network request locally.
+	                                                          putCacheRequest = new _cache2.default({
+	                                                            method: _request2.RequestMethod.PUT,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + entity[idAttribute]
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout,
+	                                                            body: entity
+	                                                          });
+	                                                          _context8.next = 7;
+	                                                          return putCacheRequest.execute().then(function (response) {
+	                                                            return response.data;
+	                                                          });
+
+	                                                        case 7:
+	                                                          entity = _context8.sent;
+
+	                                                          if (!(method === _request2.RequestMethod.POST)) {
+	                                                            _context8.next = 12;
+	                                                            break;
+	                                                          }
+
+	                                                          deleteCacheRequest = new _cache2.default({
+	                                                            method: _request2.RequestMethod.DELETE,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout
+	                                                          });
+	                                                          _context8.next = 12;
+	                                                          return deleteCacheRequest.execute();
+
+	                                                        case 12:
+	                                                          return _context8.abrupt('return', {
+	                                                            _id: originalId,
+	                                                            entity: entity
+	                                                          });
+
+	                                                        case 13:
+	                                                        case 'end':
+	                                                          return _context8.stop();
+	                                                      }
+	                                                    }
+	                                                  }, _callee8, _this2);
+	                                                }));
+
+	                                                return function (_x29) {
+	                                                  return ref.apply(this, arguments);
+	                                                };
+	                                              }()).catch(function () {
+	                                                var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee9(error) {
+	                                                  var getNetworkRequest, originalEntity, putCacheRequest;
+	                                                  return regeneratorRuntime.wrap(function _callee9$(_context9) {
+	                                                    while (1) {
+	                                                      switch (_context9.prev = _context9.next) {
+	                                                        case 0:
+	                                                          if (!(error instanceof _errors.InsufficientCredentialsError)) {
+	                                                            _context9.next = 14;
+	                                                            break;
+	                                                          }
+
+	                                                          _context9.prev = 1;
+
+	                                                          if (!(method !== _request2.RequestMethod.POST)) {
+	                                                            _context9.next = 10;
+	                                                            break;
+	                                                          }
+
+	                                                          getNetworkRequest = new _network.NetworkRequest({
+	                                                            method: _request2.RequestMethod.GET,
+	                                                            authType: _request2.AuthType.Default,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout,
+	                                                            client: _this2.client
+	                                                          });
+	                                                          _context9.next = 6;
+	                                                          return getNetworkRequest.execute().then(function (response) {
+	                                                            return response.data;
+	                                                          });
+
+	                                                        case 6:
+	                                                          originalEntity = _context9.sent;
+	                                                          putCacheRequest = new _cache2.default({
+	                                                            method: _request2.RequestMethod.PUT,
+	                                                            url: _url2.default.format({
+	                                                              protocol: _this2.client.protocol,
+	                                                              host: _this2.client.host,
+	                                                              pathname: '/' + appdataNamespace + '/' + _this2.client.appKey + '/' + collection + '/' + originalId
+	                                                            }),
+	                                                            properties: options.properties,
+	                                                            timeout: options.timeout,
+	                                                            body: originalEntity
+	                                                          });
+	                                                          _context9.next = 10;
+	                                                          return putCacheRequest.execute();
+
+	                                                        case 10:
+	                                                          _context9.next = 14;
+	                                                          break;
+
+	                                                        case 12:
+	                                                          _context9.prev = 12;
+	                                                          _context9.t0 = _context9['catch'](1);
+
+	                                                        case 14:
+	                                                          return _context9.abrupt('return', {
+	                                                            _id: originalId,
+	                                                            entity: entity,
+	                                                            error: error
+	                                                          });
+
+	                                                        case 15:
+	                                                        case 'end':
+	                                                          return _context9.stop();
+	                                                      }
+	                                                    }
+	                                                  }, _callee9, _this2, [[1, 12]]);
+	                                                }));
+
+	                                                return function (_x30) {
+	                                                  return ref.apply(this, arguments);
+	                                                };
+	                                              }());
 	                                            }
-	                                          }, _callee11, _this4);
-	                                        }));
 
-	                                        return function (_x23) {
-	                                          return ref.apply(this, arguments);
-	                                        };
-	                                      }());
-	                                      return _context12.abrupt('return', promise);
+	                                            return {
+	                                              _id: originalId,
+	                                              entity: entity,
+	                                              error: new _errors.SyncError('Unable to sync the entity since the method was not recognized.', syncEntity)
+	                                            };
+	                                          }));
 
-	                                    case 2:
-	                                    case 'end':
-	                                      return _context12.stop();
-	                                  }
-	                                }
-	                              }, _callee12, _this4);
-	                            }));
-
-	                            return function batchSync(_x22) {
-	                              return ref.apply(this, arguments);
-	                            };
-	                          }();
-
-	                          // Get the result of sync.
+	                                        case 4:
+	                                          results = _context10.sent;
 
 
-	                          _context13.next = 5;
-	                          return batchSync([]);
+	                                          // Concat the results
+	                                          syncResults = syncResults.concat(results);
 
-	                        case 5:
-	                          syncResults = _context13.sent;
+	                                          // Sync the remaining entities
 
-	                          if (!(failedSyncEntities.length > 0)) {
-	                            _context13.next = 10;
-	                            break;
+	                                          if (!(i < syncEntities.length)) {
+	                                            _context10.next = 8;
+	                                            break;
+	                                          }
+
+	                                          return _context10.abrupt('return', resolve(batchSync(syncResults)));
+
+	                                        case 8:
+	                                          return _context10.abrupt('return', resolve(syncResults));
+
+	                                        case 9:
+	                                        case 'end':
+	                                          return _context10.stop();
+	                                      }
+	                                    }
+	                                  }, _callee10, _this2);
+	                                }));
+
+	                                return function (_x27) {
+	                                  return ref.apply(this, arguments);
+	                                };
+	                              }());
+	                              return _context11.abrupt('return', promise);
+
+	                            case 2:
+	                            case 'end':
+	                              return _context11.stop();
 	                          }
+	                        }
+	                      }, _callee11, _this2);
+	                    }));
 
-	                          putRequest = new _cache2.default({
-	                            method: _request2.RequestMethod.PUT,
-	                            url: _url2.default.format({
-	                              protocol: _this4.client.protocol,
-	                              host: _this4.client.host,
-	                              pathname: _this4.pathname
-	                            }),
-	                            properties: options.properties,
-	                            timeout: options.timeout,
-	                            data: failedSyncEntities
-	                          });
-	                          _context13.next = 10;
-	                          return putRequest.execute();
+	                    return function batchSync(_x26) {
+	                      return ref.apply(this, arguments);
+	                    };
+	                  }();
 
-	                        case 10:
-	                        case 'end':
-	                          return _context13.stop();
-	                      }
-	                    }
-	                  }, _callee13, _this4);
-	                })(), 't0', 11);
+	                  // Return the result
+	                  return {
+	                    v: batchSync([])
+	                  };
+	                }();
+
+	                if (!((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object")) {
+	                  _context12.next = 11;
+	                  break;
+	                }
+
+	                return _context12.abrupt('return', _ret.v);
 
 	              case 11:
-	                return _context14.abrupt('return', syncResults);
+	                return _context12.abrupt('return', []);
 
 	              case 12:
 	              case 'end':
-	                return _context14.stop();
+	                return _context12.stop();
 	            }
 	          }
-	        }, _callee14, this);
+	        }, _callee12, this);
 	      }));
 
-	      function push(_x19, _x20) {
+	      function push(_x23, _x24) {
 	        return ref.apply(this, arguments);
 	      }
 
@@ -27710,10 +27596,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 271 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseOrderBy = __webpack_require__(272),
+	var baseOrderBy = __webpack_require__(274),
 	    isArray = __webpack_require__(32);
 
 	/**
@@ -27763,15 +27649,15 @@
 
 
 /***/ },
-/* 272 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayMap = __webpack_require__(202),
+	var arrayMap = __webpack_require__(204),
 	    baseIteratee = __webpack_require__(37),
-	    baseMap = __webpack_require__(211),
-	    baseSortBy = __webpack_require__(273),
-	    baseUnary = __webpack_require__(274),
-	    compareMultiple = __webpack_require__(275),
+	    baseMap = __webpack_require__(213),
+	    baseSortBy = __webpack_require__(275),
+	    baseUnary = __webpack_require__(276),
+	    compareMultiple = __webpack_require__(277),
 	    identity = __webpack_require__(115);
 
 	/**
@@ -27803,7 +27689,7 @@
 
 
 /***/ },
-/* 273 */
+/* 275 */
 /***/ function(module, exports) {
 
 	/**
@@ -27830,7 +27716,7 @@
 
 
 /***/ },
-/* 274 */
+/* 276 */
 /***/ function(module, exports) {
 
 	/**
@@ -27850,10 +27736,10 @@
 
 
 /***/ },
-/* 275 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var compareAscending = __webpack_require__(276);
+	var compareAscending = __webpack_require__(278);
 
 	/**
 	 * Used by `_.orderBy` to compare multiple properties of a value to another
@@ -27900,7 +27786,7 @@
 
 
 /***/ },
-/* 276 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isSymbol = __webpack_require__(109);
@@ -27947,11 +27833,11 @@
 
 
 /***/ },
-/* 277 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseIteratee = __webpack_require__(37),
-	    baseSortedUniq = __webpack_require__(278);
+	    baseSortedUniq = __webpack_require__(280);
 
 	/**
 	 * This method is like `_.uniqBy` except that it's designed and optimized
@@ -27979,7 +27865,7 @@
 
 
 /***/ },
-/* 278 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(45);
@@ -28015,14 +27901,14 @@
 
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseDifference = __webpack_require__(280),
-	    baseFlatten = __webpack_require__(286),
+	var baseDifference = __webpack_require__(282),
+	    baseFlatten = __webpack_require__(288),
 	    baseIteratee = __webpack_require__(37),
 	    isArrayLikeObject = __webpack_require__(24),
-	    last = __webpack_require__(288),
+	    last = __webpack_require__(290),
 	    rest = __webpack_require__(124);
 
 	/**
@@ -28063,15 +27949,15 @@
 
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(82),
-	    arrayIncludes = __webpack_require__(281),
-	    arrayIncludesWith = __webpack_require__(284),
-	    arrayMap = __webpack_require__(202),
-	    baseUnary = __webpack_require__(274),
-	    cacheHas = __webpack_require__(285);
+	    arrayIncludes = __webpack_require__(283),
+	    arrayIncludesWith = __webpack_require__(286),
+	    arrayMap = __webpack_require__(204),
+	    baseUnary = __webpack_require__(276),
+	    cacheHas = __webpack_require__(287);
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -28136,10 +28022,10 @@
 
 
 /***/ },
-/* 281 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIndexOf = __webpack_require__(282);
+	var baseIndexOf = __webpack_require__(284);
 
 	/**
 	 * A specialized version of `_.includes` for arrays without support for
@@ -28159,10 +28045,10 @@
 
 
 /***/ },
-/* 282 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var indexOfNaN = __webpack_require__(283);
+	var indexOfNaN = __webpack_require__(285);
 
 	/**
 	 * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
@@ -28192,7 +28078,7 @@
 
 
 /***/ },
-/* 283 */
+/* 285 */
 /***/ function(module, exports) {
 
 	/**
@@ -28221,7 +28107,7 @@
 
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports) {
 
 	/**
@@ -28249,7 +28135,7 @@
 
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports) {
 
 	/**
@@ -28268,11 +28154,11 @@
 
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(179),
-	    isFlattenable = __webpack_require__(287);
+	var arrayPush = __webpack_require__(181),
+	    isFlattenable = __webpack_require__(289);
 
 	/**
 	 * The base implementation of `_.flatten` with support for restricting flattening.
@@ -28312,7 +28198,7 @@
 
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isArguments = __webpack_require__(23),
@@ -28333,7 +28219,7 @@
 
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports) {
 
 	/**
@@ -28359,11 +28245,11 @@
 
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(290),
-	    baseFilter = __webpack_require__(291),
+	var arrayFilter = __webpack_require__(292),
+	    baseFilter = __webpack_require__(293),
 	    baseIteratee = __webpack_require__(37),
 	    isArray = __webpack_require__(32);
 
@@ -28412,7 +28298,7 @@
 
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports) {
 
 	/**
@@ -28443,7 +28329,7 @@
 
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(13);
@@ -28470,13 +28356,13 @@
 
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(290),
-	    baseXor = __webpack_require__(293),
+	var arrayFilter = __webpack_require__(292),
+	    baseXor = __webpack_require__(295),
 	    isArrayLikeObject = __webpack_require__(24),
-	    last = __webpack_require__(288),
+	    last = __webpack_require__(290),
 	    rest = __webpack_require__(124);
 
 	/**
@@ -28511,12 +28397,12 @@
 
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(179),
-	    baseDifference = __webpack_require__(280),
-	    baseUniq = __webpack_require__(294);
+	var arrayPush = __webpack_require__(181),
+	    baseDifference = __webpack_require__(282),
+	    baseUniq = __webpack_require__(296);
 
 	/**
 	 * The base implementation of methods like `_.xor`, without support for
@@ -28547,14 +28433,14 @@
 
 
 /***/ },
-/* 294 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(82),
-	    arrayIncludes = __webpack_require__(281),
-	    arrayIncludesWith = __webpack_require__(284),
-	    cacheHas = __webpack_require__(285),
-	    createSet = __webpack_require__(295),
+	    arrayIncludes = __webpack_require__(283),
+	    arrayIncludesWith = __webpack_require__(286),
+	    cacheHas = __webpack_require__(287),
+	    createSet = __webpack_require__(297),
 	    setToArray = __webpack_require__(90);
 
 	/** Used as the size to enable large array optimizations. */
@@ -28625,11 +28511,11 @@
 
 
 /***/ },
-/* 295 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Set = __webpack_require__(95),
-	    noop = __webpack_require__(296),
+	    noop = __webpack_require__(298),
 	    setToArray = __webpack_require__(90);
 
 	/** Used as references for various `Number` constants. */
@@ -28650,7 +28536,7 @@
 
 
 /***/ },
-/* 296 */
+/* 298 */
 /***/ function(module, exports) {
 
 	/**
@@ -28673,7 +28559,7 @@
 
 
 /***/ },
-/* 297 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28687,17 +28573,17 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _datastore = __webpack_require__(250);
+	var _datastore = __webpack_require__(252);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _map = __webpack_require__(210);
+	var _map = __webpack_require__(212);
 
 	var _map2 = _interopRequireDefault(_map);
 
@@ -29115,7 +29001,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 298 */
+/* 300 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -29123,34 +29009,38 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.User = undefined;
+	exports.UserStore = exports.User = undefined;
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* eslint-disable no-underscore-dangle */
 
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
 	var _query = __webpack_require__(9);
 
-	var _acl = __webpack_require__(299);
+	var _acl = __webpack_require__(301);
 
-	var _metadata = __webpack_require__(248);
+	var _metadata = __webpack_require__(250);
 
 	var _errors = __webpack_require__(6);
 
-	var _mic = __webpack_require__(300);
+	var _mic = __webpack_require__(302);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _datastore = __webpack_require__(250);
+	var _datastore = __webpack_require__(252);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _storage = __webpack_require__(137);
+	var _storage = __webpack_require__(139);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -29158,7 +29048,7 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _result = __webpack_require__(135);
+	var _result = __webpack_require__(137);
 
 	var _result2 = _interopRequireDefault(_result);
 
@@ -29166,7 +29056,17 @@
 
 	var _isObject2 = _interopRequireDefault(_isObject);
 
+	var _isArray = __webpack_require__(32);
+
+	var _isArray2 = _interopRequireDefault(_isArray);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -29182,7 +29082,7 @@
 	var hello = void 0;
 
 	if (typeof window !== 'undefined') {
-	  hello = __webpack_require__(302); // eslint-disable-line global-require
+	  hello = __webpack_require__(304); // eslint-disable-line global-require
 	}
 
 	/**
@@ -29752,6 +29652,12 @@
 	      return promise;
 	    }
 	  }, {
+	    key: 'isEmailVerified',
+	    value: function isEmailVerified() {
+	      var status = this.metadata.emailVerification;
+	      return status === 'confirmed';
+	    }
+	  }, {
 	    key: 'verifyEmail',
 	    value: function verifyEmail() {
 	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -30117,10 +30023,294 @@
 
 	  return User;
 	}();
+
+	/**
+	 * The UserStore class is used to find, save, update, remove, count and group users.
+	 */
+
+
+	var UserStore = exports.UserStore = function (_DataStore) {
+	  _inherits(UserStore, _DataStore);
+
+	  function UserStore() {
+	    _classCallCheck(this, UserStore);
+
+	    var _this10 = _possibleConstructorReturn(this, Object.getPrototypeOf(UserStore).call(this));
+
+	    _this10.disableCache();
+	    return _this10;
+	  }
+
+	  /**
+	   * Enable cache.
+	   *
+	   * @return {DataStore}  DataStore instance.
+	   */
+
+
+	  _createClass(UserStore, [{
+	    key: 'enableCache',
+	    value: function enableCache() {}
+	    // Log a warning
+	    // throw new KinveyError('Unable to enable cache for the file store.');
+
+
+	    /**
+	     * Make the store offline.
+	     *
+	     * @return {DataStore}  DataStore instance.
+	     */
+
+	  }, {
+	    key: 'offline',
+	    value: function offline() {}
+	    // Log a warning
+	    // throw new KinveyError('Unable to go offline for the file store.');
+
+
+	    /**
+	     * The pathname for the store.
+	     *
+	     * @return  {string}   Pathname
+	     */
+
+	  }, {
+	    key: 'create',
+	    value: function () {
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
+	        return regeneratorRuntime.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                throw new _errors.KinveyError('Please use `User.signup()` to create a user.');
+
+	              case 1:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this);
+	      }));
+
+	      function create() {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return create;
+	    }()
+	  }, {
+	    key: 'update',
+	    value: function () {
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(user) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+	        var socialIdentity, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, key;
+
+	        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+	          while (1) {
+	            switch (_context2.prev = _context2.next) {
+	              case 0:
+	                if (user) {
+	                  _context2.next = 2;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('No user was provided to be updated.');
+
+	              case 2:
+	                if (!(0, _isArray2.default)(user)) {
+	                  _context2.next = 4;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('Only one user can be updated at one time.', user);
+
+	              case 4:
+	                if (user[idAttribute]) {
+	                  _context2.next = 6;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('User must have an _id.');
+
+	              case 6:
+	                if (!options._identity) {
+	                  _context2.next = 28;
+	                  break;
+	                }
+
+	                socialIdentity = user[socialIdentityAttribute];
+
+	                if (!socialIdentity) {
+	                  _context2.next = 28;
+	                  break;
+	                }
+
+	                _iteratorNormalCompletion = true;
+	                _didIteratorError = false;
+	                _iteratorError = undefined;
+	                _context2.prev = 12;
+
+	                for (_iterator = socialIdentity[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                  _step$value = _slicedToArray(_step.value, 1);
+	                  key = _step$value[0];
+
+	                  if (socialIdentity[key] && options._identity !== key) {
+	                    delete socialIdentity[key];
+	                  }
+	                }
+	                _context2.next = 20;
+	                break;
+
+	              case 16:
+	                _context2.prev = 16;
+	                _context2.t0 = _context2['catch'](12);
+	                _didIteratorError = true;
+	                _iteratorError = _context2.t0;
+
+	              case 20:
+	                _context2.prev = 20;
+	                _context2.prev = 21;
+
+	                if (!_iteratorNormalCompletion && _iterator.return) {
+	                  _iterator.return();
+	                }
+
+	              case 23:
+	                _context2.prev = 23;
+
+	                if (!_didIteratorError) {
+	                  _context2.next = 26;
+	                  break;
+	                }
+
+	                throw _iteratorError;
+
+	              case 26:
+	                return _context2.finish(23);
+
+	              case 27:
+	                return _context2.finish(20);
+
+	              case 28:
+	                return _context2.abrupt('return', _get(Object.getPrototypeOf(UserStore.prototype), 'update', this).call(this, user, options));
+
+	              case 29:
+	              case 'end':
+	                return _context2.stop();
+	            }
+	          }
+	        }, _callee2, this, [[12, 16, 20, 28], [21,, 23, 27]]);
+	      }));
+
+	      function update(_x17, _x18) {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return update;
+	    }()
+	  }, {
+	    key: 'exists',
+	    value: function () {
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(username, options) {
+	        var config, request, response, data;
+	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+	          while (1) {
+	            switch (_context3.prev = _context3.next) {
+	              case 0:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.App,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/check-username-exists'
+	                  }),
+	                  properties: options.properties,
+	                  data: { username: username },
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context3.next = 4;
+	                return request.execute();
+
+	              case 4:
+	                response = _context3.sent;
+	                data = response.data || {};
+	                return _context3.abrupt('return', !!data.usernameExists);
+
+	              case 7:
+	              case 'end':
+	                return _context3.stop();
+	            }
+	          }
+	        }, _callee3, this);
+	      }));
+
+	      function exists(_x20, _x21) {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return exists;
+	    }()
+	  }, {
+	    key: 'restore',
+	    value: function () {
+	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(id) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	        var config, request, response;
+	        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+	          while (1) {
+	            switch (_context4.prev = _context4.next) {
+	              case 0:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.Master,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: this.pathname + '/' + id
+	                  }),
+	                  properties: options.properties,
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context4.next = 4;
+	                return request.execute();
+
+	              case 4:
+	                response = _context4.sent;
+	                return _context4.abrupt('return', response.data);
+
+	              case 6:
+	              case 'end':
+	                return _context4.stop();
+	            }
+	          }
+	        }, _callee4, this);
+	      }));
+
+	      function restore(_x22, _x23) {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return restore;
+	    }()
+	  }, {
+	    key: 'pathname',
+	    get: function get() {
+	      return '/' + usersNamespace + '/' + this.client.appKey;
+	    }
+	  }]);
+
+	  return UserStore;
+	}(_datastore.DataStore);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 299 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -30134,11 +30324,11 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _clone = __webpack_require__(249);
+	var _clone = __webpack_require__(251);
 
 	var _clone2 = _interopRequireDefault(_clone);
 
-	var _isPlainObject = __webpack_require__(194);
+	var _isPlainObject = __webpack_require__(196);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
@@ -30340,7 +30530,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 300 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -30354,19 +30544,19 @@
 
 	var _errors = __webpack_require__(6);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _path = __webpack_require__(301);
+	var _path = __webpack_require__(303);
 
 	var _path2 = _interopRequireDefault(_path);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
@@ -30634,7 +30824,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }())))
 
 /***/ },
-/* 301 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -30865,7 +31055,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 302 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, setImmediate) {/*! hellojs v1.13.1 | (c) 2012-2016 Andrew Dodson | MIT https://adodson.com/hello.js/LICENSE */
@@ -36686,10 +36876,10 @@
 		module.exports = hello;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(303).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), __webpack_require__(305).setImmediate))
 
 /***/ },
-/* 303 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(2).nextTick;
@@ -36768,747 +36958,10 @@
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(303).setImmediate, __webpack_require__(303).clearImmediate))
-
-/***/ },
-/* 304 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.UserStore = undefined;
-
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-	var _errors = __webpack_require__(6);
-
-	var _network = __webpack_require__(247);
-
-	var _request = __webpack_require__(148);
-
-	var _datastore = __webpack_require__(250);
-
-	var _url = __webpack_require__(141);
-
-	var _url2 = _interopRequireDefault(_url);
-
-	var _isArray = __webpack_require__(32);
-
-	var _isArray2 = _interopRequireDefault(_isArray);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable no-underscore-dangle */
-
-
-	var idAttribute = process.env.KINVEY_ID_ATTRIBUTE || '_id';
-	var usersNamespace = process.env.KINVEY_USERS_NAMESPACE || 'user';
-	var rpcNamespace = process.env.KINVEY_RPC_NAMESPACE || 'rpc';
-	var socialIdentityAttribute = process.env.KINVEY_SOCIAL_IDENTITY_ATTRIBUTE || '_socialIdentity';
-
-	/**
-	 * The UserStore class is used to find, save, update, remove, count and group users.
-	 */
-
-	var UserStore = exports.UserStore = function (_DataStore) {
-	  _inherits(UserStore, _DataStore);
-
-	  function UserStore() {
-	    _classCallCheck(this, UserStore);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserStore).call(this));
-
-	    _this.disableCache();
-	    return _this;
-	  }
-
-	  /**
-	   * Enable cache.
-	   *
-	   * @return {DataStore}  DataStore instance.
-	   */
-
-
-	  _createClass(UserStore, [{
-	    key: 'enableCache',
-	    value: function enableCache() {}
-	    // Log a warning
-	    // throw new KinveyError('Unable to enable cache for the file store.');
-
-
-	    /**
-	     * Make the store offline.
-	     *
-	     * @return {DataStore}  DataStore instance.
-	     */
-
-	  }, {
-	    key: 'offline',
-	    value: function offline() {}
-	    // Log a warning
-	    // throw new KinveyError('Unable to go offline for the file store.');
-
-
-	    /**
-	     * The pathname for the store.
-	     *
-	     * @return  {string}   Pathname
-	     */
-
-	  }, {
-	    key: 'create',
-	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-	        return regeneratorRuntime.wrap(function _callee$(_context) {
-	          while (1) {
-	            switch (_context.prev = _context.next) {
-	              case 0:
-	                throw new _errors.KinveyError('Please use `User.signup()` to create a user.');
-
-	              case 1:
-	              case 'end':
-	                return _context.stop();
-	            }
-	          }
-	        }, _callee, this);
-	      }));
-
-	      function create() {
-	        return ref.apply(this, arguments);
-	      }
-
-	      return create;
-	    }()
-	  }, {
-	    key: 'update',
-	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(user) {
-	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	        var socialIdentity, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, key;
-
-	        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-	          while (1) {
-	            switch (_context2.prev = _context2.next) {
-	              case 0:
-	                if (user) {
-	                  _context2.next = 2;
-	                  break;
-	                }
-
-	                throw new _errors.KinveyError('No user was provided to be updated.');
-
-	              case 2:
-	                if (!(0, _isArray2.default)(user)) {
-	                  _context2.next = 4;
-	                  break;
-	                }
-
-	                throw new _errors.KinveyError('Only one user can be updated at one time.', user);
-
-	              case 4:
-	                if (user[idAttribute]) {
-	                  _context2.next = 6;
-	                  break;
-	                }
-
-	                throw new _errors.KinveyError('User must have an _id.');
-
-	              case 6:
-	                if (!options._identity) {
-	                  _context2.next = 28;
-	                  break;
-	                }
-
-	                socialIdentity = user[socialIdentityAttribute];
-
-	                if (!socialIdentity) {
-	                  _context2.next = 28;
-	                  break;
-	                }
-
-	                _iteratorNormalCompletion = true;
-	                _didIteratorError = false;
-	                _iteratorError = undefined;
-	                _context2.prev = 12;
-
-	                for (_iterator = socialIdentity[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                  _step$value = _slicedToArray(_step.value, 1);
-	                  key = _step$value[0];
-
-	                  if (socialIdentity[key] && options._identity !== key) {
-	                    delete socialIdentity[key];
-	                  }
-	                }
-	                _context2.next = 20;
-	                break;
-
-	              case 16:
-	                _context2.prev = 16;
-	                _context2.t0 = _context2['catch'](12);
-	                _didIteratorError = true;
-	                _iteratorError = _context2.t0;
-
-	              case 20:
-	                _context2.prev = 20;
-	                _context2.prev = 21;
-
-	                if (!_iteratorNormalCompletion && _iterator.return) {
-	                  _iterator.return();
-	                }
-
-	              case 23:
-	                _context2.prev = 23;
-
-	                if (!_didIteratorError) {
-	                  _context2.next = 26;
-	                  break;
-	                }
-
-	                throw _iteratorError;
-
-	              case 26:
-	                return _context2.finish(23);
-
-	              case 27:
-	                return _context2.finish(20);
-
-	              case 28:
-	                return _context2.abrupt('return', _get(Object.getPrototypeOf(UserStore.prototype), 'update', this).call(this, user, options));
-
-	              case 29:
-	              case 'end':
-	                return _context2.stop();
-	            }
-	          }
-	        }, _callee2, this, [[12, 16, 20, 28], [21,, 23, 27]]);
-	      }));
-
-	      function update(_x, _x2) {
-	        return ref.apply(this, arguments);
-	      }
-
-	      return update;
-	    }()
-	  }, {
-	    key: 'exists',
-	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(username, options) {
-	        var config, request, response, data;
-	        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-	          while (1) {
-	            switch (_context3.prev = _context3.next) {
-	              case 0:
-	                config = new _request.KinveyRequestConfig({
-	                  method: _request.RequestMethod.POST,
-	                  authType: _request.AuthType.App,
-	                  url: _url2.default.format({
-	                    protocol: this.client.protocol,
-	                    host: this.client.host,
-	                    pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/check-username-exists'
-	                  }),
-	                  properties: options.properties,
-	                  data: { username: username },
-	                  timeout: options.timeout,
-	                  client: this.client
-	                });
-	                request = new _network.NetworkRequest(config);
-	                _context3.next = 4;
-	                return request.execute();
-
-	              case 4:
-	                response = _context3.sent;
-	                data = response.data || {};
-	                return _context3.abrupt('return', !!data.usernameExists);
-
-	              case 7:
-	              case 'end':
-	                return _context3.stop();
-	            }
-	          }
-	        }, _callee3, this);
-	      }));
-
-	      function exists(_x4, _x5) {
-	        return ref.apply(this, arguments);
-	      }
-
-	      return exists;
-	    }()
-	  }, {
-	    key: 'restore',
-	    value: function () {
-	      var ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(id) {
-	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	        var config, request, response;
-	        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-	          while (1) {
-	            switch (_context4.prev = _context4.next) {
-	              case 0:
-	                config = new _request.KinveyRequestConfig({
-	                  method: _request.RequestMethod.POST,
-	                  authType: _request.AuthType.Master,
-	                  url: _url2.default.format({
-	                    protocol: this.client.protocol,
-	                    host: this.client.host,
-	                    pathname: this.pathname + '/' + id
-	                  }),
-	                  properties: options.properties,
-	                  timeout: options.timeout,
-	                  client: this.client
-	                });
-	                request = new _network.NetworkRequest(config);
-	                _context4.next = 4;
-	                return request.execute();
-
-	              case 4:
-	                response = _context4.sent;
-	                return _context4.abrupt('return', response.data);
-
-	              case 6:
-	              case 'end':
-	                return _context4.stop();
-	            }
-	          }
-	        }, _callee4, this);
-	      }));
-
-	      function restore(_x6, _x7) {
-	        return ref.apply(this, arguments);
-	      }
-
-	      return restore;
-	    }()
-	  }, {
-	    key: 'pathname',
-	    get: function get() {
-	      return '/' + usersNamespace + '/' + this.client.appKey;
-	    }
-	  }]);
-
-	  return UserStore;
-	}(_datastore.DataStore);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ },
-/* 305 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.AngularDevice = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-	var _device = __webpack_require__(306);
-
-	var _package = __webpack_require__(308);
-
-	var _package2 = _interopRequireDefault(_package);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	/**
-	 * @private
-	 */
-
-	var AngularDevice = exports.AngularDevice = function (_PhoneGapDevice) {
-	  _inherits(AngularDevice, _PhoneGapDevice);
-
-	  function AngularDevice() {
-	    _classCallCheck(this, AngularDevice);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AngularDevice).apply(this, arguments));
-	  }
-
-	  _createClass(AngularDevice, null, [{
-	    key: 'toJSON',
-	    value: function toJSON() {
-	      var json = _get(Object.getPrototypeOf(AngularDevice), 'toJSON', this).call(this);
-
-	      if (AngularDevice.isBrowser()) {
-	        json.platform.name = 'web browser';
-	      }
-
-	      // Add angular information
-	      json.library = {
-	        name: 'angular',
-	        version: global.angular.version.full
-	      };
-
-	      // Add sdk information
-	      json.kinveySDK = {
-	        name: _package2.default.name,
-	        version: _package2.default.version
-	      };
-
-	      return json;
-	    }
-	  }]);
-
-	  return AngularDevice;
-	}(_device.PhoneGapDevice);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(305).setImmediate, __webpack_require__(305).clearImmediate))
 
 /***/ },
 /* 306 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.PhoneGapDevice = undefined;
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _package = __webpack_require__(307);
-
-	var _package2 = _interopRequireDefault(_package);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var online = global.navigator.onLine;
-
-	global.document.addEventListener('online', function () {
-	  online = true;
-	}, false);
-
-	global.document.addEventListener('offline', function () {
-	  online = false;
-	}, false);
-
-	var PhoneGapDevice = exports.PhoneGapDevice = function () {
-	  function PhoneGapDevice() {
-	    _classCallCheck(this, PhoneGapDevice);
-	  }
-
-	  _createClass(PhoneGapDevice, null, [{
-	    key: 'isOnline',
-	    value: function isOnline() {
-	      return online;
-	    }
-	  }, {
-	    key: 'networkState',
-	    value: function networkState() {
-	      return undefined;
-	    }
-	  }, {
-	    key: 'isPhoneGap',
-	    value: function isPhoneGap() {
-	      return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
-	    }
-	  }, {
-	    key: 'isBrowser',
-	    value: function isBrowser() {
-	      return document.URL.indexOf('http://') !== -1 || document.URL.indexOf('https://') !== -1;
-	    }
-	  }, {
-	    key: 'isiOS',
-	    value: function isiOS() {
-	      return typeof global.device !== 'undefined' && global.device.platform === 'iOS';
-	    }
-	  }, {
-	    key: 'isAndroid',
-	    value: function isAndroid() {
-	      return typeof global.device !== 'undefined' && global.device.platform === 'Android';
-	    }
-	  }, {
-	    key: 'toJSON',
-	    value: function toJSON() {
-	      if (PhoneGapDevice.isBrowser()) {
-	        var userAgent = global.navigator.userAgent.toLowerCase();
-	        var rChrome = /(chrome)\/([\w]+)/;
-	        var rFirefox = /(firefox)\/([\w.]+)/;
-	        var rIE = /(msie) ([\w.]+)/i;
-	        var rOpera = /(opera)(?:.*version)?[ \/]([\w.]+)/;
-	        var rSafari = /(safari)\/([\w.]+)/;
-	        var browser = rChrome.exec(userAgent) || rFirefox.exec(userAgent) || rIE.exec(userAgent) || rOpera.exec(userAgent) || rSafari.exec(userAgent) || [];
-
-	        return {
-	          device: {
-	            model: global.navigator.userAgent
-	          },
-	          platform: {
-	            name: 'phonegap'
-	          },
-	          os: {
-	            name: browser[1],
-	            version: browser[2]
-	          },
-	          kinveySDK: {
-	            name: _package2.default.name,
-	            version: _package2.default.version
-	          }
-	        };
-	      }
-
-	      return {
-	        device: {
-	          model: global.device.model
-	        },
-	        platform: {
-	          name: 'phonegap',
-	          version: global.device.cordova
-	        },
-	        os: {
-	          name: global.device.platform,
-	          version: global.device.version
-	        },
-	        kinveySDK: {
-	          name: _package2.default.name,
-	          version: _package2.default.version
-	        }
-	      };
-	    }
-	  }]);
-
-	  return PhoneGapDevice;
-	}();
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 307 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"_args": [
-			[
-				"kinvey-phonegap-sdk@../../PhoneGap/SDK",
-				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
-			]
-		],
-		"_from": "../../PhoneGap/SDK",
-		"_id": "kinvey-phonegap-sdk@3.0.0-beta.27",
-		"_inCache": true,
-		"_installable": true,
-		"_location": "/kinvey-phonegap-sdk",
-		"_phantomChildren": {},
-		"_requested": {
-			"name": "kinvey-phonegap-sdk",
-			"raw": "kinvey-phonegap-sdk@../../PhoneGap/SDK",
-			"rawSpec": "../../PhoneGap/SDK",
-			"scope": null,
-			"spec": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/PhoneGap/SDK",
-			"type": "directory"
-		},
-		"_requiredBy": [
-			"/"
-		],
-		"_resolved": "file:../../PhoneGap/SDK",
-		"_shasum": "0af4d92904523a273c9a3574c00f54ac5f0463a6",
-		"_shrinkwrap": null,
-		"_spec": "kinvey-phonegap-sdk@../../PhoneGap/SDK",
-		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
-		"author": {
-			"name": "Kinvey"
-		},
-		"bugs": {
-			"url": "https://github.com/Kinvey/phonegap-sdk/issues"
-		},
-		"contributors": [
-			{
-				"email": "thomas@kinvey.com",
-				"name": "Thomas Conner"
-			}
-		],
-		"dependencies": {
-			"babel-regenerator-runtime": "^6.5.0",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"lodash": "^4.0.0",
-			"parse-headers": "^2.0.0"
-		},
-		"description": "Kinvey JavaScript SDK for PhoneGap/Cordova applications.",
-		"devDependencies": {
-			"babel-core": "^6.9.0",
-			"babel-eslint": "^6.0.0",
-			"babel-polyfill": "^6.9.0",
-			"babel-preset-es2015": "^6.9.0",
-			"babel-preset-stage-2": "^6.0.15",
-			"browserify": "^13.0.0",
-			"chai": "^3.5.0",
-			"chai-as-promised": "^5.3.0",
-			"del": "^2.0.2",
-			"eslint-config-airbnb": "^9.0.1",
-			"eslint-plugin-import": "^1.8.0",
-			"eslint-plugin-jsx-a11y": "^1.2.2",
-			"eslint-plugin-react": "^5.1.1",
-			"gulp": "^3.9.0",
-			"gulp-babel": "^6.1.2",
-			"gulp-banner": "^0.1.3",
-			"gulp-buffer": "0.0.2",
-			"gulp-bump": "^2.1.0",
-			"gulp-eslint": "^2.0.0",
-			"gulp-file": "^0.3.0",
-			"gulp-git": "^1.7.0",
-			"gulp-if": "^2.0.0",
-			"gulp-plumber": "^1.0.1",
-			"gulp-prompt": "^0.2.0",
-			"gulp-rename": "^1.2.2",
-			"gulp-s3-upload": "^1.6.0",
-			"gulp-sourcemaps": "^1.6.0",
-			"gulp-uglify": "^1.5.1",
-			"gulp-util": "^3.0.6",
-			"istanbul": "^0.4.3",
-			"json-loader": "^0.5.4",
-			"mocha": "^2.5.3",
-			"nock": "^8.0.0",
-			"sinon": "^1.17.4",
-			"sinon-chai": "^2.8.0",
-			"vinyl-buffer": "^1.0.0",
-			"vinyl-source-stream": "^1.1.0",
-			"webpack": "^1.13.0",
-			"webpack-stream": "^3.1.0",
-			"yargs": "^4.7.1"
-		},
-		"engines": {
-			"node": ">=4.0"
-		},
-		"gitHead": "ca90d37f3ccde50909057d23f648b9b792bf4bfb",
-		"homepage": "http://www.kinvey.com",
-		"keywords": [
-			"Kinvey",
-			"JavaScript",
-			"PhoneGap",
-			"Cordova"
-		],
-		"license": "Apache-2.0",
-		"main": "./es5/index.js",
-		"name": "kinvey-phonegap-sdk",
-		"optionalDependencies": {},
-		"peerDependencies": {
-			"kinvey-javascript-sdk-core": "../../Core/SDK"
-		},
-		"readme": "# Kinvey PhoneGap SDK\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\nThis node and bower module makes it very easy to connect your Cordova/Phonegap app with Kinvey.\n\n## Building\nThe simplest way to build the sdk is by running `gulp`. More advanced tasks are available.\n\n* `gulp clean`: remove files created by the build process\n* `gulp lint`: lint the src files\n* `gulp bump`: bump the pacakge version\n* `gulp build`: build the sdk\n* `gulp bundle`: bundle the sdk for dist\n* `gulp uploadS3`: upload dist files to AWS S3\n\n### Flags\nThe following flags are available when running `gulp bump`:\n\n* `--type <major|minor|patch|prerelease>`: Bumps the package version using the [Semantic Version 2.0.0](http://semver.org/) spec. Defaults to `patch`.\n* `--version <version>`: Sets the package version to the provided version.\n\n## Testing\n\nYou can run the tests using `npm test`.\n\n## Releasing\nThe workflow for releasing a new version of the sdk is as follows:\n\n1. Commit all changes on the develop branch.\n2. Checkout the master branch and merge the develop branch.\n4. Update the [Changelog](CHANGELOG.md).\n5. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.\n6. Make sure all changes are committed on the master branch and push.\n\n## How to use\n\n### 1. Sign up for Kinvey\nTo use the library, sign up for Kinvey if you have not already done so. Go to the [sign up](https://console.kinvey.com/#signup) page, and follow the steps provided.\n\n### 2. Install the library\nYou can install the module using npm:\n\n```bash\nnpm install kinvey-phonegap-sdk@3.0.0-beta.27 --save\n```\n\nor\n\n```bash\nbower install kinvey-phonegap-sdk#3.0.0-beta.27 --save\n```\n\n### 3. Configure the library\nNow, the library is available for use in your project.\n\nIf you installed the library with npm, import the library in your code using `require`.\n\n```javascript\nvar Kinvey = require('kinvey-phonegap-sdk');\n```\n\nIf you installed the library with bower, add a script tag to your main html file.\n\n```html\n<script src=\"bower_components/kinvey-phonegap-sdk/dist/kinvey-phonegap-sdk.min.js\"></script>\n```\n\nNext, use `Kinvey.init` to configure your app:\n\n```javascript\nKinvey.init({\n    appKey: '<appKey>',\n    appSecret: '<appSecret>'\n});\n```\n\n\n### 4. Verify Set Up\nYou can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the library can communicate with your app.\n\n```javascript\nKinvey.ping().then(function(response) {\n  console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);\n}).catch(function(error) {\n  console.log('Kinvey Ping Failed. Response: ' + error.description);\n});\n```\n\n## What’s next?\nYou are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/phonegap-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/phonegap-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/phonegap-v3.0/samples) to go straight to working projects.\n\n## License\n\n    Copyright 2016 Kinvey, Inc.\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n",
-		"readmeFilename": "README.md",
-		"repository": {
-			"type": "git",
-			"url": "git+ssh://git@github.com/Kinvey/kinvey-phonegap-sdk.git"
-		},
-		"scripts": {
-			"postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
-			"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
-			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
-			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
-		},
-		"version": "3.0.0-beta.27"
-	};
-
-/***/ },
-/* 308 */
-/***/ function(module, exports) {
-
-	module.exports = {
-		"name": "kinvey-angular-sdk",
-		"version": "3.0.0-beta.24",
-		"description": "Kinvey JavaScript SDK for AngularJS applications.",
-		"homepage": "http://www.kinvey.com",
-		"bugs": {
-			"url": "https://github.com/Kinvey/angular-sdk/issues"
-		},
-		"license": "Apache-2.0",
-		"author": "Kinvey",
-		"contributors": [
-			"Thomas Conner <thomas@kinvey.com>"
-		],
-		"main": "./es5/index.js",
-		"repository": {
-			"type": "git",
-			"url": "git@github.com:Kinvey/kinvey-angular-sdk"
-		},
-		"scripts": {
-			"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
-			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
-			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
-			"postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags"
-		},
-		"dependencies": {
-			"babel-regenerator-runtime": "^6.5.0",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"kinvey-phonegap-sdk": "../../PhoneGap/SDK"
-		},
-		"devDependencies": {
-			"babel-core": "^6.9.0",
-			"babel-eslint": "^6.0.0",
-			"babel-polyfill": "^6.9.0",
-			"babel-preset-es2015": "^6.9.0",
-			"babel-preset-stage-2": "^6.0.15",
-			"browserify": "^13.0.0",
-			"chai": "^3.5.0",
-			"chai-as-promised": "^5.3.0",
-			"del": "^2.0.2",
-			"eslint-config-airbnb": "^9.0.1",
-			"eslint-plugin-import": "^1.8.0",
-			"eslint-plugin-jsx-a11y": "^1.2.2",
-			"eslint-plugin-react": "^5.1.1",
-			"gulp": "^3.9.0",
-			"gulp-babel": "^6.1.2",
-			"gulp-banner": "^0.1.3",
-			"gulp-buffer": "0.0.2",
-			"gulp-bump": "^2.1.0",
-			"gulp-eslint": "^2.0.0",
-			"gulp-file": "^0.3.0",
-			"gulp-git": "^1.7.0",
-			"gulp-if": "^2.0.0",
-			"gulp-plumber": "^1.0.1",
-			"gulp-prompt": "^0.2.0",
-			"gulp-rename": "^1.2.2",
-			"gulp-s3-upload": "^1.6.0",
-			"gulp-sourcemaps": "^1.6.0",
-			"gulp-uglify": "^1.5.1",
-			"gulp-util": "^3.0.6",
-			"istanbul": "^0.4.3",
-			"json-loader": "^0.5.4",
-			"mocha": "^2.5.3",
-			"nock": "^8.0.0",
-			"sinon": "^1.17.4",
-			"sinon-chai": "^2.8.0",
-			"vinyl-buffer": "^1.0.0",
-			"vinyl-source-stream": "^1.1.0",
-			"webpack": "^1.13.0",
-			"webpack-stream": "^3.1.0",
-			"yargs": "^4.7.1"
-		},
-		"engines": {
-			"node": ">=4.0"
-		},
-		"keywords": [
-			"Kinvey",
-			"JavaScript",
-			"Angular",
-			"Ionic"
-		]
-	};
-
-/***/ },
-/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37518,7 +36971,7 @@
 	});
 	exports.AngularPush = undefined;
 
-	var _push = __webpack_require__(310);
+	var _push = __webpack_require__(307);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37543,7 +36996,7 @@
 	}(_push.PhoneGapPush);
 
 /***/ },
-/* 310 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -37555,27 +37008,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _device = __webpack_require__(306);
+	var _device = __webpack_require__(308);
 
 	var _errors = __webpack_require__(6);
 
-	var _events = __webpack_require__(311);
+	var _events = __webpack_require__(310);
 
-	var _request = __webpack_require__(148);
+	var _request = __webpack_require__(150);
 
-	var _user = __webpack_require__(298);
+	var _user = __webpack_require__(300);
 
-	var _network = __webpack_require__(247);
+	var _network = __webpack_require__(249);
 
-	var _client = __webpack_require__(136);
+	var _client = __webpack_require__(138);
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _url = __webpack_require__(141);
+	var _url = __webpack_require__(143);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _bind = __webpack_require__(312);
+	var _bind = __webpack_require__(311);
 
 	var _bind2 = _interopRequireDefault(_bind);
 
@@ -37666,7 +37119,7 @@
 	          return Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
 	        }
 
-	        if (!global.PushNotification) {
+	        if (typeof global.PushNotification === 'undefined') {
 	          throw new _errors.KinveyError('PhoneGap Push Notification Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap-v3.0/guides/push#ProjectSetUp for help with ' + 'setting up your project.');
 	        }
 
@@ -37795,7 +37248,244 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2), (function() { return this; }())))
 
 /***/ },
-/* 311 */
+/* 308 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.PhoneGapDevice = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _package = __webpack_require__(309);
+
+	var _package2 = _interopRequireDefault(_package);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var PhoneGapDevice = exports.PhoneGapDevice = function () {
+	  function PhoneGapDevice() {
+	    _classCallCheck(this, PhoneGapDevice);
+	  }
+
+	  _createClass(PhoneGapDevice, null, [{
+	    key: 'isPhoneGap',
+	    value: function isPhoneGap() {
+	      return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
+	    }
+	  }, {
+	    key: 'isBrowser',
+	    value: function isBrowser() {
+	      return document.URL.indexOf('http://') !== -1 || document.URL.indexOf('https://') !== -1;
+	    }
+	  }, {
+	    key: 'isiOS',
+	    value: function isiOS() {
+	      return typeof global.device !== 'undefined' && global.device.platform === 'iOS';
+	    }
+	  }, {
+	    key: 'isAndroid',
+	    value: function isAndroid() {
+	      return typeof global.device !== 'undefined' && global.device.platform === 'Android';
+	    }
+	  }, {
+	    key: 'toJSON',
+	    value: function toJSON() {
+	      var json = {
+	        device: {},
+	        platform: {
+	          name: 'phonegap'
+	        },
+	        os: {},
+	        kinveySDK: {
+	          name: _package2.default.name,
+	          version: _package2.default.version
+	        }
+	      };
+
+	      if (PhoneGapDevice.isBrowser()) {
+	        var userAgent = global.navigator.userAgent.toLowerCase();
+	        var rChrome = /(chrome)\/([\w]+)/;
+	        var rFirefox = /(firefox)\/([\w.]+)/;
+	        var rIE = /(msie) ([\w.]+)/i;
+	        var rOpera = /(opera)(?:.*version)?[ \/]([\w.]+)/;
+	        var rSafari = /(safari)\/([\w.]+)/;
+	        var rAppleWebkit = /(applewebkit)\/([\w.]+)/;
+	        var browser = rChrome.exec(userAgent) || rFirefox.exec(userAgent) || rIE.exec(userAgent) || rOpera.exec(userAgent) || rSafari.exec(userAgent) || rAppleWebkit.exec(userAgent) || [];
+
+	        json.device.model = global.navigator.userAgent;
+	        json.os.name = browser[1];
+	        json.os.version = browser[2];
+	      } else if (typeof global.device !== 'undefined') {
+	        json.device.model = global.device.model;
+	        json.platform.version = global.device.cordova;
+	        json.os.name = global.device.platform;
+	        json.os.version = global.device.version;
+	      }
+
+	      return json;
+	    }
+	  }]);
+
+	  return PhoneGapDevice;
+	}();
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 309 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"_args": [
+			[
+				"kinvey-phonegap-sdk@3.0.0-beta.29",
+				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
+			]
+		],
+		"_from": "kinvey-phonegap-sdk@3.0.0-beta.29",
+		"_id": "kinvey-phonegap-sdk@3.0.0-beta.29",
+		"_inCache": true,
+		"_installable": true,
+		"_location": "/kinvey-phonegap-sdk",
+		"_nodeVersion": "6.2.0",
+		"_npmOperationalInternal": {
+			"host": "packages-16-east.internal.npmjs.com",
+			"tmp": "tmp/kinvey-phonegap-sdk-3.0.0-beta.29.tgz_1465304784718_0.2716468477156013"
+		},
+		"_npmUser": {
+			"email": "thomas.conner@me.com",
+			"name": "thomas.conner"
+		},
+		"_npmVersion": "3.8.9",
+		"_phantomChildren": {},
+		"_requested": {
+			"name": "kinvey-phonegap-sdk",
+			"raw": "kinvey-phonegap-sdk@3.0.0-beta.29",
+			"rawSpec": "3.0.0-beta.29",
+			"scope": null,
+			"spec": "3.0.0-beta.29",
+			"type": "version"
+		},
+		"_requiredBy": [
+			"/"
+		],
+		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0-beta.29.tgz",
+		"_shasum": "11d4adf91f1133580ae84965583eab3c92eed7ef",
+		"_shrinkwrap": null,
+		"_spec": "kinvey-phonegap-sdk@3.0.0-beta.29",
+		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
+		"author": {
+			"name": "Kinvey"
+		},
+		"bugs": {
+			"url": "https://github.com/Kinvey/phonegap-sdk/issues"
+		},
+		"contributors": [
+			{
+				"email": "thomas@kinvey.com",
+				"name": "Thomas Conner"
+			}
+		],
+		"dependencies": {
+			"babel-regenerator-runtime": "^6.5.0",
+			"kinvey-javascript-sdk-core": "3.0.0-beta.25",
+			"lodash": "^4.0.0",
+			"parse-headers": "^2.0.0"
+		},
+		"description": "Kinvey JavaScript SDK for PhoneGap/Cordova applications.",
+		"devDependencies": {
+			"babel-core": "^6.9.0",
+			"babel-eslint": "^6.0.0",
+			"babel-polyfill": "^6.9.0",
+			"babel-preset-es2015": "^6.9.0",
+			"babel-preset-stage-2": "^6.0.15",
+			"browserify": "^13.0.0",
+			"chai": "^3.5.0",
+			"chai-as-promised": "^5.3.0",
+			"del": "^2.0.2",
+			"dotenv": "^2.0.0",
+			"eslint-config-airbnb": "^9.0.1",
+			"eslint-plugin-import": "^1.8.0",
+			"eslint-plugin-jsx-a11y": "^1.2.2",
+			"eslint-plugin-react": "^5.1.1",
+			"gulp": "^3.9.0",
+			"gulp-babel": "^6.1.2",
+			"gulp-banner": "^0.1.3",
+			"gulp-buffer": "0.0.2",
+			"gulp-bump": "^2.1.0",
+			"gulp-eslint": "^2.0.0",
+			"gulp-git": "^1.7.0",
+			"gulp-plumber": "^1.0.1",
+			"gulp-prompt": "^0.2.0",
+			"gulp-rename": "^1.2.2",
+			"gulp-s3-upload": "^1.6.0",
+			"gulp-sourcemaps": "^1.6.0",
+			"gulp-uglify": "^1.5.1",
+			"gulp-util": "^3.0.6",
+			"istanbul": "^0.4.3",
+			"jsdom": "^9.2.1",
+			"json-loader": "^0.5.4",
+			"mocha": "^2.5.3",
+			"mocha-jsdom": "^1.1.0",
+			"nock": "^8.0.0",
+			"sinon": "^1.17.4",
+			"sinon-chai": "^2.8.0",
+			"vinyl-buffer": "^1.0.0",
+			"vinyl-source-stream": "^1.1.0",
+			"webpack": "^1.13.0",
+			"webpack-stream": "^3.1.0",
+			"yargs": "^4.7.1"
+		},
+		"directories": {},
+		"dist": {
+			"shasum": "11d4adf91f1133580ae84965583eab3c92eed7ef",
+			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0-beta.29.tgz"
+		},
+		"engines": {
+			"node": ">=4.0"
+		},
+		"gitHead": "7cd4cbd1ff6936f11cb29ff5f34401e0ddc71eb1",
+		"homepage": "http://www.kinvey.com",
+		"keywords": [
+			"Kinvey",
+			"JavaScript",
+			"PhoneGap",
+			"Cordova"
+		],
+		"license": "Apache-2.0",
+		"main": "./es5/index.js",
+		"maintainers": [
+			{
+				"email": "thomas.conner@me.com",
+				"name": "thomas.conner"
+			}
+		],
+		"name": "kinvey-phonegap-sdk",
+		"optionalDependencies": {},
+		"peerDependencies": {
+			"kinvey-javascript-sdk-core": "3.0.0-beta.25"
+		},
+		"readme": "ERROR: No README data found!",
+		"repository": {
+			"type": "git",
+			"url": "git+ssh://git@github.com/Kinvey/kinvey-phonegap-sdk.git"
+		},
+		"scripts": {
+			"postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags",
+			"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
+			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
+			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
+		},
+		"version": "3.0.0-beta.29"
+	};
+
+/***/ },
+/* 310 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -38099,12 +37789,12 @@
 
 
 /***/ },
-/* 312 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createWrapper = __webpack_require__(313),
-	    getHolder = __webpack_require__(335),
-	    replaceHolders = __webpack_require__(337),
+	var createWrapper = __webpack_require__(312),
+	    getHolder = __webpack_require__(334),
+	    replaceHolders = __webpack_require__(336),
 	    rest = __webpack_require__(124);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -38162,17 +37852,17 @@
 
 
 /***/ },
-/* 313 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(314),
-	    createBaseWrapper = __webpack_require__(316),
-	    createCurryWrapper = __webpack_require__(318),
-	    createHybridWrapper = __webpack_require__(319),
-	    createPartialWrapper = __webpack_require__(338),
-	    getData = __webpack_require__(327),
-	    mergeData = __webpack_require__(339),
-	    setData = __webpack_require__(333),
+	var baseSetData = __webpack_require__(313),
+	    createBaseWrapper = __webpack_require__(315),
+	    createCurryWrapper = __webpack_require__(317),
+	    createHybridWrapper = __webpack_require__(318),
+	    createPartialWrapper = __webpack_require__(337),
+	    getData = __webpack_require__(326),
+	    mergeData = __webpack_require__(338),
+	    setData = __webpack_require__(332),
 	    toInteger = __webpack_require__(126);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -38274,11 +37964,11 @@
 
 
 /***/ },
-/* 314 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var identity = __webpack_require__(115),
-	    metaMap = __webpack_require__(315);
+	    metaMap = __webpack_require__(314);
 
 	/**
 	 * The base implementation of `setData` without support for hot loop detection.
@@ -38297,7 +37987,7 @@
 
 
 /***/ },
-/* 315 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var WeakMap = __webpack_require__(96);
@@ -38309,10 +37999,10 @@
 
 
 /***/ },
-/* 316 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createCtorWrapper = __webpack_require__(317),
+	var createCtorWrapper = __webpack_require__(316),
 	    root = __webpack_require__(64);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -38344,10 +38034,10 @@
 
 
 /***/ },
-/* 317 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(193),
+	var baseCreate = __webpack_require__(195),
 	    isObject = __webpack_require__(29);
 
 	/**
@@ -38387,15 +38077,15 @@
 
 
 /***/ },
-/* 318 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(125),
-	    createCtorWrapper = __webpack_require__(317),
-	    createHybridWrapper = __webpack_require__(319),
-	    createRecurryWrapper = __webpack_require__(323),
-	    getHolder = __webpack_require__(335),
-	    replaceHolders = __webpack_require__(337),
+	    createCtorWrapper = __webpack_require__(316),
+	    createHybridWrapper = __webpack_require__(318),
+	    createRecurryWrapper = __webpack_require__(322),
+	    getHolder = __webpack_require__(334),
+	    replaceHolders = __webpack_require__(336),
 	    root = __webpack_require__(64);
 
 	/**
@@ -38440,17 +38130,17 @@
 
 
 /***/ },
-/* 319 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(320),
-	    composeArgsRight = __webpack_require__(321),
-	    countHolders = __webpack_require__(322),
-	    createCtorWrapper = __webpack_require__(317),
-	    createRecurryWrapper = __webpack_require__(323),
-	    getHolder = __webpack_require__(335),
-	    reorder = __webpack_require__(336),
-	    replaceHolders = __webpack_require__(337),
+	var composeArgs = __webpack_require__(319),
+	    composeArgsRight = __webpack_require__(320),
+	    countHolders = __webpack_require__(321),
+	    createCtorWrapper = __webpack_require__(316),
+	    createRecurryWrapper = __webpack_require__(322),
+	    getHolder = __webpack_require__(334),
+	    reorder = __webpack_require__(335),
+	    replaceHolders = __webpack_require__(336),
 	    root = __webpack_require__(64);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -38539,7 +38229,7 @@
 
 
 /***/ },
-/* 320 */
+/* 319 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -38584,7 +38274,7 @@
 
 
 /***/ },
-/* 321 */
+/* 320 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -38631,7 +38321,7 @@
 
 
 /***/ },
-/* 322 */
+/* 321 */
 /***/ function(module, exports) {
 
 	/**
@@ -38658,11 +38348,11 @@
 
 
 /***/ },
-/* 323 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLaziable = __webpack_require__(324),
-	    setData = __webpack_require__(333);
+	var isLaziable = __webpack_require__(323),
+	    setData = __webpack_require__(332);
 
 	/** Used to compose bitmasks for wrapper metadata. */
 	var BIND_FLAG = 1,
@@ -38720,13 +38410,13 @@
 
 
 /***/ },
-/* 324 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(325),
-	    getData = __webpack_require__(327),
-	    getFuncName = __webpack_require__(328),
-	    lodash = __webpack_require__(330);
+	var LazyWrapper = __webpack_require__(324),
+	    getData = __webpack_require__(326),
+	    getFuncName = __webpack_require__(327),
+	    lodash = __webpack_require__(329);
 
 	/**
 	 * Checks if `func` has a lazy counterpart.
@@ -38754,11 +38444,11 @@
 
 
 /***/ },
-/* 325 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(193),
-	    baseLodash = __webpack_require__(326);
+	var baseCreate = __webpack_require__(195),
+	    baseLodash = __webpack_require__(325);
 
 	/** Used as references for the maximum length and index of an array. */
 	var MAX_ARRAY_LENGTH = 4294967295;
@@ -38788,7 +38478,7 @@
 
 
 /***/ },
-/* 326 */
+/* 325 */
 /***/ function(module, exports) {
 
 	/**
@@ -38804,11 +38494,11 @@
 
 
 /***/ },
-/* 327 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var metaMap = __webpack_require__(315),
-	    noop = __webpack_require__(296);
+	var metaMap = __webpack_require__(314),
+	    noop = __webpack_require__(298);
 
 	/**
 	 * Gets metadata for `func`.
@@ -38825,10 +38515,10 @@
 
 
 /***/ },
-/* 328 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var realNames = __webpack_require__(329);
+	var realNames = __webpack_require__(328);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -38862,7 +38552,7 @@
 
 
 /***/ },
-/* 329 */
+/* 328 */
 /***/ function(module, exports) {
 
 	/** Used to lookup unminified function names. */
@@ -38872,15 +38562,15 @@
 
 
 /***/ },
-/* 330 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(325),
-	    LodashWrapper = __webpack_require__(331),
-	    baseLodash = __webpack_require__(326),
+	var LazyWrapper = __webpack_require__(324),
+	    LodashWrapper = __webpack_require__(330),
+	    baseLodash = __webpack_require__(325),
 	    isArray = __webpack_require__(32),
 	    isObjectLike = __webpack_require__(31),
-	    wrapperClone = __webpack_require__(332);
+	    wrapperClone = __webpack_require__(331);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -39025,11 +38715,11 @@
 
 
 /***/ },
-/* 331 */
+/* 330 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(193),
-	    baseLodash = __webpack_require__(326);
+	var baseCreate = __webpack_require__(195),
+	    baseLodash = __webpack_require__(325);
 
 	/**
 	 * The base constructor for creating `lodash` wrapper objects.
@@ -39053,12 +38743,12 @@
 
 
 /***/ },
-/* 332 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(325),
-	    LodashWrapper = __webpack_require__(331),
-	    copyArray = __webpack_require__(173);
+	var LazyWrapper = __webpack_require__(324),
+	    LodashWrapper = __webpack_require__(330),
+	    copyArray = __webpack_require__(175);
 
 	/**
 	 * Creates a clone of `wrapper`.
@@ -39082,11 +38772,11 @@
 
 
 /***/ },
-/* 333 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(314),
-	    now = __webpack_require__(334);
+	var baseSetData = __webpack_require__(313),
+	    now = __webpack_require__(333);
 
 	/** Used to detect hot functions by number of calls within a span of milliseconds. */
 	var HOT_COUNT = 150,
@@ -39130,7 +38820,7 @@
 
 
 /***/ },
-/* 334 */
+/* 333 */
 /***/ function(module, exports) {
 
 	/**
@@ -39157,7 +38847,7 @@
 
 
 /***/ },
-/* 335 */
+/* 334 */
 /***/ function(module, exports) {
 
 	/**
@@ -39176,10 +38866,10 @@
 
 
 /***/ },
-/* 336 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyArray = __webpack_require__(173),
+	var copyArray = __webpack_require__(175),
 	    isIndex = __webpack_require__(34);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -39211,7 +38901,7 @@
 
 
 /***/ },
-/* 337 */
+/* 336 */
 /***/ function(module, exports) {
 
 	/** Used as the internal argument placeholder. */
@@ -39246,11 +38936,11 @@
 
 
 /***/ },
-/* 338 */
+/* 337 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(125),
-	    createCtorWrapper = __webpack_require__(317),
+	    createCtorWrapper = __webpack_require__(316),
 	    root = __webpack_require__(64);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -39296,12 +38986,12 @@
 
 
 /***/ },
-/* 339 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(320),
-	    composeArgsRight = __webpack_require__(321),
-	    replaceHolders = __webpack_require__(337);
+	var composeArgs = __webpack_require__(319),
+	    composeArgsRight = __webpack_require__(320),
+	    replaceHolders = __webpack_require__(336);
 
 	/** Used as the internal argument placeholder. */
 	var PLACEHOLDER = '__lodash_placeholder__';
@@ -39392,7 +39082,7 @@
 
 
 /***/ },
-/* 340 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39406,7 +39096,7 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _middleware = __webpack_require__(154);
+	var _middleware = __webpack_require__(156);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -39473,7 +39163,162 @@
 	}(_middleware.KinveyMiddleware);
 
 /***/ },
+/* 340 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.AngularDevice = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+	var _device = __webpack_require__(308);
+
+	var _package = __webpack_require__(341);
+
+	var _package2 = _interopRequireDefault(_package);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @private
+	 */
+
+	var AngularDevice = exports.AngularDevice = function (_PhoneGapDevice) {
+	  _inherits(AngularDevice, _PhoneGapDevice);
+
+	  function AngularDevice() {
+	    _classCallCheck(this, AngularDevice);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AngularDevice).apply(this, arguments));
+	  }
+
+	  _createClass(AngularDevice, null, [{
+	    key: 'toJSON',
+	    value: function toJSON() {
+	      var json = _get(Object.getPrototypeOf(AngularDevice), 'toJSON', this).call(this);
+
+	      if (AngularDevice.isBrowser()) {
+	        json.platform.name = 'web browser';
+	      }
+
+	      // Add angular information
+	      json.library = {
+	        name: 'angular',
+	        version: global.angular.version.full
+	      };
+
+	      // Add sdk information
+	      json.kinveySDK = {
+	        name: _package2.default.name,
+	        version: _package2.default.version
+	      };
+
+	      return json;
+	    }
+	  }]);
+
+	  return AngularDevice;
+	}(_device.PhoneGapDevice);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
 /* 341 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"name": "kinvey-angular-sdk",
+		"version": "3.0.0-beta.26",
+		"description": "Kinvey JavaScript SDK for AngularJS applications.",
+		"homepage": "http://www.kinvey.com",
+		"bugs": {
+			"url": "https://github.com/Kinvey/angular-sdk/issues"
+		},
+		"license": "Apache-2.0",
+		"author": "Kinvey",
+		"contributors": [
+			"Thomas Conner <thomas@kinvey.com>"
+		],
+		"main": "./es5/index.js",
+		"repository": {
+			"type": "git",
+			"url": "git@github.com:Kinvey/kinvey-angular-sdk"
+		},
+		"scripts": {
+			"test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
+			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test",
+			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
+			"postpublish": "PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags"
+		},
+		"dependencies": {
+			"babel-regenerator-runtime": "^6.5.0",
+			"kinvey-javascript-sdk-core": "3.0.0-beta.24",
+			"kinvey-phonegap-sdk": "3.0.0-beta.28"
+		},
+		"devDependencies": {
+			"babel-core": "^6.9.0",
+			"babel-eslint": "^6.0.0",
+			"babel-polyfill": "^6.9.0",
+			"babel-preset-es2015": "^6.9.0",
+			"babel-preset-stage-2": "^6.0.15",
+			"browserify": "^13.0.0",
+			"chai": "^3.5.0",
+			"chai-as-promised": "^5.3.0",
+			"del": "^2.0.2",
+			"eslint-config-airbnb": "^9.0.1",
+			"eslint-plugin-import": "^1.8.0",
+			"eslint-plugin-jsx-a11y": "^1.2.2",
+			"eslint-plugin-react": "^5.1.1",
+			"gulp": "^3.9.0",
+			"gulp-babel": "^6.1.2",
+			"gulp-banner": "^0.1.3",
+			"gulp-buffer": "0.0.2",
+			"gulp-bump": "^2.1.0",
+			"gulp-eslint": "^2.0.0",
+			"gulp-git": "^1.7.0",
+			"gulp-plumber": "^1.0.1",
+			"gulp-prompt": "^0.2.0",
+			"gulp-rename": "^1.2.2",
+			"gulp-s3-upload": "^1.6.0",
+			"gulp-sourcemaps": "^1.6.0",
+			"gulp-uglify": "^1.5.1",
+			"gulp-util": "^3.0.6",
+			"istanbul": "^0.4.3",
+			"json-loader": "^0.5.4",
+			"mocha": "^2.5.3",
+			"nock": "^8.0.0",
+			"sinon": "^1.17.4",
+			"sinon-chai": "^2.8.0",
+			"vinyl-buffer": "^1.0.0",
+			"vinyl-source-stream": "^1.1.0",
+			"webpack": "^1.13.0",
+			"webpack-stream": "^3.1.0",
+			"yargs": "^4.7.1"
+		},
+		"engines": {
+			"node": ">=4.0"
+		},
+		"keywords": [
+			"Kinvey",
+			"JavaScript",
+			"Angular",
+			"Ionic"
+		]
+	};
+
+/***/ },
+/* 342 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39483,7 +39328,7 @@
 	});
 	exports.AngularPopup = undefined;
 
-	var _popup = __webpack_require__(342);
+	var _popup = __webpack_require__(343);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -39508,7 +39353,7 @@
 	}(_popup.PhoneGapPopup);
 
 /***/ },
-/* 342 */
+/* 343 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -39520,11 +39365,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(311);
+	var _events = __webpack_require__(310);
 
-	var _device = __webpack_require__(306);
+	var _device = __webpack_require__(308);
 
-	var _bind = __webpack_require__(312);
+	var _bind = __webpack_require__(311);
 
 	var _bind2 = _interopRequireDefault(_bind);
 

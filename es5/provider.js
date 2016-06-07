@@ -12,8 +12,6 @@ var _kinveyJavascriptSdkCore = require('kinvey-javascript-sdk-core');
 
 var _kinveyJavascriptSdkCore2 = _interopRequireDefault(_kinveyJavascriptSdkCore);
 
-var _device = require('./device');
-
 var _push = require('./push');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -42,9 +40,7 @@ var AngularKinvey = function (_Kinvey) {
       var client = _get(Object.getPrototypeOf(AngularKinvey), 'init', this).call(this, options);
 
       // Add Push module to Kinvey
-      if (_device.AngularDevice.isiOS() || _device.AngularDevice.isAndroid()) {
-        this.Push = new _push.AngularPush();
-      }
+      this.Push = new _push.AngularPush();
 
       // Return the client
       return client;
