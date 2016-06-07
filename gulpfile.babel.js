@@ -77,25 +77,18 @@ gulp.task('bundle', ['build'], () => {
   return stream;
 });
 
-gulp.task('bumpVersion', () => {
+gulp.task('bump', () => {
   if (!args.type && !args.version) {
     args.type = 'patch';
   }
 
-  const stream = gulp.src('./package.json')
+  const stream = gulp.src(['./package.json', './bower.json'])
     .pipe(bump({
       preid: 'beta',
       type: args.type,
       version: args.version
     }))
     .pipe(gulp.dest(`${__dirname}/`))
-    .on('error', errorHandler);
-  return stream;
-});
-
-gulp.task('bump', ['bumpVersion'], () => {
-  const stream = file('bump.txt', '', { src: true })
-    .pipe(gulp.dest(`${__dirname}/tmp`))
     .on('error', errorHandler);
   return stream;
 });
