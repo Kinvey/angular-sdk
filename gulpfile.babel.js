@@ -13,7 +13,6 @@ import s3Upload from 'gulp-s3-upload';
 import banner from 'gulp-banner';
 import pkg from './package.json';
 import bump from 'gulp-bump';
-import file from 'gulp-file';
 import { argv as args } from 'yargs';
 
 function errorHandler(err) {
@@ -63,7 +62,7 @@ gulp.task('bundle', ['build'], () => {
         './index.js'
       ],
       output: {
-        filename: `kinvey-angular-sdk-${pkg.version}.js`
+        filename: 'kinvey-angular-sdk.js'
       },
       module: {
         loaders: [
@@ -73,10 +72,14 @@ gulp.task('bundle', ['build'], () => {
     }, webpack))
     .pipe(banner(header, { pkg: pkg }))
     .pipe(gulp.dest(`${__dirname}/dist`))
-    .pipe(rename(`kinvey-angular-sdk-${pkg.version}.min.js`))
+    .pipe(rename(`kinvey-angular-sdk-${pkg.version}.js`))
+    .pipe(gulp.dest(`${__dirname}/dist`))
+    .pipe(rename('kinvey-angular-sdk.min.js'))
     .pipe(buffer())
     .pipe(uglify())
     .pipe(banner(header, { pkg: pkg }))
+    .pipe(gulp.dest(`${__dirname}/dist`))
+    .pipe(rename(`kinvey-angular-sdk-${pkg.version}.min.js`))
     .pipe(gulp.dest(`${__dirname}/dist`))
     .on('error', errorHandler);
   return stream;
