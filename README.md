@@ -11,7 +11,7 @@ The simplest way to build the sdk is by running `gulp`. More advanced tasks are 
 * `gulp bump`: bump the pacakge version
 * `gulp build`: build the sdk
 * `gulp bundle`: bundle the sdk for dist
-* `gulp uploadS3`: upload dist files to AWS S3
+* `gulp upload`: upload dist files to AWS S3
 
 ### Flags
 The following flags are available when running `gulp bump`:
@@ -28,9 +28,13 @@ The workflow for releasing a new version of the sdk is as follows:
 
 1. Commit all changes on the develop branch.
 2. Checkout the master branch and merge the develop branch.
-4. Update the [Changelog](CHANGELOG.md).
-5. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.
-6. Make sure all changes are committed on the master branch and push.
+3. Update the [Changelog](CHANGELOG.md).
+4. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.
+5. Run `gulp bundle` and commit changes.
+6. Run `gulp tag`.
+7. Make sure all changes are committed on the master branch and push.
+8. Checkout the develop branch and merge the master branch.
+9. __Optional:__ Update Dev Center and Sample apps.
 
 ## How to use
 
@@ -41,13 +45,13 @@ To use the library, sign up for Kinvey if you have not already done so. Go to th
 You can install the module using npm:
 
 ```bash
-npm install kinvey-angular-sdk@3.0.0-beta.24 --save
+npm install kinvey-angular-sdk --save
 ```
 
 or
 
 ```bash
-bower install kinvey-angular-sdk#3.0.0-beta.24 --save
+bower install kinvey-angular-sdk --save
 ```
 
 ### 3. Configure the library
