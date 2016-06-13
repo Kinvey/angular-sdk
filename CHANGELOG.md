@@ -1,4 +1,7 @@
 ## Changelog
+### 3.0.0-beta.27 (2016-06-13)
+* Enhancement: Use Html5 SDK and PhoneGap SDK modules depending on where an app is deployed.
+
 ### 3.0.0-beta.26 (2016-06-07)
 * Bugfix (MLIBZ-1134): Check that `global.device` is not `undefined`.
 
