@@ -22,6 +22,7 @@
     "test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover"
   },
   "dependencies": {
+    "gulp-tag-version": "^1.3.0",
     "kinvey-html5-sdk": "*",
     "kinvey-javascript-sdk-core": "*",
     "kinvey-phonegap-sdk": "*",
