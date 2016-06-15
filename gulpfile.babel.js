@@ -121,8 +121,7 @@ gulp.task('upload', ['bundle'], () => {
   ])
     .pipe(plumber())
     .pipe(s3({
-      Bucket: 'kinvey-downloads/js',
-      uploadNewFilesOnly: true
+      Bucket: 'kinvey-downloads/js'
     }, (error, data) => {
       if (error) {
         return errorHandler(error);
