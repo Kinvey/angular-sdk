@@ -1,5 +1,5 @@
 /**
- * kinvey-angular-sdk v3.0.0-beta.27
+ * kinvey-angular-sdk v3.0.0-beta.28
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -73,15 +73,15 @@
 
 	var _cache = __webpack_require__(166);
 
-	var _cache2 = __webpack_require__(313);
+	var _cache2 = __webpack_require__(306);
 
 	var _http = __webpack_require__(189);
 
-	var _http2 = __webpack_require__(327);
+	var _http2 = __webpack_require__(320);
 
-	var _device = __webpack_require__(328);
+	var _device = __webpack_require__(321);
 
-	var _popup = __webpack_require__(332);
+	var _popup = __webpack_require__(325);
 
 	// Swap Cache Middelware
 	var cacheRack = _rack.KinveyRackManager.cacheRack;
@@ -1001,7 +1001,7 @@
 
 	var _kinveyJavascriptSdkCore = __webpack_require__(7);
 
-	var _push = __webpack_require__(281);
+	var _push = __webpack_require__(274);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1067,13 +1067,13 @@
 
 	var _datastore = __webpack_require__(227);
 
-	var _filestore = __webpack_require__(274);
+	var _filestore = __webpack_require__(267);
 
 	var _sync = __webpack_require__(247);
 
-	var _user = __webpack_require__(275);
+	var _user = __webpack_require__(268);
 
-	var _mic = __webpack_require__(277);
+	var _mic = __webpack_require__(270);
 
 	var _network = __webpack_require__(199);
 
@@ -9875,7 +9875,7 @@
 	   */
 	  app: function app(client) {
 	    if (!client.appKey || !client.appSecret) {
-	      throw new Error('Missing client credentials');
+	      throw new Error('Missing client appKey and/or appSecret.' + ' Use Kinvey.init() to set the appKey and appSecret for the client.');
 	    }
 
 	    return {
@@ -9907,7 +9907,7 @@
 	   */
 	  master: function master(client) {
 	    if (!client.appKey || !client.masterSecret) {
-	      throw new Error('Missing client credentials');
+	      throw new Error('Missing client appKey and/or appSecret.' + ' Use Kinvey.init() to set the appKey and appSecret for the client.');
 	    }
 
 	    return {
@@ -19053,11 +19053,13 @@
 
 	var _metadata = __webpack_require__(202);
 
+	var _es6Promise = __webpack_require__(169);
+
 	var _regeneratorRuntime = __webpack_require__(2);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
 
-	var _differenceBy = __webpack_require__(256);
+	var _differenceBy = __webpack_require__(248);
 
 	var _differenceBy2 = _interopRequireDefault(_differenceBy);
 
@@ -19073,7 +19075,7 @@
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _filter = __webpack_require__(266);
+	var _filter = __webpack_require__(259);
 
 	var _filter2 = _interopRequireDefault(_filter);
 
@@ -19081,7 +19083,7 @@
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _xorWith = __webpack_require__(269);
+	var _xorWith = __webpack_require__(262);
 
 	var _xorWith2 = _interopRequireDefault(_xorWith);
 
@@ -19095,7 +19097,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19681,7 +19683,7 @@
 	                  }
 
 	                  _context10.next = 9;
-	                  return Promise.all((0, _map2.default)(data, function (entity) {
+	                  return _es6Promise.Promise.all((0, _map2.default)(data, function (entity) {
 	                    var config = new _request.KinveyRequestConfig({
 	                      method: _request.RequestMethod.POST,
 	                      authType: _request.AuthType.Default,
@@ -19783,7 +19785,7 @@
 	                  }
 
 	                  _context11.next = 9;
-	                  return Promise.all((0, _map2.default)(data, function (entity) {
+	                  return _es6Promise.Promise.all((0, _map2.default)(data, function (entity) {
 	                    var config = new _request.KinveyRequestConfig({
 	                      method: _request.RequestMethod.PUT,
 	                      authType: _request.AuthType.Default,
@@ -20139,21 +20141,18 @@
 
 	                  // Emit the cache entities
 	                  observer.next(cacheEntities);
-	                  _context14.next = 28;
+	                  _context14.next = 27;
 	                  break;
 
 	                case 25:
 	                  _context14.prev = 25;
 	                  _context14.t0 = _context14['catch'](15);
 
-	                  // Swalllow the error and emit an empty array
-	                  observer.next(cacheEntities);
-
-	                case 28:
-	                  _context14.next = 30;
+	                case 27:
+	                  _context14.next = 29;
 	                  return _get(Object.getPrototypeOf(CacheStore.prototype), 'find', _this10).call(_this10, query, options).toPromise();
 
-	                case 30:
+	                case 29:
 	                  networkEntities = _context14.sent;
 
 
@@ -20161,10 +20160,10 @@
 	                  removedEntities = (0, _differenceBy2.default)(cacheEntities, networkEntities, idAttribute);
 	                  removedIds = Object.keys((0, _keyBy2.default)(removedEntities, idAttribute));
 	                  removeQuery = new _query4.Query().contains(idAttribute, removedIds);
-	                  _context14.next = 36;
+	                  _context14.next = 35;
 	                  return _this10.clear(removeQuery, options);
 
-	                case 36:
+	                case 35:
 
 	                  // Save network entities to cache
 	                  saveConfig = new _request.KinveyRequestConfig({
@@ -20180,30 +20179,30 @@
 	                    timeout: options.timeout
 	                  });
 	                  saveRequest = new _cache.CacheRequest(saveConfig);
-	                  _context14.next = 40;
+	                  _context14.next = 39;
 	                  return saveRequest.execute();
 
-	                case 40:
+	                case 39:
 
 	                  // Emit the network entities
 	                  observer.next(networkEntities);
-	                  _context14.next = 46;
+	                  _context14.next = 45;
 	                  break;
 
-	                case 43:
-	                  _context14.prev = 43;
+	                case 42:
+	                  _context14.prev = 42;
 	                  _context14.t1 = _context14['catch'](0);
 	                  return _context14.abrupt('return', observer.error(_context14.t1));
 
-	                case 46:
+	                case 45:
 	                  return _context14.abrupt('return', observer.complete());
 
-	                case 47:
+	                case 46:
 	                case 'end':
 	                  return _context14.stop();
 	              }
 	            }
-	          }, _callee14, _this10, [[0, 43], [15, 25]]);
+	          }, _callee14, _this10, [[0, 42], [15, 25]]);
 	        }));
 
 	        return function (_x19) {
@@ -20248,7 +20247,7 @@
 	                  }
 
 	                  observer.next(undefined);
-	                  _context15.next = 37;
+	                  _context15.next = 36;
 	                  break;
 
 	                case 5:
@@ -20307,21 +20306,18 @@
 	                  // Emit the cache entity
 
 	                  observer.next(cacheEntity);
-	                  _context15.next = 29;
+	                  _context15.next = 28;
 	                  break;
 
 	                case 26:
 	                  _context15.prev = 26;
 	                  _context15.t0 = _context15['catch'](16);
 
-	                  // Swallow the error and emit undefined
-	                  observer.next(undefined);
-
-	                case 29:
-	                  _context15.next = 31;
+	                case 28:
+	                  _context15.next = 30;
 	                  return _get(Object.getPrototypeOf(CacheStore.prototype), 'findById', _this11).call(_this11, id, options).toPromise();
 
-	                case 31:
+	                case 30:
 	                  networkEntity = _context15.sent;
 
 
@@ -20339,32 +20335,32 @@
 	                    timeout: options.timeout
 	                  });
 	                  saveRequest = new _cache.CacheRequest(saveConfig);
-	                  _context15.next = 36;
+	                  _context15.next = 35;
 	                  return saveRequest.execute();
 
-	                case 36:
+	                case 35:
 
 	                  // Emit the network entity
 	                  observer.next(networkEntity);
 
-	                case 37:
-	                  _context15.next = 42;
+	                case 36:
+	                  _context15.next = 41;
 	                  break;
 
-	                case 39:
-	                  _context15.prev = 39;
+	                case 38:
+	                  _context15.prev = 38;
 	                  _context15.t1 = _context15['catch'](0);
 	                  return _context15.abrupt('return', observer.error(_context15.t1));
 
-	                case 42:
+	                case 41:
 	                  return _context15.abrupt('return', observer.complete());
 
-	                case 43:
+	                case 42:
 	                case 'end':
 	                  return _context15.stop();
 	              }
 	            }
-	          }, _callee15, _this11, [[0, 39], [16, 26]]);
+	          }, _callee15, _this11, [[0, 38], [16, 26]]);
 	        }));
 
 	        return function (_x21) {
@@ -20472,43 +20468,40 @@
 	                  // Emit the cache count
 
 	                  observer.next(data ? data.count : 0);
-	                  _context16.next = 27;
+	                  _context16.next = 26;
 	                  break;
 
 	                case 24:
 	                  _context16.prev = 24;
 	                  _context16.t0 = _context16['catch'](14);
 
-	                  // Swallow the error and emit 0
-	                  observer.next(0);
-
-	                case 27:
-	                  _context16.next = 29;
+	                case 26:
+	                  _context16.next = 28;
 	                  return _get(Object.getPrototypeOf(CacheStore.prototype), 'count', _this12).call(_this12, query, options).toPromise();
 
-	                case 29:
+	                case 28:
 	                  networkCount = _context16.sent;
 
 
 	                  // Emit the network count
 	                  observer.next(networkCount);
-	                  _context16.next = 36;
+	                  _context16.next = 35;
 	                  break;
 
-	                case 33:
-	                  _context16.prev = 33;
+	                case 32:
+	                  _context16.prev = 32;
 	                  _context16.t1 = _context16['catch'](0);
 	                  return _context16.abrupt('return', observer.error(_context16.t1));
 
-	                case 36:
+	                case 35:
 	                  return _context16.abrupt('return', observer.complete());
 
-	                case 37:
+	                case 36:
 	                case 'end':
 	                  return _context16.stop();
 	              }
 	            }
-	          }, _callee16, _this12, [[0, 33], [14, 24]]);
+	          }, _callee16, _this12, [[0, 32], [14, 24]]);
 	        }));
 
 	        return function (_x23) {
@@ -20601,7 +20594,7 @@
 	                  }
 
 	                  ids = Object.keys((0, _keyBy2.default)(data, idAttribute));
-	                  query = new _query4.Query().contains('entity._id', ids);
+	                  query = new _query4.Query().contains('entityId', ids);
 	                  _context17.next = 20;
 	                  return _this13.push(query, options);
 
@@ -20720,7 +20713,7 @@
 	                  }
 
 	                  ids = Object.keys((0, _keyBy2.default)(data, idAttribute));
-	                  query = new _query4.Query().contains('entity._id', ids);
+	                  query = new _query4.Query().contains('entityId', ids);
 	                  _context18.next = 20;
 	                  return _this14.push(query, options);
 
@@ -20831,7 +20824,7 @@
 	                    var metadata = new _metadata.Metadata(entity);
 	                    return metadata.isLocal();
 	                  });
-	                  _query = new _query4.Query().contains('entity._id', Object.keys((0, _keyBy2.default)(localEntities, idAttribute)));
+	                  _query = new _query4.Query().contains('entityId', Object.keys((0, _keyBy2.default)(localEntities, idAttribute)));
 	                  _context19.next = 14;
 	                  return _this15.clearSync(_query, options);
 
@@ -20851,7 +20844,7 @@
 	                  }
 
 	                  ids = Object.keys((0, _keyBy2.default)(entities, idAttribute));
-	                  _query2 = new _query4.Query().contains('entity._id', ids);
+	                  _query2 = new _query4.Query().contains('entityId', ids);
 	                  _context19.next = 22;
 	                  return _this15.push(_query2, options);
 
@@ -20965,7 +20958,7 @@
 
 	                  query = new _query4.Query();
 
-	                  query.equalTo('entity._id', entity[idAttribute]);
+	                  query.equalTo('entityId', entity[idAttribute]);
 	                  _context20.next = 18;
 	                  return _this16.clearSync(query, options);
 
@@ -20983,7 +20976,7 @@
 	                    break;
 	                  }
 
-	                  _query3 = new _query4.Query().equalTo('entity._id', entity[idAttribute]);
+	                  _query3 = new _query4.Query().equalTo('entityId', entity[idAttribute]);
 	                  _context20.next = 26;
 	                  return _this16.push(_query3, options);
 
@@ -21086,7 +21079,7 @@
 	                    break;
 	                  }
 
-	                  syncQuery = new _query4.Query().contains('entity._id', Object.keys((0, _keyBy2.default)(data, idAttribute)));
+	                  syncQuery = new _query4.Query().contains('entityId', Object.keys((0, _keyBy2.default)(data, idAttribute)));
 	                  _context21.next = 15;
 	                  return _this17.clearSync(syncQuery, options);
 
@@ -21223,6 +21216,11 @@
 	    key: 'clearSync',
 	    value: function clearSync(query, options) {
 	      return this.syncManager.clear(query, options);
+	    }
+	  }, {
+	    key: 'purge',
+	    value: function purge(query, options) {
+	      return this.clearSync(query, options);
 	    }
 	  }, {
 	    key: 'syncAutomatically',
@@ -21539,23 +21537,30 @@
 	var DataStoreManager = function () {
 	  function DataStoreManager() {
 	    _classCallCheck(this, DataStoreManager);
+
+	    throw new _errors.KinveyError('Not allowed to construct a DataStore instance.' + ' Please use the collection() function to retrieve an instance of a DataStore instance.');
 	  }
+
+	  /**
+	   * Returns an instance of the Store class based on the type provided.
+	   *
+	   * @param  {string}       [collection]                  Name of the collection.
+	   * @param  {StoreType}    [type=DataStoreType.Network]  Type of store to return.
+	   * @return {DataStore}                                  DataStore instance.
+	   */
+
 
 	  _createClass(DataStoreManager, null, [{
 	    key: 'collection',
-
-	    /**
-	     * Returns an instance of the Store class based on the type provided.
-	     *
-	     * @param  {string}       [collection]                  Name of the collection.
-	     * @param  {StoreType}    [type=DataStoreType.Network]  Type of store to return.
-	     * @return {DataStore}                                  DataStore instance.
-	     */
 	    value: function collection(_collection) {
 	      var type = arguments.length <= 1 || arguments[1] === undefined ? DataStoreType.Cache : arguments[1];
 	      var options = arguments[2];
 
 	      var store = void 0;
+
+	      if (!_collection) {
+	        throw new _errors.KinveyError('A collection is required.');
+	      }
 
 	      switch (type) {
 	        case DataStoreType.Network:
@@ -21577,6 +21582,51 @@
 	    value: function getInstance(collection, type, options) {
 	      return this.collection(collection, type, options);
 	    }
+	  }, {
+	    key: 'clearCache',
+	    value: function () {
+	      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee25() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	        var client, pathname, config, request, response;
+	        return _regeneratorRuntime2.default.wrap(function _callee25$(_context25) {
+	          while (1) {
+	            switch (_context25.prev = _context25.next) {
+	              case 0:
+	                client = options.client || _client.Client.sharedInstance();
+	                pathname = '/' + appdataNamespace + '/' + client.appKey;
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.DELETE,
+	                  url: _url2.default.format({
+	                    protocol: client.protocol,
+	                    host: client.host,
+	                    pathname: pathname,
+	                    query: options.query
+	                  }),
+	                  properties: options.properties,
+	                  timeout: options.timeout
+	                });
+	                request = new _cache.CacheRequest(config);
+	                _context25.next = 6;
+	                return request.execute();
+
+	              case 6:
+	                response = _context25.sent;
+	                return _context25.abrupt('return', response.data);
+
+	              case 8:
+	              case 'end':
+	                return _context25.stop();
+	            }
+	          }
+	        }, _callee25, this);
+	      }));
+
+	      function clearCache(_x41) {
+	        return ref.apply(this, arguments);
+	      }
+
+	      return clearCache;
+	    }()
 	  }]);
 
 	  return DataStoreManager;
@@ -21778,6 +21828,8 @@
 
 	var _query3 = __webpack_require__(11);
 
+	var _es6Promise = __webpack_require__(169);
+
 	var _regeneratorRuntime = __webpack_require__(2);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
@@ -21812,7 +21864,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -21969,7 +22021,7 @@
 	                          }
 
 	                          _context.next = 17;
-	                          return Promise.all(promises);
+	                          return _es6Promise.Promise.all(promises);
 
 	                        case 17:
 	                          responses = _context.sent;
@@ -22940,6 +22992,8 @@
 
 	var _query = __webpack_require__(11);
 
+	var _es6Promise = __webpack_require__(169);
+
 	var _regeneratorRuntime = __webpack_require__(2);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
@@ -22964,17 +23018,9 @@
 
 	var _isString2 = _interopRequireDefault(_isString);
 
-	var _orderBy = __webpack_require__(248);
-
-	var _orderBy2 = _interopRequireDefault(_orderBy);
-
-	var _sortedUniqBy = __webpack_require__(254);
-
-	var _sortedUniqBy2 = _interopRequireDefault(_sortedUniqBy);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -23065,19 +23111,9 @@
 
 	              case 6:
 	                syncEntities = _context.sent;
-
-
-	                // Filter the sync entities so that we only perform
-	                // one sync operation per unique entity.
-	                syncEntities = (0, _orderBy2.default)(syncEntities, 'key', ['desc']);
-	                syncEntities = (0, _sortedUniqBy2.default)(syncEntities, function (syncEntity) {
-	                  return syncEntity.entity[idAttribute];
-	                });
-
-	                // Return the length of sync entities
 	                return _context.abrupt('return', syncEntities);
 
-	              case 10:
+	              case 8:
 	              case 'end':
 	                return _context.stop();
 	            }
@@ -23235,7 +23271,7 @@
 
 	                // Process the array of entities
 	                _context7.next = 4;
-	                return Promise.all((0, _map2.default)(entities, function () {
+	                return _es6Promise.Promise.all((0, _map2.default)(entities, function () {
 	                  var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee6(entity) {
 	                    var id, query, findConfig, findRequest, response, syncEntities, syncEntity, request;
 	                    return _regeneratorRuntime2.default.wrap(function _callee6$(_context6) {
@@ -23264,7 +23300,7 @@
 	                          case 5:
 
 	                            // Find an existing sync operation for the entity
-	                            query = new _query.Query().equalTo('entity._id', id);
+	                            query = new _query.Query().equalTo('entityId', id);
 	                            findConfig = new _request2.KinveyRequestConfig({
 	                              method: _request2.RequestMethod.GET,
 	                              url: _url2.default.format({
@@ -23283,15 +23319,12 @@
 	                          case 10:
 	                            response = _context6.sent;
 	                            syncEntities = response.data;
-	                            syncEntity = syncEntities.length === 1 ? syncEntities[0] : { collection: _this.collection, state: {} };
+	                            syncEntity = syncEntities.length === 1 ? syncEntities[0] : { collection: _this.collection, state: {}, entityId: id };
 
 	                            // Update the state
 
 	                            syncEntity.state = syncEntity.state || {};
 	                            syncEntity.state.method = operation;
-
-	                            // Update the entity
-	                            syncEntity.entity = entity;
 
 	                            // Send a request to save the sync entity
 	                            request = new _cache.CacheRequest({
@@ -23307,7 +23340,7 @@
 	                            });
 	                            return _context6.abrupt('return', request.execute());
 
-	                          case 18:
+	                          case 17:
 	                          case 'end':
 	                            return _context6.stop();
 	                        }
@@ -23492,13 +23525,6 @@
 	                }
 
 	                _ret = function () {
-	                  // Filter the sync entities so that we only perform
-	                  // one sync operation per unique entity.
-	                  syncEntities = (0, _orderBy2.default)(syncEntities, 'key', ['desc']);
-	                  syncEntities = (0, _sortedUniqBy2.default)(syncEntities, function (syncEntity) {
-	                    return syncEntity.entity[idAttribute];
-	                  });
-
 	                  // Sync the entities in batches to prevent exhausting
 	                  // available network connections
 	                  var batchSync = function () {
@@ -23508,7 +23534,7 @@
 	                        while (1) {
 	                          switch (_context13.prev = _context13.next) {
 	                            case 0:
-	                              promise = new Promise(function () {
+	                              promise = new _es6Promise.Promise(function () {
 	                                var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee12(resolve) {
 	                                  var batch, results;
 	                                  return _regeneratorRuntime2.default.wrap(function _callee12$(_context12) {
@@ -23521,9 +23547,8 @@
 
 	                                          // Get the results of syncing all of the entities
 	                                          _context12.next = 4;
-	                                          return Promise.all((0, _map2.default)(batch, function (syncEntity) {
-	                                            var entity = syncEntity.entity;
-	                                            var originalId = entity[idAttribute];
+	                                          return _es6Promise.Promise.all((0, _map2.default)(batch, function (syncEntity) {
+	                                            var originalId = syncEntity.entityId;
 	                                            var method = syncEntity.state.method;
 
 	                                            if (method === _request2.RequestMethod.DELETE) {
@@ -23556,7 +23581,7 @@
 	                                                return request.execute();
 	                                              }).then(function () {
 	                                                // Return the result
-	                                                var result = { _id: originalId, entity: entity };
+	                                                var result = { _id: originalId };
 	                                                return result;
 	                                              }).catch(function () {
 	                                                var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee9(error) {
@@ -23636,7 +23661,6 @@
 	                                                        case 16:
 	                                                          return _context9.abrupt('return', {
 	                                                            _id: originalId,
-	                                                            entity: entity,
 	                                                            error: error
 	                                                          });
 
@@ -23653,219 +23677,235 @@
 	                                                };
 	                                              }());
 	                                            } else if (method === _request2.RequestMethod.POST || method === _request2.RequestMethod.PUT) {
-	                                              // Save the entity to the network.
-	                                              var _request = new _network.NetworkRequest({
-	                                                method: method,
-	                                                authType: _request2.AuthType.Default,
+	                                              // Get the entity from cache
+	                                              var config = new _request2.KinveyRequestConfig({
+	                                                method: _request2.RequestMethod.GET,
 	                                                url: _url2.default.format({
 	                                                  protocol: _this2.client.protocol,
 	                                                  host: _this2.client.host,
 	                                                  pathname: _this2.backendPathname + '/' + originalId
 	                                                }),
 	                                                properties: options.properties,
-	                                                timeout: options.timeout,
-	                                                body: entity,
-	                                                client: _this2.client
+	                                                timeout: options.timeout
 	                                              });
-
-	                                              // If the entity was created locally then delete the autogenerated _id,
-	                                              // send a POST request, and update the url.
-	                                              if (method === _request2.RequestMethod.POST) {
-	                                                delete entity[idAttribute];
-	                                                _request.method = _request2.RequestMethod.POST;
-	                                                _request.url = _url2.default.format({
-	                                                  protocol: _this2.client.protocol,
-	                                                  host: _this2.client.host,
-	                                                  pathname: _this2.backendPathname
-	                                                });
-	                                                _request.body = entity;
-	                                              }
-
+	                                              var _request = new _cache.CacheRequest(config);
 	                                              return _request.execute().then(function (response) {
-	                                                return response.data;
-	                                              }).then(function () {
-	                                                var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee10(entity) {
-	                                                  var deleteConfig, deleteRequest, putCacheRequest, deleteCacheRequest;
-	                                                  return _regeneratorRuntime2.default.wrap(function _callee10$(_context10) {
-	                                                    while (1) {
-	                                                      switch (_context10.prev = _context10.next) {
-	                                                        case 0:
-	                                                          // Remove the sync entity
-	                                                          deleteConfig = new _request2.KinveyRequestConfig({
-	                                                            method: _request2.RequestMethod.DELETE,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.pathname + '/' + syncEntity[idAttribute]
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout
-	                                                          });
-	                                                          deleteRequest = new _cache.CacheRequest(deleteConfig);
-	                                                          _context10.next = 4;
-	                                                          return deleteRequest.execute();
+	                                                var entity = response.data;
 
-	                                                        case 4:
+	                                                // Save the entity to the network.
+	                                                var request = new _network.NetworkRequest({
+	                                                  method: method,
+	                                                  authType: _request2.AuthType.Default,
+	                                                  url: _url2.default.format({
+	                                                    protocol: _this2.client.protocol,
+	                                                    host: _this2.client.host,
+	                                                    pathname: _this2.backendPathname + '/' + originalId
+	                                                  }),
+	                                                  properties: options.properties,
+	                                                  timeout: options.timeout,
+	                                                  body: entity,
+	                                                  client: _this2.client
+	                                                });
 
-	                                                          // Save the result of the network request locally.
-	                                                          putCacheRequest = new _cache.CacheRequest({
-	                                                            method: _request2.RequestMethod.PUT,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + entity[idAttribute]
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout,
-	                                                            body: entity
-	                                                          });
-	                                                          _context10.next = 7;
-	                                                          return putCacheRequest.execute().then(function (response) {
-	                                                            return response.data;
-	                                                          });
+	                                                // If the entity was created locally then delete the autogenerated _id,
+	                                                // send a POST request, and update the url.
+	                                                if (method === _request2.RequestMethod.POST) {
+	                                                  delete entity[idAttribute];
+	                                                  request.method = _request2.RequestMethod.POST;
+	                                                  request.url = _url2.default.format({
+	                                                    protocol: _this2.client.protocol,
+	                                                    host: _this2.client.host,
+	                                                    pathname: _this2.backendPathname
+	                                                  });
+	                                                  request.body = entity;
+	                                                }
 
-	                                                        case 7:
-	                                                          entity = _context10.sent;
+	                                                return request.execute().then(function (response) {
+	                                                  return response.data;
+	                                                }).then(function () {
+	                                                  var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee10(entity) {
+	                                                    var deleteConfig, deleteRequest, putCacheRequest, deleteCacheRequest;
+	                                                    return _regeneratorRuntime2.default.wrap(function _callee10$(_context10) {
+	                                                      while (1) {
+	                                                        switch (_context10.prev = _context10.next) {
+	                                                          case 0:
+	                                                            // Remove the sync entity
+	                                                            deleteConfig = new _request2.KinveyRequestConfig({
+	                                                              method: _request2.RequestMethod.DELETE,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.pathname + '/' + syncEntity[idAttribute]
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout
+	                                                            });
+	                                                            deleteRequest = new _cache.CacheRequest(deleteConfig);
+	                                                            _context10.next = 4;
+	                                                            return deleteRequest.execute();
 
-	                                                          if (!(method === _request2.RequestMethod.POST)) {
+	                                                          case 4:
+
+	                                                            // Save the result of the network request locally.
+	                                                            putCacheRequest = new _cache.CacheRequest({
+	                                                              method: _request2.RequestMethod.PUT,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.backendPathname + '/' + entity[idAttribute]
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout,
+	                                                              body: entity
+	                                                            });
+	                                                            _context10.next = 7;
+	                                                            return putCacheRequest.execute().then(function (response) {
+	                                                              return response.data;
+	                                                            });
+
+	                                                          case 7:
+	                                                            entity = _context10.sent;
+
+	                                                            if (!(method === _request2.RequestMethod.POST)) {
+	                                                              _context10.next = 12;
+	                                                              break;
+	                                                            }
+
+	                                                            deleteCacheRequest = new _cache.CacheRequest({
+	                                                              method: _request2.RequestMethod.DELETE,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout
+	                                                            });
 	                                                            _context10.next = 12;
-	                                                            break;
-	                                                          }
+	                                                            return deleteCacheRequest.execute();
 
-	                                                          deleteCacheRequest = new _cache.CacheRequest({
-	                                                            method: _request2.RequestMethod.DELETE,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + originalId
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout
-	                                                          });
-	                                                          _context10.next = 12;
-	                                                          return deleteCacheRequest.execute();
+	                                                          case 12:
+	                                                            return _context10.abrupt('return', {
+	                                                              _id: originalId,
+	                                                              entity: entity
+	                                                            });
 
-	                                                        case 12:
-	                                                          return _context10.abrupt('return', {
-	                                                            _id: originalId,
-	                                                            entity: entity
-	                                                          });
-
-	                                                        case 13:
-	                                                        case 'end':
-	                                                          return _context10.stop();
+	                                                          case 13:
+	                                                          case 'end':
+	                                                            return _context10.stop();
+	                                                        }
 	                                                      }
-	                                                    }
-	                                                  }, _callee10, _this2);
-	                                                }));
+	                                                    }, _callee10, _this2);
+	                                                  }));
 
-	                                                return function (_x34) {
-	                                                  return ref.apply(this, arguments);
-	                                                };
-	                                              }()).catch(function () {
-	                                                var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee11(error) {
-	                                                  var getNetworkRequest, originalEntity, putCacheRequest, deleteSyncRequest;
-	                                                  return _regeneratorRuntime2.default.wrap(function _callee11$(_context11) {
-	                                                    while (1) {
-	                                                      switch (_context11.prev = _context11.next) {
-	                                                        case 0:
-	                                                          if (!(error instanceof _errors.InsufficientCredentialsError)) {
+	                                                  return function (_x34) {
+	                                                    return ref.apply(this, arguments);
+	                                                  };
+	                                                }()).catch(function () {
+	                                                  var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee11(error) {
+	                                                    var getNetworkRequest, originalEntity, putCacheRequest, deleteSyncRequest;
+	                                                    return _regeneratorRuntime2.default.wrap(function _callee11$(_context11) {
+	                                                      while (1) {
+	                                                        switch (_context11.prev = _context11.next) {
+	                                                          case 0:
+	                                                            if (!(error instanceof _errors.InsufficientCredentialsError)) {
+	                                                              _context11.next = 17;
+	                                                              break;
+	                                                            }
+
+	                                                            _context11.prev = 1;
+
+	                                                            if (!(method !== _request2.RequestMethod.POST)) {
+	                                                              _context11.next = 13;
+	                                                              break;
+	                                                            }
+
+	                                                            // Get the original entity
+	                                                            getNetworkRequest = new _network.NetworkRequest({
+	                                                              method: _request2.RequestMethod.GET,
+	                                                              authType: _request2.AuthType.Default,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout,
+	                                                              client: _this2.client
+	                                                            });
+	                                                            _context11.next = 6;
+	                                                            return getNetworkRequest.execute().then(function (response) {
+	                                                              return response.data;
+	                                                            });
+
+	                                                          case 6:
+	                                                            originalEntity = _context11.sent;
+
+
+	                                                            // Update the cache with the original entity
+	                                                            putCacheRequest = new _cache.CacheRequest({
+	                                                              method: _request2.RequestMethod.PUT,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout,
+	                                                              body: originalEntity
+	                                                            });
+	                                                            _context11.next = 10;
+	                                                            return putCacheRequest.execute();
+
+	                                                          case 10:
+
+	                                                            // Clear the item from the sync table
+	                                                            deleteSyncRequest = new _cache.CacheRequest({
+	                                                              method: _request2.RequestMethod.DELETE,
+	                                                              url: _url2.default.format({
+	                                                                protocol: _this2.client.protocol,
+	                                                                host: _this2.client.host,
+	                                                                pathname: _this2.pathname + '/' + syncEntity[idAttribute]
+	                                                              }),
+	                                                              properties: options.properties,
+	                                                              timeout: options.timeout
+	                                                            });
+	                                                            _context11.next = 13;
+	                                                            return deleteSyncRequest.execute();
+
+	                                                          case 13:
 	                                                            _context11.next = 17;
 	                                                            break;
-	                                                          }
 
-	                                                          _context11.prev = 1;
+	                                                          case 15:
+	                                                            _context11.prev = 15;
+	                                                            _context11.t0 = _context11['catch'](1);
 
-	                                                          if (!(method !== _request2.RequestMethod.POST)) {
-	                                                            _context11.next = 13;
-	                                                            break;
-	                                                          }
+	                                                          case 17:
+	                                                            return _context11.abrupt('return', {
+	                                                              _id: originalId,
+	                                                              entity: entity,
+	                                                              error: error
+	                                                            });
 
-	                                                          // Get the original entity
-	                                                          getNetworkRequest = new _network.NetworkRequest({
-	                                                            method: _request2.RequestMethod.GET,
-	                                                            authType: _request2.AuthType.Default,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + originalId
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout,
-	                                                            client: _this2.client
-	                                                          });
-	                                                          _context11.next = 6;
-	                                                          return getNetworkRequest.execute().then(function (response) {
-	                                                            return response.data;
-	                                                          });
-
-	                                                        case 6:
-	                                                          originalEntity = _context11.sent;
-
-
-	                                                          // Update the cache with the original entity
-	                                                          putCacheRequest = new _cache.CacheRequest({
-	                                                            method: _request2.RequestMethod.PUT,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + originalId
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout,
-	                                                            body: originalEntity
-	                                                          });
-	                                                          _context11.next = 10;
-	                                                          return putCacheRequest.execute();
-
-	                                                        case 10:
-
-	                                                          // Clear the item from the sync table
-	                                                          deleteSyncRequest = new _cache.CacheRequest({
-	                                                            method: _request2.RequestMethod.DELETE,
-	                                                            url: _url2.default.format({
-	                                                              protocol: _this2.client.protocol,
-	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.pathname + '/' + syncEntity[idAttribute]
-	                                                            }),
-	                                                            properties: options.properties,
-	                                                            timeout: options.timeout
-	                                                          });
-	                                                          _context11.next = 13;
-	                                                          return deleteSyncRequest.execute();
-
-	                                                        case 13:
-	                                                          _context11.next = 17;
-	                                                          break;
-
-	                                                        case 15:
-	                                                          _context11.prev = 15;
-	                                                          _context11.t0 = _context11['catch'](1);
-
-	                                                        case 17:
-	                                                          return _context11.abrupt('return', {
-	                                                            _id: originalId,
-	                                                            entity: entity,
-	                                                            error: error
-	                                                          });
-
-	                                                        case 18:
-	                                                        case 'end':
-	                                                          return _context11.stop();
+	                                                          case 18:
+	                                                          case 'end':
+	                                                            return _context11.stop();
+	                                                        }
 	                                                      }
-	                                                    }
-	                                                  }, _callee11, _this2, [[1, 15]]);
-	                                                }));
+	                                                    }, _callee11, _this2, [[1, 15]]);
+	                                                  }));
 
-	                                                return function (_x35) {
-	                                                  return ref.apply(this, arguments);
-	                                                };
-	                                              }());
+	                                                  return function (_x35) {
+	                                                    return ref.apply(this, arguments);
+	                                                  };
+	                                                }());
+	                                              });
 	                                            }
 
 	                                            return {
 	                                              _id: originalId,
-	                                              entity: entity,
+	                                              entity: undefined,
 	                                              error: new _errors.SyncError('Unable to sync the entity since the method was not recognized.', syncEntity)
 	                                            };
 	                                          }));
@@ -24047,316 +24087,11 @@
 /* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseOrderBy = __webpack_require__(249),
-	    isArray = __webpack_require__(34);
-
-	/**
-	 * This method is like `_.sortBy` except that it allows specifying the sort
-	 * orders of the iteratees to sort by. If `orders` is unspecified, all values
-	 * are sorted in ascending order. Otherwise, specify an order of "desc" for
-	 * descending or "asc" for ascending sort order of corresponding values.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Collection
-	 * @param {Array|Object} collection The collection to iterate over.
-	 * @param {Array[]|Function[]|Object[]|string[]} [iteratees=[_.identity]]
-	 *  The iteratees to sort by.
-	 * @param {string[]} [orders] The sort orders of `iteratees`.
-	 * @param- {Object} [guard] Enables use as an iteratee for methods like `_.reduce`.
-	 * @returns {Array} Returns the new sorted array.
-	 * @example
-	 *
-	 * var users = [
-	 *   { 'user': 'fred',   'age': 48 },
-	 *   { 'user': 'barney', 'age': 34 },
-	 *   { 'user': 'fred',   'age': 40 },
-	 *   { 'user': 'barney', 'age': 36 }
-	 * ];
-	 *
-	 * // Sort by `user` in ascending order and by `age` in descending order.
-	 * _.orderBy(users, ['user', 'age'], ['asc', 'desc']);
-	 * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
-	 */
-	function orderBy(collection, iteratees, orders, guard) {
-	  if (collection == null) {
-	    return [];
-	  }
-	  if (!isArray(iteratees)) {
-	    iteratees = iteratees == null ? [] : [iteratees];
-	  }
-	  orders = guard ? undefined : orders;
-	  if (!isArray(orders)) {
-	    orders = orders == null ? [] : [orders];
-	  }
-	  return baseOrderBy(collection, iteratees, orders);
-	}
-
-	module.exports = orderBy;
-
-
-/***/ },
-/* 249 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var arrayMap = __webpack_require__(177),
-	    baseIteratee = __webpack_require__(39),
-	    baseMap = __webpack_require__(178),
-	    baseSortBy = __webpack_require__(250),
-	    baseUnary = __webpack_require__(251),
-	    compareMultiple = __webpack_require__(252),
-	    identity = __webpack_require__(117);
-
-	/**
-	 * The base implementation of `_.orderBy` without param guards.
-	 *
-	 * @private
-	 * @param {Array|Object} collection The collection to iterate over.
-	 * @param {Function[]|Object[]|string[]} iteratees The iteratees to sort by.
-	 * @param {string[]} orders The sort orders of `iteratees`.
-	 * @returns {Array} Returns the new sorted array.
-	 */
-	function baseOrderBy(collection, iteratees, orders) {
-	  var index = -1;
-	  iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(baseIteratee));
-
-	  var result = baseMap(collection, function(value, key, collection) {
-	    var criteria = arrayMap(iteratees, function(iteratee) {
-	      return iteratee(value);
-	    });
-	    return { 'criteria': criteria, 'index': ++index, 'value': value };
-	  });
-
-	  return baseSortBy(result, function(object, other) {
-	    return compareMultiple(object, other, orders);
-	  });
-	}
-
-	module.exports = baseOrderBy;
-
-
-/***/ },
-/* 250 */
-/***/ function(module, exports) {
-
-	/**
-	 * The base implementation of `_.sortBy` which uses `comparer` to define the
-	 * sort order of `array` and replaces criteria objects with their corresponding
-	 * values.
-	 *
-	 * @private
-	 * @param {Array} array The array to sort.
-	 * @param {Function} comparer The function to define sort order.
-	 * @returns {Array} Returns `array`.
-	 */
-	function baseSortBy(array, comparer) {
-	  var length = array.length;
-
-	  array.sort(comparer);
-	  while (length--) {
-	    array[length] = array[length].value;
-	  }
-	  return array;
-	}
-
-	module.exports = baseSortBy;
-
-
-/***/ },
-/* 251 */
-/***/ function(module, exports) {
-
-	/**
-	 * The base implementation of `_.unary` without support for storing wrapper metadata.
-	 *
-	 * @private
-	 * @param {Function} func The function to cap arguments for.
-	 * @returns {Function} Returns the new capped function.
-	 */
-	function baseUnary(func) {
-	  return function(value) {
-	    return func(value);
-	  };
-	}
-
-	module.exports = baseUnary;
-
-
-/***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var compareAscending = __webpack_require__(253);
-
-	/**
-	 * Used by `_.orderBy` to compare multiple properties of a value to another
-	 * and stable sort them.
-	 *
-	 * If `orders` is unspecified, all values are sorted in ascending order. Otherwise,
-	 * specify an order of "desc" for descending or "asc" for ascending sort order
-	 * of corresponding values.
-	 *
-	 * @private
-	 * @param {Object} object The object to compare.
-	 * @param {Object} other The other object to compare.
-	 * @param {boolean[]|string[]} orders The order to sort by for each property.
-	 * @returns {number} Returns the sort order indicator for `object`.
-	 */
-	function compareMultiple(object, other, orders) {
-	  var index = -1,
-	      objCriteria = object.criteria,
-	      othCriteria = other.criteria,
-	      length = objCriteria.length,
-	      ordersLength = orders.length;
-
-	  while (++index < length) {
-	    var result = compareAscending(objCriteria[index], othCriteria[index]);
-	    if (result) {
-	      if (index >= ordersLength) {
-	        return result;
-	      }
-	      var order = orders[index];
-	      return result * (order == 'desc' ? -1 : 1);
-	    }
-	  }
-	  // Fixes an `Array#sort` bug in the JS engine embedded in Adobe applications
-	  // that causes it, under certain circumstances, to provide the same value for
-	  // `object` and `other`. See https://github.com/jashkenas/underscore/pull/1247
-	  // for more details.
-	  //
-	  // This also ensures a stable sort in V8 and other engines.
-	  // See https://bugs.chromium.org/p/v8/issues/detail?id=90 for more details.
-	  return object.index - other.index;
-	}
-
-	module.exports = compareMultiple;
-
-
-/***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var isSymbol = __webpack_require__(111);
-
-	/**
-	 * Compares values to sort them in ascending order.
-	 *
-	 * @private
-	 * @param {*} value The value to compare.
-	 * @param {*} other The other value to compare.
-	 * @returns {number} Returns the sort order indicator for `value`.
-	 */
-	function compareAscending(value, other) {
-	  if (value !== other) {
-	    var valIsDefined = value !== undefined,
-	        valIsNull = value === null,
-	        valIsReflexive = value === value,
-	        valIsSymbol = isSymbol(value);
-
-	    var othIsDefined = other !== undefined,
-	        othIsNull = other === null,
-	        othIsReflexive = other === other,
-	        othIsSymbol = isSymbol(other);
-
-	    if ((!othIsNull && !othIsSymbol && !valIsSymbol && value > other) ||
-	        (valIsSymbol && othIsDefined && othIsReflexive && !othIsNull && !othIsSymbol) ||
-	        (valIsNull && othIsDefined && othIsReflexive) ||
-	        (!valIsDefined && othIsReflexive) ||
-	        !valIsReflexive) {
-	      return 1;
-	    }
-	    if ((!valIsNull && !valIsSymbol && !othIsSymbol && value < other) ||
-	        (othIsSymbol && valIsDefined && valIsReflexive && !valIsNull && !valIsSymbol) ||
-	        (othIsNull && valIsDefined && valIsReflexive) ||
-	        (!othIsDefined && valIsReflexive) ||
-	        !othIsReflexive) {
-	      return -1;
-	    }
-	  }
-	  return 0;
-	}
-
-	module.exports = compareAscending;
-
-
-/***/ },
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseIteratee = __webpack_require__(39),
-	    baseSortedUniq = __webpack_require__(255);
-
-	/**
-	 * This method is like `_.uniqBy` except that it's designed and optimized
-	 * for sorted arrays.
-	 *
-	 * @static
-	 * @memberOf _
-	 * @since 4.0.0
-	 * @category Array
-	 * @param {Array} array The array to inspect.
-	 * @param {Function} [iteratee] The iteratee invoked per element.
-	 * @returns {Array} Returns the new duplicate free array.
-	 * @example
-	 *
-	 * _.sortedUniqBy([1.1, 1.2, 2.3, 2.4], Math.floor);
-	 * // => [1.1, 2.3]
-	 */
-	function sortedUniqBy(array, iteratee) {
-	  return (array && array.length)
-	    ? baseSortedUniq(array, baseIteratee(iteratee))
-	    : [];
-	}
-
-	module.exports = sortedUniqBy;
-
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var eq = __webpack_require__(47);
-
-	/**
-	 * The base implementation of `_.sortedUniq` and `_.sortedUniqBy` without
-	 * support for iteratee shorthands.
-	 *
-	 * @private
-	 * @param {Array} array The array to inspect.
-	 * @param {Function} [iteratee] The iteratee invoked per element.
-	 * @returns {Array} Returns the new duplicate free array.
-	 */
-	function baseSortedUniq(array, iteratee) {
-	  var index = -1,
-	      length = array.length,
-	      resIndex = 0,
-	      result = [];
-
-	  while (++index < length) {
-	    var value = array[index],
-	        computed = iteratee ? iteratee(value) : value;
-
-	    if (!index || !eq(computed, seen)) {
-	      var seen = computed;
-	      result[resIndex++] = value === 0 ? 0 : value;
-	    }
-	  }
-	  return result;
-	}
-
-	module.exports = baseSortedUniq;
-
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var baseDifference = __webpack_require__(257),
-	    baseFlatten = __webpack_require__(263),
+	var baseDifference = __webpack_require__(249),
+	    baseFlatten = __webpack_require__(256),
 	    baseIteratee = __webpack_require__(39),
 	    isArrayLikeObject = __webpack_require__(26),
-	    last = __webpack_require__(265),
+	    last = __webpack_require__(258),
 	    rest = __webpack_require__(126);
 
 	/**
@@ -24397,15 +24132,15 @@
 
 
 /***/ },
-/* 257 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(84),
-	    arrayIncludes = __webpack_require__(258),
-	    arrayIncludesWith = __webpack_require__(261),
+	    arrayIncludes = __webpack_require__(250),
+	    arrayIncludesWith = __webpack_require__(253),
 	    arrayMap = __webpack_require__(177),
-	    baseUnary = __webpack_require__(251),
-	    cacheHas = __webpack_require__(262);
+	    baseUnary = __webpack_require__(254),
+	    cacheHas = __webpack_require__(255);
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -24470,10 +24205,10 @@
 
 
 /***/ },
-/* 258 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIndexOf = __webpack_require__(259);
+	var baseIndexOf = __webpack_require__(251);
 
 	/**
 	 * A specialized version of `_.includes` for arrays without support for
@@ -24493,10 +24228,10 @@
 
 
 /***/ },
-/* 259 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var indexOfNaN = __webpack_require__(260);
+	var indexOfNaN = __webpack_require__(252);
 
 	/**
 	 * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
@@ -24526,7 +24261,7 @@
 
 
 /***/ },
-/* 260 */
+/* 252 */
 /***/ function(module, exports) {
 
 	/**
@@ -24555,7 +24290,7 @@
 
 
 /***/ },
-/* 261 */
+/* 253 */
 /***/ function(module, exports) {
 
 	/**
@@ -24583,7 +24318,27 @@
 
 
 /***/ },
-/* 262 */
+/* 254 */
+/***/ function(module, exports) {
+
+	/**
+	 * The base implementation of `_.unary` without support for storing wrapper metadata.
+	 *
+	 * @private
+	 * @param {Function} func The function to cap arguments for.
+	 * @returns {Function} Returns the new capped function.
+	 */
+	function baseUnary(func) {
+	  return function(value) {
+	    return func(value);
+	  };
+	}
+
+	module.exports = baseUnary;
+
+
+/***/ },
+/* 255 */
 /***/ function(module, exports) {
 
 	/**
@@ -24602,11 +24357,11 @@
 
 
 /***/ },
-/* 263 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var arrayPush = __webpack_require__(213),
-	    isFlattenable = __webpack_require__(264);
+	    isFlattenable = __webpack_require__(257);
 
 	/**
 	 * The base implementation of `_.flatten` with support for restricting flattening.
@@ -24646,7 +24401,7 @@
 
 
 /***/ },
-/* 264 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isArguments = __webpack_require__(25),
@@ -24667,7 +24422,7 @@
 
 
 /***/ },
-/* 265 */
+/* 258 */
 /***/ function(module, exports) {
 
 	/**
@@ -24693,11 +24448,11 @@
 
 
 /***/ },
-/* 266 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(267),
-	    baseFilter = __webpack_require__(268),
+	var arrayFilter = __webpack_require__(260),
+	    baseFilter = __webpack_require__(261),
 	    baseIteratee = __webpack_require__(39),
 	    isArray = __webpack_require__(34);
 
@@ -24746,7 +24501,7 @@
 
 
 /***/ },
-/* 267 */
+/* 260 */
 /***/ function(module, exports) {
 
 	/**
@@ -24777,7 +24532,7 @@
 
 
 /***/ },
-/* 268 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(15);
@@ -24804,13 +24559,13 @@
 
 
 /***/ },
-/* 269 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(267),
-	    baseXor = __webpack_require__(270),
+	var arrayFilter = __webpack_require__(260),
+	    baseXor = __webpack_require__(263),
 	    isArrayLikeObject = __webpack_require__(26),
-	    last = __webpack_require__(265),
+	    last = __webpack_require__(258),
 	    rest = __webpack_require__(126);
 
 	/**
@@ -24845,12 +24600,12 @@
 
 
 /***/ },
-/* 270 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var arrayPush = __webpack_require__(213),
-	    baseDifference = __webpack_require__(257),
-	    baseUniq = __webpack_require__(271);
+	    baseDifference = __webpack_require__(249),
+	    baseUniq = __webpack_require__(264);
 
 	/**
 	 * The base implementation of methods like `_.xor`, without support for
@@ -24881,14 +24636,14 @@
 
 
 /***/ },
-/* 271 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(84),
-	    arrayIncludes = __webpack_require__(258),
-	    arrayIncludesWith = __webpack_require__(261),
-	    cacheHas = __webpack_require__(262),
-	    createSet = __webpack_require__(272),
+	    arrayIncludes = __webpack_require__(250),
+	    arrayIncludesWith = __webpack_require__(253),
+	    cacheHas = __webpack_require__(255),
+	    createSet = __webpack_require__(265),
 	    setToArray = __webpack_require__(92);
 
 	/** Used as the size to enable large array optimizations. */
@@ -24959,11 +24714,11 @@
 
 
 /***/ },
-/* 272 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Set = __webpack_require__(97),
-	    noop = __webpack_require__(273),
+	    noop = __webpack_require__(266),
 	    setToArray = __webpack_require__(92);
 
 	/** Used as references for various `Number` constants. */
@@ -24984,7 +24739,7 @@
 
 
 /***/ },
-/* 273 */
+/* 266 */
 /***/ function(module, exports) {
 
 	/**
@@ -25007,7 +24762,7 @@
 
 
 /***/ },
-/* 274 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25027,6 +24782,8 @@
 
 	var _datastore = __webpack_require__(227);
 
+	var _es6Promise = __webpack_require__(169);
+
 	var _regeneratorRuntime = __webpack_require__(2);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
@@ -25041,7 +24798,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25128,7 +24885,7 @@
 	                  break;
 	                }
 
-	                return _context.abrupt('return', Promise.all((0, _map2.default)(files, function (file) {
+	                return _context.abrupt('return', _es6Promise.Promise.all((0, _map2.default)(files, function (file) {
 	                  return _this2.downloadByUrl(file._downloadURL, options);
 	                })));
 
@@ -25424,7 +25181,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 275 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25444,19 +25201,21 @@
 
 	var _query = __webpack_require__(11);
 
-	var _acl = __webpack_require__(276);
+	var _acl = __webpack_require__(269);
 
 	var _metadata = __webpack_require__(202);
 
 	var _errors = __webpack_require__(8);
 
-	var _mic = __webpack_require__(277);
+	var _mic = __webpack_require__(270);
 
 	var _request = __webpack_require__(152);
 
 	var _datastore = __webpack_require__(227);
 
 	var _network = __webpack_require__(199);
+
+	var _es6Promise = __webpack_require__(169);
 
 	var _storage = __webpack_require__(141);
 
@@ -25490,7 +25249,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25512,7 +25271,7 @@
 	var hello = void 0;
 
 	if (typeof window !== 'undefined') {
-	  hello = __webpack_require__(279); // eslint-disable-line global-require
+	  hello = __webpack_require__(272); // eslint-disable-line global-require
 	}
 
 	/**
@@ -25887,16 +25646,16 @@
 
 	      var isActiveUser = this.isActive();
 	      if (isActiveUser) {
-	        return Promise.reject(new _errors.ActiveUserError('This user is already the active user.'));
+	        return _es6Promise.Promise.reject(new _errors.ActiveUserError('This user is already the active user.'));
 	      }
 
 	      var activeUser = User.getActiveUser(this.client);
 	      if (activeUser) {
-	        return Promise.reject(new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.'));
+	        return _es6Promise.Promise.reject(new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.'));
 	      }
 
 	      if ((!usernameOrData.username || usernameOrData.username === '' || !usernameOrData.password || usernameOrData.password === '') && !usernameOrData[socialIdentityAttribute]) {
-	        return Promise.reject(new _errors.KinveyError('Username and/or password missing. ' + 'Please provide both a username and password to login.'));
+	        return _es6Promise.Promise.reject(new _errors.KinveyError('Username and/or password missing. ' + 'Please provide both a username and password to login.'));
 	      }
 
 	      var config = new _request.KinveyRequestConfig({
@@ -25990,7 +25749,7 @@
 	      var isActive = this.isActive();
 
 	      if (!isActive) {
-	        return Promise.resolve();
+	        return _es6Promise.Promise.resolve();
 	      }
 
 	      var request = new _network.NetworkRequest({
@@ -26015,9 +25774,9 @@
 	        }
 
 	        return null;
-	      })
-	      // .then(() => DataStore.clear({ client: this.client }))
-	      .then(function () {
+	      }).then(function () {
+	        return _datastore.DataStoreManager.clearCache({ client: _this4.client });
+	      }).then(function () {
 	        return _this4;
 	      });
 
@@ -26066,7 +25825,7 @@
 	        collectionName: 'identities'
 	      }, options);
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        if (!identity) {
 	          throw new _errors.KinveyError('An identity is required to connect the user.');
 	        }
@@ -26146,7 +25905,7 @@
 	      data[socialIdentityAttribute] = socialIdentity;
 	      this.data = data;
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        var isActive = _this6.isActive();
 
 	        if (isActive) {
@@ -26188,7 +25947,7 @@
 	      data[socialIdentityAttribute] = socialIdentity;
 	      this.data = data;
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        if (!_this7[idAttribute]) {
 	          return _this7;
 	        }
@@ -26242,7 +26001,7 @@
 	        state: true
 	      }, options);
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        if (options.state === true) {
 	          var activeUser = User.getActiveUser(_this8.client);
 	          if (activeUser) {
@@ -26751,7 +26510,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 276 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -26971,7 +26730,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 277 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -26991,7 +26750,9 @@
 
 	var _client = __webpack_require__(140);
 
-	var _path = __webpack_require__(278);
+	var _es6Promise = __webpack_require__(169);
+
+	var _path = __webpack_require__(271);
 
 	var _path2 = _interopRequireDefault(_path);
 
@@ -27055,7 +26816,7 @@
 
 	      var clientId = this.client.appKey;
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        if (authorizationGrant === AuthorizationGrant.AuthorizationCodeLoginPage) {
 	          // Step 1: Request a code
 	          return _this.requestCodeWithPopup(clientId, redirectUri, options);
@@ -27117,7 +26878,7 @@
 
 	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        var pathname = '/';
 
 	        if (options.version) {
@@ -27146,7 +26907,7 @@
 
 	        throw new _errors.KinveyError('KinveyPopup is undefined.' + (' Unable to login using authorization grant ' + AuthorizationGrant.AuthorizationCodeLoginPage + '.'));
 	      }).then(function (popup) {
-	        var promise = new Promise(function (resolve, reject) {
+	        var promise = new _es6Promise.Promise(function (resolve, reject) {
 	          var redirected = false;
 
 	          function loadCallback(event) {
@@ -27201,7 +26962,7 @@
 	    value: function requestCodeWithUrl(loginUrl, clientId, redirectUri) {
 	      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
 
-	      var promise = Promise.resolve().then(function () {
+	      var promise = _es6Promise.Promise.resolve().then(function () {
 	        var config = new _request.KinveyRequestConfig({
 	          method: _request.RequestMethod.POST,
 	          url: loginUrl,
@@ -27271,7 +27032,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 278 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -27502,7 +27263,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 279 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, setImmediate) {/*! hellojs v1.13.1 | (c) 2012-2016 Andrew Dodson | MIT https://adodson.com/hello.js/LICENSE */
@@ -33323,10 +33084,10 @@
 		module.exports = hello;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(280).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(273).setImmediate))
 
 /***/ },
-/* 280 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(4).nextTick;
@@ -33405,10 +33166,10 @@
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(280).setImmediate, __webpack_require__(280).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(273).setImmediate, __webpack_require__(273).clearImmediate))
 
 /***/ },
-/* 281 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -33420,25 +33181,27 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _device = __webpack_require__(282);
+	var _device = __webpack_require__(275);
 
 	var _errors = __webpack_require__(8);
 
-	var _events = __webpack_require__(284);
+	var _events = __webpack_require__(277);
 
 	var _request = __webpack_require__(152);
 
-	var _user = __webpack_require__(275);
+	var _user = __webpack_require__(268);
 
 	var _network = __webpack_require__(199);
 
 	var _client = __webpack_require__(140);
 
+	var _es6Promise = __webpack_require__(169);
+
 	var _url = __webpack_require__(145);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _bind = __webpack_require__(285);
+	var _bind = __webpack_require__(278);
 
 	var _bind2 = _interopRequireDefault(_bind);
 
@@ -33513,7 +33276,7 @@
 
 	      return _device.Device.ready().then(function () {
 	        if (!_this2.isSupported()) {
-	          return Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
+	          return _es6Promise.Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
 	        }
 
 	        if (typeof global.PushNotification === 'undefined') {
@@ -33524,7 +33287,7 @@
 	          return null;
 	        });
 	      }).then(function () {
-	        var promise = new Promise(function (resolve, reject) {
+	        var promise = new _es6Promise.Promise(function (resolve, reject) {
 	          _this2.phonegapPush = global.PushNotification.init(options);
 	          _this2.phonegapPush.on(notificationEvent, notificationEventListener);
 
@@ -33581,10 +33344,10 @@
 
 	      return _device.Device.ready().then(function () {
 	        if (!_this3.isSupported()) {
-	          return Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
+	          return _es6Promise.Promise.reject(new _errors.KinveyError('Kinvey currently only supports ' + 'push notifications on iOS and Android platforms.'));
 	        }
 
-	        var promise = new Promise(function (resolve, reject) {
+	        var promise = new _es6Promise.Promise(function (resolve, reject) {
 	          if (_this3.phonegapPush) {
 	            _this3.phonegapPush.off(notificationEvent, notificationEventListener);
 	            _this3.phonegapPush.unregister(function () {
@@ -33599,7 +33362,7 @@
 	        });
 
 	        promise = promise.then(function () {
-	          return Promise.resolve(storage.getItem(deviceIdCollectionName));
+	          return _es6Promise.Promise.resolve(storage.getItem(deviceIdCollectionName));
 	        }).then(function (deviceId) {
 	          if (!deviceId) {
 	            throw new _errors.KinveyError('This device has not been registered for push notifications.');
@@ -33646,7 +33409,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 282 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -33660,7 +33423,7 @@
 
 	var _es6Promise = __webpack_require__(169);
 
-	var _package = __webpack_require__(283);
+	var _package = __webpack_require__(276);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -33746,7 +33509,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 283 */
+/* 276 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -33754,36 +33517,46 @@
 			[
 				{
 					"name": "kinvey-phonegap-sdk",
-					"raw": "kinvey-phonegap-sdk@../../PhoneGap/SDK",
-					"rawSpec": "../../PhoneGap/SDK",
+					"raw": "kinvey-phonegap-sdk@*",
+					"rawSpec": "*",
 					"scope": null,
-					"spec": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/PhoneGap/SDK",
-					"type": "directory"
+					"spec": "*",
+					"type": "range"
 				},
 				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
-		"_from": "../../PhoneGap/SDK",
-		"_id": "kinvey-phonegap-sdk@3.0.0-beta.30",
+		"_from": "kinvey-phonegap-sdk@*",
+		"_id": "kinvey-phonegap-sdk@3.0.0-beta.31",
 		"_inCache": true,
 		"_installable": true,
 		"_location": "/kinvey-phonegap-sdk",
+		"_nodeVersion": "5.9.0",
+		"_npmOperationalInternal": {
+			"host": "packages-16-east.internal.npmjs.com",
+			"tmp": "tmp/kinvey-phonegap-sdk-3.0.0-beta.31.tgz_1467123513952_0.5055766066070646"
+		},
+		"_npmUser": {
+			"email": "opensource@kinvey.com",
+			"name": "kinvey"
+		},
+		"_npmVersion": "3.8.5",
 		"_phantomChildren": {},
 		"_requested": {
 			"name": "kinvey-phonegap-sdk",
-			"raw": "kinvey-phonegap-sdk@../../PhoneGap/SDK",
-			"rawSpec": "../../PhoneGap/SDK",
+			"raw": "kinvey-phonegap-sdk@*",
+			"rawSpec": "*",
 			"scope": null,
-			"spec": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/PhoneGap/SDK",
-			"type": "directory"
+			"spec": "*",
+			"type": "range"
 		},
 		"_requiredBy": [
 			"/"
 		],
-		"_resolved": "file:../../PhoneGap/SDK",
-		"_shasum": "f8e0096b13d32df7f9884fe383eac819b2542266",
+		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0-beta.31.tgz",
+		"_shasum": "b4d2316d7c316ebbc93321e503dcbde961d95850",
 		"_shrinkwrap": null,
-		"_spec": "kinvey-phonegap-sdk@../../PhoneGap/SDK",
+		"_spec": "kinvey-phonegap-sdk@*",
 		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey"
@@ -33799,8 +33572,8 @@
 		],
 		"dependencies": {
 			"es6-promise": "^3.2.1",
-			"kinvey-html5-sdk": "../../HTML5/SDK",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
+			"kinvey-html5-sdk": "*",
+			"kinvey-javascript-sdk-core": "*",
 			"lodash": "^4.0.0",
 			"parse-headers": "^2.0.0",
 			"regenerator-runtime": "^0.9.5"
@@ -33850,10 +33623,15 @@
 			"webpack-stream": "^3.1.0",
 			"yargs": "^4.7.1"
 		},
+		"directories": {},
+		"dist": {
+			"shasum": "b4d2316d7c316ebbc93321e503dcbde961d95850",
+			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0-beta.31.tgz"
+		},
 		"engines": {
 			"node": ">=4.0"
 		},
-		"gitHead": "d2f77f435d287ae1ccb87aacc0c093de34f3c3d8",
+		"gitHead": "f2ecca2beea43069c99715607e9194505c5a59b5",
 		"homepage": "http://www.kinvey.com",
 		"keywords": [
 			"Kinvey",
@@ -33863,18 +33641,19 @@
 		],
 		"license": "Apache-2.0",
 		"main": "./dist/index.js",
+		"maintainers": [
+			{
+				"email": "thomas.conner@me.com",
+				"name": "thomas.conner"
+			}
+		],
 		"name": "kinvey-phonegap-sdk",
 		"optionalDependencies": {},
 		"peerDependencies": {
-			"es6-promise": "^3.2.1",
-			"kinvey-html5-sdk": "../../HTML5/SDK",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"lodash": "^4.0.0",
-			"parse-headers": "^2.0.0",
-			"regenerator-runtime": "^0.9.5"
+			"kinvey-html5-sdk": "*",
+			"kinvey-javascript-sdk-core": "*"
 		},
-		"readme": "# Kinvey PhoneGap SDK\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\nThis node and bower module makes it very easy to connect your Cordova/Phonegap app with Kinvey.\n\n## Building\nThe simplest way to build the sdk is by running `gulp`. More advanced tasks are available.\n\n* `gulp clean`: remove files created by the build process\n* `gulp lint`: lint the src files\n* `gulp bump`: bump the pacakge version\n* `gulp build`: build the sdk\n* `gulp bundle`: bundle the sdk for dist\n* `gulp upload`: upload dist files to AWS S3\n\n### Flags\nThe following flags are available when running `gulp bump`:\n\n* `--type <major|minor|patch|prerelease>`: Bumps the package version using the [Semantic Version 2.0.0](http://semver.org/) spec. Defaults to `patch`.\n* `--version <version>`: Sets the package version to the provided version.\n\n## Testing\n\nYou can run the tests using `npm test`.\n\n## Releasing\nThe workflow for releasing a new version of the sdk is as follows:\n\n1. Commit all changes on the develop branch.\n2. Checkout the master branch and merge the develop branch.\n3. Update the [Changelog](CHANGELOG.md).\n4. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.\n5. Run `gulp bundle` and commit changes.\n6. Run `gulp tag`.\n7. Make sure all changes are committed on the master branch and push.\n8. Checkout the develop branch and merge the master branch.\n9. __Optional:__ Update Dev Center and Sample apps.\n\n## How to use\n\n### 1. Sign up for Kinvey\nTo use the library, sign up for Kinvey if you have not already done so. Go to the [sign up](https://console.kinvey.com/#signup) page, and follow the steps provided.\n\n### 2. Install the library\nYou can install the module using npm:\n\n```bash\nnpm install kinvey-phonegap-sdk --save\n```\n\nor\n\n```bash\nbower install kinvey-phonegap-sdk --save\n```\n\n### 3. Configure the library\nNow, the library is available for use in your project.\n\nIf you installed the library with npm, import the library in your code using `require`.\n\n```javascript\nvar Kinvey = require('kinvey-phonegap-sdk');\n```\n\nIf you installed the library with bower, add a script tag to your main html file.\n\n```html\n<script src=\"bower_components/kinvey-phonegap-sdk/dist/kinvey-phonegap-sdk.min.js\"></script>\n```\n\nNext, use `Kinvey.init` to configure your app:\n\n```javascript\nKinvey.init({\n    appKey: '<appKey>',\n    appSecret: '<appSecret>'\n});\n```\n\n\n### 4. Verify Set Up\nYou can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the library can communicate with your app.\n\n```javascript\nKinvey.ping().then(function(response) {\n  console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);\n}).catch(function(error) {\n  console.log('Kinvey Ping Failed. Response: ' + error.description);\n});\n```\n\n## What’s next?\nYou are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/phonegap-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/phonegap-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/phonegap-v3.0/samples) to go straight to working projects.\n\n## License\n\n    Copyright 2016 Kinvey, Inc.\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n",
-		"readmeFilename": "README.md",
+		"readme": "ERROR: No README data found!",
 		"repository": {
 			"type": "git",
 			"url": "git+ssh://git@github.com/Kinvey/phonegap-sdk.git"
@@ -33884,11 +33663,11 @@
 			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
 			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
 		},
-		"version": "3.0.0-beta.30"
+		"version": "3.0.0-beta.31"
 	};
 
 /***/ },
-/* 284 */
+/* 277 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -34196,12 +33975,12 @@
 
 
 /***/ },
-/* 285 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createWrapper = __webpack_require__(286),
-	    getHolder = __webpack_require__(308),
-	    replaceHolders = __webpack_require__(310),
+	var createWrapper = __webpack_require__(279),
+	    getHolder = __webpack_require__(301),
+	    replaceHolders = __webpack_require__(303),
 	    rest = __webpack_require__(126);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -34259,17 +34038,17 @@
 
 
 /***/ },
-/* 286 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(287),
-	    createBaseWrapper = __webpack_require__(289),
-	    createCurryWrapper = __webpack_require__(291),
-	    createHybridWrapper = __webpack_require__(292),
-	    createPartialWrapper = __webpack_require__(311),
-	    getData = __webpack_require__(300),
-	    mergeData = __webpack_require__(312),
-	    setData = __webpack_require__(306),
+	var baseSetData = __webpack_require__(280),
+	    createBaseWrapper = __webpack_require__(282),
+	    createCurryWrapper = __webpack_require__(284),
+	    createHybridWrapper = __webpack_require__(285),
+	    createPartialWrapper = __webpack_require__(304),
+	    getData = __webpack_require__(293),
+	    mergeData = __webpack_require__(305),
+	    setData = __webpack_require__(299),
 	    toInteger = __webpack_require__(128);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -34371,11 +34150,11 @@
 
 
 /***/ },
-/* 287 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var identity = __webpack_require__(117),
-	    metaMap = __webpack_require__(288);
+	    metaMap = __webpack_require__(281);
 
 	/**
 	 * The base implementation of `setData` without support for hot loop detection.
@@ -34394,7 +34173,7 @@
 
 
 /***/ },
-/* 288 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var WeakMap = __webpack_require__(98);
@@ -34406,10 +34185,10 @@
 
 
 /***/ },
-/* 289 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createCtorWrapper = __webpack_require__(290),
+	var createCtorWrapper = __webpack_require__(283),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -34441,7 +34220,7 @@
 
 
 /***/ },
-/* 290 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseCreate = __webpack_require__(226),
@@ -34484,15 +34263,15 @@
 
 
 /***/ },
-/* 291 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(127),
-	    createCtorWrapper = __webpack_require__(290),
-	    createHybridWrapper = __webpack_require__(292),
-	    createRecurryWrapper = __webpack_require__(296),
-	    getHolder = __webpack_require__(308),
-	    replaceHolders = __webpack_require__(310),
+	    createCtorWrapper = __webpack_require__(283),
+	    createHybridWrapper = __webpack_require__(285),
+	    createRecurryWrapper = __webpack_require__(289),
+	    getHolder = __webpack_require__(301),
+	    replaceHolders = __webpack_require__(303),
 	    root = __webpack_require__(66);
 
 	/**
@@ -34537,17 +34316,17 @@
 
 
 /***/ },
-/* 292 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(293),
-	    composeArgsRight = __webpack_require__(294),
-	    countHolders = __webpack_require__(295),
-	    createCtorWrapper = __webpack_require__(290),
-	    createRecurryWrapper = __webpack_require__(296),
-	    getHolder = __webpack_require__(308),
-	    reorder = __webpack_require__(309),
-	    replaceHolders = __webpack_require__(310),
+	var composeArgs = __webpack_require__(286),
+	    composeArgsRight = __webpack_require__(287),
+	    countHolders = __webpack_require__(288),
+	    createCtorWrapper = __webpack_require__(283),
+	    createRecurryWrapper = __webpack_require__(289),
+	    getHolder = __webpack_require__(301),
+	    reorder = __webpack_require__(302),
+	    replaceHolders = __webpack_require__(303),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -34636,7 +34415,7 @@
 
 
 /***/ },
-/* 293 */
+/* 286 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -34681,7 +34460,7 @@
 
 
 /***/ },
-/* 294 */
+/* 287 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -34728,7 +34507,7 @@
 
 
 /***/ },
-/* 295 */
+/* 288 */
 /***/ function(module, exports) {
 
 	/**
@@ -34755,11 +34534,11 @@
 
 
 /***/ },
-/* 296 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLaziable = __webpack_require__(297),
-	    setData = __webpack_require__(306);
+	var isLaziable = __webpack_require__(290),
+	    setData = __webpack_require__(299);
 
 	/** Used to compose bitmasks for wrapper metadata. */
 	var BIND_FLAG = 1,
@@ -34817,13 +34596,13 @@
 
 
 /***/ },
-/* 297 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(298),
-	    getData = __webpack_require__(300),
-	    getFuncName = __webpack_require__(301),
-	    lodash = __webpack_require__(303);
+	var LazyWrapper = __webpack_require__(291),
+	    getData = __webpack_require__(293),
+	    getFuncName = __webpack_require__(294),
+	    lodash = __webpack_require__(296);
 
 	/**
 	 * Checks if `func` has a lazy counterpart.
@@ -34851,11 +34630,11 @@
 
 
 /***/ },
-/* 298 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseCreate = __webpack_require__(226),
-	    baseLodash = __webpack_require__(299);
+	    baseLodash = __webpack_require__(292);
 
 	/** Used as references for the maximum length and index of an array. */
 	var MAX_ARRAY_LENGTH = 4294967295;
@@ -34885,7 +34664,7 @@
 
 
 /***/ },
-/* 299 */
+/* 292 */
 /***/ function(module, exports) {
 
 	/**
@@ -34901,11 +34680,11 @@
 
 
 /***/ },
-/* 300 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var metaMap = __webpack_require__(288),
-	    noop = __webpack_require__(273);
+	var metaMap = __webpack_require__(281),
+	    noop = __webpack_require__(266);
 
 	/**
 	 * Gets metadata for `func`.
@@ -34922,10 +34701,10 @@
 
 
 /***/ },
-/* 301 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var realNames = __webpack_require__(302);
+	var realNames = __webpack_require__(295);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -34959,7 +34738,7 @@
 
 
 /***/ },
-/* 302 */
+/* 295 */
 /***/ function(module, exports) {
 
 	/** Used to lookup unminified function names. */
@@ -34969,15 +34748,15 @@
 
 
 /***/ },
-/* 303 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(298),
-	    LodashWrapper = __webpack_require__(304),
-	    baseLodash = __webpack_require__(299),
+	var LazyWrapper = __webpack_require__(291),
+	    LodashWrapper = __webpack_require__(297),
+	    baseLodash = __webpack_require__(292),
 	    isArray = __webpack_require__(34),
 	    isObjectLike = __webpack_require__(33),
-	    wrapperClone = __webpack_require__(305);
+	    wrapperClone = __webpack_require__(298);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -35122,11 +34901,11 @@
 
 
 /***/ },
-/* 304 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseCreate = __webpack_require__(226),
-	    baseLodash = __webpack_require__(299);
+	    baseLodash = __webpack_require__(292);
 
 	/**
 	 * The base constructor for creating `lodash` wrapper objects.
@@ -35150,11 +34929,11 @@
 
 
 /***/ },
-/* 305 */
+/* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(298),
-	    LodashWrapper = __webpack_require__(304),
+	var LazyWrapper = __webpack_require__(291),
+	    LodashWrapper = __webpack_require__(297),
 	    copyArray = __webpack_require__(207);
 
 	/**
@@ -35179,11 +34958,11 @@
 
 
 /***/ },
-/* 306 */
+/* 299 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(287),
-	    now = __webpack_require__(307);
+	var baseSetData = __webpack_require__(280),
+	    now = __webpack_require__(300);
 
 	/** Used to detect hot functions by number of calls within a span of milliseconds. */
 	var HOT_COUNT = 150,
@@ -35227,7 +35006,7 @@
 
 
 /***/ },
-/* 307 */
+/* 300 */
 /***/ function(module, exports) {
 
 	/**
@@ -35254,7 +35033,7 @@
 
 
 /***/ },
-/* 308 */
+/* 301 */
 /***/ function(module, exports) {
 
 	/**
@@ -35273,7 +35052,7 @@
 
 
 /***/ },
-/* 309 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyArray = __webpack_require__(207),
@@ -35308,7 +35087,7 @@
 
 
 /***/ },
-/* 310 */
+/* 303 */
 /***/ function(module, exports) {
 
 	/** Used as the internal argument placeholder. */
@@ -35343,11 +35122,11 @@
 
 
 /***/ },
-/* 311 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(127),
-	    createCtorWrapper = __webpack_require__(290),
+	    createCtorWrapper = __webpack_require__(283),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -35393,12 +35172,12 @@
 
 
 /***/ },
-/* 312 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(293),
-	    composeArgsRight = __webpack_require__(294),
-	    replaceHolders = __webpack_require__(310);
+	var composeArgs = __webpack_require__(286),
+	    composeArgsRight = __webpack_require__(287),
+	    replaceHolders = __webpack_require__(303);
 
 	/** Used as the internal argument placeholder. */
 	var PLACEHOLDER = '__lodash_placeholder__';
@@ -35489,7 +35268,7 @@
 
 
 /***/ },
-/* 313 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35503,19 +35282,19 @@
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _cache = __webpack_require__(314);
+	var _cache = __webpack_require__(307);
 
 	var _errors = __webpack_require__(8);
 
 	var _log = __webpack_require__(200);
 
-	var _webstorage = __webpack_require__(315);
+	var _webstorage = __webpack_require__(308);
 
-	var _indexeddb = __webpack_require__(325);
+	var _indexeddb = __webpack_require__(318);
 
-	var _websql = __webpack_require__(326);
+	var _websql = __webpack_require__(319);
 
-	var _device = __webpack_require__(282);
+	var _device = __webpack_require__(275);
 
 	var _forEach = __webpack_require__(13);
 
@@ -35635,7 +35414,7 @@
 	}(_cache.CacheMiddleware);
 
 /***/ },
-/* 314 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -35653,11 +35432,11 @@
 
 	var _log = __webpack_require__(200);
 
-	var _webstorage = __webpack_require__(315);
+	var _webstorage = __webpack_require__(308);
 
-	var _indexeddb = __webpack_require__(325);
+	var _indexeddb = __webpack_require__(318);
 
-	var _websql = __webpack_require__(326);
+	var _websql = __webpack_require__(319);
 
 	var _forEach = __webpack_require__(13);
 
@@ -35778,7 +35557,7 @@
 	}(_cache.CacheMiddleware);
 
 /***/ },
-/* 315 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -35801,7 +35580,7 @@
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
-	var _merge = __webpack_require__(316);
+	var _merge = __webpack_require__(309);
 
 	var _merge2 = _interopRequireDefault(_merge);
 
@@ -36356,10 +36135,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 316 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMerge = __webpack_require__(317),
+	var baseMerge = __webpack_require__(310),
 	    createAssigner = __webpack_require__(124);
 
 	/**
@@ -36401,17 +36180,17 @@
 
 
 /***/ },
-/* 317 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(42),
 	    arrayEach = __webpack_require__(14),
-	    assignMergeValue = __webpack_require__(318),
-	    baseMergeDeep = __webpack_require__(319),
+	    assignMergeValue = __webpack_require__(311),
+	    baseMergeDeep = __webpack_require__(312),
 	    isArray = __webpack_require__(34),
 	    isObject = __webpack_require__(31),
 	    isTypedArray = __webpack_require__(99),
-	    keysIn = __webpack_require__(321);
+	    keysIn = __webpack_require__(314);
 
 	/**
 	 * The base implementation of `_.merge` without support for multiple sources.
@@ -36457,7 +36236,7 @@
 
 
 /***/ },
-/* 318 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(47);
@@ -36482,10 +36261,10 @@
 
 
 /***/ },
-/* 319 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignMergeValue = __webpack_require__(318),
+	var assignMergeValue = __webpack_require__(311),
 	    baseClone = __webpack_require__(204),
 	    copyArray = __webpack_require__(207),
 	    isArguments = __webpack_require__(25),
@@ -36495,7 +36274,7 @@
 	    isObject = __webpack_require__(31),
 	    isPlainObject = __webpack_require__(198),
 	    isTypedArray = __webpack_require__(99),
-	    toPlainObject = __webpack_require__(320);
+	    toPlainObject = __webpack_require__(313);
 
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -36571,11 +36350,11 @@
 
 
 /***/ },
-/* 320 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(123),
-	    keysIn = __webpack_require__(321);
+	    keysIn = __webpack_require__(314);
 
 	/**
 	 * Converts `value` to a plain object flattening inherited enumerable string
@@ -36609,10 +36388,10 @@
 
 
 /***/ },
-/* 321 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseKeysIn = __webpack_require__(322),
+	var baseKeysIn = __webpack_require__(315),
 	    indexKeys = __webpack_require__(23),
 	    isIndex = __webpack_require__(36),
 	    isPrototype = __webpack_require__(37);
@@ -36670,11 +36449,11 @@
 
 
 /***/ },
-/* 322 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflect = __webpack_require__(323),
-	    iteratorToArray = __webpack_require__(324);
+	var Reflect = __webpack_require__(316),
+	    iteratorToArray = __webpack_require__(317);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -36712,7 +36491,7 @@
 
 
 /***/ },
-/* 323 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var root = __webpack_require__(66);
@@ -36724,7 +36503,7 @@
 
 
 /***/ },
-/* 324 */
+/* 317 */
 /***/ function(module, exports) {
 
 	/**
@@ -36748,7 +36527,7 @@
 
 
 /***/ },
-/* 325 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -37259,7 +37038,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 326 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -37629,7 +37408,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 327 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37660,6 +37439,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	// eslint-disable-line no-unused-vars
+	var $injector = angular.injector(['ng']);
 
 	var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
 	  _inherits(HttpMiddleware, _KinveyMiddleware);
@@ -37674,7 +37454,7 @@
 	    key: 'handle',
 	    value: function () {
 	      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
-	        var url, method, headers, body, $injector, $http, response;
+	        var url, method, headers, body, $http, response;
 	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
 	          while (1) {
 	            switch (_context.prev = _context.next) {
@@ -37687,10 +37467,9 @@
 	                method = request.method;
 	                headers = request.headers;
 	                body = request.body;
-	                $injector = angular.injector(['ng']);
 	                $http = $injector.get('$http');
-	                _context.prev = 8;
-	                _context.next = 11;
+	                _context.prev = 7;
+	                _context.next = 10;
 	                return $http({
 	                  url: url,
 	                  method: method,
@@ -37698,7 +37477,7 @@
 	                  data: body
 	                });
 
-	              case 11:
+	              case 10:
 	                response = _context.sent;
 
 
@@ -37710,9 +37489,9 @@
 
 	                return _context.abrupt('return', request);
 
-	              case 16:
-	                _context.prev = 16;
-	                _context.t0 = _context['catch'](8);
+	              case 15:
+	                _context.prev = 15;
+	                _context.t0 = _context['catch'](7);
 
 	                request.response = {
 	                  statusCode: _context.t0.status,
@@ -37722,12 +37501,12 @@
 
 	                return _context.abrupt('return', request);
 
-	              case 20:
+	              case 19:
 	              case 'end':
 	                return _context.stop();
 	            }
 	          }
-	        }, _callee, this, [[8, 16]]);
+	        }, _callee, this, [[7, 15]]);
 	      }));
 
 	      function handle(_x) {
@@ -37742,7 +37521,7 @@
 	}(_middleware.KinveyMiddleware);
 
 /***/ },
-/* 328 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -37754,11 +37533,11 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _device = __webpack_require__(282);
+	var _device = __webpack_require__(275);
 
-	var _device2 = __webpack_require__(329);
+	var _device2 = __webpack_require__(322);
 
-	var _package = __webpack_require__(331);
+	var _package = __webpack_require__(324);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -37816,7 +37595,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 329 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -37828,7 +37607,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _package = __webpack_require__(330);
+	var _package = __webpack_require__(323);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -37876,7 +37655,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 330 */
+/* 323 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -37884,37 +37663,47 @@
 			[
 				{
 					"name": "kinvey-html5-sdk",
-					"raw": "kinvey-html5-sdk@../../HTML5/SDK",
-					"rawSpec": "../../HTML5/SDK",
+					"raw": "kinvey-html5-sdk@*",
+					"rawSpec": "*",
 					"scope": null,
-					"spec": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/HTML5/SDK",
-					"type": "directory"
+					"spec": "*",
+					"type": "range"
 				},
 				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
-		"_from": "../../HTML5/SDK",
-		"_id": "kinvey-html5-sdk@3.0.0-beta.19",
+		"_from": "kinvey-html5-sdk@*",
+		"_id": "kinvey-html5-sdk@3.0.0-beta.20",
 		"_inCache": true,
 		"_installable": true,
 		"_location": "/kinvey-html5-sdk",
+		"_nodeVersion": "6.2.1",
+		"_npmOperationalInternal": {
+			"host": "packages-12-west.internal.npmjs.com",
+			"tmp": "tmp/kinvey-html5-sdk-3.0.0-beta.20.tgz_1467122218916_0.0852264214772731"
+		},
+		"_npmUser": {
+			"email": "thomas.conner@me.com",
+			"name": "thomas.conner"
+		},
+		"_npmVersion": "3.9.3",
 		"_phantomChildren": {},
 		"_requested": {
 			"name": "kinvey-html5-sdk",
-			"raw": "kinvey-html5-sdk@../../HTML5/SDK",
-			"rawSpec": "../../HTML5/SDK",
+			"raw": "kinvey-html5-sdk@*",
+			"rawSpec": "*",
 			"scope": null,
-			"spec": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/HTML5/SDK",
-			"type": "directory"
+			"spec": "*",
+			"type": "range"
 		},
 		"_requiredBy": [
 			"/",
 			"/kinvey-phonegap-sdk"
 		],
-		"_resolved": "file:../../HTML5/SDK",
-		"_shasum": "39d3d342261f9f30c0eb187e640c79bc7e3c094c",
+		"_resolved": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.0-beta.20.tgz",
+		"_shasum": "02485bd217c657f48dc571a92acd3d6d90a43529",
 		"_shrinkwrap": null,
-		"_spec": "kinvey-html5-sdk@../../HTML5/SDK",
+		"_spec": "kinvey-html5-sdk@*",
 		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey"
@@ -37930,7 +37719,7 @@
 		],
 		"dependencies": {
 			"es6-promise": "^3.2.1",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
+			"kinvey-javascript-sdk-core": "*",
 			"lodash": "^4.8.2",
 			"parse-headers": "^2.0.1",
 			"regenerator-runtime": "^0.9.5"
@@ -37979,10 +37768,15 @@
 			"webpack-stream": "^3.1.0",
 			"yargs": "^4.7.1"
 		},
+		"directories": {},
+		"dist": {
+			"shasum": "02485bd217c657f48dc571a92acd3d6d90a43529",
+			"tarball": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.0-beta.20.tgz"
+		},
 		"engines": {
 			"node": ">=4.0"
 		},
-		"gitHead": "8dfe42b1d04666241aa40b44a5ed5d8df19442ac",
+		"gitHead": "b8e378ee8768df50bd58103536d08e9b534d2a88",
 		"homepage": "http://www.kinvey.com",
 		"keywords": [
 			"Kinvey",
@@ -37991,17 +37785,22 @@
 		],
 		"license": "Apache-2.0",
 		"main": "./dist/index.js",
+		"maintainers": [
+			{
+				"email": "opensource@kinvey.com",
+				"name": "kinvey"
+			},
+			{
+				"email": "thomas.conner@me.com",
+				"name": "thomas.conner"
+			}
+		],
 		"name": "kinvey-html5-sdk",
 		"optionalDependencies": {},
 		"peerDependencies": {
-			"es6-promise": "^3.2.1",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"lodash": "^4.8.2",
-			"parse-headers": "^2.0.1",
-			"regenerator-runtime": "^0.9.5"
+			"kinvey-javascript-sdk-core": "*"
 		},
-		"readme": "# Kinvey Html5 SDK\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\nThis node and bower module makes it very easy to connect your Html5 app with Kinvey.\n\n## How to use\n\n#### 1. Sign up for Kinvey\nTo use the SDK, sign up for Kinvey if you have not already done so. Go to the [sign up](https://console.kinvey.com/#signup) page, and follow the steps provided.\n\n#### 2. Install the SDK\nYou can install the module using npm:\n\n```bash\nnpm install kinvey-html5-sdk --save\n```\n\nor\n\n```bash\nbower install kinvey-html5-sdk --save\n```\n\n#### 3. Configure the SDK\nIf you installed the SDK with npm, import the library in your code using `require`.\n\n```javascript\nvar Kinvey = require('kinvey-html5-sdk');\n```\n\nIf you installed the SDK with bower, add a script tag to your main html file.\n\n```html\n<script src=\"bower_components/kinvey-html5-sdk/dist/kinvey-html5-sdk.min.js\"></script>\n```\n\nNext, use `Kinvey.init` to configure your app. Replace `<appKey>` and `<appSecret>` with your apps app key and secret. You can find these for your app using the [Kinvey Console App](https://console.kinvey.com).\n\n```javascript\nKinvey.init({\n    appKey: '<appKey>',\n    appSecret: '<appSecret>'\n});\n```\n\n#### 4. Verify Set Up\nYou can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the SDK can communicate with your app.\n\n```javascript\nKinvey.ping().then(function(response) {\n  console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);\n}).catch(function(error) {\n  console.log('Kinvey Ping Failed. Response: ' + error.message);\n});\n```\n\n## What’s next?\nYou are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/html5-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/html5-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/html5-v3.0/samples) to go straight to working projects.\n\n## Build\nThe simplest way to build the sdk is by running `gulp`. More advanced tasks are available.\n\n* `gulp build`: build the sdk\n* `gulp bump`: bump the pacakge version. Please see [Flags](#Flags).\n* `gulp bundle`: bundle the sdk for dist\n* `gulp clean`: remove files created by the build process\n* `gulp lint`: lint the src files\n* `gulp tag`: create a git tag for the version\n* `gulp upload`: upload dist files to AWS S3\n\n#### Flags\nThe following flags are available when running `gulp bump`:\n\n* `--type <major|minor|patch|prerelease>`: Bumps the package version using the [Semantic Version 2.0.0](http://semver.org/) spec. Defaults to `patch`.\n* `--version <version>`: Sets the package version to the provided version.\n\n## Test\n\nYou can run the tests using `npm test`.\n\n## Release\nThe workflow for releasing a new version of the sdk is as follows:\n\n1. Commit all changes on the develop branch.\n2. Checkout the master branch and merge the develop branch.\n3. Update the [Changelog](CHANGELOG.md).\n4. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.\n5. Run `gulp bundle` and commit file changes.\n6. Run `gulp tag`.\n6. Make sure all changes are committed on the master branch and push.\n7. Checkout the develop branch and merge the master branch.\n8. __Optional:__ Update Dev Center and Sample apps.\n\n*Note: The [HTML5 Release Job](https://build.kinvey.com/jenkins/view/Libraries/job/html5-sdk-release/) will upload the build to [AWS S3](https://aws.amazon.com/s3/) and publish the [pacakge](https://www.npmjs.com/package/kinvey-html5-sdk) on NPM.*\n\n## License\n\n    Copyright 2016 Kinvey, Inc.\n\n    Licensed under the Apache License, Version 2.0 (the \"License\");\n    you may not use this file except in compliance with the License.\n    You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n    Unless required by applicable law or agreed to in writing, software\n    distributed under the License is distributed on an \"AS IS\" BASIS,\n    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n    See the License for the specific language governing permissions and\n    limitations under the License.\n",
-		"readmeFilename": "README.md",
+		"readme": "ERROR: No README data found!",
 		"repository": {
 			"type": "git",
 			"url": "git+ssh://git@github.com/Kinvey/html5-sdk.git"
@@ -38011,16 +37810,16 @@
 			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
 			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
 		},
-		"version": "3.0.0-beta.19"
+		"version": "3.0.0-beta.20"
 	};
 
 /***/ },
-/* 331 */
+/* 324 */
 /***/ function(module, exports) {
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.0.0-beta.27",
+		"version": "3.0.0-beta.28",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -38042,16 +37841,15 @@
 			"test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover"
 		},
 		"dependencies": {
-			"kinvey-html5-sdk": "../../HTML5/SDK",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"kinvey-phonegap-sdk": "../../PhoneGap/SDK",
+			"kinvey-html5-sdk": "*",
+			"kinvey-javascript-sdk-core": "*",
+			"kinvey-phonegap-sdk": "*",
 			"regenerator-runtime": "^0.9.5"
 		},
 		"peerDependencies": {
-			"kinvey-html5-sdk": "../../HTML5/SDK",
-			"kinvey-javascript-sdk-core": "../../Core/SDK",
-			"kinvey-phonegap-sdk": "../../PhoneGap/SDK",
-			"regenerator-runtime": "^0.9.5"
+			"kinvey-html5-sdk": "*",
+			"kinvey-javascript-sdk-core": "*",
+			"kinvey-phonegap-sdk": "*"
 		},
 		"devDependencies": {
 			"babel-core": "^6.9.0",
@@ -38106,7 +37904,7 @@
 	};
 
 /***/ },
-/* 332 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38116,11 +37914,11 @@
 	});
 	exports.Popup = undefined;
 
-	var _popup = __webpack_require__(333);
+	var _popup = __webpack_require__(326);
 
-	var _popup2 = __webpack_require__(334);
+	var _popup2 = __webpack_require__(327);
 
-	var _device = __webpack_require__(328);
+	var _device = __webpack_require__(321);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -38140,7 +37938,7 @@
 	};
 
 /***/ },
-/* 333 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -38148,19 +37946,19 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.PhoneGapPopup = undefined;
+	exports.Popup = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(284);
+	var _events = __webpack_require__(277);
 
-	var _device = __webpack_require__(282);
+	var _device = __webpack_require__(275);
 
 	var _regeneratorRuntime = __webpack_require__(2);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
 
-	var _bind = __webpack_require__(285);
+	var _bind = __webpack_require__(278);
 
 	var _bind2 = _interopRequireDefault(_bind);
 
@@ -38175,15 +37973,15 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
 
 
-	var PhoneGapPopup = exports.PhoneGapPopup = function (_EventEmitter) {
-	  _inherits(PhoneGapPopup, _EventEmitter);
+	var Popup = exports.Popup = function (_EventEmitter) {
+	  _inherits(Popup, _EventEmitter);
 
-	  function PhoneGapPopup() {
-	    _classCallCheck(this, PhoneGapPopup);
+	  function Popup() {
+	    _classCallCheck(this, Popup);
 
 	    // Create some event listeners
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhoneGapPopup).call(this));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popup).call(this));
 
 	    _this.eventListeners = {
 	      loadStartCallback: (0, _bind2.default)(_this.loadStartCallback, _this),
@@ -38194,7 +37992,7 @@
 	    return _this;
 	  }
 
-	  _createClass(PhoneGapPopup, [{
+	  _createClass(Popup, [{
 	    key: 'open',
 	    value: function () {
 	      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee() {
@@ -38312,12 +38110,12 @@
 	    }
 	  }]);
 
-	  return PhoneGapPopup;
+	  return Popup;
 	}(_events.EventEmitter);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 334 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -38329,7 +38127,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(284);
+	var _events = __webpack_require__(277);
 
 	var _regeneratorRuntime = __webpack_require__(2);
 

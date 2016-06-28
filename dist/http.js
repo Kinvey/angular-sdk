@@ -26,6 +26,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // eslint-disable-line no-unused-vars
+var $injector = angular.injector(['ng']);
 
 var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
   _inherits(HttpMiddleware, _KinveyMiddleware);
@@ -40,7 +41,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
     key: 'handle',
     value: function () {
       var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
-        var url, method, headers, body, $injector, $http, response;
+        var url, method, headers, body, $http, response;
         return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -53,10 +54,9 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
                 method = request.method;
                 headers = request.headers;
                 body = request.body;
-                $injector = angular.injector(['ng']);
                 $http = $injector.get('$http');
-                _context.prev = 8;
-                _context.next = 11;
+                _context.prev = 7;
+                _context.next = 10;
                 return $http({
                   url: url,
                   method: method,
@@ -64,7 +64,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
                   data: body
                 });
 
-              case 11:
+              case 10:
                 response = _context.sent;
 
 
@@ -76,9 +76,9 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
 
                 return _context.abrupt('return', request);
 
-              case 16:
-                _context.prev = 16;
-                _context.t0 = _context['catch'](8);
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context['catch'](7);
 
                 request.response = {
                   statusCode: _context.t0.status,
@@ -88,12 +88,12 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
 
                 return _context.abrupt('return', request);
 
-              case 20:
+              case 19:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this, [[8, 16]]);
+        }, _callee, this, [[7, 15]]);
       }));
 
       function handle(_x) {
