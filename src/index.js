@@ -1,34 +1,34 @@
-import 'regenerator-runtime/runtime';
-import KinveyProvider from './provider';
-import { KinveyError } from 'kinvey-javascript-sdk-core/es5/errors';
-import { NetworkRack } from 'kinvey-javascript-sdk-core/es5/rack/rack';
-import { HttpMiddleware } from 'kinvey-javascript-sdk-core/es5/rack/middleware/http';
-import { AngularHttpMiddleware } from './http';
-import { AngularDevice } from './device';
-import { AngularPopup } from './popup';
+import 'regenerator-runtime';
+import { KinveyProvider } from './provider';
+import { KinveyError } from 'kinvey-javascript-sdk-core/dist/errors';
+import { KinveyRackManager } from 'kinvey-javascript-sdk-core/dist/rack/rack';
+import { CacheMiddleware as CoreCacheMiddleware } from 'kinvey-javascript-sdk-core/dist/rack/cache';
+import { CacheMiddleware } from 'kinvey-phonegap-sdk/dist/cache';
+import { HttpMiddleware as CoreHttpMiddleware } from 'kinvey-javascript-sdk-core/dist/rack/http';
+import { HttpMiddleware } from './http';
+import { Device } from './device';
+import { Popup } from './popup';
 
-// Add the Http Middleware to the network rack
-const networkRack = NetworkRack.sharedInstance();
-networkRack.swap(HttpMiddleware, new AngularHttpMiddleware());
+// Swap Cache Middelware
+const cacheRack = KinveyRackManager.cacheRack;
+cacheRack.swap(CoreCacheMiddleware, new CacheMiddleware());
 
-// Check that the device plugin is installed
-if (AngularDevice.isPhoneGap()) {
-  const onDeviceReady = () => {
-    document.removeEventListener('deviceready', onDeviceReady);
+// Swap Http middleware
+const networkRack = KinveyRackManager.networkRack;
+networkRack.swap(CoreHttpMiddleware, new HttpMiddleware());
 
-    if (typeof global.device === 'undefined') {
-      throw new KinveyError('Cordova Device Plugin is not installed.'
-        + ' Please refer to devcenter.kinvey.com/phonegap-v3.0/guides/getting-started for help with'
-        + ' setting up your project.');
-    }
-  };
-
-  document.addEventListener('deviceready', onDeviceReady, false);
-}
+// Check that the cordova device plugin is installed
+Device.ready().then(() => {
+  if (Device.isPhoneGap() && typeof global.device === 'undefined') {
+    throw new KinveyError('Cordova Device Plugin is not installed.'
+      + ' Please refer to devcenter.kinvey.com/phonegap-v3.0/guides/getting-started for help with'
+      + ' setting up your project.');
+  }
+});
 
 // Expose globals
-global.KinveyDevice = AngularDevice;
-global.KinveyPopup = AngularPopup;
+global.KinveyDevice = Device;
+global.KinveyPopup = Popup;
 
 // Register the SDK as a provider
 const ngKinvey = angular.module('kinvey', []);

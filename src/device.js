@@ -1,31 +1,16 @@
-import { PhoneGapDevice } from 'kinvey-phonegap-sdk/es5/device';
-import { Html5Device } from 'kinvey-html5-sdk/es5/device';
+import { Device as PhoneGapDevice } from 'kinvey-phonegap-sdk/dist/device';
+import { Device as Html5Device } from 'kinvey-html5-sdk/dist/device';
 import packageJSON from '../package.json';
 
 /**
  * @private
  */
-export class AngularDevice {
-  static isPhoneGap() {
-    return PhoneGapDevice.isPhoneGap();
-  }
-
-  static isBrowser() {
-    return PhoneGapDevice.isBrowser();
-  }
-
-  static isiOS() {
-    return PhoneGapDevice.isiOS();
-  }
-
-  static isAndroid() {
-    return PhoneGapDevice.isAndroid();
-  }
+export class Device extends PhoneGapDevice {
   static toJSON() {
     let json;
 
     // Get the correct device information
-    if (PhoneGapDevice.isPhoneGap()) {
+    if (Device.isPhoneGap()) {
       json = PhoneGapDevice.toJSON();
     } else {
       json = Html5Device.toJSON();
