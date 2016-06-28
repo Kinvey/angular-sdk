@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.0.0-beta.27",
+  "version": "3.0.0-beta.28",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -22,16 +22,15 @@
     "test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover"
   },
   "dependencies": {
-    "kinvey-html5-sdk": "../../HTML5/SDK",
-    "kinvey-javascript-sdk-core": "../../Core/SDK",
-    "kinvey-phonegap-sdk": "../../PhoneGap/SDK",
+    "kinvey-html5-sdk": "*",
+    "kinvey-javascript-sdk-core": "*",
+    "kinvey-phonegap-sdk": "*",
     "regenerator-runtime": "^0.9.5"
   },
   "peerDependencies": {
-    "kinvey-html5-sdk": "../../HTML5/SDK",
-    "kinvey-javascript-sdk-core": "../../Core/SDK",
-    "kinvey-phonegap-sdk": "../../PhoneGap/SDK",
-    "regenerator-runtime": "^0.9.5"
+    "kinvey-html5-sdk": "*",
+    "kinvey-javascript-sdk-core": "*",
+    "kinvey-phonegap-sdk": "*"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
