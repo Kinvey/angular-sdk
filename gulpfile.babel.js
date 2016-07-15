@@ -58,14 +58,20 @@ gulp.task('bundle', ['build'], () => {
     .pipe(gulpWebpack({
       context: `${__dirname}/dist`,
       entry: ['./index.js'],
-      output: {
-        filename: 'kinvey-angular-sdk.js'
+      externals: {
+        angular: {
+          var: 'angular'
+        }
       },
       module: {
         loaders: [
           { test: /\.json$/, loader: 'json' }
         ]
-      }
+      },
+      output: {
+        filename: 'kinvey-angular-sdk.js'
+      },
+      targert: 'web'
     }, webpack))
     .pipe(banner(header, { pkg: pkg }))
     .pipe(gulp.dest(`${__dirname}/dist`))
