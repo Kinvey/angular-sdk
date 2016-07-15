@@ -1,4 +1,7 @@
 ## Changelog
+### 3.0.0 (2016-07-15)
+* Enhancement: Release 3.0.0.
+
 ### 3.0.0-beta.28 (2016-06-28)
 * BugFix (MLIBZ-1155): Use `es6-promise` to polyfill browsers that don't support Promises natively.
 
