@@ -22,15 +22,15 @@
     "test:jenkins": "./node_modules/.bin/istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover"
   },
   "dependencies": {
-    "kinvey-html5-sdk": "3.0.0-beta.22",
+    "kinvey-html5-sdk": "^3.0.0",
     "kinvey-javascript-sdk-core": "3.0.0-beta.30",
-    "kinvey-phonegap-sdk": "3.0.0.beta.32",
+    "kinvey-phonegap-sdk": "^3.0.0",
     "regenerator-runtime": "^0.9.5"
   },
   "peerDependencies": {
-    "kinvey-html5-sdk": "3.0.0-beta.22",
+    "kinvey-html5-sdk": "^3.0.0",
     "kinvey-javascript-sdk-core": "3.0.0-beta.30",
-    "kinvey-phonegap-sdk": "3.0.0.beta.32"
+    "kinvey-phonegap-sdk": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.0",
