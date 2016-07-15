@@ -1,7 +1,5 @@
 'use strict';
 
-require('regenerator-runtime');
-
 var _provider = require('./provider');
 
 var _errors = require('kinvey-javascript-sdk-core/dist/errors');
@@ -19,6 +17,14 @@ var _http2 = require('./http');
 var _device = require('./device');
 
 var _popup = require('./popup');
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// eslint-disable-line import/no-unresolved
 
 // Swap Cache Middelware
 var cacheRack = _rack.KinveyRackManager.cacheRack;
@@ -40,5 +46,5 @@ global.KinveyDevice = _device.Device;
 global.KinveyPopup = _popup.Popup;
 
 // Register the SDK as a provider
-var ngKinvey = angular.module('kinvey', []);
+var ngKinvey = _angular2.default.module('kinvey', []);
 ngKinvey.provider('$kinvey', _provider.KinveyProvider);
