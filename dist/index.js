@@ -45,6 +45,9 @@ _device.Device.ready().then(function () {
 global.KinveyDevice = _device.Device;
 global.KinveyPopup = _popup.Popup;
 
-// Register the SDK as a provider
+// Create the kinvey angular module
 var ngKinvey = _angular2.default.module('kinvey', []);
 ngKinvey.provider('$kinvey', _provider.KinveyProvider);
+
+// Export
+module.exports = ngKinvey;
