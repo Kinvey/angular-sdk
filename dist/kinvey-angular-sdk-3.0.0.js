@@ -8,7 +8,17 @@
  *
  * Released under the Apache-2.0 license.
  */
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require(undefined));
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else {
+		var a = typeof exports === 'object' ? factory(require(undefined)) : factory(root[undefined]);
+		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
+	}
+})(this, function(__WEBPACK_EXTERNAL_MODULE_309__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
@@ -108,24 +118,12 @@
 	global.KinveyDevice = _device.Device;
 	global.KinveyPopup = _popup.Popup;
 
-	// Register the SDK as a provider
-	function getKinveyModule() {
-	  return _angular2.default.module('kinvey', []).provider('$kinvey', _provider.KinveyProvider);
-	}
+	// Create the kinvey angular module
+	var ngKinvey = _angular2.default.module('kinvey', []);
+	ngKinvey.provider('$kinvey', _provider.KinveyProvider);
 
-	// @see http://addyosmani.com/writing-modular-js/
-
-	if (typeof window.define === 'function' && window.define.amd !== undefined) {
-	  // AMD suppport
-	  window.define('kinvey', [], getKinveyModule());
-	} else if (typeof module !== 'undefined' && module.exports !== undefined) {
-	  // CommonJS suppport
-	  module.exports = getKinveyModule();
-	} else {
-	  // Default
-	  // make kinvey available globally
-	  getKinveyModule();
-	}
+	// Export
+	module.exports = ngKinvey;
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
@@ -36026,7 +36024,7 @@
 /* 309 */
 /***/ function(module, exports) {
 
-	module.exports = angular;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_309__;
 
 /***/ },
 /* 310 */
@@ -39114,4 +39112,6 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;

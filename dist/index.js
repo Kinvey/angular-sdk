@@ -45,21 +45,9 @@ _device.Device.ready().then(function () {
 global.KinveyDevice = _device.Device;
 global.KinveyPopup = _popup.Popup;
 
-// Register the SDK as a provider
-function getKinveyModule() {
-  return _angular2.default.module('kinvey', []).provider('$kinvey', _provider.KinveyProvider);
-}
+// Create the kinvey angular module
+var ngKinvey = _angular2.default.module('kinvey', []);
+ngKinvey.provider('$kinvey', _provider.KinveyProvider);
 
-// @see http://addyosmani.com/writing-modular-js/
-
-if (typeof window.define === 'function' && window.define.amd !== undefined) {
-  // AMD suppport
-  window.define('kinvey', [], getKinveyModule());
-} else if (typeof module !== 'undefined' && module.exports !== undefined) {
-  // CommonJS suppport
-  module.exports = getKinveyModule();
-} else {
-  // Default
-  // make kinvey available globally
-  getKinveyModule();
-}
+// Export
+module.exports = ngKinvey;
