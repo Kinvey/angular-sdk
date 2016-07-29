@@ -45,7 +45,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
   _createClass(HttpMiddleware, [{
     key: 'handle',
     value: function () {
-      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
+      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
         var url, method, headers, body, $http, response;
         return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
           while (1) {
@@ -102,7 +102,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
       }));
 
       function handle(_x) {
-        return _ref.apply(this, arguments);
+        return ref.apply(this, arguments);
       }
 
       return handle;

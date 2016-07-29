@@ -1,5 +1,5 @@
 /**
- * kinvey-angular-sdk v3.0.0
+ * kinvey-angular-sdk v3.0.1
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -10,14 +10,14 @@
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require(undefined));
+		module.exports = factory(require("angular"));
 	else if(typeof define === 'function' && define.amd)
-		define([], factory);
+		define(["angular"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require(undefined)) : factory(root[undefined]);
+		var a = typeof exports === 'object' ? factory(require("angular")) : factory(root["angular"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_309__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_318__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,17 +81,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cache = __webpack_require__(168);
 
-	var _cache2 = __webpack_require__(310);
+	var _cache2 = __webpack_require__(319);
 
 	var _http = __webpack_require__(191);
 
-	var _http2 = __webpack_require__(324);
+	var _http2 = __webpack_require__(333);
 
-	var _device = __webpack_require__(325);
+	var _device = __webpack_require__(334);
 
-	var _popup = __webpack_require__(329);
+	var _popup = __webpack_require__(338);
 
-	var _angular = __webpack_require__(309);
+	var _angular = __webpack_require__(318);
 
 	var _angular2 = _interopRequireDefault(_angular);
 
@@ -178,7 +178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _kinvey = __webpack_require__(4);
 
-	var _angular = __webpack_require__(309);
+	var _angular = __webpack_require__(318);
 
 	var _angular2 = _interopRequireDefault(_angular);
 
@@ -238,7 +238,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _kinvey = __webpack_require__(5);
 
-	var _push = __webpack_require__(277);
+	var _push = __webpack_require__(286);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -345,21 +345,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _endpoint = __webpack_require__(151);
 
-	var _log = __webpack_require__(202);
+	var _log = __webpack_require__(203);
 
-	var _metadata = __webpack_require__(204);
+	var _metadata = __webpack_require__(205);
 
 	var _query = __webpack_require__(11);
 
-	var _datastore = __webpack_require__(229);
+	var _datastore = __webpack_require__(230);
 
-	var _filestore = __webpack_require__(270);
+	var _filestore = __webpack_require__(271);
 
-	var _sync = __webpack_require__(250);
+	var _sync = __webpack_require__(251);
 
-	var _user = __webpack_require__(271);
+	var _user = __webpack_require__(272);
 
-	var _mic = __webpack_require__(273);
+	var _social = __webpack_require__(274);
 
 	var _network = __webpack_require__(201);
 
@@ -384,7 +384,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var appdataNamespace = process.env.KINVEY_DATASTORE_NAMESPACE || 'appdata';
 
 	/**
-	 * The Kinvey class is used as the entry point for the Kinvey JavaScript SDk.
+	 * The Kinvey class is used as the entry point for the Kinvey JavaScript SDK.
 	 */
 
 	var Kinvey = exports.Kinvey = function () {
@@ -434,14 +434,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      // Add all the modules to the Kinvey namespace
 	      this.Aggregation = _aggregation.Aggregation;
-	      this.AuthorizationGrant = _mic.AuthorizationGrant;
+	      this.AuthorizationGrant = _social.AuthorizationGrant;
 	      this.CustomEndpoint = _endpoint.CustomEndpoint;
 	      this.DataStore = _datastore.DataStore;
 	      this.DataStoreType = _datastore.DataStoreType;
 	      this.Files = new _filestore.FileStore();
 	      this.Metadata = _metadata.Metadata;
 	      this.Query = _query.Query;
-	      this.SocialIdentity = _mic.SocialIdentity;
+	      this.SocialIdentity = _social.SocialIdentity;
 	      this.Sync = _sync.Sync;
 	      this.User = _user.User;
 	      this.UserStore = _user.UserStore;
@@ -735,6 +735,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * @private
+	 */
 	var KinveyError = exports.KinveyError = function (_ExtendableError) {
 	  _inherits(KinveyError, _ExtendableError);
 
@@ -755,6 +758,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return KinveyError;
 	}(_es6Error2.default);
 
+	/**
+	 * @private
+	 */
+
+
 	var ActiveUserError = exports.ActiveUserError = function (_KinveyError) {
 	  _inherits(ActiveUserError, _KinveyError);
 
@@ -769,6 +777,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return ActiveUserError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var FeatureUnavailableError = exports.FeatureUnavailableError = function (_KinveyError2) {
 	  _inherits(FeatureUnavailableError, _KinveyError2);
@@ -785,6 +798,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return FeatureUnavailableError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var IncompleteRequestBodyError = exports.IncompleteRequestBodyError = function (_KinveyError3) {
 	  _inherits(IncompleteRequestBodyError, _KinveyError3);
 
@@ -799,6 +817,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return IncompleteRequestBodyError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var InsufficientCredentialsError = exports.InsufficientCredentialsError = function (_KinveyError4) {
 	  _inherits(InsufficientCredentialsError, _KinveyError4);
@@ -815,6 +838,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return InsufficientCredentialsError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var InvalidCredentialsError = exports.InvalidCredentialsError = function (_KinveyError5) {
 	  _inherits(InvalidCredentialsError, _KinveyError5);
 
@@ -829,6 +857,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return InvalidCredentialsError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var InvalidIdentifierError = exports.InvalidIdentifierError = function (_KinveyError6) {
 	  _inherits(InvalidIdentifierError, _KinveyError6);
@@ -845,6 +878,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return InvalidIdentifierError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var InvalidQuerySyntaxError = exports.InvalidQuerySyntaxError = function (_KinveyError7) {
 	  _inherits(InvalidQuerySyntaxError, _KinveyError7);
 
@@ -859,6 +897,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return InvalidQuerySyntaxError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var JSONParseError = exports.JSONParseError = function (_KinveyError8) {
 	  _inherits(JSONParseError, _KinveyError8);
@@ -875,6 +918,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return JSONParseError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var MissingQueryError = exports.MissingQueryError = function (_KinveyError9) {
 	  _inherits(MissingQueryError, _KinveyError9);
 
@@ -889,6 +937,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return MissingQueryError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var MissingRequestHeaderError = exports.MissingRequestHeaderError = function (_KinveyError10) {
 	  _inherits(MissingRequestHeaderError, _KinveyError10);
@@ -905,6 +958,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return MissingRequestHeaderError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var MissingRequestParameterError = exports.MissingRequestParameterError = function (_KinveyError11) {
 	  _inherits(MissingRequestParameterError, _KinveyError11);
 
@@ -919,6 +977,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return MissingRequestParameterError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var NoNetworkConnectionError = exports.NoNetworkConnectionError = function (_KinveyError12) {
 	  _inherits(NoNetworkConnectionError, _KinveyError12);
@@ -935,6 +998,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return NoNetworkConnectionError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var NoActiveUserError = exports.NoActiveUserError = function (_KinveyError13) {
 	  _inherits(NoActiveUserError, _KinveyError13);
 
@@ -949,6 +1017,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return NoActiveUserError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var NotFoundError = exports.NotFoundError = function (_KinveyError14) {
 	  _inherits(NotFoundError, _KinveyError14);
@@ -965,6 +1038,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return NotFoundError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var NoResponseError = exports.NoResponseError = function (_KinveyError15) {
 	  _inherits(NoResponseError, _KinveyError15);
 
@@ -979,6 +1057,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return NoResponseError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var ParameterValueOutOfRangeError = exports.ParameterValueOutOfRangeError = function (_KinveyError16) {
 	  _inherits(ParameterValueOutOfRangeError, _KinveyError16);
@@ -995,6 +1078,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return ParameterValueOutOfRangeError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var QueryError = exports.QueryError = function (_KinveyError17) {
 	  _inherits(QueryError, _KinveyError17);
 
@@ -1010,6 +1098,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return QueryError;
 	}(KinveyError);
 
+	/**
+	 * @private
+	 */
+
+
 	var ServerError = exports.ServerError = function (_KinveyError18) {
 	  _inherits(ServerError, _KinveyError18);
 
@@ -1024,6 +1117,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return ServerError;
 	}(KinveyError);
+
+	/**
+	 * @private
+	 */
+
 
 	var SyncError = exports.SyncError = function (_KinveyError19) {
 	  _inherits(SyncError, _KinveyError19);
@@ -1170,6 +1268,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+	/**
+	 * @private
+	 */
 	var Aggregation = exports.Aggregation = function () {
 	  function Aggregation(options) {
 	    _classCallCheck(this, Aggregation);
@@ -1455,7 +1556,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {number} [options.skip=0] Number of entities to skip from the start.
 	   * @return {Query} The query.
 	   */
-
 	  function Query(options) {
 	    _classCallCheck(this, Query);
 
@@ -7494,7 +7594,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *   appSecret: '<appSecret>'
 	   * });
 	   */
-
 	  function Client() {
 	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
@@ -7538,27 +7637,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.micHost = options.micHost;
 
 	    /**
-	     * @type {string|undefined}
+	     * @type {?string}
 	     */
 	    this.appKey = options.appKey;
 
 	    /**
-	     * @type {string|undefined}
+	     * @type {?string}
 	     */
 	    this.appSecret = options.appSecret;
 
 	    /**
-	     * @type {string|undefined}
+	     * @type {?string}
 	     */
 	    this.masterSecret = options.masterSecret;
 
 	    /**
-	     * @type {string|undefined}
+	     * @type {?string}
 	     */
 	    this.encryptionKey = options.encryptionKey;
 
 	    /**
-	     * @type {string|undefined}
+	     * @type {?string}
 	     */
 	    this.appVersion = options.appVersion;
 	  }
@@ -7678,17 +7777,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Active social identity being used to authorize a user for your
-	     * app.
-	     */
-
-	  }, {
-	    key: 'activeSocialIdentity',
-	    get: function get() {
-	      return (0, _storage.getActiveSocialIdentity)(this);
-	    }
-
-	    /**
 	     * The version of your app. It will sent with Kinvey API requests
 	     * using the X-Kinvey-Api-Version header.
 	     */
@@ -7757,10 +7845,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.getActiveUser = getActiveUser;
 	exports.setActiveUser = setActiveUser;
-	exports.getActiveSocialIdentity = getActiveSocialIdentity;
-	exports.setActiveSocialIdentity = setActiveSocialIdentity;
-	exports.getSyncKey = getSyncKey;
-	exports.setSyncKey = setSyncKey;
+	exports.getIdentitySession = getIdentitySession;
+	exports.setIdentitySession = setIdentitySession;
 
 	var _localStorage = __webpack_require__(142);
 
@@ -7769,15 +7855,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var userCollectionName = process.env.KINVEY_USER_COLLECTION_NAME || 'kinvey_user';
-	var socialIdentityCollectionName = process.env.KINVEY_SOCIAL_IDENTITY_COLLECTION_NAME || 'kinvey_socialIdentity';
-	var syncKeyCollectionName = process.env.KINVEY_SYNC_KEY_COLLECTION_NAME || 'kinvey_syncKey';
 
-	// Get the active user
+	/**
+	 * @private
+	 */
 	function getActiveUser(client) {
 	  return _localStorage2.default.get('' + client.appKey + userCollectionName);
 	}
 
-	// Set the active user
+	/**
+	 * @private
+	 */
 	function setActiveUser(client, data) {
 	  if (data) {
 	    try {
@@ -7790,40 +7878,26 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return _localStorage2.default.remove('' + client.appKey + userCollectionName);
 	}
 
-	// Get the active social identity
-	function getActiveSocialIdentity(client) {
-	  return _localStorage2.default.get('' + client.appKey + socialIdentityCollectionName);
+	/**
+	 * @private
+	 */
+	function getIdentitySession(client, identity) {
+	  return _localStorage2.default.get('' + client.appKey + identity);
 	}
 
-	// Set the active social identity
-	function setActiveSocialIdentity(client, data) {
-	  if (data) {
+	/**
+	 * @private
+	 */
+	function setIdentitySession(client, identity, session) {
+	  if (session) {
 	    try {
-	      return _localStorage2.default.set('' + client.appKey + socialIdentityCollectionName, data);
+	      return _localStorage2.default.set('' + client.appKey + identity, session);
 	    } catch (error) {
 	      return false;
 	    }
 	  }
 
-	  return _localStorage2.default.remove('' + client.appKey + socialIdentityCollectionName);
-	}
-
-	// Get the sync key
-	function getSyncKey(client) {
-	  return _localStorage2.default.get('' + client.appKey + syncKeyCollectionName);
-	}
-
-	// Set the sync key
-	function setSyncKey(client, key) {
-	  if (key) {
-	    try {
-	      return _localStorage2.default.set('' + client.appKey + syncKeyCollectionName, key);
-	    } catch (error) {
-	      return false;
-	    }
-	  }
-
-	  return _localStorage2.default.remove('' + client.appKey + syncKeyCollectionName);
+	  return _localStorage2.default.remove('' + client.appKey + identity);
 	}
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
@@ -9482,7 +9556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var rpcNamespace = process.env.KINVEY_RPC_NAMESPACE || 'rpc';
 
 	/**
-	 * Executes a custom command.
+	 * Executes a custom endpoint on the Kinvey backend.
 	 */
 
 	var CustomEndpoint = exports.CustomEndpoint = function () {
@@ -9688,6 +9762,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
+	 * @private
 	 * Enum for Auth types.
 	 */
 	var AuthType = {
@@ -9725,7 +9800,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @returns {Object}
 	   */
-
 	  all: function all(client) {
 	    try {
 	      return Auth.session(client);
@@ -9813,6 +9887,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 	  }
 	};
+
+	/**
+	 * @private
+	 */
 
 	var Headers = exports.Headers = function () {
 	  function Headers() {
@@ -9929,6 +10007,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return Headers;
 	}();
 
+	/**
+	 * @private
+	 */
+
+
 	var Properties = exports.Properties = function () {
 	  function Properties() {
 	    var properties = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -10024,6 +10107,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return Properties;
 	}();
+
+	/**
+	 * @private
+	 */
+
 
 	var RequestConfig = exports.RequestConfig = function () {
 	  function RequestConfig() {
@@ -10145,6 +10233,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return RequestConfig;
 	}();
+
+	/**
+	 * @private
+	 */
+
 
 	var KinveyRequestConfig = exports.KinveyRequestConfig = function (_RequestConfig) {
 	  _inherits(KinveyRequestConfig, _RequestConfig);
@@ -12417,7 +12510,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
-
 	var KinveyRack = exports.KinveyRack = function (_Rack) {
 	  _inherits(KinveyRack, _Rack);
 
@@ -14561,7 +14653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'handle',
 	    value: function () {
 	      var _ref12 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee12(request) {
-	        var _request, method, query, body, appKey, collection, entityId, db, data;
+	        var _request, method, query, body, appKey, collection, entityId, client, encryptionKey, db, data;
 
 	        return _regeneratorRuntime2.default.wrap(function _callee12$(_context12) {
 	          while (1) {
@@ -14579,123 +14671,125 @@ return /******/ (function(modules) { // webpackBootstrap
 	                appKey = _request.appKey;
 	                collection = _request.collection;
 	                entityId = _request.entityId;
-	                db = this.openDatabase(appKey);
+	                client = _request.client;
+	                encryptionKey = client.encryptionKey;
+	                db = this.openDatabase(appKey, encryptionKey);
 	                data = void 0;
 
 	                if (!(method === _request2.RequestMethod.GET)) {
-	                  _context12.next = 36;
+	                  _context12.next = 38;
 	                  break;
 	                }
 
 	                if (!entityId) {
-	                  _context12.next = 31;
+	                  _context12.next = 33;
 	                  break;
 	                }
 
 	                if (!(entityId === '_count')) {
-	                  _context12.next = 20;
+	                  _context12.next = 22;
 	                  break;
 	                }
 
-	                _context12.next = 17;
+	                _context12.next = 19;
 	                return db.count(collection, query);
 
-	              case 17:
+	              case 19:
 	                data = _context12.sent;
-	                _context12.next = 29;
+	                _context12.next = 31;
 	                break;
 
-	              case 20:
+	              case 22:
 	                if (!(entityId === '_group')) {
-	                  _context12.next = 26;
+	                  _context12.next = 28;
 	                  break;
 	                }
 
-	                _context12.next = 23;
+	                _context12.next = 25;
 	                return db.group(collection, body);
 
-	              case 23:
+	              case 25:
 	                data = _context12.sent;
-	                _context12.next = 29;
+	                _context12.next = 31;
 	                break;
-
-	              case 26:
-	                _context12.next = 28;
-	                return db.findById(collection, request.entityId);
 
 	              case 28:
-	                data = _context12.sent;
+	                _context12.next = 30;
+	                return db.findById(collection, request.entityId);
 
-	              case 29:
-	                _context12.next = 34;
-	                break;
+	              case 30:
+	                data = _context12.sent;
 
 	              case 31:
-	                _context12.next = 33;
-	                return db.find(collection, query);
-
-	              case 33:
-	                data = _context12.sent;
-
-	              case 34:
-	                _context12.next = 58;
+	                _context12.next = 36;
 	                break;
 
+	              case 33:
+	                _context12.next = 35;
+	                return db.find(collection, query);
+
+	              case 35:
+	                data = _context12.sent;
+
 	              case 36:
+	                _context12.next = 60;
+	                break;
+
+	              case 38:
 	                if (!(method === _request2.RequestMethod.POST || method === _request2.RequestMethod.PUT)) {
-	                  _context12.next = 42;
+	                  _context12.next = 44;
 	                  break;
 	                }
 
-	                _context12.next = 39;
+	                _context12.next = 41;
 	                return db.save(collection, body);
 
-	              case 39:
+	              case 41:
 	                data = _context12.sent;
-	                _context12.next = 58;
+	                _context12.next = 60;
 	                break;
 
-	              case 42:
+	              case 44:
 	                if (!(method === _request2.RequestMethod.DELETE)) {
-	                  _context12.next = 58;
+	                  _context12.next = 60;
 	                  break;
 	                }
 
 	                if (!(collection && entityId)) {
-	                  _context12.next = 49;
+	                  _context12.next = 51;
 	                  break;
 	                }
 
-	                _context12.next = 46;
+	                _context12.next = 48;
 	                return db.removeById(collection, entityId);
 
-	              case 46:
+	              case 48:
 	                data = _context12.sent;
-	                _context12.next = 58;
+	                _context12.next = 60;
 	                break;
 
-	              case 49:
+	              case 51:
 	                if (collection) {
-	                  _context12.next = 55;
+	                  _context12.next = 57;
 	                  break;
 	                }
 
-	                _context12.next = 52;
+	                _context12.next = 54;
 	                return db.clear();
 
-	              case 52:
+	              case 54:
 	                data = _context12.sent;
-	                _context12.next = 58;
+	                _context12.next = 60;
 	                break;
 
-	              case 55:
-	                _context12.next = 57;
+	              case 57:
+	                _context12.next = 59;
 	                return db.remove(collection, query);
 
-	              case 57:
+	              case 59:
 	                data = _context12.sent;
 
-	              case 58:
+	              case 60:
 
 	                request.response = {
 	                  statusCode: method === _request2.RequestMethod.POST ? _response.StatusCode.Created : _response.StatusCode.Ok,
@@ -14709,7 +14803,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                return _context12.abrupt('return', request);
 
-	              case 61:
+	              case 63:
 	              case 'end':
 	                return _context12.stop();
 	            }
@@ -14765,7 +14859,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
-
 	var KinveyMiddleware = exports.KinveyMiddleware = function (_Middleware) {
 	  _inherits(KinveyMiddleware, _Middleware);
 
@@ -14840,7 +14933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
-	 * @provate
+	 * @private
 	 * Enum for Status Codes.
 	 */
 	var StatusCode = {
@@ -14856,6 +14949,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	Object.freeze(StatusCode);
 	exports.StatusCode = StatusCode;
+
+	/**
+	 * @private
+	 */
 
 	var ResponseConfig = exports.ResponseConfig = function () {
 	  function ResponseConfig() {
@@ -14898,6 +14995,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return ResponseConfig;
 	}();
+
+	/**
+	 * @private
+	 */
+
 
 	var KinveyResponseConfig = exports.KinveyResponseConfig = function (_ResponseConfig) {
 	  _inherits(KinveyResponseConfig, _ResponseConfig);
@@ -14979,6 +15081,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  return Response;
 	}();
+
+	/**
+	 * @private
+	 */
+
 
 	var KinveyResponse = exports.KinveyResponse = function (_Response) {
 	  _inherits(KinveyResponse, _Response);
@@ -16735,7 +16842,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
-
 	var ParseMiddleware = exports.ParseMiddleware = function (_KinveyMiddleware) {
 	  _inherits(ParseMiddleware, _KinveyMiddleware);
 
@@ -16838,7 +16944,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
-
 	var SerializeMiddleware = exports.SerializeMiddleware = function (_KinveyMiddleware) {
 	  _inherits(SerializeMiddleware, _KinveyMiddleware);
 
@@ -16998,6 +17103,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// eslint-disable-line no-unused-vars
 
+	/**
+	 * @private
+	 */
 	var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
 	  _inherits(HttpMiddleware, _KinveyMiddleware);
 
@@ -18217,7 +18325,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _response2 = __webpack_require__(170);
+	var _response = __webpack_require__(170);
+
+	var _enums = __webpack_require__(202);
 
 	var _storage = __webpack_require__(141);
 
@@ -18228,6 +18338,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _url = __webpack_require__(145);
 
 	var _url2 = _interopRequireDefault(_url);
+
+	var _assign = __webpack_require__(121);
+
+	var _assign2 = _interopRequireDefault(_assign);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18241,7 +18355,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	var socialIdentityAttribute = process.env.KINVEY_SOCIAL_IDENTITY_ATTRIBUTE || '_socialIdentity';
-	var micIdentity = process.env.KINVEY_MIC_IDENTITY || 'kinveyAuth';
 	var tokenPathname = process.env.KINVEY_MIC_TOKEN_PATHNAME || '/oauth/token';
 	var usersNamespace = process.env.KINVEY_USERS_NAMESPACE || 'user';
 
@@ -18252,13 +18365,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	var NetworkRequest = exports.NetworkRequest = function (_KinveyRequest) {
 	  _inherits(NetworkRequest, _KinveyRequest);
 
-	  function NetworkRequest(options) {
+	  function NetworkRequest() {
+	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
 	    _classCallCheck(this, NetworkRequest);
 
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(NetworkRequest).call(this, options));
 
 	    _this.rack = _rack.KinveyRackManager.networkRack;
-	    _this.automaticallyRefreshAuthToken = true;
 	    return _this;
 	  }
 
@@ -18267,9 +18381,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function () {
 	      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee() {
 	        var rawResponse = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
-
-	        var response, activeSocialIdentity, token, config, refreshTokenRequest, newToken, activeUser, socialIdentity, data, loginRequest, user, _response;
-
+	        var response, micSession, refreshMICRequestConfig, refreshMICRequest, newMicSession, data, loginRequestConfig, loginRequest, activeUser;
 	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
 	          while (1) {
 	            switch (_context.prev = _context.next) {
@@ -18296,8 +18408,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	              case 9:
 
-	                if (!(response instanceof _response2.KinveyResponse)) {
-	                  response = new _response2.KinveyResponse(new _response2.KinveyResponseConfig({
+	                if (!(response instanceof _response.KinveyResponse)) {
+	                  response = new _response.KinveyResponse(new _response.KinveyResponseConfig({
 	                    statusCode: response.statusCode,
 	                    headers: response.headers,
 	                    data: response.data
@@ -18318,63 +18430,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	                _context.prev = 15;
 	                _context.t0 = _context['catch'](0);
 
-	                if (!(_context.t0 instanceof _errors.InvalidCredentialsError && this.automaticallyRefreshAuthToken)) {
-	                  _context.next = 53;
+	                if (!(_context.t0 instanceof _errors.InvalidCredentialsError)) {
+	                  _context.next = 38;
 	                  break;
 	                }
 
-	                this.automaticallyRefreshAuthToken = false;
-	                activeSocialIdentity = this.client ? this.client.activeSocialIdentity : undefined;
+	                // Retrieve the MIC session
+	                micSession = (0, _storage.getIdentitySession)(this.client, _enums.SocialIdentity.MobileIdentityConnect);
+
+	                if (!micSession) {
+	                  _context.next = 38;
+	                  break;
+	                }
 
 	                // Refresh MIC Auth Token
-
-	                if (!(activeSocialIdentity && activeSocialIdentity.identity === micIdentity)) {
-	                  _context.next = 53;
-	                  break;
-	                }
-
-	                // Refresh the token
-	                token = activeSocialIdentity.token;
-	                config = new _request.KinveyRequestConfig({
+	                refreshMICRequestConfig = new _request.KinveyRequestConfig({
 	                  method: _request.RequestMethod.POST,
+	                  headers: {
+	                    'Content-Type': 'application/x-www-form-urlencoded'
+	                  },
 	                  authType: _request.AuthType.App,
 	                  url: _url2.default.format({
-	                    protocol: activeSocialIdentity.client.micProtocol,
-	                    host: activeSocialIdentity.client.micHost,
+	                    protocol: micSession.protocol || this.client.micProtocol,
+	                    host: micSession.host || this.client.micHost,
 	                    pathname: tokenPathname
 	                  }),
-	                  properties: this.properties,
 	                  body: {
 	                    grant_type: 'refresh_token',
-	                    client_id: token.audience,
-	                    redirect_uri: activeSocialIdentity.redirectUri,
-	                    refresh_token: token.refresh_token
-	                  }
+	                    client_id: micSession.client_id,
+	                    redirect_uri: micSession.redirect_uri,
+	                    refresh_token: micSession.refresh_token
+	                  },
+	                  timeout: this.timeout,
+	                  properties: this.properties
 	                });
-
-	                config.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	                refreshTokenRequest = new NetworkRequest(config);
-
-	                refreshTokenRequest.automaticallyRefreshAuthToken = false;
-	                _context.next = 28;
-	                return refreshTokenRequest.execute().then(function (response) {
+	                refreshMICRequest = new NetworkRequest(refreshMICRequestConfig);
+	                _context.next = 24;
+	                return refreshMICRequest.execute().then(function (response) {
 	                  return response.data;
 	                });
 
-	              case 28:
-	                newToken = _context.sent;
+	              case 24:
+	                newMicSession = _context.sent;
 
+	                micSession = (0, _assign2.default)(micSession, newMicSession);
 
-	                // Login the user with the new token
-	                activeUser = this.client.activeUser;
-	                socialIdentity = activeUser[socialIdentityAttribute];
-
-	                socialIdentity[activeSocialIdentity.identity] = newToken;
+	                // Login the user with the new mic session
 	                data = {};
 
-	                data[socialIdentityAttribute] = socialIdentity;
+	                data[socialIdentityAttribute] = {};
+	                data[socialIdentityAttribute][_enums.SocialIdentity.MobileIdentityConnect] = micSession;
 
-	                loginRequest = new NetworkRequest({
+	                // Login the user
+	                loginRequestConfig = new _request.KinveyRequestConfig({
 	                  method: _request.RequestMethod.POST,
 	                  authType: _request.AuthType.App,
 	                  url: _url2.default.format({
@@ -18383,59 +18491,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    pathname: '/' + usersNamespace + '/' + this.client.appKey + '/login'
 	                  }),
 	                  properties: this.properties,
-	                  data: data,
+	                  body: data,
 	                  timeout: this.timeout,
 	                  client: this.client
 	                });
+	                loginRequest = new NetworkRequest(loginRequestConfig);
 
 	                loginRequest.automaticallyRefreshAuthToken = false;
-	                _context.next = 38;
+	                _context.next = 34;
 	                return loginRequest.execute().then(function (response) {
 	                  return response.data;
 	                });
 
+	              case 34:
+	                activeUser = _context.sent;
+
+
+	                // Store the updated active user
+	                (0, _storage.setActiveUser)(this.client, activeUser);
+
+	                // Store the updated mic session
+	                (0, _storage.setIdentitySession)(this.client, _enums.SocialIdentity.MobileIdentityConnect, micSession);
+
+	                // Execute the original request
+	                return _context.abrupt('return', this.execute());
+
 	              case 38:
-	                user = _context.sent;
-
-
-	                // Store the new data
-	                (0, _storage.setActiveUser)(this.client, user);
-	                (0, _storage.setActiveSocialIdentity)(this.client, {
-	                  identity: activeSocialIdentity.identity,
-	                  redirectUri: activeSocialIdentity.redirectUri,
-	                  token: user[socialIdentityAttribute][activeSocialIdentity.identity],
-	                  client: activeSocialIdentity.client
-	                });
-
-	                _context.prev = 41;
-	                _context.next = 44;
-	                return this.execute();
-
-	              case 44:
-	                _response = _context.sent;
-
-	                this.automaticallyRefreshAuthToken = true;
-	                return _context.abrupt('return', _response);
-
-	              case 49:
-	                _context.prev = 49;
-	                _context.t1 = _context['catch'](41);
-
-	                this.automaticallyRefreshAuthToken = true;
-	                throw _context.t1;
-
-	              case 53:
 	                throw _context.t0;
 
-	              case 54:
+	              case 39:
 	              case 'end':
 	                return _context.stop();
 	            }
 	          }
-	        }, _callee, this, [[0, 15], [41, 49]]);
+	        }, _callee, this, [[0, 15]]);
 	      }));
 
-	      function execute(_x) {
+	      function execute(_x2) {
 	        return _ref.apply(this, arguments);
 	      }
 
@@ -18461,6 +18553,31 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/**
+	 * @private
+	 * Enum for Social Identities
+	 */
+	var SocialIdentity = {
+	  Facebook: 'facebook',
+	  Google: 'google',
+	  Kinvey: process.env.KINVEY_IDENTITY || 'kinvey',
+	  LinkedIn: 'linkedin',
+	  MobileIdentityConnect: process.env.KINVEY_MIC_IDENTITY || 'kinveyAuth',
+	  Windows: 'windows'
+	};
+	Object.freeze(SocialIdentity);
+	exports.SocialIdentity = SocialIdentity;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
@@ -18468,7 +18585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.Log = undefined;
 
-	var _loglevel = __webpack_require__(203);
+	var _loglevel = __webpack_require__(204);
 
 	var _loglevel2 = _interopRequireDefault(_loglevel);
 
@@ -18476,6 +18593,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var originalFactory = _loglevel2.default.methodFactory;
 
+	/**
+	 * @private
+	 */
 	_loglevel2.default.methodFactory = function methodFactory(methodName, logLevel, loggerName) {
 	  var rawMethod = originalFactory(methodName, logLevel, loggerName);
 
@@ -18494,11 +18614,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	};
 
+	/**
+	 * @private
+	 */
 	_loglevel2.default.setDefaultLevel(_loglevel2.default.levels.SILENT);
+
+	/**
+	 * @private
+	 */
 	exports.Log = _loglevel2.default;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -18727,7 +18854,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -18741,7 +18868,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _clone = __webpack_require__(205);
+	var _clone = __webpack_require__(206);
 
 	var _clone2 = _interopRequireDefault(_clone);
 
@@ -18756,7 +18883,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var kmdAttribute = process.env.KINVEY_KMD_ATTRIBUTE || '_kmd';
 
 	/**
-	 * Wrapper for accessing the `_kmd` properties of an entity.
+	 * The Metadata class is used to as a wrapper for accessing the `_kmd` properties of an entity.
 	 */
 
 	var Metadata = exports.Metadata = function () {
@@ -18836,10 +18963,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseClone = __webpack_require__(206);
+	var baseClone = __webpack_require__(207);
 
 	/**
 	 * Creates a shallow clone of `value`.
@@ -18875,21 +19002,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(42),
 	    arrayEach = __webpack_require__(14),
 	    assignValue = __webpack_require__(122),
-	    baseAssign = __webpack_require__(207),
-	    cloneBuffer = __webpack_require__(208),
-	    copyArray = __webpack_require__(209),
-	    copySymbols = __webpack_require__(210),
-	    getAllKeys = __webpack_require__(213),
+	    baseAssign = __webpack_require__(208),
+	    cloneBuffer = __webpack_require__(209),
+	    copyArray = __webpack_require__(210),
+	    copySymbols = __webpack_require__(211),
+	    getAllKeys = __webpack_require__(214),
 	    getTag = __webpack_require__(94),
-	    initCloneArray = __webpack_require__(216),
-	    initCloneByTag = __webpack_require__(217),
-	    initCloneObject = __webpack_require__(227),
+	    initCloneArray = __webpack_require__(217),
+	    initCloneByTag = __webpack_require__(218),
+	    initCloneObject = __webpack_require__(228),
 	    isArray = __webpack_require__(34),
 	    isBuffer = __webpack_require__(134),
 	    isHostObject = __webpack_require__(63),
@@ -19020,7 +19147,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(123),
@@ -19043,7 +19170,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports) {
 
 	/**
@@ -19067,7 +19194,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports) {
 
 	/**
@@ -19093,11 +19220,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(123),
-	    getSymbols = __webpack_require__(211);
+	    getSymbols = __webpack_require__(212);
 
 	/**
 	 * Copies own symbol properties of `source` to `object`.
@@ -19115,10 +19242,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var stubArray = __webpack_require__(212);
+	var stubArray = __webpack_require__(213);
 
 	/** Built-in value references. */
 	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
@@ -19145,7 +19272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports) {
 
 	/**
@@ -19174,11 +19301,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseGetAllKeys = __webpack_require__(214),
-	    getSymbols = __webpack_require__(211),
+	var baseGetAllKeys = __webpack_require__(215),
+	    getSymbols = __webpack_require__(212),
 	    keys = __webpack_require__(19);
 
 	/**
@@ -19196,10 +19323,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(215),
+	var arrayPush = __webpack_require__(216),
 	    isArray = __webpack_require__(34);
 
 	/**
@@ -19222,7 +19349,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports) {
 
 	/**
@@ -19248,7 +19375,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -19280,16 +19407,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 217 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(218),
-	    cloneDataView = __webpack_require__(219),
-	    cloneMap = __webpack_require__(220),
-	    cloneRegExp = __webpack_require__(222),
-	    cloneSet = __webpack_require__(223),
-	    cloneSymbol = __webpack_require__(225),
-	    cloneTypedArray = __webpack_require__(226);
+	var cloneArrayBuffer = __webpack_require__(219),
+	    cloneDataView = __webpack_require__(220),
+	    cloneMap = __webpack_require__(221),
+	    cloneRegExp = __webpack_require__(223),
+	    cloneSet = __webpack_require__(224),
+	    cloneSymbol = __webpack_require__(226),
+	    cloneTypedArray = __webpack_require__(227);
 
 	/** `Object#toString` result references. */
 	var boolTag = '[object Boolean]',
@@ -19366,7 +19493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 218 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Uint8Array = __webpack_require__(90);
@@ -19388,10 +19515,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 219 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(218);
+	var cloneArrayBuffer = __webpack_require__(219);
 
 	/**
 	 * Creates a clone of `dataView`.
@@ -19410,10 +19537,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 220 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addMapEntry = __webpack_require__(221),
+	var addMapEntry = __webpack_require__(222),
 	    arrayReduce = __webpack_require__(166),
 	    mapToArray = __webpack_require__(91);
 
@@ -19435,7 +19562,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 221 */
+/* 222 */
 /***/ function(module, exports) {
 
 	/**
@@ -19456,7 +19583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 222 */
+/* 223 */
 /***/ function(module, exports) {
 
 	/** Used to match `RegExp` flags from their coerced string values. */
@@ -19479,10 +19606,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 223 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var addSetEntry = __webpack_require__(224),
+	var addSetEntry = __webpack_require__(225),
 	    arrayReduce = __webpack_require__(166),
 	    setToArray = __webpack_require__(92);
 
@@ -19504,7 +19631,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 224 */
+/* 225 */
 /***/ function(module, exports) {
 
 	/**
@@ -19524,7 +19651,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 225 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Symbol = __webpack_require__(89);
@@ -19548,10 +19675,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 226 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var cloneArrayBuffer = __webpack_require__(218);
+	var cloneArrayBuffer = __webpack_require__(219);
 
 	/**
 	 * Creates a clone of `typedArray`.
@@ -19570,10 +19697,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 227 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(228),
+	var baseCreate = __webpack_require__(229),
 	    getPrototype = __webpack_require__(21),
 	    isPrototype = __webpack_require__(37);
 
@@ -19594,7 +19721,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 228 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isObject = __webpack_require__(31);
@@ -19618,7 +19745,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 229 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -19635,9 +19762,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _cache = __webpack_require__(230);
+	var _cache = __webpack_require__(231);
 
-	var _deltafetch = __webpack_require__(231);
+	var _deltafetch = __webpack_require__(232);
 
 	var _network = __webpack_require__(201);
 
@@ -19645,13 +19772,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _query4 = __webpack_require__(11);
 
-	var _observable = __webpack_require__(232);
+	var _observable = __webpack_require__(233);
 
 	var _client = __webpack_require__(140);
 
-	var _sync = __webpack_require__(250);
+	var _sync = __webpack_require__(251);
 
-	var _metadata = __webpack_require__(204);
+	var _metadata = __webpack_require__(205);
 
 	var _es6Promise = __webpack_require__(171);
 
@@ -19659,7 +19786,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
 
-	var _differenceBy = __webpack_require__(251);
+	var _differenceBy = __webpack_require__(252);
 
 	var _differenceBy2 = _interopRequireDefault(_differenceBy);
 
@@ -19675,7 +19802,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _filter = __webpack_require__(262);
+	var _filter = __webpack_require__(263);
 
 	var _filter2 = _interopRequireDefault(_filter);
 
@@ -19683,7 +19810,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _xorWith = __webpack_require__(265);
+	var _xorWith = __webpack_require__(266);
 
 	var _xorWith2 = _interopRequireDefault(_xorWith);
 
@@ -19719,7 +19846,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.DataStoreType = DataStoreType;
 
 	/**
-	 * @private
+	 * The NetworkStore class is used to find, create, update, remove, count and group entities over the network.
 	 */
 
 	var NetworkStore = exports.NetworkStore = function () {
@@ -20462,7 +20589,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}();
 
 	/**
-	 * @private
+	 * The CacheStore class is used to find, create, update, remove, count and group entities. Entities are stored
+	 * in a cache and synced with the backend.
 	 */
 
 
@@ -20477,7 +20605,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * @type {number|undefined}
 	     */
-
 	    var _this8 = _possibleConstructorReturn(this, Object.getPrototypeOf(CacheStore).call(this, collection, options));
 
 	    _this8.ttl = options.ttl || undefined;
@@ -21703,7 +21830,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(NetworkStore);
 
 	/**
-	 * @private
+	 * The SyncStore class is used to find, create, update, remove, count and group entities. Entities are stored
+	 * in a cache and synced with the backend.
 	 */
 
 
@@ -22052,11 +22180,24 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return store;
 	    }
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'getInstance',
 	    value: function getInstance(collection, type, options) {
 	      return this.collection(collection, type, options);
 	    }
+
+	    /**
+	     * Clear the cache. This will delete all data in the cache.
+	     *
+	     * @param  {Object} [options={}] Options
+	     * @return {Promise<Object>} The result of clearing the cache.
+	     */
+
 	  }, {
 	    key: 'clearCache',
 	    value: function () {
@@ -22111,7 +22252,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 230 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22152,7 +22293,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
-
 	var CacheRequest = exports.CacheRequest = function (_KinveyRequest) {
 	  _inherits(CacheRequest, _KinveyRequest);
 
@@ -22273,7 +22413,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_request.KinveyRequest);
 
 /***/ },
-/* 231 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -22293,7 +22433,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _request = __webpack_require__(152);
 
-	var _cache = __webpack_require__(230);
+	var _cache = __webpack_require__(231);
 
 	var _network = __webpack_require__(201);
 
@@ -22606,7 +22746,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 232 */
+/* 233 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22618,9 +22758,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _Observable2 = __webpack_require__(233);
+	var _Observable2 = __webpack_require__(234);
 
-	var _toPromise2 = __webpack_require__(249);
+	var _toPromise2 = __webpack_require__(250);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -22628,6 +22768,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	/**
+	 * @private
+	 */
 	var KinveyObservable = exports.KinveyObservable = function (_Observable) {
 	  _inherits(KinveyObservable, _Observable);
 
@@ -22653,13 +22796,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_Observable2.Observable);
 
 /***/ },
-/* 233 */
+/* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(234);
-	var toSubscriber_1 = __webpack_require__(235);
-	var symbol_observable_1 = __webpack_require__(246);
+	var root_1 = __webpack_require__(235);
+	var toSubscriber_1 = __webpack_require__(236);
+	var symbol_observable_1 = __webpack_require__(247);
 	/**
 	 * A representation of any set of values over any amount of time. This the most basic building block
 	 * of RxJS.
@@ -22798,7 +22941,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Observable.js.map
 
 /***/ },
-/* 234 */
+/* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module, global) {"use strict";
@@ -22822,12 +22965,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(135)(module), (function() { return this; }())))
 
 /***/ },
-/* 235 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Subscriber_1 = __webpack_require__(236);
-	var rxSubscriber_1 = __webpack_require__(245);
+	var Subscriber_1 = __webpack_require__(237);
+	var rxSubscriber_1 = __webpack_require__(246);
 	function toSubscriber(nextOrObserver, error, complete) {
 	    if (nextOrObserver) {
 	        if (nextOrObserver instanceof Subscriber_1.Subscriber) {
@@ -22846,7 +22989,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=toSubscriber.js.map
 
 /***/ },
-/* 236 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -22855,10 +22998,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var isFunction_1 = __webpack_require__(237);
-	var Subscription_1 = __webpack_require__(238);
-	var Observer_1 = __webpack_require__(244);
-	var rxSubscriber_1 = __webpack_require__(245);
+	var isFunction_1 = __webpack_require__(238);
+	var Subscription_1 = __webpack_require__(239);
+	var Observer_1 = __webpack_require__(245);
+	var rxSubscriber_1 = __webpack_require__(246);
 	/**
 	 * Implements the {@link Observer} interface and extends the
 	 * {@link Subscription} class. While the {@link Observer} is the public API for
@@ -23100,7 +23243,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Subscriber.js.map
 
 /***/ },
-/* 237 */
+/* 238 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23111,16 +23254,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=isFunction.js.map
 
 /***/ },
-/* 238 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var isArray_1 = __webpack_require__(239);
-	var isObject_1 = __webpack_require__(240);
-	var isFunction_1 = __webpack_require__(237);
-	var tryCatch_1 = __webpack_require__(241);
-	var errorObject_1 = __webpack_require__(242);
-	var UnsubscriptionError_1 = __webpack_require__(243);
+	var isArray_1 = __webpack_require__(240);
+	var isObject_1 = __webpack_require__(241);
+	var isFunction_1 = __webpack_require__(238);
+	var tryCatch_1 = __webpack_require__(242);
+	var errorObject_1 = __webpack_require__(243);
+	var UnsubscriptionError_1 = __webpack_require__(244);
 	/**
 	 * Represents a disposable resource, such as the execution of an Observable. A
 	 * Subscription has one important method, `unsubscribe`, that takes no argument
@@ -23266,7 +23409,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Subscription.js.map
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23274,7 +23417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=isArray.js.map
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23285,11 +23428,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=isObject.js.map
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var errorObject_1 = __webpack_require__(242);
+	var errorObject_1 = __webpack_require__(243);
 	var tryCatchTarget;
 	function tryCatcher() {
 	    try {
@@ -23309,7 +23452,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=tryCatch.js.map
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23318,7 +23461,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=errorObject.js.map
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23348,7 +23491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=UnsubscriptionError.js.map
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23361,25 +23504,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=Observer.js.map
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(234);
+	var root_1 = __webpack_require__(235);
 	var Symbol = root_1.root.Symbol;
 	exports.$$rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'function') ?
 	    Symbol.for('rxSubscriber') : '@@rxSubscriber';
 	//# sourceMappingURL=rxSubscriber.js.map
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(247);
+	module.exports = __webpack_require__(248);
 
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -23388,7 +23531,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		value: true
 	});
 
-	var _ponyfill = __webpack_require__(248);
+	var _ponyfill = __webpack_require__(249);
 
 	var _ponyfill2 = _interopRequireDefault(_ponyfill);
 
@@ -23407,7 +23550,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23435,11 +23578,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 249 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var root_1 = __webpack_require__(234);
+	var root_1 = __webpack_require__(235);
 	/**
 	 * @param PromiseCtor
 	 * @return {Promise<T>}
@@ -23468,7 +23611,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	//# sourceMappingURL=toPromise.js.map
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -23487,11 +23630,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _cache = __webpack_require__(230);
+	var _cache = __webpack_require__(231);
 
 	var _network = __webpack_require__(201);
 
-	var _deltafetch = __webpack_require__(231);
+	var _deltafetch = __webpack_require__(232);
 
 	var _client = __webpack_require__(140);
 
@@ -23544,6 +23687,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 	Object.freeze(SyncOperation);
 	exports.SyncOperation = SyncOperation;
+
+	/**
+	 * @private
+	 */
 
 	var SyncManager = exports.SyncManager = function () {
 	  function SyncManager(collection) {
@@ -24054,8 +24201,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                          // Get the results of syncing all of the entities
 	                                          _context12.next = 4;
 	                                          return _es6Promise.Promise.all((0, _map2.default)(batch, function (syncEntity) {
-	                                            var originalId = syncEntity.entityId;
-	                                            var method = syncEntity.state.method;
+	                                            var entityId = syncEntity.entityId;
+	                                            var state = syncEntity.state;
+	                                            var method = state.method;
+
 
 	                                            if (method === _request2.RequestMethod.DELETE) {
 	                                              // Remove the entity from the network.
@@ -24065,14 +24214,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                url: _url2.default.format({
 	                                                  protocol: _this2.client.protocol,
 	                                                  host: _this2.client.host,
-	                                                  pathname: _this2.backendPathname + '/' + originalId
+	                                                  pathname: _this2.backendPathname + '/' + entityId
 	                                                }),
 	                                                properties: options.properties,
 	                                                timeout: options.timeout,
 	                                                client: _this2.client
 	                                              });
 	                                              return request.execute().then(function () {
-	                                                // Remove the sync entity
+	                                                // Remove the sync entity from the cache
 	                                                var config = new _request2.KinveyRequestConfig({
 	                                                  method: _request2.RequestMethod.DELETE,
 	                                                  url: _url2.default.format({
@@ -24087,7 +24236,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                return request.execute();
 	                                              }).then(function () {
 	                                                // Return the result
-	                                                var result = { _id: originalId };
+	                                                var result = { _id: entityId };
 	                                                return result;
 	                                              }).catch(function () {
 	                                                var _ref12 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee9(error) {
@@ -24110,7 +24259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                            url: _url2.default.format({
 	                                                              protocol: _this2.client.protocol,
 	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + originalId
+	                                                              pathname: _this2.backendPathname + '/' + entityId
 	                                                            }),
 	                                                            properties: options.properties,
 	                                                            timeout: options.timeout,
@@ -24131,7 +24280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                            url: _url2.default.format({
 	                                                              protocol: _this2.client.protocol,
 	                                                              host: _this2.client.host,
-	                                                              pathname: _this2.backendPathname + '/' + originalId
+	                                                              pathname: _this2.backendPathname + '/' + entityId
 	                                                            }),
 	                                                            properties: options.properties,
 	                                                            timeout: options.timeout,
@@ -24166,7 +24315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                                                        case 16:
 	                                                          return _context9.abrupt('return', {
-	                                                            _id: originalId,
+	                                                            _id: entityId,
 	                                                            error: error
 	                                                          });
 
@@ -24189,7 +24338,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                url: _url2.default.format({
 	                                                  protocol: _this2.client.protocol,
 	                                                  host: _this2.client.host,
-	                                                  pathname: _this2.backendPathname + '/' + originalId
+	                                                  pathname: _this2.backendPathname + '/' + entityId
 	                                                }),
 	                                                properties: options.properties,
 	                                                timeout: options.timeout
@@ -24198,14 +24347,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                              return _request.execute().then(function (response) {
 	                                                var entity = response.data;
 
-	                                                // Save the entity to the network.
+	                                                // Save the entity to the backend.
 	                                                var request = new _network.NetworkRequest({
 	                                                  method: method,
 	                                                  authType: _request2.AuthType.Default,
 	                                                  url: _url2.default.format({
 	                                                    protocol: _this2.client.protocol,
 	                                                    host: _this2.client.host,
-	                                                    pathname: _this2.backendPathname + '/' + originalId
+	                                                    pathname: _this2.backendPathname + '/' + entityId
 	                                                  }),
 	                                                  properties: options.properties,
 	                                                  timeout: options.timeout,
@@ -24282,7 +24431,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                              url: _url2.default.format({
 	                                                                protocol: _this2.client.protocol,
 	                                                                host: _this2.client.host,
-	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                                pathname: _this2.backendPathname + '/' + entityId
 	                                                              }),
 	                                                              properties: options.properties,
 	                                                              timeout: options.timeout
@@ -24292,7 +24441,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                                                          case 12:
 	                                                            return _context10.abrupt('return', {
-	                                                              _id: originalId,
+	                                                              _id: entityId,
 	                                                              entity: entity
 	                                                            });
 
@@ -24333,7 +24482,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                              url: _url2.default.format({
 	                                                                protocol: _this2.client.protocol,
 	                                                                host: _this2.client.host,
-	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                                pathname: _this2.backendPathname + '/' + entityId
 	                                                              }),
 	                                                              properties: options.properties,
 	                                                              timeout: options.timeout,
@@ -24354,7 +24503,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                              url: _url2.default.format({
 	                                                                protocol: _this2.client.protocol,
 	                                                                host: _this2.client.host,
-	                                                                pathname: _this2.backendPathname + '/' + originalId
+	                                                                pathname: _this2.backendPathname + '/' + entityId
 	                                                              }),
 	                                                              properties: options.properties,
 	                                                              timeout: options.timeout,
@@ -24389,7 +24538,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	                                                          case 17:
 	                                                            return _context11.abrupt('return', {
-	                                                              _id: originalId,
+	                                                              _id: entityId,
 	                                                              entity: entity,
 	                                                              error: error
 	                                                            });
@@ -24410,7 +24559,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                            }
 
 	                                            return {
-	                                              _id: originalId,
+	                                              _id: entityId,
 	                                              entity: undefined,
 	                                              error: new _errors.SyncError('Unable to sync the entity since the method was not recognized.', syncEntity)
 	                                            };
@@ -24590,14 +24739,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseDifference = __webpack_require__(252),
-	    baseFlatten = __webpack_require__(259),
+	var baseDifference = __webpack_require__(253),
+	    baseFlatten = __webpack_require__(260),
 	    baseIteratee = __webpack_require__(39),
 	    isArrayLikeObject = __webpack_require__(26),
-	    last = __webpack_require__(261),
+	    last = __webpack_require__(262),
 	    rest = __webpack_require__(126);
 
 	/**
@@ -24638,15 +24787,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(84),
-	    arrayIncludes = __webpack_require__(253),
-	    arrayIncludesWith = __webpack_require__(256),
+	    arrayIncludes = __webpack_require__(254),
+	    arrayIncludesWith = __webpack_require__(257),
 	    arrayMap = __webpack_require__(179),
-	    baseUnary = __webpack_require__(257),
-	    cacheHas = __webpack_require__(258);
+	    baseUnary = __webpack_require__(258),
+	    cacheHas = __webpack_require__(259);
 
 	/** Used as the size to enable large array optimizations. */
 	var LARGE_ARRAY_SIZE = 200;
@@ -24711,10 +24860,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 253 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseIndexOf = __webpack_require__(254);
+	var baseIndexOf = __webpack_require__(255);
 
 	/**
 	 * A specialized version of `_.includes` for arrays without support for
@@ -24734,10 +24883,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 254 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var indexOfNaN = __webpack_require__(255);
+	var indexOfNaN = __webpack_require__(256);
 
 	/**
 	 * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
@@ -24767,7 +24916,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 255 */
+/* 256 */
 /***/ function(module, exports) {
 
 	/**
@@ -24796,7 +24945,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 256 */
+/* 257 */
 /***/ function(module, exports) {
 
 	/**
@@ -24824,7 +24973,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports) {
 
 	/**
@@ -24844,7 +24993,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 258 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/**
@@ -24863,11 +25012,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 259 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(215),
-	    isFlattenable = __webpack_require__(260);
+	var arrayPush = __webpack_require__(216),
+	    isFlattenable = __webpack_require__(261);
 
 	/**
 	 * The base implementation of `_.flatten` with support for restricting flattening.
@@ -24907,7 +25056,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 260 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var isArguments = __webpack_require__(25),
@@ -24928,7 +25077,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports) {
 
 	/**
@@ -24954,11 +25103,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(263),
-	    baseFilter = __webpack_require__(264),
+	var arrayFilter = __webpack_require__(264),
+	    baseFilter = __webpack_require__(265),
 	    baseIteratee = __webpack_require__(39),
 	    isArray = __webpack_require__(34);
 
@@ -25007,7 +25156,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports) {
 
 	/**
@@ -25038,7 +25187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var baseEach = __webpack_require__(15);
@@ -25065,13 +25214,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayFilter = __webpack_require__(263),
-	    baseXor = __webpack_require__(266),
+	var arrayFilter = __webpack_require__(264),
+	    baseXor = __webpack_require__(267),
 	    isArrayLikeObject = __webpack_require__(26),
-	    last = __webpack_require__(261),
+	    last = __webpack_require__(262),
 	    rest = __webpack_require__(126);
 
 	/**
@@ -25106,12 +25255,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var arrayPush = __webpack_require__(215),
-	    baseDifference = __webpack_require__(252),
-	    baseUniq = __webpack_require__(267);
+	var arrayPush = __webpack_require__(216),
+	    baseDifference = __webpack_require__(253),
+	    baseUniq = __webpack_require__(268);
 
 	/**
 	 * The base implementation of methods like `_.xor`, without support for
@@ -25142,14 +25291,14 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 267 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SetCache = __webpack_require__(84),
-	    arrayIncludes = __webpack_require__(253),
-	    arrayIncludesWith = __webpack_require__(256),
-	    cacheHas = __webpack_require__(258),
-	    createSet = __webpack_require__(268),
+	    arrayIncludes = __webpack_require__(254),
+	    arrayIncludesWith = __webpack_require__(257),
+	    cacheHas = __webpack_require__(259),
+	    createSet = __webpack_require__(269),
 	    setToArray = __webpack_require__(92);
 
 	/** Used as the size to enable large array optimizations. */
@@ -25220,11 +25369,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 268 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Set = __webpack_require__(97),
-	    noop = __webpack_require__(269),
+	    noop = __webpack_require__(270),
 	    setToArray = __webpack_require__(92);
 
 	/** Used as references for various `Number` constants. */
@@ -25245,7 +25394,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports) {
 
 	/**
@@ -25268,7 +25417,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25290,11 +25439,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _request = __webpack_require__(152);
 
-	var _datastore = __webpack_require__(229);
+	var _datastore = __webpack_require__(230);
 
 	var _es6Promise = __webpack_require__(171);
 
-	var _log = __webpack_require__(202);
+	var _log = __webpack_require__(203);
 
 	var _errors = __webpack_require__(8);
 
@@ -25453,21 +25602,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Download a file. A promise will be returned that will be resolved with the file or rejected with
-	     * an error.
+	     * Download a file.
 	     *
 	     * @param   {string}        name                                          Name
 	     * @param   {Object}        [options]                                     Options
 	     * @param   {Boolean}       [options.tls]                                 Use Transport Layer Security
 	     * @param   {Number}        [options.ttl]                                 Time To Live (in seconds)
-	     * @param   {Boolean}       [options.stream]                              Stream the file
-	     * @param   {DataPolicy}    [options.dataPolicy=DataPolicy.NetworkFirst]  Data policy
-	     * @param   {AuthType}      [options.authType=AuthType.Default]           Auth type
-	     * @return  {Promise}                                                     Promise
+	     * @param   {Boolean}       [options.stream=false]                        Stream the file
+	     * @return  {Promise<string>}                                             File content
 	     *
 	     * @example
 	     * var files = new Kinvey.Files();
-	     * files.download('BostonTeaParty.png', {
+	     * files.download('Kinvey.png', {
 	     *   tls: true, // Use transport layer security
 	     *   ttl: 60 * 60 * 24, // 1 day in seconds
 	     *   stream: true // stream the file
@@ -25527,6 +25673,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return download;
 	    }()
+
+	    /**
+	     * Download a file using a url.
+	     *
+	     * @param   {string}        url                                           File download url
+	     * @param   {Object}        [options]                                     Options
+	     * @return  {Promise<string>}                                             File content.
+	    */
+
 	  }, {
 	    key: 'downloadByUrl',
 	    value: function () {
@@ -25599,6 +25754,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	      options.stream = true;
 	      return this.download(name, options);
 	    }
+
+	    /**
+	     * Upload a file.
+	     *
+	     * @param {Blob|string} file  File content
+	     * @param {Object} [metadata={}] File metadata
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<File>} A file entity.
+	     */
+
 	  }, {
 	    key: 'upload',
 	    value: function () {
@@ -25738,6 +25903,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return upload;
 	    }()
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'uploadToGCS',
 	    value: function () {
@@ -25874,16 +26044,31 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return uploadToGCS;
 	    }()
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'create',
 	    value: function create(file, metadata, options) {
 	      return this.upload(file, metadata, options);
 	    }
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'update',
 	    value: function update(file, metadata, options) {
 	      return this.upload(file, metadata, options);
 	    }
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'remove',
 	    value: function remove() {
@@ -25893,6 +26078,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'pathname',
 
 	    /**
+	     * @private
 	     * The pathname for the store.
 	     *
 	     * @return  {string}  Pathname
@@ -25907,7 +26093,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -25917,33 +26103,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.User = exports.UserStore = undefined;
 
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
 	var _client = __webpack_require__(140);
 
-	var _query = __webpack_require__(11);
+	var _acl = __webpack_require__(273);
 
-	var _acl = __webpack_require__(272);
-
-	var _metadata = __webpack_require__(204);
+	var _metadata = __webpack_require__(205);
 
 	var _errors = __webpack_require__(8);
 
-	var _mic = __webpack_require__(273);
-
 	var _request = __webpack_require__(152);
 
-	var _datastore = __webpack_require__(229);
+	var _datastore = __webpack_require__(230);
 
 	var _network = __webpack_require__(201);
 
 	var _es6Promise = __webpack_require__(171);
 
+	var _social = __webpack_require__(274);
+
 	var _storage = __webpack_require__(141);
+
+	var _log = __webpack_require__(203);
 
 	var _regeneratorRuntime = __webpack_require__(161);
 
@@ -25961,10 +26145,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _result2 = _interopRequireDefault(_result);
 
-	var _isObject = __webpack_require__(31);
-
-	var _isObject2 = _interopRequireDefault(_isObject);
-
 	var _isArray = __webpack_require__(34);
 
 	var _isArray2 = _interopRequireDefault(_isArray);
@@ -25972,6 +26152,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _isString = __webpack_require__(35);
 
 	var _isString2 = _interopRequireDefault(_isString);
+
+	var _isObject = __webpack_require__(31);
+
+	var _isObject2 = _interopRequireDefault(_isObject);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -25984,7 +26168,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // eslint-disable-line no-unused-vars
 
 
-	var appdataNamespace = process.env.KINVEY_DATASTORE_NAMESPACE || 'appdata';
 	var usersNamespace = process.env.KINVEY_USERS_NAMESPACE || 'user';
 	var rpcNamespace = process.env.KINVEY_RPC_NAMESPACE || 'rpc';
 	var idAttribute = process.env.KINVEY_ID_ATTRIBUTE || '_id';
@@ -25992,12 +26175,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var socialIdentityAttribute = process.env.KINVEY_SOCIAL_IDENTITY_ATTRIBUTE || '_socialIdentity';
 	var usernameAttribute = process.env.KINVEY_USERNAME_ATTRIBUTE || 'username';
 	var emailAttribute = process.env.KINVEY_EMAIL_ATTRIBUTE || 'email';
-	var supportedIdentities = ['facebook', 'google', 'linkedIn'];
-	var hello = void 0;
-
-	if (typeof window !== 'undefined') {
-	  hello = __webpack_require__(275); // eslint-disable-line global-require
-	}
 
 	/**
 	 * The UserStore class is used to find, save, update, remove, count and group users.
@@ -26014,6 +26191,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  _createClass(UserStore, [{
 	    key: 'create',
+
+
+	    /**
+	     * @private
+	     * @throws {KinveyError} Method is unsupported. Instead use User.signup() to create a user.
+	     */
 	    value: function () {
 	      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee() {
 	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
@@ -26036,19 +26219,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return create;
 	    }()
+
+	    /**
+	     * Update a user.
+	     *
+	     * @deprecated Use the `update` function for a user instance.
+	     *
+	     * @param {Object} data Data for user to update.
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<Object>} The updated user data.
+	     */
+
 	  }, {
 	    key: 'update',
 	    value: function () {
-	      var _ref2 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee2(user) {
+	      var _ref2 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee2(data) {
 	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	        var socialIdentity, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _step$value, key;
-
 	        return _regeneratorRuntime2.default.wrap(function _callee2$(_context2) {
 	          while (1) {
 	            switch (_context2.prev = _context2.next) {
 	              case 0:
-	                if (user) {
+	                if (data) {
 	                  _context2.next = 2;
 	                  break;
 	                }
@@ -26056,15 +26247,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	                throw new _errors.KinveyError('No user was provided to be updated.');
 
 	              case 2:
-	                if (!(0, _isArray2.default)(user)) {
+	                if (!(0, _isArray2.default)(data)) {
 	                  _context2.next = 4;
 	                  break;
 	                }
 
-	                throw new _errors.KinveyError('Only one user can be updated at one time.', user);
+	                throw new _errors.KinveyError('Only one user can be updated at one time.', data);
 
 	              case 4:
-	                if (user[idAttribute]) {
+	                if (data[idAttribute]) {
 	                  _context2.next = 6;
 	                  break;
 	                }
@@ -26072,73 +26263,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	                throw new _errors.KinveyError('User must have an _id.');
 
 	              case 6:
-	                if (!options._identity) {
-	                  _context2.next = 28;
-	                  break;
-	                }
+	                return _context2.abrupt('return', _get(Object.getPrototypeOf(UserStore.prototype), 'update', this).call(this, data, options));
 
-	                socialIdentity = user[socialIdentityAttribute];
-
-	                if (!socialIdentity) {
-	                  _context2.next = 28;
-	                  break;
-	                }
-
-	                _iteratorNormalCompletion = true;
-	                _didIteratorError = false;
-	                _iteratorError = undefined;
-	                _context2.prev = 12;
-
-	                for (_iterator = socialIdentity[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                  _step$value = _slicedToArray(_step.value, 1);
-	                  key = _step$value[0];
-
-	                  if (socialIdentity[key] && options._identity !== key) {
-	                    delete socialIdentity[key];
-	                  }
-	                }
-	                _context2.next = 20;
-	                break;
-
-	              case 16:
-	                _context2.prev = 16;
-	                _context2.t0 = _context2['catch'](12);
-	                _didIteratorError = true;
-	                _iteratorError = _context2.t0;
-
-	              case 20:
-	                _context2.prev = 20;
-	                _context2.prev = 21;
-
-	                if (!_iteratorNormalCompletion && _iterator.return) {
-	                  _iterator.return();
-	                }
-
-	              case 23:
-	                _context2.prev = 23;
-
-	                if (!_didIteratorError) {
-	                  _context2.next = 26;
-	                  break;
-	                }
-
-	                throw _iteratorError;
-
-	              case 26:
-	                return _context2.finish(23);
-
-	              case 27:
-	                return _context2.finish(20);
-
-	              case 28:
-	                return _context2.abrupt('return', _get(Object.getPrototypeOf(UserStore.prototype), 'update', this).call(this, user, options));
-
-	              case 29:
+	              case 7:
 	              case 'end':
 	                return _context2.stop();
 	            }
 	          }
-	        }, _callee2, this, [[12, 16, 20, 28], [21,, 23, 27]]);
+	        }, _callee2, this);
 	      }));
 
 	      function update(_x, _x2) {
@@ -26147,6 +26279,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return update;
 	    }()
+
+	    /**
+	     * Check if a username already exists.
+	     *
+	     * @deprecated Use the `exists` function on the `User` class.
+	     *
+	     * @param {string} username Username
+	     * @param {Object} [options={}] Options
+	     * @return {boolean} True if the username already exists otherwise false.
+	     */
+
 	  }, {
 	    key: 'exists',
 	    value: function () {
@@ -26193,6 +26336,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return exists;
 	    }()
+
+	    /**
+	     * Restore a user that has been suspended.
+	     *
+	     * @deprecated Use the `restore` function on the `User` class.
+	     *
+	     * @param {string} id Id of the user to restore.
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
 	  }, {
 	    key: 'restore',
 	    value: function () {
@@ -26263,15 +26417,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * Create a new instance of a User.
 	   *
-	   * @param  {Object}   [data={}]    Data for the user.
-	   * @return {User}                  User
-	   *
-	   * @example
-	   * var user = new User();
+	   * @param {Object} [data={}] Data for the user.
+	   * @param {Object} [options={}] Options.
+	   * @return {User} User
 	   */
-
 	  function User() {
 	    var data = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
 	    _classCallCheck(this, User);
 
@@ -26288,16 +26440,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	     *
 	     * @type {Client}
 	     */
-	    this.client = _client.Client.sharedInstance();
+	    this.client = options.client || _client.Client.sharedInstance();
 	  }
 
 	  /**
 	   * The _id for the user.
 	   *
 	   * @return {?string} _id
-	   *
-	   * @example
-	   * var _id = user._id;
 	   */
 
 
@@ -26306,17 +26455,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	    /**
-	     * Checks if this user is the active user.
+	     * Checks if the user is the active user.
 	     *
-	     * @return {Promise<Boolean>} True or false if this user is the active user.
-	     *
-	     * @example
-	     * var promise = user.isActiveUser();
-	     * promise.then(function(isActiveUser) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @return {boolean} True the user is the active user otherwise false.
 	     */
 	    value: function isActive() {
 	      var activeUser = User.getActiveUser(this.client);
@@ -26327,6 +26468,28 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return false;
 	    }
+
+	    /**
+	     * Checks if the users email is verfified.
+	     *
+	     * @return {boolean} True if the users email is verified otherwise false.
+	     */
+
+	  }, {
+	    key: 'isEmailVerified',
+	    value: function isEmailVerified() {
+	      var status = this.metadata.emailVerification;
+	      return status === 'confirmed';
+	    }
+
+	    /**
+	     * Gets the active user. You can optionally provide a client
+	     * to use to lookup the active user.
+	     *
+	     * @param {Client} [client=Client.sharedInstance()] Client to use to lookup active user.
+	     * @return {?User} The active user.
+	     */
+
 	  }, {
 	    key: 'login',
 
@@ -26334,551 +26497,1121 @@ return /******/ (function(modules) { // webpackBootstrap
 	    /**
 	     * Login using a username or password.
 	     *
-	     * @param  {string|Object}      usernameOrData    Username or an object with username
-	     *                                                and password properties.
-	     * @param  {string}             [password]        Users password.
-	     * @param  {Object}             [options={}]      Options
-	     * @return {Promise<User>}                        The logged in user.
-	     *
-	     * @example
-	     * var promise = user.login('username', 'password');
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param {string|Object} username Username or an object with username and password as properties.
+	     * @param {string} [password] Password
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<User>} The user.
 	     */
-	    value: function login(usernameOrData, password) {
-	      var _this2 = this;
+	    value: function () {
+	      var _ref5 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee5(username, password) {
+	        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	        var isActiveUser, activeUser, credentials, config, request, _ref6, data;
 
-	      if (!(0, _isObject2.default)(usernameOrData)) {
-	        usernameOrData = {
-	          username: usernameOrData,
-	          password: password
-	        };
+	        return _regeneratorRuntime2.default.wrap(function _callee5$(_context5) {
+	          while (1) {
+	            switch (_context5.prev = _context5.next) {
+	              case 0:
+	                isActiveUser = this.isActive();
+
+	                if (!isActiveUser) {
+	                  _context5.next = 3;
+	                  break;
+	                }
+
+	                return _context5.abrupt('return', _es6Promise.Promise.reject(new _errors.ActiveUserError('This user is already the active user.')));
+
+	              case 3:
+	                activeUser = User.getActiveUser(this.client);
+
+	                if (!activeUser) {
+	                  _context5.next = 6;
+	                  break;
+	                }
+
+	                return _context5.abrupt('return', _es6Promise.Promise.reject(new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.')));
+
+	              case 6:
+	                credentials = username;
+
+	                if (!(0, _isObject2.default)(credentials)) {
+	                  credentials = {
+	                    username: username,
+	                    password: password
+	                  };
+	                }
+
+	                if (!credentials[socialIdentityAttribute]) {
+	                  if (credentials.username) {
+	                    credentials.username = String(credentials.username).trim();
+	                  }
+
+	                  if (credentials.password) {
+	                    credentials.password = String(credentials.password).trim();
+	                  }
+	                }
+
+	                if (!((!credentials.username || credentials.username === '' || !credentials.password || credentials.password === '') && !credentials[socialIdentityAttribute])) {
+	                  _context5.next = 11;
+	                  break;
+	                }
+
+	                return _context5.abrupt('return', _es6Promise.Promise.reject(new _errors.KinveyError('Username and/or password missing. ' + 'Please provide both a username and password to login.')));
+
+	              case 11:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.App,
+	                  url: _url2.default.format({
+	                    protocol: this.client.apiProtocol,
+	                    host: this.client.apiHost,
+	                    pathname: this.pathname + '/login'
+	                  }),
+	                  body: credentials,
+	                  properties: options.properties,
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context5.next = 15;
+	                return request.execute();
+
+	              case 15:
+	                _ref6 = _context5.sent;
+	                data = _ref6.data;
+
+	                this.data = data;
+	                (0, _storage.setActiveUser)(this.client, this.data);
+	                return _context5.abrupt('return', this);
+
+	              case 20:
+	              case 'end':
+	                return _context5.stop();
+	            }
+	          }
+	        }, _callee5, this);
+	      }));
+
+	      function login(_x12, _x13, _x14) {
+	        return _ref5.apply(this, arguments);
 	      }
 
-	      if (!usernameOrData[socialIdentityAttribute]) {
-	        if (usernameOrData.username) {
-	          usernameOrData.username = String(usernameOrData.username).trim();
-	        }
+	      return login;
+	    }()
 
-	        if (usernameOrData.password) {
-	          usernameOrData.password = String(usernameOrData.password).trim();
-	        }
-	      }
+	    /**
+	     * Login using a username or password.
+	     *
+	     * @param {string|Object} username Username or an object with username and password as properties.
+	     * @param {string} [password] Password
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<User>} The user.
+	     */
 
-	      var isActiveUser = this.isActive();
-	      if (isActiveUser) {
-	        return _es6Promise.Promise.reject(new _errors.ActiveUserError('This user is already the active user.'));
-	      }
-
-	      var activeUser = User.getActiveUser(this.client);
-	      if (activeUser) {
-	        return _es6Promise.Promise.reject(new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.'));
-	      }
-
-	      if ((!usernameOrData.username || usernameOrData.username === '' || !usernameOrData.password || usernameOrData.password === '') && !usernameOrData[socialIdentityAttribute]) {
-	        return _es6Promise.Promise.reject(new _errors.KinveyError('Username and/or password missing. ' + 'Please provide both a username and password to login.'));
-	      }
-
-	      var config = new _request.KinveyRequestConfig({
-	        method: _request.RequestMethod.POST,
-	        authType: _request.AuthType.App,
-	        url: _url2.default.format({
-	          protocol: this.client.apiProtocol,
-	          host: this.client.apiHost,
-	          pathname: this.pathname + '/login'
-	        }),
-	        body: usernameOrData,
-	        properties: options.properties,
-	        timeout: options.timeout
-	      });
-	      var request = new _network.NetworkRequest(config);
-	      request.automaticallyRefreshAuthToken = false;
-	      var promise = request.execute().then(function (response) {
-	        _this2.data = response.data;
-	        (0, _storage.setActiveUser)(_this2.client, _this2.data);
-	        return User.getActiveUser(_this2.client);
-	      });
-
-	      return promise;
-	    }
-	  }, {
-	    key: 'loginWithIdentity',
-	    value: function loginWithIdentity(identity, token, options) {
-	      var data = {};
-	      data[socialIdentityAttribute] = {};
-	      data[socialIdentityAttribute][identity] = token;
-	      return this.login(data, options);
-	    }
 	  }, {
 	    key: 'loginWithMIC',
 
 
-	    /* eslint-disable max-len */
 	    /**
 	     * Login using Mobile Identity Connect.
 	     *
-	     * @param  {string}                 redirectUri                                                         The redirect uri used
-	     *                                                                                                      for MIC logins.
-	     * @param  {AuthorizationGrant}     [authorizationGrant=AuthoizationGrant.AuthorizationCodeLoginPage]   MIC authorization grant to use.
-	     * @param  {Object}                 [options={}]                                                        Options
-	     * @return {Promise<User>}                                                                              The logged in user.
-	     *
-	     * @example
-	     * var promise = user.loginWithMIC('http://example.com');
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param {string} redirectUri The redirect uri.
+	     * @param {AuthorizationGrant} [authorizationGrant=AuthoizationGrant.AuthorizationCodeLoginPage] MIC authorization grant to use.
+	     * @param {Object} [options] Options
+	     * @return {Promise<User>} The user.
 	     */
-	    /* eslint-enable max-len */
-	    value: function loginWithMIC(redirectUri, authorizationGrant) {
-	      var _this3 = this;
+	    value: function () {
+	      var _ref7 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee6(redirectUri, authorizationGrant) {
+	        var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	        var isActiveUser, activeUser, mic, session;
+	        return _regeneratorRuntime2.default.wrap(function _callee6$(_context6) {
+	          while (1) {
+	            switch (_context6.prev = _context6.next) {
+	              case 0:
+	                isActiveUser = this.isActive();
 
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	                if (!isActiveUser) {
+	                  _context6.next = 3;
+	                  break;
+	                }
 
-	      var mic = new _mic.MobileIdentityConnect(this.client);
-	      return mic.login(redirectUri, authorizationGrant, options).then(function (token) {
-	        options.redirectUri = redirectUri;
-	        options.micClient = (0, _result2.default)(mic.client, 'toJSON', mic.client);
-	        return _this3.connect(_mic.MobileIdentityConnect.identity, token, options);
-	      });
-	    }
+	                return _context6.abrupt('return', _es6Promise.Promise.reject(new _errors.ActiveUserError('This user is already the active user.')));
+
+	              case 3:
+	                activeUser = User.getActiveUser(this.client);
+
+	                if (!activeUser) {
+	                  _context6.next = 6;
+	                  break;
+	                }
+
+	                return _context6.abrupt('return', _es6Promise.Promise.reject(new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.')));
+
+	              case 6:
+	                mic = new _social.MobileIdentityConnect({ client: this.client });
+	                _context6.next = 9;
+	                return mic.login(redirectUri, authorizationGrant, options);
+
+	              case 9:
+	                session = _context6.sent;
+	                return _context6.abrupt('return', this.connectIdentity(_social.MobileIdentityConnect.identity, session, options));
+
+	              case 11:
+	              case 'end':
+	                return _context6.stop();
+	            }
+	          }
+	        }, _callee6, this);
+	      }));
+
+	      function loginWithMIC(_x16, _x17, _x18) {
+	        return _ref7.apply(this, arguments);
+	      }
+
+	      return loginWithMIC;
+	    }()
 
 	    /**
-	     * Logout the user. If the user was the active user then the active user will be set to null.
+	     * Login using Mobile Identity Connect.
 	     *
-	     * @param  {Object}         [options={}]    Options
-	     * @return {Promise<User>}                  The logged out user.
-	     *
-	     * @example
-	     * var promise = user.logout();
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param {string} redirectUri The redirect uri.
+	     * @param {AuthorizationGrant} [authorizationGrant=AuthoizationGrant.AuthorizationCodeLoginPage] MIC authorization grant to use.
+	     * @param {Object} [options] Options
+	     * @return {Promise<User>} The user.
 	     */
 
 	  }, {
-	    key: 'logout',
-	    value: function logout() {
-	      var _this4 = this;
+	    key: 'connectIdentity',
 
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      var isActive = this.isActive();
-
-	      if (!isActive) {
-	        return _es6Promise.Promise.resolve();
-	      }
-
-	      var request = new _network.NetworkRequest({
-	        method: _request.RequestMethod.POST,
-	        authType: _request.AuthType.Session,
-	        url: _url2.default.format({
-	          protocol: this.client.protocol,
-	          host: this.client.host,
-	          pathname: '/' + usersNamespace + '/' + this.client.appKey + '/_logout'
-	        }),
-	        properties: options.properties,
-	        timeout: options.timeout
-	      });
-	      request.automaticallyRefreshAuthToken = false;
-
-	      var promise = request.execute().catch(function () {
-	        return null;
-	      }).then(function () {
-	        var isActive = _this4.isActive();
-	        if (isActive) {
-	          (0, _storage.setActiveUser)(_this4.client, null);
-	        }
-
-	        return null;
-	      }).then(function () {
-	        return _datastore.DataStore.clearCache({ client: _this4.client });
-	      }).then(function () {
-	        return _this4;
-	      });
-
-	      return promise;
-	    }
 
 	    /**
-	     * @private
-	     * Returns true or false if identity connect is supported.
+	     * Connect an social identity.
 	     *
-	     * @return {Boolean}  True or false if identity connect is supported.
+	     * @param {string} identity Social identity.
+	     * @param {Object} session Social identity session.
+	     * @param {Object} [options] Options
+	     * @return {Promise<User>} The user.
+	     */
+	    value: function () {
+	      var _ref8 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee7(identity, session, options) {
+	        var data, socialIdentity, isActive;
+	        return _regeneratorRuntime2.default.wrap(function _callee7$(_context7) {
+	          while (1) {
+	            switch (_context7.prev = _context7.next) {
+	              case 0:
+	                data = this.data;
+	                socialIdentity = data[socialIdentityAttribute] || {};
+
+	                socialIdentity[identity] = session;
+	                data[socialIdentityAttribute] = socialIdentity;
+	                this.data = data;
+
+	                _context7.prev = 5;
+	                isActive = this.isActive();
+
+	                if (!isActive) {
+	                  _context7.next = 9;
+	                  break;
+	                }
+
+	                return _context7.abrupt('return', this.update(data, options));
+
+	              case 9:
+	                _context7.next = 11;
+	                return this.login(data, null, options);
+
+	              case 11:
+	                (0, _storage.setIdentitySession)(this.client, identity, session);
+	                return _context7.abrupt('return', this);
+
+	              case 15:
+	                _context7.prev = 15;
+	                _context7.t0 = _context7['catch'](5);
+
+	                if (!(_context7.t0 instanceof _errors.NotFoundError)) {
+	                  _context7.next = 21;
+	                  break;
+	                }
+
+	                _context7.next = 20;
+	                return this.signup(data, options);
+
+	              case 20:
+	                return _context7.abrupt('return', this.connectIdentity(identity, session, options));
+
+	              case 21:
+	                throw _context7.t0;
+
+	              case 22:
+	              case 'end':
+	                return _context7.stop();
+	            }
+	          }
+	        }, _callee7, this, [[5, 15]]);
+	      }));
+
+	      function connectIdentity(_x20, _x21, _x22) {
+	        return _ref8.apply(this, arguments);
+	      }
+
+	      return connectIdentity;
+	    }()
+
+	    /**
+	     * Connect an social identity.
 	     *
-	     * @example
-	     * var isIdentitySupported = user.isIdentitySupported('identity');
+	     * @deprecated Use connectIdentity().
+	     *
+	     * @param {string} identity Social identity.
+	     * @param {Object} session Social identity session.
+	     * @param {Object} [options] Options
+	     * @return {Promise<User>} The user.
 	     */
 
 	  }, {
 	    key: 'connectWithIdentity',
+	    value: function () {
+	      var _ref9 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee8(identity, session, options) {
+	        return _regeneratorRuntime2.default.wrap(function _callee8$(_context8) {
+	          while (1) {
+	            switch (_context8.prev = _context8.next) {
+	              case 0:
+	                return _context8.abrupt('return', this.connectIdentity(identity, session, options));
 
+	              case 1:
+	              case 'end':
+	                return _context8.stop();
+	            }
+	          }
+	        }, _callee8, this);
+	      }));
 
-	    /* eslint-disable max-len */
+	      function connectWithIdentity(_x23, _x24, _x25) {
+	        return _ref9.apply(this, arguments);
+	      }
+
+	      return connectWithIdentity;
+	    }()
+
 	    /**
-	     * Connect using an identity (Facebook, Google, LinkedIn etc.).
+	     * Connect a Facebook identity.
 	     *
-	     * @param  {SocialIdentity|string}         identity                                Identity used to connect the user.
-	     * @param  {Object}                        [options={}]                            Options
-	     * @param  {string}                        [options.collectionName='Identities']   Collection name to use to lookup credentials
-	     *                                                                                 for the identity.
-	     * @return {Promise<User>}                                                         The connected user.
-	     *
-	     * @example
-	     * var promise = user.connectWithIdentity(SocialIdentity.Facebook);
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
 	     */
-	    /* eslint-enable max-len */
-	    value: function connectWithIdentity(identity) {
-	      var _this5 = this;
 
-	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	  }, {
+	    key: 'connectFacebook',
+	    value: function () {
+	      var _ref10 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee9(clientId, options) {
+	        var facebook, session;
+	        return _regeneratorRuntime2.default.wrap(function _callee9$(_context9) {
+	          while (1) {
+	            switch (_context9.prev = _context9.next) {
+	              case 0:
+	                facebook = new _social.Facebook({ client: this.client });
+	                _context9.next = 3;
+	                return facebook.login(clientId, options);
 
-	      options = (0, _assign2.default)({
-	        collectionName: 'identities'
-	      }, options);
+	              case 3:
+	                session = _context9.sent;
+	                return _context9.abrupt('return', this.connectIdentity(_social.Facebook.identity, session, options));
 
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        if (!identity) {
-	          throw new _errors.KinveyError('An identity is required to connect the user.');
-	        }
+	              case 5:
+	              case 'end':
+	                return _context9.stop();
+	            }
+	          }
+	        }, _callee9, this);
+	      }));
 
-	        if (!User.isIdentitySupported(identity)) {
-	          throw new _errors.KinveyError('Identity ' + identity + ' is not supported on this platform.');
-	        }
+	      function connectFacebook(_x26, _x27) {
+	        return _ref10.apply(this, arguments);
+	      }
 
-	        var query = new _query.Query().equalTo('identity', identity);
-	        var request = new _network.NetworkRequest({
-	          method: _request.RequestMethod.GET,
-	          authType: _request.AuthType.None,
-	          url: _url2.default.format({
-	            protocol: _this5.client.protocol,
-	            host: _this5.client.host,
-	            pathname: '/' + appdataNamespace + '/' + _this5.client.appKey + '/' + options.collectionName
-	          }),
-	          query: query,
-	          properties: options.properties,
-	          timeout: options.timeout
-	        });
-	        return request.execute();
-	      });
+	      return connectFacebook;
+	    }()
 
-	      promise = promise.then(function (response) {
-	        if (response.data.length === 1) {
-	          var helloSettings = {};
-	          helloSettings[identity] = response.data[0].key || response.data[0].appId || response.data[0].clientId;
-	          hello.init(helloSettings);
-	          return hello(identity).login();
-	        }
+	    /**
+	     * Connect a Facebook identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
 
-	        throw new _errors.KinveyError('Unsupported identity.');
-	      }).then(function () {
-	        var authResponse = hello(identity).getAuthResponse();
-	        return _this5.connect(identity, authResponse, options);
-	      });
+	  }, {
+	    key: 'disconnectFacebook',
 
-	      return promise;
-	    }
+
+	    /**
+	     * Diconnect a Facebook identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+	    value: function () {
+	      var _ref11 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee10(options) {
+	        return _regeneratorRuntime2.default.wrap(function _callee10$(_context10) {
+	          while (1) {
+	            switch (_context10.prev = _context10.next) {
+	              case 0:
+	                return _context10.abrupt('return', this.disconnectIdentity(_social.Facebook.identity, options));
+
+	              case 1:
+	              case 'end':
+	                return _context10.stop();
+	            }
+	          }
+	        }, _callee10, this);
+	      }));
+
+	      function disconnectFacebook(_x28) {
+	        return _ref11.apply(this, arguments);
+	      }
+
+	      return disconnectFacebook;
+	    }()
+
+	    /**
+	     * Connect a Google identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+
+	  }, {
+	    key: 'connectGoogle',
+	    value: function () {
+	      var _ref12 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee11(clientId, options) {
+	        var google, session;
+	        return _regeneratorRuntime2.default.wrap(function _callee11$(_context11) {
+	          while (1) {
+	            switch (_context11.prev = _context11.next) {
+	              case 0:
+	                google = new _social.Google({ client: this.client });
+	                _context11.next = 3;
+	                return google.login(clientId, options);
+
+	              case 3:
+	                session = _context11.sent;
+	                return _context11.abrupt('return', this.connectIdentity(_social.Google.identity, session, options));
+
+	              case 5:
+	              case 'end':
+	                return _context11.stop();
+	            }
+	          }
+	        }, _callee11, this);
+	      }));
+
+	      function connectGoogle(_x29, _x30) {
+	        return _ref12.apply(this, arguments);
+	      }
+
+	      return connectGoogle;
+	    }()
+
+	    /**
+	     * Connect a Google identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+
+	  }, {
+	    key: 'disconnectGoogle',
+
+
+	    /**
+	     * Diconnect a Google identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+	    value: function () {
+	      var _ref13 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee12(options) {
+	        return _regeneratorRuntime2.default.wrap(function _callee12$(_context12) {
+	          while (1) {
+	            switch (_context12.prev = _context12.next) {
+	              case 0:
+	                return _context12.abrupt('return', this.disconnectIdentity(_social.Google.identity, options));
+
+	              case 1:
+	              case 'end':
+	                return _context12.stop();
+	            }
+	          }
+	        }, _callee12, this);
+	      }));
+
+	      function disconnectGoogle(_x31) {
+	        return _ref13.apply(this, arguments);
+	      }
+
+	      return disconnectGoogle;
+	    }()
+
+	    /**
+	     * Connect a LinkedIn identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+
+	  }, {
+	    key: 'connectLinkedIn',
+	    value: function () {
+	      var _ref14 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee13(clientId, options) {
+	        var linkedIn, session;
+	        return _regeneratorRuntime2.default.wrap(function _callee13$(_context13) {
+	          while (1) {
+	            switch (_context13.prev = _context13.next) {
+	              case 0:
+	                linkedIn = new _social.LinkedIn({ client: this.client });
+	                _context13.next = 3;
+	                return linkedIn.login(clientId, options);
+
+	              case 3:
+	                session = _context13.sent;
+	                return _context13.abrupt('return', this.connectIdentity(_social.LinkedIn.identity, session, options));
+
+	              case 5:
+	              case 'end':
+	                return _context13.stop();
+	            }
+	          }
+	        }, _callee13, this);
+	      }));
+
+	      function connectLinkedIn(_x32, _x33) {
+	        return _ref14.apply(this, arguments);
+	      }
+
+	      return connectLinkedIn;
+	    }()
+
+	    /**
+	     * Connect a LinkedIn identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+
+	  }, {
+	    key: 'disconnectLinkedIn',
+
+
+	    /**
+	     * Diconnect a LinkedIn identity.
+	     *
+	     * @param  {Object}         [options]     Options
+	     * @return {Promise<User>}                The user.
+	     */
+	    value: function () {
+	      var _ref15 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee14(options) {
+	        return _regeneratorRuntime2.default.wrap(function _callee14$(_context14) {
+	          while (1) {
+	            switch (_context14.prev = _context14.next) {
+	              case 0:
+	                return _context14.abrupt('return', this.disconnectIdentity(_social.LinkedIn.identity, options));
+
+	              case 1:
+	              case 'end':
+	                return _context14.stop();
+	            }
+	          }
+	        }, _callee14, this);
+	      }));
+
+	      function disconnectLinkedIn(_x34) {
+	        return _ref15.apply(this, arguments);
+	      }
+
+	      return disconnectLinkedIn;
+	    }()
 
 	    /**
 	     * @private
+	     * Disconnects the user from an identity.
 	     *
-	     * Connects with the provided accessToken and identity.
-	     *
-	     * @param  {SocialIdentity|string}         identity      Identity used to connect the user.
-	     * @param  {string}                        accessToken   Access token for the identity.
-	     * @param  {number}                        [expiresIn]   Time in seconds for how long the access token is valid.
-	     * @param  {Object}                        [options={}]  Options
-	     * @return {Promise<User>}                               The connected user.
-	     *
-	     * @example
-	     * var token = {
-	     *   access_token: 'access_token',
-	     *   refresh_token: 'refresh_token',
-	     *   expires_in: 3600
-	     * };
-	     * var promise = user.connect(SocialIdentity.Facebook, token);
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param {SocialIdentity|string} identity Identity used to connect the user.
+	     * @param  {Object} [options] Options
+	     * @return {Promise<User>} The user.
 	     */
 
 	  }, {
-	    key: 'connect',
-	    value: function connect(identity, token) {
-	      var _this6 = this;
+	    key: 'disconnectIdentity',
+	    value: function () {
+	      var _ref16 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee15(identity, options) {
+	        var data, socialIdentity;
+	        return _regeneratorRuntime2.default.wrap(function _callee15$(_context15) {
+	          while (1) {
+	            switch (_context15.prev = _context15.next) {
+	              case 0:
+	                _context15.prev = 0;
 
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	                if (!(identity === _social.Facebook.identity)) {
+	                  _context15.next = 6;
+	                  break;
+	                }
 
-	      var data = this.data;
-	      var socialIdentity = data[socialIdentityAttribute] || {};
-	      socialIdentity[identity] = token;
-	      data[socialIdentityAttribute] = socialIdentity;
-	      this.data = data;
+	                _context15.next = 4;
+	                return _social.Facebook.logout();
 
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        var isActive = _this6.isActive();
+	              case 4:
+	                _context15.next = 19;
+	                break;
 
-	        if (isActive) {
-	          options._identity = identity;
-	          return _this6.update(data, options);
-	        }
+	              case 6:
+	                if (!(identity === _social.Google.identity)) {
+	                  _context15.next = 11;
+	                  break;
+	                }
 
-	        return _this6.login(data, null, options);
-	      }).catch(function (err) {
-	        if (err instanceof _errors.NotFoundError) {
-	          return _this6.signup(data, options).then(function () {
-	            return _this6.connect(identity, token, options);
-	          });
-	        }
+	                _context15.next = 9;
+	                return _social.Google.logout();
 
-	        throw err;
-	      }).then(function () {
-	        (0, _storage.setActiveSocialIdentity)(_this6.client, {
-	          identity: identity,
-	          token: _this6[socialIdentityAttribute][identity],
-	          redirectUri: options.redirectUri,
-	          client: options.micClient
-	        });
-	        return _this6;
-	      });
+	              case 9:
+	                _context15.next = 19;
+	                break;
 
-	      return promise;
-	    }
+	              case 11:
+	                if (!(identity === _social.LinkedIn.identity)) {
+	                  _context15.next = 16;
+	                  break;
+	                }
+
+	                _context15.next = 14;
+	                return _social.LinkedIn.logout();
+
+	              case 14:
+	                _context15.next = 19;
+	                break;
+
+	              case 16:
+	                if (!(identity === _social.MobileIdentityConnect.identity)) {
+	                  _context15.next = 19;
+	                  break;
+	                }
+
+	                _context15.next = 19;
+	                return _social.MobileIdentityConnect.logout();
+
+	              case 19:
+
+	                (0, _storage.setIdentitySession)(this.client, identity, null);
+	                _context15.next = 25;
+	                break;
+
+	              case 22:
+	                _context15.prev = 22;
+	                _context15.t0 = _context15['catch'](0);
+
+	                _log.Log.error(_context15.t0);
+
+	              case 25:
+	                data = this.data;
+	                socialIdentity = data[socialIdentityAttribute] || {};
+
+	                delete socialIdentity[identity];
+	                data[socialIdentityAttribute] = socialIdentity;
+	                this.data = data;
+
+	                if (this[idAttribute]) {
+	                  _context15.next = 32;
+	                  break;
+	                }
+
+	                return _context15.abrupt('return', this);
+
+	              case 32:
+	                _context15.next = 34;
+	                return this.update(data, options);
+
+	              case 34:
+	                return _context15.abrupt('return', this);
+
+	              case 35:
+	              case 'end':
+	                return _context15.stop();
+	            }
+	          }
+	        }, _callee15, this, [[0, 22]]);
+	      }));
+
+	      function disconnectIdentity(_x35, _x36) {
+	        return _ref16.apply(this, arguments);
+	      }
+
+	      return disconnectIdentity;
+	    }()
+
+	    /**
+	     * Logout the active user.
+	     *
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<User>} The user.
+	     */
+
 	  }, {
-	    key: 'disconnect',
-	    value: function disconnect(identity) {
-	      var _this7 = this;
+	    key: 'logout',
+	    value: function () {
+	      var _ref17 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee16() {
+	        var _this2 = this;
 
-	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	        var config, request, identities, promises;
+	        return _regeneratorRuntime2.default.wrap(function _callee16$(_context16) {
+	          while (1) {
+	            switch (_context16.prev = _context16.next) {
+	              case 0:
+	                _context16.prev = 0;
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.Session,
+	                  url: _url2.default.format({
+	                    protocol: this.client.apiProtocol,
+	                    host: this.client.apiHost,
+	                    pathname: this.pathname + '/_logout'
+	                  }),
+	                  properties: options.properties,
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context16.next = 5;
+	                return request.execute();
 
-	      var data = this.data;
-	      var socialIdentity = data[socialIdentityAttribute] || {};
-	      delete socialIdentity[identity];
-	      data[socialIdentityAttribute] = socialIdentity;
-	      this.data = data;
+	              case 5:
+	                _context16.next = 10;
+	                break;
 
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        if (!_this7[idAttribute]) {
-	          return _this7;
-	        }
+	              case 7:
+	                _context16.prev = 7;
+	                _context16.t0 = _context16['catch'](0);
 
-	        return _this7.update(data, options);
-	      }).then(function () {
-	        var activeSocialIdentity = _this7.client.activeSocialIdentity;
+	                _log.Log.error(_context16.t0);
 
-	        if (activeSocialIdentity.identity === identity) {
-	          (0, _storage.setActiveSocialIdentity)(_this7.client, null);
-	        }
+	              case 10:
+	                _context16.prev = 10;
+	                identities = Object.keys(this._socialIdentity);
+	                promises = identities.map(function (identity) {
+	                  return _this2.disconnectIdentity(identity, options);
+	                });
+	                _context16.next = 15;
+	                return _es6Promise.Promise.all(promises);
 
-	        return _this7;
-	      });
+	              case 15:
+	                _context16.next = 20;
+	                break;
 
-	      return promise;
-	    }
+	              case 17:
+	                _context16.prev = 17;
+	                _context16.t1 = _context16['catch'](10);
+
+	                _log.Log.error(_context16.t1);
+
+	              case 20:
+
+	                (0, _storage.setActiveUser)(this.client, null);
+	                _context16.next = 23;
+	                return _datastore.DataStore.clearCache({ client: this.client });
+
+	              case 23:
+	                return _context16.abrupt('return', this);
+
+	              case 24:
+	              case 'end':
+	                return _context16.stop();
+	            }
+	          }
+	        }, _callee16, this, [[0, 7], [10, 17]]);
+	      }));
+
+	      function logout(_x37) {
+	        return _ref17.apply(this, arguments);
+	      }
+
+	      return logout;
+	    }()
+
+	    /**
+	     * Sign up a user with Kinvey.
+	     *
+	     * @param {User|Object} data Users data.
+	     * @param {Object} [options] Options
+	     * @param {boolean} [options.state=true] If set to true, the user will be set as the active user after successfully
+	     *                                       being signed up.
+	     * @return {Promise<User>} The user.
+	     */
+
 	  }, {
 	    key: 'signup',
+	    value: function () {
+	      var _ref18 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee17(user) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	        var activeUser, config, request, response;
+	        return _regeneratorRuntime2.default.wrap(function _callee17$(_context17) {
+	          while (1) {
+	            switch (_context17.prev = _context17.next) {
+	              case 0:
+	                options = (0, _assign2.default)({
+	                  state: true
+	                }, options);
+
+	                if (!(options.state === true)) {
+	                  _context17.next = 5;
+	                  break;
+	                }
+
+	                activeUser = User.getActiveUser(this.client);
+
+	                if (!activeUser) {
+	                  _context17.next = 5;
+	                  break;
+	                }
+
+	                throw new _errors.ActiveUserError('An active user already exists.' + ' Please logout the active user before you login.');
+
+	              case 5:
+
+	                if (user instanceof User) {
+	                  user = user.data;
+	                }
+
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.App,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: this.pathname
+	                  }),
+	                  body: user,
+	                  properties: options.properties,
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context17.next = 10;
+	                return request.execute();
+
+	              case 10:
+	                response = _context17.sent;
+
+	                this.data = response.data;
+
+	                if (options.state === true) {
+	                  (0, _storage.setActiveUser)(this.client, this.data);
+	                }
+
+	                return _context17.abrupt('return', this);
+
+	              case 14:
+	              case 'end':
+	                return _context17.stop();
+	            }
+	          }
+	        }, _callee17, this);
+	      }));
+
+	      function signup(_x39, _x40) {
+	        return _ref18.apply(this, arguments);
+	      }
+
+	      return signup;
+	    }()
+
+	    /**
+	     * Sign up a user with Kinvey.
+	     *
+	     * @param {User|Object} data Users data.
+	     * @param {Object} [options] Options
+	     * @param {boolean} [options.state=true] If set to true, the user will be set as the active user after successfully
+	     *                                       being signed up.
+	     * @return {Promise<User>} The user.
+	     */
+
+	  }, {
+	    key: 'signupWithIdentity',
 
 
 	    /**
-	     * Sign up. If options.state is set to true then the user
-	     * will be set as the active user after succesfully signing up the
-	     * user.
+	     * Sign up a user with Kinvey using an identity.
 	     *
-	     * @param  {User|Object}    data                    Users data.
-	     * @param  {Object}         [options={}]            Options
-	     * @param  {Boolean}        [options.state=true]    If set to true, the user will be
-	     *                                                  set as the active user after successfully
-	     *                                                  being signed up.
-	     * @return {Promise<User>}                          The signed up user.
-	     *
-	     * @example
-	     * var promise = user.signup({
-	     *   username: 'admin',
-	     *   password: 'admin'
-	     * });
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
+	     * @param {SocialIdentity|string} identity The identity.
+	     * @param {Object} session Identity session
+	     * @param {Object} [options] Options
+	     * @param {boolean} [options.state=true] If set to true, the user will be set as the active user after successfully
+	     *                                       being signed up.
+	     * @return {Promise<User>} The user.
 	     */
-	    value: function signup(data) {
-	      var _this8 = this;
-
-	      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-	      options = (0, _assign2.default)({
-	        state: true
-	      }, options);
-
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        if (options.state === true) {
-	          var activeUser = User.getActiveUser(_this8.client);
-	          if (activeUser) {
-	            throw new _errors.ActiveUserError('An active user already exists. ' + 'Please logout the active user before you login.');
-	          }
-	        }
-	      }).then(function () {
-	        var request = new _network.NetworkRequest({
-	          method: _request.RequestMethod.POST,
-	          authType: _request.AuthType.App,
-	          url: _url2.default.format({
-	            protocol: _this8.client.protocol,
-	            host: _this8.client.host,
-	            pathname: '/' + usersNamespace + '/' + _this8.client.appKey
-	          }),
-	          data: (0, _result2.default)(data, 'toJSON', data),
-	          properties: options.properties,
-	          timeout: options.timeout
-	        });
-	        return request.execute();
-	      }).then(function (response) {
-	        _this8.data = response.data;
-
-	        if (options.state === true) {
-	          (0, _storage.setActiveUser)(_this8.client, _this8.data);
-	        }
-
-	        return _this8;
-	      });
-
-	      return promise;
-	    }
-	  }, {
-	    key: 'signupWithIdentity',
-	    value: function signupWithIdentity(identity, tokens, options) {
+	    value: function signupWithIdentity(identity, session, options) {
 	      var data = {};
 	      data[socialIdentityAttribute] = {};
-	      data[socialIdentityAttribute][identity] = tokens;
+	      data[socialIdentityAttribute][identity] = session;
 	      return this.signup(data, options);
 	    }
+
+	    /**
+	     * Sign up a user with Kinvey using an identity.
+	     *
+	     * @param {SocialIdentity|string} identity The identity.
+	     * @param {Object} session Identity session
+	     * @param {Object} [options] Options
+	     * @param {boolean} [options.state=true] If set to true, the user will be set as the active user after successfully
+	     *                                       being signed up.
+	     * @return {Promise<User>} The user.
+	     */
+
 	  }, {
 	    key: 'update',
-	    value: function update(data, options) {
-	      var _this9 = this;
 
-	      data = (0, _assign2.default)(this.data, data);
-	      var userStore = new UserStore();
-	      return userStore.update(data, options).then(function (data) {
-	        _this9.data = data;
 
-	        if (_this9.isActive()) {
-	          (0, _storage.setActiveUser)(_this9.client, _this9.data);
-	        }
+	    /**
+	     * Update the users data.
+	     *
+	     * @param {Object} data Data.
+	     * @param {Object} [options] Options
+	     * @return {Promise<User>} The user.
+	     */
+	    value: function () {
+	      var _ref19 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee18(data, options) {
+	        var userStore;
+	        return _regeneratorRuntime2.default.wrap(function _callee18$(_context18) {
+	          while (1) {
+	            switch (_context18.prev = _context18.next) {
+	              case 0:
+	                data = (0, _assign2.default)(this.data, data);
+	                userStore = new UserStore();
+	                _context18.next = 4;
+	                return userStore.update(data, options);
 
-	        return _this9;
-	      });
-	    }
+	              case 4:
+
+	                if (this.isActive()) {
+	                  (0, _storage.setActiveUser)(this.client, this.data);
+	                }
+
+	                return _context18.abrupt('return', this);
+
+	              case 6:
+	              case 'end':
+	                return _context18.stop();
+	            }
+	          }
+	        }, _callee18, this);
+	      }));
+
+	      function update(_x42, _x43) {
+	        return _ref19.apply(this, arguments);
+	      }
+
+	      return update;
+	    }()
+
+	    /**
+	     * Retfresh the users data.
+	     *
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<User>} The user.
+	     */
+
 	  }, {
 	    key: 'me',
-	    value: function me() {
-	      var _this10 = this;
+	    value: function () {
+	      var _ref20 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee19() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	        var config, request, _ref21, data, activeUser;
 
-	      var request = new _network.NetworkRequest({
-	        method: _request.RequestMethod.GET,
-	        authType: _request.AuthType.Session,
-	        url: _url2.default.format({
-	          protocol: this.client.protocol,
-	          host: this.client.host,
-	          pathname: '/' + usersNamespace + '/' + this.client.appKey + '/_me'
-	        }),
-	        properties: options.properties,
-	        timeout: options.timeout
-	      });
+	        return _regeneratorRuntime2.default.wrap(function _callee19$(_context19) {
+	          while (1) {
+	            switch (_context19.prev = _context19.next) {
+	              case 0:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.GET,
+	                  authType: _request.AuthType.Session,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: this.pathname + '/_me'
+	                  }),
+	                  properties: options.properties,
+	                  timeout: options.timeout
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context19.next = 4;
+	                return request.execute();
 
-	      var promise = request.execute().then(function (response) {
-	        _this10.data = response.data;
+	              case 4:
+	                _ref21 = _context19.sent;
+	                data = _ref21.data;
 
-	        if (!_this10.authtoken) {
-	          var activeUser = User.getActiveUser(_this10.client);
+	                this.data = data;
 
-	          if (activeUser) {
-	            _this10.authtoken = activeUser.authtoken;
+	                if (!this.authtoken) {
+	                  activeUser = User.getActiveUser(this.client);
+
+
+	                  if (activeUser) {
+	                    this.authtoken = activeUser.authtoken;
+	                  }
+	                }
+
+	                (0, _storage.setActiveUser)(this.client, this.data);
+	                return _context19.abrupt('return', this);
+
+	              case 10:
+	              case 'end':
+	                return _context19.stop();
+	            }
 	          }
-	        }
+	        }, _callee19, this);
+	      }));
 
-	        (0, _storage.setActiveUser)(_this10.client, _this10.data);
-	        return _this10;
-	      });
+	      function me(_x44) {
+	        return _ref20.apply(this, arguments);
+	      }
 
-	      return promise;
-	    }
-	  }, {
-	    key: 'isEmailVerified',
-	    value: function isEmailVerified() {
-	      var status = this.metadata.emailVerification;
-	      return status === 'confirmed';
-	    }
+	      return me;
+	    }()
+
+	    /**
+	     * Request an email to be sent to verify the users email.
+	     *
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
 	  }, {
 	    key: 'verifyEmail',
-	    value: function verifyEmail() {
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    value: function () {
+	      var _ref22 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee20() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      var request = new _network.NetworkRequest({
-	        method: _request.RequestMethod.POST,
-	        authType: _request.AuthType.App,
-	        url: _url2.default.format({
-	          protocol: this.client.protocol,
-	          host: this.client.host,
-	          pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/' + this.username + '/user-email-verification-initiate'
-	        }),
-	        properties: options.properties,
-	        timeout: options.timeout,
-	        client: this.client
-	      });
+	        var config, request, _ref23, data;
 
-	      var promise = request.execute().then(function (response) {
-	        return response.data;
-	      });
-	      return promise;
-	    }
+	        return _regeneratorRuntime2.default.wrap(function _callee20$(_context20) {
+	          while (1) {
+	            switch (_context20.prev = _context20.next) {
+	              case 0:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.App,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/' + this.username + '/user-email-verification-initiate'
+	                  }),
+	                  properties: options.properties,
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context20.next = 4;
+	                return request.execute();
+
+	              case 4:
+	                _ref23 = _context20.sent;
+	                data = _ref23.data;
+	                return _context20.abrupt('return', data);
+
+	              case 7:
+	              case 'end':
+	                return _context20.stop();
+	            }
+	          }
+	        }, _callee20, this);
+	      }));
+
+	      function verifyEmail(_x46) {
+	        return _ref22.apply(this, arguments);
+	      }
+
+	      return verifyEmail;
+	    }()
+
+	    /**
+	     * Request an email to be sent to recover a forgot username.
+	     *
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
 	  }, {
 	    key: 'forgotUsername',
-	    value: function forgotUsername() {
+	    value: function () {
+	      var _ref24 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee21() {
+	        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	        var config, request, _ref25, data;
+
+	        return _regeneratorRuntime2.default.wrap(function _callee21$(_context21) {
+	          while (1) {
+	            switch (_context21.prev = _context21.next) {
+	              case 0:
+	                config = new _request.KinveyRequestConfig({
+	                  method: _request.RequestMethod.POST,
+	                  authType: _request.AuthType.App,
+	                  url: _url2.default.format({
+	                    protocol: this.client.protocol,
+	                    host: this.client.host,
+	                    pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/user-forgot-username'
+	                  }),
+	                  properties: options.properties,
+	                  data: { email: this.email },
+	                  timeout: options.timeout,
+	                  client: this.client
+	                });
+	                request = new _network.NetworkRequest(config);
+	                _context21.next = 4;
+	                return request.execute();
+
+	              case 4:
+	                _ref25 = _context21.sent;
+	                data = _ref25.data;
+	                return _context21.abrupt('return', data);
+
+	              case 7:
+	              case 'end':
+	                return _context21.stop();
+	            }
+	          }
+	        }, _callee21, this);
+	      }));
+
+	      function forgotUsername(_x48) {
+	        return _ref24.apply(this, arguments);
+	      }
+
+	      return forgotUsername;
+	    }()
+
+	    /**
+	     * Request an email to be sent to reset the users password.
+	     *
+	     * @param {Object} [options = {}] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
+	  }, {
+	    key: 'resetPassword',
+	    value: function resetPassword() {
 	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	      var request = new _network.NetworkRequest({
-	        method: _request.RequestMethod.POST,
-	        authType: _request.AuthType.App,
-	        url: _url2.default.format({
-	          protocol: this.client.protocol,
-	          host: this.client.host,
-	          pathname: '/' + rpcNamespace + '/' + this.client.appKey + '/user-forgot-username'
-	        }),
-	        properties: options.properties,
-	        data: { email: this.email },
-	        timeout: options.timeout,
-	        client: this.client
-	      });
+	      options.client = this.client;
+	      return User.resetPassword(this.username, options);
+	    }
 
-	      var promise = request.execute().then(function (response) {
-	        return response.data;
-	      });
-	      return promise;
-	    }
-	  }, {
-	    key: 'toJSON',
-	    value: function toJSON() {
-	      return this.data;
-	    }
+	    /**
+	     * Request an email to be sent to reset a users password.
+	     *
+	     * @param {string} username Username
+	     * @param {Object} [options={}] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
 	  }, {
 	    key: '_id',
 	    get: function get() {
@@ -26889,9 +27622,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The _acl for the user.
 	     *
 	     * @return {Acl} _acl
-	     *
-	     * @example
-	     * var _acl = user._acl;
 	     */
 
 	  }, {
@@ -26904,16 +27634,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The metadata for the user.
 	     *
 	     * @return {Metadata} metadata
-	     *
-	     * @example
-	     * var metadata = user.metadata;
 	     */
 
 	  }, {
 	    key: 'metadata',
 	    get: function get() {
 	      return new _metadata.Metadata(this.data);
-	    },
+	    }
+
+	    /**
+	     * Set the metadata for the user.
+	     *
+	     * @param {Metadata|Object} metadata The metadata.
+	     */
+	    ,
 	    set: function set(metadata) {
 	      this.data[kmdAttribute] = (0, _result2.default)(metadata, 'toJSON', metadata);
 	    }
@@ -26922,19 +27656,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The _kmd for the user.
 	     *
 	     * @return {Metadata} _kmd
-	     *
-	     * @example
-	     * var _kmd = user._kmd;
 	     */
 
 	  }, {
 	    key: '_kmd',
 	    get: function get() {
 	      return this.metadata;
-	    },
+	    }
+
+	    /**
+	     * Set the _kmd for the user.
+	     *
+	     * @param {Metadata|Object} metadata The metadata.
+	     */
+	    ,
 	    set: function set(kmd) {
 	      this.metadata = kmd;
 	    }
+
+	    /**
+	     * The _socialIdentity for the user.
+	     *
+	     * @return {Object} _socialIdentity
+	     */
+
 	  }, {
 	    key: '_socialIdentity',
 	    get: function get() {
@@ -26945,9 +27690,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The auth token for the user.
 	     *
 	     * @return {?string} Auth token
-	     *
-	     * @example
-	     * var authtoken = user.authtoken;
 	     */
 
 	  }, {
@@ -26960,9 +27702,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * Set the auth token for the user.
 	     *
 	     * @param  {?string} authtoken Auth token
-	     *
-	     * @example
-	     * user.authtoken = 'authtoken';
 	     */
 	    ,
 	    set: function set(authtoken) {
@@ -26975,9 +27714,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The username for the user.
 	     *
 	     * @return {?string} Username
-	     *
-	     * @example
-	     * var username = user.username;
 	     */
 
 	  }, {
@@ -26990,9 +27726,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	     * The email for the user.
 	     *
 	     * @return {?string} Email
-	     *
-	     * @example
-	     * var email = user.email;
 	     */
 
 	  }, {
@@ -27000,25 +27733,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    get: function get() {
 	      return this.data[emailAttribute];
 	    }
+
+	    /**
+	     * @private
+	     */
+
 	  }, {
 	    key: 'pathname',
 	    get: function get() {
 	      return '/' + usersNamespace + '/' + this.client.appKey;
 	    }
-
-	    /**
-	     * Gets the active user. You can optionally provide a client
-	     * to use to lookup the active user.
-	     *
-	     * @param  {Client}           [client=Client.sharedInstance()]   Client to use to set the active user.
-	     * @return {Promise<User>}                                       The active user on the client. The
-	     *                                                               active user could be null if one does
-	     *                                                               not exist.
-	     *
-	     * @example
-	     * var _id = user._id;
-	     */
-
 	  }], [{
 	    key: 'getActiveUser',
 	    value: function getActiveUser() {
@@ -27036,105 +27760,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'login',
-	    value: function login(usernameOrData, password, options) {
+	    value: function login(username, password, options) {
 	      var user = new User();
-	      return user.login(usernameOrData, password, options);
-	    }
-	  }, {
-	    key: 'loginWithIdentity',
-	    value: function loginWithIdentity(identity, tokens, options) {
-	      var user = new User();
-	      return user.loginWithIdentity(identity, tokens, options);
+	      return user.login(username, password, options);
 	    }
 	  }, {
 	    key: 'loginWithMIC',
 	    value: function loginWithMIC(redirectUri, authorizationGrant) {
 	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
-	      var client = options.client || _client.Client.sharedInstance();
 	      var user = new User();
-	      user.client = client;
+	      user.client = options.client || _client.Client.sharedInstance();
 	      return user.loginWithMIC(redirectUri, authorizationGrant, options);
 	    }
 	  }, {
-	    key: 'isIdentitySupported',
-	    value: function isIdentitySupported(identity) {
-	      return typeof hello !== 'undefined' && supportedIdentities.indexOf(identity) !== -1;
-	    }
-
-	    /**
-	     * Connect using Facebook.
-	     *
-	     * @param  {Object}         [options={}]  Options
-	     * @return {Promise<User>}                The connected user.
-	     *
-	     * @example
-	     * var promise = user.connectWithFacebook();
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
-	     */
-
-	  }, {
-	    key: 'connectWithFacebook',
-	    value: function connectWithFacebook() {
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      return User.connectWithIdentity(_mic.SocialIdentity.Facebook, options);
-	    }
-
-	    /**
-	     * Connect using Google.
-	     *
-	     * @param  {Object}         [options={}]  Options
-	     * @return {Promise<User>}                The connected user.
-	     *
-	     * @example
-	     * var promise = user.connectWithGoogle();
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
-	     */
-
-	  }, {
-	    key: 'connectWithGoogle',
-	    value: function connectWithGoogle() {
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      return User.connectWithIdentity(_mic.SocialIdentity.Google, options);
-	    }
-
-	    /**
-	     * Connect using LinkedIn.
-	     *
-	     * @param  {Object}         [options={}]  Options
-	     * @return {Promise<User>}                The connected user.
-	     *
-	     * @example
-	     * var promise = user.connectWithLinkedIn();
-	     * promise.then(function(user) {
-	     *   ...
-	     * }).catch(function(error) {
-	     *   ...
-	     * });
-	     */
-
-	  }, {
-	    key: 'connectWithLinkedIn',
-	    value: function connectWithLinkedIn() {
-	      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      return User.connectWithIdentity(_mic.SocialIdentity.LinkedIn, options);
+	    key: 'connectFacebook',
+	    value: function connectFacebook(clientId, options) {
+	      var user = new User({});
+	      return user.connectFacebook(clientId, options);
 	    }
 	  }, {
-	    key: 'connectWithIdentity',
-	    value: function connectWithIdentity(identity, options) {
-	      var user = new User();
-	      return user.connectWithIdentity(identity, options);
+	    key: 'connectGoogle',
+	    value: function connectGoogle(clientId, options) {
+	      var user = new User({});
+	      return user.connectGoogle(clientId, options);
+	    }
+	  }, {
+	    key: 'connectLinkedIn',
+	    value: function connectLinkedIn(clientId, options) {
+	      var user = new User({});
+	      return user.connectLinkedIn(clientId, options);
 	    }
 	  }, {
 	    key: 'signup',
@@ -27144,22 +27799,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'signupWithIdentity',
-	    value: function signupWithIdentity(identity, tokens, options) {
+	    value: function signupWithIdentity(identity, session, options) {
 	      var user = new User();
-	      return user.signupWithIdentity(identity, tokens, options);
+	      return user.signupWithIdentity(identity, session, options);
 	    }
 	  }, {
 	    key: 'resetPassword',
 	    value: function () {
-	      var _ref5 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee5(username) {
+	      var _ref26 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee22(username) {
 	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-	        var client, request, response;
-	        return _regeneratorRuntime2.default.wrap(function _callee5$(_context5) {
+
+	        var client, config, request, _ref27, data;
+
+	        return _regeneratorRuntime2.default.wrap(function _callee22$(_context22) {
 	          while (1) {
-	            switch (_context5.prev = _context5.next) {
+	            switch (_context22.prev = _context22.next) {
 	              case 0:
 	                if (username) {
-	                  _context5.next = 2;
+	                  _context22.next = 2;
 	                  break;
 	                }
 
@@ -27167,7 +27824,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	              case 2:
 	                if ((0, _isString2.default)(username)) {
-	                  _context5.next = 4;
+	                  _context22.next = 4;
 	                  break;
 	                }
 
@@ -27175,7 +27832,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	              case 4:
 	                client = options.client || _client.Client.sharedInstance();
-	                request = new _network.NetworkRequest({
+	                config = new _request.KinveyRequestConfig({
 	                  method: _request.RequestMethod.POST,
 	                  authType: _request.AuthType.App,
 	                  url: _url2.default.format({
@@ -27187,27 +27844,59 @@ return /******/ (function(modules) { // webpackBootstrap
 	                  timeout: options.timeout,
 	                  client: client
 	                });
-	                _context5.next = 8;
+	                request = new _network.NetworkRequest(config);
+	                _context22.next = 9;
 	                return request.execute();
 
-	              case 8:
-	                response = _context5.sent;
-	                return _context5.abrupt('return', response.data);
+	              case 9:
+	                _ref27 = _context22.sent;
+	                data = _ref27.data;
+	                return _context22.abrupt('return', data);
 
-	              case 10:
+	              case 12:
 	              case 'end':
-	                return _context5.stop();
+	                return _context22.stop();
 	            }
 	          }
-	        }, _callee5, this);
+	        }, _callee22, this);
 	      }));
 
-	      function resetPassword(_x26, _x27) {
-	        return _ref5.apply(this, arguments);
+	      function resetPassword(_x53, _x54) {
+	        return _ref26.apply(this, arguments);
 	      }
 
 	      return resetPassword;
 	    }()
+
+	    /**
+	     * Check if a username already exists.
+	     *
+	     * @param {string} username Username
+	     * @param {Object} [options] Options
+	     * @return {boolean} True if the username already exists otherwise false.
+	     */
+
+	  }, {
+	    key: 'exists',
+	    value: function exists(username, options) {
+	      var store = new UserStore();
+	      return store.exists(username, options);
+	    }
+
+	    /**
+	     * Restore a user that has been suspended.
+	     *
+	     * @param {string} id Id of the user to restore.
+	     * @param {Object} [options] Options
+	     * @return {Promise<Object>} The response.
+	     */
+
+	  }, {
+	    key: 'restore',
+	    value: function restore(id, options) {
+	      var store = new UserStore();
+	      return store.restore(id, options);
+	    }
 	  }]);
 
 	  return User;
@@ -27215,7 +27904,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -27229,7 +27918,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _clone = __webpack_require__(205);
+	var _clone = __webpack_require__(206);
 
 	var _clone2 = _interopRequireDefault(_clone);
 
@@ -27244,7 +27933,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var aclAttribute = process.env.KINVEY_ACL_ATTRIBUTE || '_acl';
 
 	/**
-	 * Wrapper for reading and setting permissions on an entity level.
+	 * The Acl class is used as a wrapper for reading and setting permissions on an entity level.
 	 *
 	 * @example
 	 * var entity = { _acl: {} };
@@ -27435,540 +28124,580 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.MobileIdentityConnect = exports.SocialIdentity = exports.AuthorizationGrant = undefined;
+
+	var _enums = __webpack_require__(202);
+
+	Object.keys(_enums).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _enums[key];
+	    }
+	  });
+	});
+
+	var _facebook = __webpack_require__(275);
+
+	Object.keys(_facebook).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _facebook[key];
+	    }
+	  });
+	});
+
+	var _google = __webpack_require__(281);
+
+	Object.keys(_google).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _google[key];
+	    }
+	  });
+	});
+
+	var _linkedin = __webpack_require__(282);
+
+	Object.keys(_linkedin).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _linkedin[key];
+	    }
+	  });
+	});
+
+	var _mic = __webpack_require__(283);
+
+	Object.keys(_mic).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _mic[key];
+	    }
+	  });
+	});
+
+	var _windows = __webpack_require__(285);
+
+	Object.keys(_windows).forEach(function (key) {
+	  if (key === "default" || key === "__esModule") return;
+	  Object.defineProperty(exports, key, {
+	    enumerable: true,
+	    get: function get() {
+	      return _windows[key];
+	    }
+	  });
+	});
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Facebook = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _errors = __webpack_require__(8);
+	var _social = __webpack_require__(276);
 
-	var _network = __webpack_require__(201);
-
-	var _request = __webpack_require__(152);
-
-	var _client = __webpack_require__(140);
+	var _enums = __webpack_require__(202);
 
 	var _es6Promise = __webpack_require__(171);
 
-	var _path = __webpack_require__(274);
+	var _errors = __webpack_require__(8);
 
-	var _path2 = _interopRequireDefault(_path);
+	var _string = __webpack_require__(279);
+
+	var _regeneratorRuntime = __webpack_require__(161);
+
+	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
+
+	var _assign = __webpack_require__(121);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	var _querystring = __webpack_require__(148);
+
+	var _querystring2 = _interopRequireDefault(_querystring);
 
 	var _url = __webpack_require__(145);
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _isString = __webpack_require__(35);
-
-	var _isString2 = _interopRequireDefault(_isString);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new _es6Promise.Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return _es6Promise.Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var authPathname = process.env.KINVEY_MIC_AUTH_PATHNAME || '/oauth/auth';
-	var tokenPathname = process.env.KINVEY_MIC_TOKEN_PATHNAME || '/oauth/token';
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable camelcase */
+	// eslint-disable-line no-unused-vars
+
 
 	/**
-	 * Enum for Mobile Identity Connect authorization grants.
+	 * @private
 	 */
-	var AuthorizationGrant = {
-	  AuthorizationCodeLoginPage: 'AuthorizationCodeLoginPage',
-	  AuthorizationCodeAPI: 'AuthorizationCodeAPI'
-	};
-	Object.freeze(AuthorizationGrant);
-	exports.AuthorizationGrant = AuthorizationGrant;
+	var Facebook = exports.Facebook = function (_Social) {
+	  _inherits(Facebook, _Social);
 
-	/**
-	 * Enum for Social Identities.
-	 */
+	  function Facebook() {
+	    _classCallCheck(this, Facebook);
 
-	var SocialIdentity = {
-	  Facebook: 'facebook',
-	  Google: 'google',
-	  LinkedIn: 'linkedin'
-	};
-	Object.freeze(SocialIdentity);
-	exports.SocialIdentity = SocialIdentity;
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Facebook).apply(this, arguments));
+	  }
+
+	  _createClass(Facebook, [{
+	    key: 'isSupported',
+	    value: function isSupported() {
+	      return !!global.KinveyPopup;
+	    }
+	  }, {
+	    key: 'login',
+	    value: function () {
+	      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(clientId) {
+	        var _this2 = this;
+
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	        var session, promise;
+	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                options = (0, _assign2.default)({
+	                  force: false,
+	                  scope: 'public_profile'
+	                }, options);
+
+	                if (this.isSupported()) {
+	                  _context.next = 3;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('Unable to login with ' + this.identity + '. It is not supported on this platform.');
+
+	              case 3:
+	                session = this.session;
+
+	                if (!(session && this.isOnline(session))) {
+	                  _context.next = 6;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', session);
+
+	              case 6:
+	                if (clientId) {
+	                  _context.next = 8;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('Unable to login with ' + this.identity + '. ' + ' No client id was provided.');
+
+	              case 8:
+	                promise = new _es6Promise.Promise(function (resolve, reject) {
+	                  var redirectUri = options.redirectUri || global.location.href;
+	                  var originalState = (0, _string.randomString)();
+	                  var popup = new global.KinveyPopup();
+	                  var redirected = false;
+
+	                  // Handle the response from a login request
+	                  var oauthCallback = function oauthCallback(urlString) {
+	                    var _url$parse = _url2.default.parse(urlString);
+
+	                    var hash = _url$parse.hash;
+
+	                    var _querystring$parse = _querystring2.default.parse(hash.substring(1));
+
+	                    var access_token = _querystring$parse.access_token;
+	                    var expires_in = _querystring$parse.expires_in;
+	                    var error = _querystring$parse.error;
+	                    var error_description = _querystring$parse.error_description;
+	                    var error_reason = _querystring$parse.error_reason;
+	                    var state = _querystring$parse.state;
+
+	                    var expiresIn = parseInt(expires_in, 10);
+	                    var expires = new Date().getTime() / 1e3 + (expiresIn || 60 * 60 * 24 * 365);
+
+	                    if (state === originalState) {
+	                      if (access_token) {
+	                        var _session = {
+	                          access_token: access_token,
+	                          expires_in: expiresIn,
+	                          expires: expires,
+	                          client_id: clientId
+	                        };
+	                        _this2.session = _session;
+	                        resolve(_session);
+	                      } else if (error) {
+	                        _this2.session = null;
+	                        reject({ reason: error_reason, error: error, description: error_description });
+	                      } else {
+	                        _this2.session = null;
+	                        reject({ reason: 'not_authorized', error: 'access_denied', description: 'Your app is not authorized.' });
+	                      }
+	                    } else {
+	                      _this2.session = null;
+	                      reject({ reason: 'state_mismatch', error: 'access_denied', description: 'The state did not match.' });
+	                    }
+	                  };
+
+	                  function loadCallback(event) {
+	                    var urlString = event.url;
+
+	                    try {
+	                      if (urlString && urlString.indexOf(redirectUri) === 0 && redirected === false) {
+	                        redirected = true;
+	                        popup.removeAllListeners();
+	                        popup.close();
+	                        oauthCallback(urlString);
+	                      }
+	                    } catch (error) {
+	                      // Just catch the error
+	                    }
+	                  }
+
+	                  function errorCallback(event) {
+	                    var urlString = event.url;
+
+	                    try {
+	                      if (urlString && urlString.indexOf(redirectUri) === 0 && redirected === false) {
+	                        redirected = true;
+	                        popup.removeAllListeners();
+	                        popup.close();
+	                        oauthCallback(urlString);
+	                      } else if (redirected === false) {
+	                        popup.removeAllListeners();
+	                        popup.close();
+	                        reject(new _errors.KinveyError(event.message, '', event.code));
+	                      }
+	                    } catch (error) {
+	                      // Just catch the error
+	                    }
+	                  }
+
+	                  function closedCallback() {
+	                    if (redirected === false) {
+	                      popup.removeAllListeners();
+	                      reject(new _errors.KinveyError('Facebook login has been cancelled.'));
+	                    }
+	                  }
+
+	                  popup.on('loadstart', loadCallback);
+	                  popup.on('loadstop', loadCallback);
+	                  popup.on('error', errorCallback);
+	                  popup.on('closed', closedCallback);
+	                  popup.open(_url2.default.format({
+	                    protocol: 'https:',
+	                    host: 'www.facebook.com',
+	                    pathname: '/dialog/oauth',
+	                    query: {
+	                      client_id: clientId,
+	                      redirect_uri: redirectUri,
+	                      response_type: 'token',
+	                      scope: options.scope,
+	                      auth_type: options.force === true ? 'rerequest' : null,
+	                      state: originalState
+	                    }
+	                  }));
+	                });
+	                return _context.abrupt('return', promise);
+
+	              case 10:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this);
+	      }));
+
+	      function login(_x, _x2) {
+	        return _ref.apply(this, arguments);
+	      }
+
+	      return login;
+	    }()
+	  }, {
+	    key: 'logout',
+	    value: function () {
+	      var _ref2 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee2() {
+	        return _regeneratorRuntime2.default.wrap(function _callee2$(_context2) {
+	          while (1) {
+	            switch (_context2.prev = _context2.next) {
+	              case 0:
+	                this.session = null;
+
+	              case 1:
+	              case 'end':
+	                return _context2.stop();
+	            }
+	          }
+	        }, _callee2, this);
+	      }));
+
+	      function logout() {
+	        return _ref2.apply(this, arguments);
+	      }
+
+	      return logout;
+	    }()
+	  }, {
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Facebook;
+	    }
+	  }], [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Facebook;
+	    }
+	  }]);
+
+	  return Facebook;
+	}(_social.Social);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Social = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // eslint-disable-line no-unused-vars
+
+
+	var _client = __webpack_require__(140);
+
+	var _errors = __webpack_require__(8);
+
+	var _localStorage = __webpack_require__(142);
+
+	var _localStorage2 = _interopRequireDefault(_localStorage);
+
+	var _regeneratorRuntime = __webpack_require__(161);
+
+	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
+
+	var _assign = __webpack_require__(121);
+
+	var _assign2 = _interopRequireDefault(_assign);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { return step("next", value); }, function (err) { return step("throw", err); }); } } return step("next"); }); }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var hello = void 0;
+
+	if (typeof window !== 'undefined') {
+	  hello = __webpack_require__(277); // eslint-disable-line global-require
+	}
 
 	/**
 	 * @private
 	 */
 
-	var MobileIdentityConnect = exports.MobileIdentityConnect = function () {
-	  function MobileIdentityConnect() {
-	    var client = arguments.length <= 0 || arguments[0] === undefined ? _client.Client.sharedInstance() : arguments[0];
+	var Social = exports.Social = function () {
+	  function Social() {
+	    var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-	    _classCallCheck(this, MobileIdentityConnect);
+	    _classCallCheck(this, Social);
 
-	    this.client = client;
+	    this.client = options.client || _client.Client.sharedInstance();
 	  }
 
-	  _createClass(MobileIdentityConnect, [{
-	    key: 'login',
-	    value: function login(redirectUri) {
-	      var _this = this;
-
-	      var authorizationGrant = arguments.length <= 1 || arguments[1] === undefined ? AuthorizationGrant.AuthorizationCodeLoginPage : arguments[1];
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
-
-	      var clientId = this.client.appKey;
-
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        if (authorizationGrant === AuthorizationGrant.AuthorizationCodeLoginPage) {
-	          // Step 1: Request a code
-	          return _this.requestCodeWithPopup(clientId, redirectUri, options);
-	        } else if (authorizationGrant === AuthorizationGrant.AuthorizationCodeAPI) {
-	          // Step 1a: Request a temp login url
-	          return _this.requestTempLoginUrl(clientId, redirectUri, options).then(function (url) {
-	            return _this.requestCodeWithUrl(url, clientId, redirectUri, options);
-	          }); // Step 1b: Request a code
-	        }
-
-	        throw new _errors.KinveyError('The authorization grant ' + authorizationGrant + ' is unsupported. ' + 'Please use a supported authorization grant.');
-	      }).then(function (code) {
-	        return _this.requestToken(code, clientId, redirectUri, options);
-	      }); // Step 3: Request a token
-
-	      return promise;
+	  _createClass(Social, [{
+	    key: 'isSupported',
+	    value: function isSupported() {
+	      return !!hello;
 	    }
 	  }, {
-	    key: 'requestTempLoginUrl',
-	    value: function requestTempLoginUrl(clientId, redirectUri) {
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	    key: 'isOnline',
+	    value: function isOnline(session) {
+	      var currentTime = new Date().getTime() / 1000;
+	      return session && session.access_token && session.expires > currentTime;
+	    }
+	  }, {
+	    key: 'login',
+	    value: function () {
+	      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(clientId) {
+	        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	        var session, helloSettings;
+	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
+	          while (1) {
+	            switch (_context.prev = _context.next) {
+	              case 0:
+	                options = (0, _assign2.default)({
+	                  redirectUri: global.location.href,
+	                  scope: null,
+	                  force: null
+	                }, options);
 
-	      var pathname = '/';
+	                if (this.isSupported()) {
+	                  _context.next = 3;
+	                  break;
+	                }
 
-	      if (options.version) {
-	        var version = options.version;
+	                throw new _errors.KinveyError('Unable to login with ' + this.identity + '. It is not supported on this platform.');
 
-	        if (!(0, _isString2.default)(version)) {
-	          version = String(version);
-	        }
+	              case 3:
+	                session = this.session;
 
-	        pathname = _path2.default.join(pathname, version.indexOf('v') === 0 ? version : 'v' + version);
+	                if (!(session && this.isOnline(session))) {
+	                  _context.next = 6;
+	                  break;
+	                }
+
+	                return _context.abrupt('return', session);
+
+	              case 6:
+	                if (clientId) {
+	                  _context.next = 8;
+	                  break;
+	                }
+
+	                throw new _errors.KinveyError('Unable to login with ' + this.identity + '. ' + ' No client id was provided.');
+
+	              case 8:
+	                helloSettings = {};
+
+	                helloSettings[this.identity] = clientId;
+	                hello.init(helloSettings);
+	                _context.next = 13;
+	                return hello(this.identity).login({
+	                  redirect_uri: options.redirectUri,
+	                  scope: options.scope,
+	                  force: options.force
+	                });
+
+	              case 13:
+	                session = hello(this.identity).getAuthResponse();
+	                session.clientId = clientId;
+	                this.session = session;
+	                return _context.abrupt('return', session);
+
+	              case 17:
+	              case 'end':
+	                return _context.stop();
+	            }
+	          }
+	        }, _callee, this);
+	      }));
+
+	      function login(_x2, _x3) {
+	        return _ref.apply(this, arguments);
 	      }
 
-	      var config = new _request.KinveyRequestConfig({
-	        method: _request.RequestMethod.POST,
-	        url: _url2.default.format({
-	          protocol: this.client.micProtocol,
-	          host: this.client.micHost,
-	          pathname: _path2.default.join(pathname, authPathname)
-	        }),
-	        properties: options.properties,
-	        body: {
-	          client_id: clientId,
-	          redirect_uri: redirectUri,
-	          response_type: 'code'
-	        }
-	      });
-	      config.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	      var request = new _network.NetworkRequest(config);
-	      return request.execute().then(function (response) {
-	        return response.data.temp_login_uri;
-	      });
-	    }
+	      return login;
+	    }()
 	  }, {
-	    key: 'requestCodeWithPopup',
-	    value: function requestCodeWithPopup(clientId, redirectUri) {
-	      var _this2 = this;
+	    key: 'logout',
+	    value: function () {
+	      var _ref2 = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee2() {
+	        var helloSettings;
+	        return _regeneratorRuntime2.default.wrap(function _callee2$(_context2) {
+	          while (1) {
+	            switch (_context2.prev = _context2.next) {
+	              case 0:
+	                if (!this.isSupported()) {
+	                  _context2.next = 6;
+	                  break;
+	                }
 
-	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+	                helloSettings = {};
 
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        var pathname = '/';
+	                helloSettings[this.identity] = this.session.clientId;
+	                hello.init(helloSettings);
+	                _context2.next = 6;
+	                return hello(this.identity).logout();
 
-	        if (options.version) {
-	          var version = options.version;
+	              case 6:
 
-	          if (!(0, _isString2.default)(version)) {
-	            version = String(version);
-	          }
+	                this.session = null;
 
-	          pathname = _path2.default.join(pathname, version.indexOf('v') === 0 ? version : 'v' + version);
-	        }
-
-	        if (global.KinveyPopup) {
-	          var popup = new global.KinveyPopup();
-	          return popup.open(_url2.default.format({
-	            protocol: _this2.client.micProtocol,
-	            host: _this2.client.micHost,
-	            pathname: _path2.default.join(pathname, authPathname),
-	            query: {
-	              client_id: clientId,
-	              redirect_uri: redirectUri,
-	              response_type: 'code'
-	            }
-	          }));
-	        }
-
-	        throw new _errors.KinveyError('KinveyPopup is undefined.' + (' Unable to login using authorization grant ' + AuthorizationGrant.AuthorizationCodeLoginPage + '.'));
-	      }).then(function (popup) {
-	        var promise = new _es6Promise.Promise(function (resolve, reject) {
-	          var redirected = false;
-
-	          function loadCallback(event) {
-	            try {
-	              if (event.url && event.url.indexOf(redirectUri) === 0 && redirected === false) {
-	                redirected = true;
-	                popup.removeAllListeners();
-	                popup.close();
-	                resolve(_url2.default.parse(event.url, true).query.code);
-	              }
-	            } catch (error) {
-	              // Just catch the error
+	              case 7:
+	              case 'end':
+	                return _context2.stop();
 	            }
 	          }
+	        }, _callee2, this);
+	      }));
 
-	          function errorCallback(event) {
-	            try {
-	              if (event.url && event.url.indexOf(redirectUri) === 0 && redirected === false) {
-	                redirected = true;
-	                popup.removeAllListeners();
-	                popup.close();
-	                resolve(_url2.default.parse(event.url, true).query.code);
-	              } else if (redirected === false) {
-	                popup.removeAllListeners();
-	                popup.close();
-	                reject(new _errors.KinveyError(event.message, '', event.code));
-	              }
-	            } catch (error) {
-	              // Just catch the error
-	            }
-	          }
+	      function logout() {
+	        return _ref2.apply(this, arguments);
+	      }
 
-	          function closedCallback() {
-	            if (redirected === false) {
-	              popup.removeAllListeners();
-	              reject(new _errors.KinveyError('Login has been cancelled.'));
-	            }
-	          }
-
-	          popup.on('loadstart', loadCallback);
-	          popup.on('loadstop', loadCallback);
-	          popup.on('error', errorCallback);
-	          popup.on('closed', closedCallback);
-	        });
-	        return promise;
-	      });
-
-	      return promise;
-	    }
+	      return logout;
+	    }()
 	  }, {
-	    key: 'requestCodeWithUrl',
-	    value: function requestCodeWithUrl(loginUrl, clientId, redirectUri) {
-	      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-
-	      var promise = _es6Promise.Promise.resolve().then(function () {
-	        var config = new _request.KinveyRequestConfig({
-	          method: _request.RequestMethod.POST,
-	          url: loginUrl,
-	          properties: options.properties,
-	          body: {
-	            client_id: clientId,
-	            redirect_uri: redirectUri,
-	            response_type: 'code',
-	            username: options.username,
-	            password: options.password
-	          },
-	          followRedirect: false
-	        });
-	        config.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	        var request = new _network.NetworkRequest(config);
-	        return request.execute();
-	      }).then(function (response) {
-	        var location = response.getHeader('location');
-
-	        if (location) {
-	          return _url2.default.parse(location, true).query.code;
-	        }
-
-	        throw new _errors.KinveyError('Unable to authorize user with username ' + options.username + '.', 'A location header was not provided with a code to exchange for an auth token.');
-	      });
-
-	      return promise;
-	    }
-	  }, {
-	    key: 'requestToken',
-	    value: function requestToken(code, clientId, redirectUri) {
-	      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
-
-	      var config = new _request.KinveyRequestConfig({
-	        method: _request.RequestMethod.POST,
-	        authType: _request.AuthType.App,
-	        url: _url2.default.format({
-	          protocol: this.client.micProtocol,
-	          host: this.client.micHost,
-	          pathname: tokenPathname
-	        }),
-	        properties: options.properties,
-	        body: {
-	          grant_type: 'authorization_code',
-	          client_id: clientId,
-	          redirect_uri: redirectUri,
-	          code: code
-	        }
-	      });
-	      config.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	      var request = new _network.NetworkRequest(config);
-	      request.automaticallyRefreshAuthToken = false;
-	      var promise = request.execute().then(function (response) {
-	        return response.data;
-	      });
-	      return promise;
-	    }
-	  }], [{
 	    key: 'identity',
 	    get: function get() {
-	      return process.env.KINVEY_MIC_IDENTITY || 'kinveyAuth';
+	      throw new _errors.KinveyError('A subclass must override this property.');
+	    }
+	  }, {
+	    key: 'session',
+	    get: function get() {
+	      return _localStorage2.default.get('' + this.client.appKey + this.identity);
+	    },
+	    set: function set(session) {
+	      if (session) {
+	        _localStorage2.default.set('' + this.client.appKey + this.identity, session);
+	      } else {
+	        _localStorage2.default.remove('' + this.client.appKey + this.identity);
+	      }
+	    }
+	  }], [{
+	    key: 'login',
+	    value: function login(clientId, options) {
+	      var social = new this(options);
+	      return social.login(clientId, options);
+	    }
+	  }, {
+	    key: 'logout',
+	    value: function logout() {
+	      var social = new this();
+	      return social.logout();
+	    }
+	  }, {
+	    key: 'identity',
+	    get: function get() {
+	      throw new _errors.KinveyError('A subclass must override this property.');
 	    }
 	  }]);
 
-	  return MobileIdentityConnect;
+	  return Social;
 	}();
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 274 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-	// resolves . and .. elements in a path array with directory names there
-	// must be no slashes, empty elements, or device names (c:\) in the array
-	// (so also no leading and trailing slashes - it does not distinguish
-	// relative and absolute paths)
-	function normalizeArray(parts, allowAboveRoot) {
-	  // if the path tries to go above the root, `up` ends up > 0
-	  var up = 0;
-	  for (var i = parts.length - 1; i >= 0; i--) {
-	    var last = parts[i];
-	    if (last === '.') {
-	      parts.splice(i, 1);
-	    } else if (last === '..') {
-	      parts.splice(i, 1);
-	      up++;
-	    } else if (up) {
-	      parts.splice(i, 1);
-	      up--;
-	    }
-	  }
-
-	  // if the path is allowed to go above the root, restore leading ..s
-	  if (allowAboveRoot) {
-	    for (; up--; up) {
-	      parts.unshift('..');
-	    }
-	  }
-
-	  return parts;
-	}
-
-	// Split a filename into [root, dir, basename, ext], unix version
-	// 'root' is just a slash, or nothing.
-	var splitPathRe =
-	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-	var splitPath = function(filename) {
-	  return splitPathRe.exec(filename).slice(1);
-	};
-
-	// path.resolve([from ...], to)
-	// posix version
-	exports.resolve = function() {
-	  var resolvedPath = '',
-	      resolvedAbsolute = false;
-
-	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-	    var path = (i >= 0) ? arguments[i] : process.cwd();
-
-	    // Skip empty and invalid entries
-	    if (typeof path !== 'string') {
-	      throw new TypeError('Arguments to path.resolve must be strings');
-	    } else if (!path) {
-	      continue;
-	    }
-
-	    resolvedPath = path + '/' + resolvedPath;
-	    resolvedAbsolute = path.charAt(0) === '/';
-	  }
-
-	  // At this point the path should be resolved to a full absolute path, but
-	  // handle relative paths to be safe (might happen when process.cwd() fails)
-
-	  // Normalize the path
-	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-	    return !!p;
-	  }), !resolvedAbsolute).join('/');
-
-	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-	};
-
-	// path.normalize(path)
-	// posix version
-	exports.normalize = function(path) {
-	  var isAbsolute = exports.isAbsolute(path),
-	      trailingSlash = substr(path, -1) === '/';
-
-	  // Normalize the path
-	  path = normalizeArray(filter(path.split('/'), function(p) {
-	    return !!p;
-	  }), !isAbsolute).join('/');
-
-	  if (!path && !isAbsolute) {
-	    path = '.';
-	  }
-	  if (path && trailingSlash) {
-	    path += '/';
-	  }
-
-	  return (isAbsolute ? '/' : '') + path;
-	};
-
-	// posix version
-	exports.isAbsolute = function(path) {
-	  return path.charAt(0) === '/';
-	};
-
-	// posix version
-	exports.join = function() {
-	  var paths = Array.prototype.slice.call(arguments, 0);
-	  return exports.normalize(filter(paths, function(p, index) {
-	    if (typeof p !== 'string') {
-	      throw new TypeError('Arguments to path.join must be strings');
-	    }
-	    return p;
-	  }).join('/'));
-	};
-
-
-	// path.relative(from, to)
-	// posix version
-	exports.relative = function(from, to) {
-	  from = exports.resolve(from).substr(1);
-	  to = exports.resolve(to).substr(1);
-
-	  function trim(arr) {
-	    var start = 0;
-	    for (; start < arr.length; start++) {
-	      if (arr[start] !== '') break;
-	    }
-
-	    var end = arr.length - 1;
-	    for (; end >= 0; end--) {
-	      if (arr[end] !== '') break;
-	    }
-
-	    if (start > end) return [];
-	    return arr.slice(start, end - start + 1);
-	  }
-
-	  var fromParts = trim(from.split('/'));
-	  var toParts = trim(to.split('/'));
-
-	  var length = Math.min(fromParts.length, toParts.length);
-	  var samePartsLength = length;
-	  for (var i = 0; i < length; i++) {
-	    if (fromParts[i] !== toParts[i]) {
-	      samePartsLength = i;
-	      break;
-	    }
-	  }
-
-	  var outputParts = [];
-	  for (var i = samePartsLength; i < fromParts.length; i++) {
-	    outputParts.push('..');
-	  }
-
-	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-	  return outputParts.join('/');
-	};
-
-	exports.sep = '/';
-	exports.delimiter = ':';
-
-	exports.dirname = function(path) {
-	  var result = splitPath(path),
-	      root = result[0],
-	      dir = result[1];
-
-	  if (!root && !dir) {
-	    // No dirname whatsoever
-	    return '.';
-	  }
-
-	  if (dir) {
-	    // It has a dirname, strip trailing slash
-	    dir = dir.substr(0, dir.length - 1);
-	  }
-
-	  return root + dir;
-	};
-
-
-	exports.basename = function(path, ext) {
-	  var f = splitPath(path)[2];
-	  // TODO: make this comparison case-insensitive on windows?
-	  if (ext && f.substr(-1 * ext.length) === ext) {
-	    f = f.substr(0, f.length - ext.length);
-	  }
-	  return f;
-	};
-
-
-	exports.extname = function(path) {
-	  return splitPath(path)[3];
-	};
-
-	function filter (xs, f) {
-	    if (xs.filter) return xs.filter(f);
-	    var res = [];
-	    for (var i = 0; i < xs.length; i++) {
-	        if (f(xs[i], i, xs)) res.push(xs[i]);
-	    }
-	    return res;
-	}
-
-	// String.prototype.substr - negative index don't work in IE8
-	var substr = 'ab'.substr(-1) === 'b'
-	    ? function (str, start, len) { return str.substr(start, len) }
-	    : function (str, start, len) {
-	        if (start < 0) start = str.length + start;
-	        return str.substr(start, len);
-	    }
-	;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
-
-/***/ },
-/* 275 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, setImmediate) {/*! hellojs v1.13.3 | (c) 2012-2016 Andrew Dodson | MIT https://adodson.com/hello.js/LICENSE */
@@ -33785,10 +34514,10 @@ return /******/ (function(modules) { // webpackBootstrap
 		module.exports = hello;
 	}
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(276).setImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(278).setImmediate))
 
 /***/ },
-/* 276 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {var nextTick = __webpack_require__(7).nextTick;
@@ -33867,10 +34596,755 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function(id) {
 	  delete immediateIds[id];
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(276).setImmediate, __webpack_require__(276).clearImmediate))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(278).setImmediate, __webpack_require__(278).clearImmediate))
 
 /***/ },
-/* 277 */
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.randomString = randomString;
+
+	var _uid = __webpack_require__(280);
+
+	var _uid2 = _interopRequireDefault(_uid);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * @private
+	 */
+	function randomString(size) {
+	  var prefix = arguments.length <= 1 || arguments[1] === undefined ? '' : arguments[1];
+
+	  return '' + prefix + (0, _uid2.default)(size);
+	}
+
+/***/ },
+/* 280 */
+/***/ function(module, exports) {
+
+	/**
+	 * Export `uid`
+	 */
+
+	module.exports = uid;
+
+	/**
+	 * Create a `uid`
+	 *
+	 * @param {String} len
+	 * @return {String} uid
+	 */
+
+	function uid(len) {
+	  len = len || 7;
+	  return Math.random().toString(35).substr(2, len);
+	}
+
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Google = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _social = __webpack_require__(276);
+
+	var _enums = __webpack_require__(202);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @private
+	 */
+	var Google = exports.Google = function (_Social) {
+	  _inherits(Google, _Social);
+
+	  function Google() {
+	    _classCallCheck(this, Google);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Google).apply(this, arguments));
+	  }
+
+	  _createClass(Google, [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Google;
+	    }
+	  }], [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Google;
+	    }
+	  }]);
+
+	  return Google;
+	}(_social.Social);
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.LinkedIn = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _social = __webpack_require__(276);
+
+	var _enums = __webpack_require__(202);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @private
+	 */
+	var LinkedIn = exports.LinkedIn = function (_Social) {
+	  _inherits(LinkedIn, _Social);
+
+	  function LinkedIn() {
+	    _classCallCheck(this, LinkedIn);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LinkedIn).apply(this, arguments));
+	  }
+
+	  _createClass(LinkedIn, [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.LinkedIn;
+	    }
+	  }], [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.LinkedIn;
+	    }
+	  }]);
+
+	  return LinkedIn;
+	}(_social.Social);
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.MobileIdentityConnect = exports.AuthorizationGrant = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _social = __webpack_require__(276);
+
+	var _enums = __webpack_require__(202);
+
+	var _errors = __webpack_require__(8);
+
+	var _network = __webpack_require__(201);
+
+	var _request = __webpack_require__(152);
+
+	var _es6Promise = __webpack_require__(171);
+
+	var _path = __webpack_require__(284);
+
+	var _path2 = _interopRequireDefault(_path);
+
+	var _url = __webpack_require__(145);
+
+	var _url2 = _interopRequireDefault(_url);
+
+	var _isString = __webpack_require__(35);
+
+	var _isString2 = _interopRequireDefault(_isString);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var authPathname = process.env.KINVEY_MIC_AUTH_PATHNAME || '/oauth/auth';
+	var tokenPathname = process.env.KINVEY_MIC_TOKEN_PATHNAME || '/oauth/token';
+
+	/**
+	 * Enum for Mobile Identity Connect authorization grants.
+	 * @property  {string}    AuthorizationCodeLoginPage   AuthorizationCodeLoginPage grant
+	 * @property  {string}    AuthorizationCodeAPI         AuthorizationCodeAPI grant
+	 */
+	var AuthorizationGrant = {
+	  AuthorizationCodeLoginPage: 'AuthorizationCodeLoginPage',
+	  AuthorizationCodeAPI: 'AuthorizationCodeAPI'
+	};
+	Object.freeze(AuthorizationGrant);
+	exports.AuthorizationGrant = AuthorizationGrant;
+
+	/**
+	 * @private
+	 */
+
+	var MobileIdentityConnect = exports.MobileIdentityConnect = function (_Social) {
+	  _inherits(MobileIdentityConnect, _Social);
+
+	  function MobileIdentityConnect() {
+	    _classCallCheck(this, MobileIdentityConnect);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(MobileIdentityConnect).apply(this, arguments));
+	  }
+
+	  _createClass(MobileIdentityConnect, [{
+	    key: 'login',
+	    value: function login(redirectUri) {
+	      var _this2 = this;
+
+	      var authorizationGrant = arguments.length <= 1 || arguments[1] === undefined ? AuthorizationGrant.AuthorizationCodeLoginPage : arguments[1];
+	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+
+	      var clientId = this.client.appKey;
+
+	      var promise = _es6Promise.Promise.resolve().then(function () {
+	        if (authorizationGrant === AuthorizationGrant.AuthorizationCodeLoginPage) {
+	          // Step 1: Request a code
+	          return _this2.requestCodeWithPopup(clientId, redirectUri, options);
+	        } else if (authorizationGrant === AuthorizationGrant.AuthorizationCodeAPI) {
+	          // Step 1a: Request a temp login url
+	          return _this2.requestTempLoginUrl(clientId, redirectUri, options).then(function (url) {
+	            return _this2.requestCodeWithUrl(url, clientId, redirectUri, options);
+	          }); // Step 1b: Request a code
+	        }
+
+	        throw new _errors.KinveyError('The authorization grant ' + authorizationGrant + ' is unsupported. ' + 'Please use a supported authorization grant.');
+	      }).then(function (code) {
+	        return _this2.requestToken(code, clientId, redirectUri, options);
+	      }) // Step 3: Request a token
+	      .then(function (session) {
+	        session.client_id = clientId;
+	        session.redirect_uri = redirectUri;
+	        session.protocol = _this2.client.micProtocol;
+	        session.host = _this2.client.micHost;
+	        return session;
+	      });
+
+	      return promise;
+	    }
+	  }, {
+	    key: 'requestTempLoginUrl',
+	    value: function requestTempLoginUrl(clientId, redirectUri) {
+	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+
+	      var pathname = '/';
+
+	      if (options.version) {
+	        var version = options.version;
+
+	        if (!(0, _isString2.default)(version)) {
+	          version = String(version);
+	        }
+
+	        pathname = _path2.default.join(pathname, version.indexOf('v') === 0 ? version : 'v' + version);
+	      }
+
+	      var config = new _request.KinveyRequestConfig({
+	        method: _request.RequestMethod.POST,
+	        headers: {
+	          'Content-Type': 'application/x-www-form-urlencoded'
+	        },
+	        url: _url2.default.format({
+	          protocol: this.client.micProtocol,
+	          host: this.client.micHost,
+	          pathname: _path2.default.join(pathname, authPathname)
+	        }),
+	        properties: options.properties,
+	        body: {
+	          client_id: clientId,
+	          redirect_uri: redirectUri,
+	          response_type: 'code'
+	        }
+	      });
+	      var request = new _network.NetworkRequest(config);
+	      return request.execute().then(function (response) {
+	        return response.data.temp_login_uri;
+	      });
+	    }
+	  }, {
+	    key: 'requestCodeWithPopup',
+	    value: function requestCodeWithPopup(clientId, redirectUri) {
+	      var _this3 = this;
+
+	      var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+
+	      var promise = _es6Promise.Promise.resolve().then(function () {
+	        var pathname = '/';
+
+	        if (options.version) {
+	          var version = options.version;
+
+	          if (!(0, _isString2.default)(version)) {
+	            version = String(version);
+	          }
+
+	          pathname = _path2.default.join(pathname, version.indexOf('v') === 0 ? version : 'v' + version);
+	        }
+
+	        if (global.KinveyPopup) {
+	          var popup = new global.KinveyPopup();
+	          return popup.open(_url2.default.format({
+	            protocol: _this3.client.micProtocol,
+	            host: _this3.client.micHost,
+	            pathname: _path2.default.join(pathname, authPathname),
+	            query: {
+	              client_id: clientId,
+	              redirect_uri: redirectUri,
+	              response_type: 'code'
+	            }
+	          }));
+	        }
+
+	        throw new _errors.KinveyError('KinveyPopup is undefined.' + (' Unable to login using authorization grant ' + AuthorizationGrant.AuthorizationCodeLoginPage + '.'));
+	      }).then(function (popup) {
+	        var promise = new _es6Promise.Promise(function (resolve, reject) {
+	          var redirected = false;
+
+	          function loadCallback(event) {
+	            try {
+	              if (event.url && event.url.indexOf(redirectUri) === 0 && redirected === false) {
+	                redirected = true;
+	                popup.removeAllListeners();
+	                popup.close();
+	                resolve(_url2.default.parse(event.url, true).query.code);
+	              }
+	            } catch (error) {
+	              // Just catch the error
+	            }
+	          }
+
+	          function errorCallback(event) {
+	            try {
+	              if (event.url && event.url.indexOf(redirectUri) === 0 && redirected === false) {
+	                redirected = true;
+	                popup.removeAllListeners();
+	                popup.close();
+	                resolve(_url2.default.parse(event.url, true).query.code);
+	              } else if (redirected === false) {
+	                popup.removeAllListeners();
+	                popup.close();
+	                reject(new _errors.KinveyError(event.message, '', event.code));
+	              }
+	            } catch (error) {
+	              // Just catch the error
+	            }
+	          }
+
+	          function closedCallback() {
+	            if (redirected === false) {
+	              popup.removeAllListeners();
+	              reject(new _errors.KinveyError('Login has been cancelled.'));
+	            }
+	          }
+
+	          popup.on('loadstart', loadCallback);
+	          popup.on('loadstop', loadCallback);
+	          popup.on('error', errorCallback);
+	          popup.on('closed', closedCallback);
+	        });
+	        return promise;
+	      });
+
+	      return promise;
+	    }
+	  }, {
+	    key: 'requestCodeWithUrl',
+	    value: function requestCodeWithUrl(loginUrl, clientId, redirectUri) {
+	      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+	      var promise = _es6Promise.Promise.resolve().then(function () {
+	        var config = new _request.KinveyRequestConfig({
+	          method: _request.RequestMethod.POST,
+	          headers: {
+	            'Content-Type': 'application/x-www-form-urlencoded'
+	          },
+	          url: loginUrl,
+	          properties: options.properties,
+	          body: {
+	            client_id: clientId,
+	            redirect_uri: redirectUri,
+	            response_type: 'code',
+	            username: options.username,
+	            password: options.password
+	          },
+	          followRedirect: false
+	        });
+	        var request = new _network.NetworkRequest(config);
+	        return request.execute();
+	      }).then(function (response) {
+	        var location = response.getHeader('location');
+
+	        if (location) {
+	          return _url2.default.parse(location, true).query.code;
+	        }
+
+	        throw new _errors.KinveyError('Unable to authorize user with username ' + options.username + '.', 'A location header was not provided with a code to exchange for an auth token.');
+	      });
+
+	      return promise;
+	    }
+	  }, {
+	    key: 'requestToken',
+	    value: function requestToken(code, clientId, redirectUri) {
+	      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+	      var config = new _request.KinveyRequestConfig({
+	        method: _request.RequestMethod.POST,
+	        headers: {
+	          'Content-Type': 'application/x-www-form-urlencoded'
+	        },
+	        authType: _request.AuthType.App,
+	        url: _url2.default.format({
+	          protocol: this.client.micProtocol,
+	          host: this.client.micHost,
+	          pathname: tokenPathname
+	        }),
+	        properties: options.properties,
+	        body: {
+	          grant_type: 'authorization_code',
+	          client_id: clientId,
+	          redirect_uri: redirectUri,
+	          code: code
+	        }
+	      });
+	      var request = new _network.NetworkRequest(config);
+	      var promise = request.execute().then(function (response) {
+	        return response.data;
+	      });
+	      return promise;
+	    }
+	  }, {
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.MobileIdentityConnect;
+	    }
+	  }], [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.MobileIdentityConnect;
+	    }
+	  }]);
+
+	  return MobileIdentityConnect;
+	}(_social.Social);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }())))
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	// resolves . and .. elements in a path array with directory names there
+	// must be no slashes, empty elements, or device names (c:\) in the array
+	// (so also no leading and trailing slashes - it does not distinguish
+	// relative and absolute paths)
+	function normalizeArray(parts, allowAboveRoot) {
+	  // if the path tries to go above the root, `up` ends up > 0
+	  var up = 0;
+	  for (var i = parts.length - 1; i >= 0; i--) {
+	    var last = parts[i];
+	    if (last === '.') {
+	      parts.splice(i, 1);
+	    } else if (last === '..') {
+	      parts.splice(i, 1);
+	      up++;
+	    } else if (up) {
+	      parts.splice(i, 1);
+	      up--;
+	    }
+	  }
+
+	  // if the path is allowed to go above the root, restore leading ..s
+	  if (allowAboveRoot) {
+	    for (; up--; up) {
+	      parts.unshift('..');
+	    }
+	  }
+
+	  return parts;
+	}
+
+	// Split a filename into [root, dir, basename, ext], unix version
+	// 'root' is just a slash, or nothing.
+	var splitPathRe =
+	    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+	var splitPath = function(filename) {
+	  return splitPathRe.exec(filename).slice(1);
+	};
+
+	// path.resolve([from ...], to)
+	// posix version
+	exports.resolve = function() {
+	  var resolvedPath = '',
+	      resolvedAbsolute = false;
+
+	  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+	    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+	    // Skip empty and invalid entries
+	    if (typeof path !== 'string') {
+	      throw new TypeError('Arguments to path.resolve must be strings');
+	    } else if (!path) {
+	      continue;
+	    }
+
+	    resolvedPath = path + '/' + resolvedPath;
+	    resolvedAbsolute = path.charAt(0) === '/';
+	  }
+
+	  // At this point the path should be resolved to a full absolute path, but
+	  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+	  // Normalize the path
+	  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+	    return !!p;
+	  }), !resolvedAbsolute).join('/');
+
+	  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+	};
+
+	// path.normalize(path)
+	// posix version
+	exports.normalize = function(path) {
+	  var isAbsolute = exports.isAbsolute(path),
+	      trailingSlash = substr(path, -1) === '/';
+
+	  // Normalize the path
+	  path = normalizeArray(filter(path.split('/'), function(p) {
+	    return !!p;
+	  }), !isAbsolute).join('/');
+
+	  if (!path && !isAbsolute) {
+	    path = '.';
+	  }
+	  if (path && trailingSlash) {
+	    path += '/';
+	  }
+
+	  return (isAbsolute ? '/' : '') + path;
+	};
+
+	// posix version
+	exports.isAbsolute = function(path) {
+	  return path.charAt(0) === '/';
+	};
+
+	// posix version
+	exports.join = function() {
+	  var paths = Array.prototype.slice.call(arguments, 0);
+	  return exports.normalize(filter(paths, function(p, index) {
+	    if (typeof p !== 'string') {
+	      throw new TypeError('Arguments to path.join must be strings');
+	    }
+	    return p;
+	  }).join('/'));
+	};
+
+
+	// path.relative(from, to)
+	// posix version
+	exports.relative = function(from, to) {
+	  from = exports.resolve(from).substr(1);
+	  to = exports.resolve(to).substr(1);
+
+	  function trim(arr) {
+	    var start = 0;
+	    for (; start < arr.length; start++) {
+	      if (arr[start] !== '') break;
+	    }
+
+	    var end = arr.length - 1;
+	    for (; end >= 0; end--) {
+	      if (arr[end] !== '') break;
+	    }
+
+	    if (start > end) return [];
+	    return arr.slice(start, end - start + 1);
+	  }
+
+	  var fromParts = trim(from.split('/'));
+	  var toParts = trim(to.split('/'));
+
+	  var length = Math.min(fromParts.length, toParts.length);
+	  var samePartsLength = length;
+	  for (var i = 0; i < length; i++) {
+	    if (fromParts[i] !== toParts[i]) {
+	      samePartsLength = i;
+	      break;
+	    }
+	  }
+
+	  var outputParts = [];
+	  for (var i = samePartsLength; i < fromParts.length; i++) {
+	    outputParts.push('..');
+	  }
+
+	  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+	  return outputParts.join('/');
+	};
+
+	exports.sep = '/';
+	exports.delimiter = ':';
+
+	exports.dirname = function(path) {
+	  var result = splitPath(path),
+	      root = result[0],
+	      dir = result[1];
+
+	  if (!root && !dir) {
+	    // No dirname whatsoever
+	    return '.';
+	  }
+
+	  if (dir) {
+	    // It has a dirname, strip trailing slash
+	    dir = dir.substr(0, dir.length - 1);
+	  }
+
+	  return root + dir;
+	};
+
+
+	exports.basename = function(path, ext) {
+	  var f = splitPath(path)[2];
+	  // TODO: make this comparison case-insensitive on windows?
+	  if (ext && f.substr(-1 * ext.length) === ext) {
+	    f = f.substr(0, f.length - ext.length);
+	  }
+	  return f;
+	};
+
+
+	exports.extname = function(path) {
+	  return splitPath(path)[3];
+	};
+
+	function filter (xs, f) {
+	    if (xs.filter) return xs.filter(f);
+	    var res = [];
+	    for (var i = 0; i < xs.length; i++) {
+	        if (f(xs[i], i, xs)) res.push(xs[i]);
+	    }
+	    return res;
+	}
+
+	// String.prototype.substr - negative index don't work in IE8
+	var substr = 'ab'.substr(-1) === 'b'
+	    ? function (str, start, len) { return str.substr(start, len) }
+	    : function (str, start, len) {
+	        if (start < 0) start = str.length + start;
+	        return str.substr(start, len);
+	    }
+	;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Windows = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _social = __webpack_require__(276);
+
+	var _enums = __webpack_require__(202);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * @private
+	 */
+	var Windows = exports.Windows = function (_Social) {
+	  _inherits(Windows, _Social);
+
+	  function Windows() {
+	    _classCallCheck(this, Windows);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Windows).apply(this, arguments));
+	  }
+
+	  _createClass(Windows, [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Windows;
+	    }
+	  }], [{
+	    key: 'identity',
+	    get: function get() {
+	      return _enums.SocialIdentity.Windows;
+	    }
+	  }]);
+
+	  return Windows;
+	}(_social.Social);
+
+/***/ },
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -33882,15 +35356,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _device = __webpack_require__(278);
+	var _device = __webpack_require__(287);
 
 	var _errors = __webpack_require__(8);
 
-	var _events = __webpack_require__(280);
+	var _events = __webpack_require__(289);
 
 	var _request = __webpack_require__(152);
 
-	var _user = __webpack_require__(271);
+	var _user = __webpack_require__(272);
 
 	var _network = __webpack_require__(201);
 
@@ -33902,7 +35376,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _bind = __webpack_require__(281);
+	var _bind = __webpack_require__(290);
 
 	var _bind2 = _interopRequireDefault(_bind);
 
@@ -34122,7 +35596,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }())))
 
 /***/ },
-/* 278 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -34136,7 +35610,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _es6Promise = __webpack_require__(171);
 
-	var _package = __webpack_require__(279);
+	var _package = __webpack_require__(288);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -34222,7 +35696,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 279 */
+/* 288 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -34236,18 +35710,18 @@ return /******/ (function(modules) { // webpackBootstrap
 					"spec": ">=3.0.0 <4.0.0",
 					"type": "range"
 				},
-				"/Users/franciosdelpech/Documents/GIT/angular-sdk"
+				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
 		"_from": "kinvey-phonegap-sdk@>=3.0.0 <4.0.0",
-		"_id": "kinvey-phonegap-sdk@3.0.0",
+		"_id": "kinvey-phonegap-sdk@3.0.1",
 		"_inCache": true,
 		"_installable": true,
 		"_location": "/kinvey-phonegap-sdk",
 		"_nodeVersion": "5.9.0",
 		"_npmOperationalInternal": {
-			"host": "packages-12-west.internal.npmjs.com",
-			"tmp": "tmp/kinvey-phonegap-sdk-3.0.0.tgz_1468614770356_0.9632505523040891"
+			"host": "packages-16-east.internal.npmjs.com",
+			"tmp": "tmp/kinvey-phonegap-sdk-3.0.1.tgz_1469821763066_0.2642002042848617"
 		},
 		"_npmUser": {
 			"email": "opensource@kinvey.com",
@@ -34266,11 +35740,11 @@ return /******/ (function(modules) { // webpackBootstrap
 		"_requiredBy": [
 			"/"
 		],
-		"_resolved": "http://se-maven.cloudapp.net/nexus/content/groups/mobile-plugins/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0.tgz",
-		"_shasum": "231b6f034b8b67cfdcc9b049436fc4cf44fded68",
+		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.1.tgz",
+		"_shasum": "f2b8f4e82539c3f698f32274b69943b9cd6480e3",
 		"_shrinkwrap": null,
 		"_spec": "kinvey-phonegap-sdk@^3.0.0",
-		"_where": "/Users/franciosdelpech/Documents/GIT/angular-sdk",
+		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey"
 		},
@@ -34292,7 +35766,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		"dependencies": {
 			"es6-promise": "^3.2.1",
 			"kinvey-html5-sdk": "^3.0.0",
-			"kinvey-javascript-sdk-core": "3.0.0-beta.30",
+			"kinvey-javascript-sdk-core": "^3.0.0",
 			"lodash": "^4.0.0",
 			"parse-headers": "^2.0.0",
 			"regenerator-runtime": "^0.9.5"
@@ -34344,8 +35818,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"directories": {},
 		"dist": {
-			"shasum": "231b6f034b8b67cfdcc9b049436fc4cf44fded68",
-			"tarball": "http://se-maven.cloudapp.net/nexus/content/groups/mobile-plugins/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.0.tgz"
+			"shasum": "f2b8f4e82539c3f698f32274b69943b9cd6480e3",
+			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.0.1.tgz"
 		},
 		"engines": {
 			"node": ">=4.0"
@@ -34384,7 +35858,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"space-before-function-paren": "off"
 			}
 		},
-		"gitHead": "e856e8880a3b9a47401be879ed8604db6bb6a541",
+		"gitHead": "590cc42d1b00c86a9eca10f69fd325a6c136a9a1",
 		"homepage": "http://www.kinvey.com",
 		"keywords": [
 			"Kinvey",
@@ -34404,7 +35878,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		"optionalDependencies": {},
 		"peerDependencies": {
 			"kinvey-html5-sdk": "^3.0.0",
-			"kinvey-javascript-sdk-core": "3.0.0-beta.30"
+			"kinvey-javascript-sdk-core": "^3.0.0"
 		},
 		"readme": "ERROR: No README data found!",
 		"repository": {
@@ -34416,11 +35890,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
 			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
 		},
-		"version": "3.0.0"
+		"version": "3.0.1"
 	};
 
 /***/ },
-/* 280 */
+/* 289 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -34728,12 +36202,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 281 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createWrapper = __webpack_require__(282),
-	    getHolder = __webpack_require__(304),
-	    replaceHolders = __webpack_require__(306),
+	var createWrapper = __webpack_require__(291),
+	    getHolder = __webpack_require__(313),
+	    replaceHolders = __webpack_require__(315),
 	    rest = __webpack_require__(126);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -34791,17 +36265,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 282 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(283),
-	    createBaseWrapper = __webpack_require__(285),
-	    createCurryWrapper = __webpack_require__(287),
-	    createHybridWrapper = __webpack_require__(288),
-	    createPartialWrapper = __webpack_require__(307),
-	    getData = __webpack_require__(296),
-	    mergeData = __webpack_require__(308),
-	    setData = __webpack_require__(302),
+	var baseSetData = __webpack_require__(292),
+	    createBaseWrapper = __webpack_require__(294),
+	    createCurryWrapper = __webpack_require__(296),
+	    createHybridWrapper = __webpack_require__(297),
+	    createPartialWrapper = __webpack_require__(316),
+	    getData = __webpack_require__(305),
+	    mergeData = __webpack_require__(317),
+	    setData = __webpack_require__(311),
 	    toInteger = __webpack_require__(128);
 
 	/** Used as the `TypeError` message for "Functions" methods. */
@@ -34903,11 +36377,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 283 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var identity = __webpack_require__(117),
-	    metaMap = __webpack_require__(284);
+	    metaMap = __webpack_require__(293);
 
 	/**
 	 * The base implementation of `setData` without support for hot loop detection.
@@ -34926,7 +36400,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 284 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var WeakMap = __webpack_require__(98);
@@ -34938,10 +36412,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 285 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var createCtorWrapper = __webpack_require__(286),
+	var createCtorWrapper = __webpack_require__(295),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -34973,10 +36447,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 286 */
+/* 295 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(228),
+	var baseCreate = __webpack_require__(229),
 	    isObject = __webpack_require__(31);
 
 	/**
@@ -35016,15 +36490,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 287 */
+/* 296 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(127),
-	    createCtorWrapper = __webpack_require__(286),
-	    createHybridWrapper = __webpack_require__(288),
-	    createRecurryWrapper = __webpack_require__(292),
-	    getHolder = __webpack_require__(304),
-	    replaceHolders = __webpack_require__(306),
+	    createCtorWrapper = __webpack_require__(295),
+	    createHybridWrapper = __webpack_require__(297),
+	    createRecurryWrapper = __webpack_require__(301),
+	    getHolder = __webpack_require__(313),
+	    replaceHolders = __webpack_require__(315),
 	    root = __webpack_require__(66);
 
 	/**
@@ -35069,17 +36543,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 288 */
+/* 297 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(289),
-	    composeArgsRight = __webpack_require__(290),
-	    countHolders = __webpack_require__(291),
-	    createCtorWrapper = __webpack_require__(286),
-	    createRecurryWrapper = __webpack_require__(292),
-	    getHolder = __webpack_require__(304),
-	    reorder = __webpack_require__(305),
-	    replaceHolders = __webpack_require__(306),
+	var composeArgs = __webpack_require__(298),
+	    composeArgsRight = __webpack_require__(299),
+	    countHolders = __webpack_require__(300),
+	    createCtorWrapper = __webpack_require__(295),
+	    createRecurryWrapper = __webpack_require__(301),
+	    getHolder = __webpack_require__(313),
+	    reorder = __webpack_require__(314),
+	    replaceHolders = __webpack_require__(315),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -35168,7 +36642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 289 */
+/* 298 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -35213,7 +36687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 290 */
+/* 299 */
 /***/ function(module, exports) {
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -35260,7 +36734,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 291 */
+/* 300 */
 /***/ function(module, exports) {
 
 	/**
@@ -35287,11 +36761,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 292 */
+/* 301 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isLaziable = __webpack_require__(293),
-	    setData = __webpack_require__(302);
+	var isLaziable = __webpack_require__(302),
+	    setData = __webpack_require__(311);
 
 	/** Used to compose bitmasks for wrapper metadata. */
 	var BIND_FLAG = 1,
@@ -35349,13 +36823,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 293 */
+/* 302 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(294),
-	    getData = __webpack_require__(296),
-	    getFuncName = __webpack_require__(297),
-	    lodash = __webpack_require__(299);
+	var LazyWrapper = __webpack_require__(303),
+	    getData = __webpack_require__(305),
+	    getFuncName = __webpack_require__(306),
+	    lodash = __webpack_require__(308);
 
 	/**
 	 * Checks if `func` has a lazy counterpart.
@@ -35383,11 +36857,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 294 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(228),
-	    baseLodash = __webpack_require__(295);
+	var baseCreate = __webpack_require__(229),
+	    baseLodash = __webpack_require__(304);
 
 	/** Used as references for the maximum length and index of an array. */
 	var MAX_ARRAY_LENGTH = 4294967295;
@@ -35417,7 +36891,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 295 */
+/* 304 */
 /***/ function(module, exports) {
 
 	/**
@@ -35433,11 +36907,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 296 */
+/* 305 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var metaMap = __webpack_require__(284),
-	    noop = __webpack_require__(269);
+	var metaMap = __webpack_require__(293),
+	    noop = __webpack_require__(270);
 
 	/**
 	 * Gets metadata for `func`.
@@ -35454,10 +36928,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 297 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var realNames = __webpack_require__(298);
+	var realNames = __webpack_require__(307);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -35491,7 +36965,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 298 */
+/* 307 */
 /***/ function(module, exports) {
 
 	/** Used to lookup unminified function names. */
@@ -35501,15 +36975,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 299 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(294),
-	    LodashWrapper = __webpack_require__(300),
-	    baseLodash = __webpack_require__(295),
+	var LazyWrapper = __webpack_require__(303),
+	    LodashWrapper = __webpack_require__(309),
+	    baseLodash = __webpack_require__(304),
 	    isArray = __webpack_require__(34),
 	    isObjectLike = __webpack_require__(33),
-	    wrapperClone = __webpack_require__(301);
+	    wrapperClone = __webpack_require__(310);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -35654,11 +37128,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 300 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseCreate = __webpack_require__(228),
-	    baseLodash = __webpack_require__(295);
+	var baseCreate = __webpack_require__(229),
+	    baseLodash = __webpack_require__(304);
 
 	/**
 	 * The base constructor for creating `lodash` wrapper objects.
@@ -35682,12 +37156,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 301 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var LazyWrapper = __webpack_require__(294),
-	    LodashWrapper = __webpack_require__(300),
-	    copyArray = __webpack_require__(209);
+	var LazyWrapper = __webpack_require__(303),
+	    LodashWrapper = __webpack_require__(309),
+	    copyArray = __webpack_require__(210);
 
 	/**
 	 * Creates a clone of `wrapper`.
@@ -35711,11 +37185,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 302 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseSetData = __webpack_require__(283),
-	    now = __webpack_require__(303);
+	var baseSetData = __webpack_require__(292),
+	    now = __webpack_require__(312);
 
 	/** Used to detect hot functions by number of calls within a span of milliseconds. */
 	var HOT_COUNT = 150,
@@ -35759,7 +37233,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 303 */
+/* 312 */
 /***/ function(module, exports) {
 
 	/**
@@ -35786,7 +37260,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 304 */
+/* 313 */
 /***/ function(module, exports) {
 
 	/**
@@ -35805,10 +37279,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 305 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var copyArray = __webpack_require__(209),
+	var copyArray = __webpack_require__(210),
 	    isIndex = __webpack_require__(36);
 
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -35840,7 +37314,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 306 */
+/* 315 */
 /***/ function(module, exports) {
 
 	/** Used as the internal argument placeholder. */
@@ -35875,11 +37349,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 307 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var apply = __webpack_require__(127),
-	    createCtorWrapper = __webpack_require__(286),
+	    createCtorWrapper = __webpack_require__(295),
 	    root = __webpack_require__(66);
 
 	/** Used to compose bitmasks for wrapper metadata. */
@@ -35925,12 +37399,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 308 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var composeArgs = __webpack_require__(289),
-	    composeArgsRight = __webpack_require__(290),
-	    replaceHolders = __webpack_require__(306);
+	var composeArgs = __webpack_require__(298),
+	    composeArgsRight = __webpack_require__(299),
+	    replaceHolders = __webpack_require__(315);
 
 	/** Used as the internal argument placeholder. */
 	var PLACEHOLDER = '__lodash_placeholder__';
@@ -36021,13 +37495,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 309 */
+/* 318 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_309__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_318__;
 
 /***/ },
-/* 310 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36041,19 +37515,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
-	var _cache = __webpack_require__(311);
+	var _cache = __webpack_require__(320);
 
 	var _errors = __webpack_require__(8);
 
-	var _log = __webpack_require__(202);
+	var _log = __webpack_require__(203);
 
-	var _webstorage = __webpack_require__(312);
+	var _storage = __webpack_require__(321);
 
-	var _indexeddb = __webpack_require__(322);
+	var _indexeddb = __webpack_require__(331);
 
-	var _websql = __webpack_require__(323);
+	var _websql = __webpack_require__(332);
 
-	var _device = __webpack_require__(278);
+	var _device = __webpack_require__(287);
 
 	var _forEach = __webpack_require__(13);
 
@@ -36098,15 +37572,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	          break;
 	        case _cache.DBAdapter.LocalStorage:
-	          if (_webstorage.LocalStorage.isSupported()) {
-	            _this.adapter = new _webstorage.LocalStorage(name);
+	          if (_storage.LocalStorage.isSupported()) {
+	            _this.adapter = new _storage.LocalStorage(name);
 	            return false;
 	          }
 
 	          break;
 	        case _cache.DBAdapter.SessionStorage:
-	          if (_webstorage.SessionStorage.isSupported()) {
-	            _this.adapter = new _webstorage.SessionStorage(name);
+	          if (_storage.SessionStorage.isSupported()) {
+	            _this.adapter = new _storage.SessionStorage(name);
 	            return false;
 	          }
 
@@ -36173,7 +37647,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_cache.CacheMiddleware);
 
 /***/ },
-/* 311 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36189,13 +37663,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(8);
 
-	var _log = __webpack_require__(202);
+	var _log = __webpack_require__(203);
 
-	var _webstorage = __webpack_require__(312);
+	var _storage = __webpack_require__(321);
 
-	var _indexeddb = __webpack_require__(322);
+	var _indexeddb = __webpack_require__(331);
 
-	var _websql = __webpack_require__(323);
+	var _websql = __webpack_require__(332);
 
 	var _forEach = __webpack_require__(13);
 
@@ -36252,15 +37726,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	          break;
 	        case DBAdapter.LocalStorage:
-	          if (_webstorage.LocalStorage.isSupported()) {
-	            _this.adapter = new _webstorage.LocalStorage(name);
+	          if (_storage.LocalStorage.isSupported()) {
+	            _this.adapter = new _storage.LocalStorage(name);
 	            return false;
 	          }
 
 	          break;
 	        case DBAdapter.SessionStorage:
-	          if (_webstorage.SessionStorage.isSupported()) {
-	            _this.adapter = new _webstorage.SessionStorage(name);
+	          if (_storage.SessionStorage.isSupported()) {
+	            _this.adapter = new _storage.SessionStorage(name);
 	            return false;
 	          }
 
@@ -36296,8 +37770,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(CacheMiddleware, [{
 	    key: 'openDatabase',
 	    value: function openDatabase(name) {
-	      var adapters = arguments.length <= 1 || arguments[1] === undefined ? [DBAdapter.IndexedDB, DBAdapter.WebSQL, DBAdapter.LocalStorage, DBAdapter.SessionStorage] : arguments[1];
-
 	      if (!name) {
 	        throw new _errors.KinveyError('A name is required to open a database.');
 	      }
@@ -36305,7 +37777,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var db = dbCache[name];
 
 	      if (!db) {
-	        db = new DB(name, adapters);
+	        db = new DB(name);
 	      }
 
 	      return db;
@@ -36316,7 +37788,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_cache.CacheMiddleware);
 
 /***/ },
-/* 312 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -36339,7 +37811,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
-	var _merge = __webpack_require__(313);
+	var _merge = __webpack_require__(322);
 
 	var _merge2 = _interopRequireDefault(_merge);
 
@@ -36354,6 +37826,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _findIndex = __webpack_require__(163);
 
 	var _findIndex2 = _interopRequireDefault(_findIndex);
+
+	var _find = __webpack_require__(187);
+
+	var _find2 = _interopRequireDefault(_find);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36448,7 +37924,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	              case 2:
 	                entities = _context2.sent;
-	                entity = find(entities, function (entity) {
+	                entity = (0, _find2.default)(entities, function (entity) {
 	                  return entity[idAttribute] === id;
 	                });
 
@@ -36560,11 +38036,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	              case 7:
 
 	                delete entitiesById[id];
-	                global.localStorage.setItem('' + this.name + collection, JSON.stringify((0, _values2.default)(entitiesById)));
-
-	                return _context4.abrupt('return', entity);
+	                _context4.next = 10;
+	                return this.save(collection, (0, _values2.default)(entitiesById));
 
 	              case 10:
+	                return _context4.abrupt('return', entity);
+
+	              case 11:
 	              case 'end':
 	                return _context4.stop();
 	            }
@@ -36698,7 +38176,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	              case 2:
 	                entities = _context7.sent;
-	                entity = find(entities, function (entity) {
+	                entity = (0, _find2.default)(entities, function (entity) {
 	                  return entity[idAttribute] === id;
 	                });
 
@@ -36866,11 +38344,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return clear;
 	    }()
-	  }, {
-	    key: 'masterCollectionName',
-	    get: function get() {
-	      return this.name + '_' + masterCollectionName;
-	    }
 	  }], [{
 	    key: 'isSupported',
 	    value: function isSupported() {
@@ -36894,10 +38367,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }())))
 
 /***/ },
-/* 313 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseMerge = __webpack_require__(314),
+	var baseMerge = __webpack_require__(323),
 	    createAssigner = __webpack_require__(124);
 
 	/**
@@ -36939,17 +38412,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 314 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(42),
 	    arrayEach = __webpack_require__(14),
-	    assignMergeValue = __webpack_require__(315),
-	    baseMergeDeep = __webpack_require__(316),
+	    assignMergeValue = __webpack_require__(324),
+	    baseMergeDeep = __webpack_require__(325),
 	    isArray = __webpack_require__(34),
 	    isObject = __webpack_require__(31),
 	    isTypedArray = __webpack_require__(99),
-	    keysIn = __webpack_require__(318);
+	    keysIn = __webpack_require__(327);
 
 	/**
 	 * The base implementation of `_.merge` without support for multiple sources.
@@ -36995,7 +38468,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 315 */
+/* 324 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var eq = __webpack_require__(47);
@@ -37020,12 +38493,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 316 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assignMergeValue = __webpack_require__(315),
-	    baseClone = __webpack_require__(206),
-	    copyArray = __webpack_require__(209),
+	var assignMergeValue = __webpack_require__(324),
+	    baseClone = __webpack_require__(207),
+	    copyArray = __webpack_require__(210),
 	    isArguments = __webpack_require__(25),
 	    isArray = __webpack_require__(34),
 	    isArrayLikeObject = __webpack_require__(26),
@@ -37033,7 +38506,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    isObject = __webpack_require__(31),
 	    isPlainObject = __webpack_require__(200),
 	    isTypedArray = __webpack_require__(99),
-	    toPlainObject = __webpack_require__(317);
+	    toPlainObject = __webpack_require__(326);
 
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -37109,11 +38582,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 317 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(123),
-	    keysIn = __webpack_require__(318);
+	    keysIn = __webpack_require__(327);
 
 	/**
 	 * Converts `value` to a plain object flattening inherited enumerable string
@@ -37147,10 +38620,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 318 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var baseKeysIn = __webpack_require__(319),
+	var baseKeysIn = __webpack_require__(328),
 	    indexKeys = __webpack_require__(23),
 	    isIndex = __webpack_require__(36),
 	    isPrototype = __webpack_require__(37);
@@ -37208,11 +38681,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 319 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflect = __webpack_require__(320),
-	    iteratorToArray = __webpack_require__(321);
+	var Reflect = __webpack_require__(329),
+	    iteratorToArray = __webpack_require__(330);
 
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -37250,7 +38723,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 320 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var root = __webpack_require__(66);
@@ -37262,7 +38735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 321 */
+/* 330 */
 /***/ function(module, exports) {
 
 	/**
@@ -37286,7 +38759,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 322 */
+/* 331 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -37797,7 +39270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 323 */
+/* 332 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -38167,7 +39640,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), (function() { return this; }())))
 
 /***/ },
-/* 324 */
+/* 333 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38187,7 +39660,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
 
-	var _angular = __webpack_require__(309);
+	var _angular = __webpack_require__(318);
 
 	var _angular2 = _interopRequireDefault(_angular);
 
@@ -38217,7 +39690,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(HttpMiddleware, [{
 	    key: 'handle',
 	    value: function () {
-	      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
+	      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
 	        var url, method, headers, body, $http, response;
 	        return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
 	          while (1) {
@@ -38274,7 +39747,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }));
 
 	      function handle(_x) {
-	        return _ref.apply(this, arguments);
+	        return ref.apply(this, arguments);
 	      }
 
 	      return handle;
@@ -38285,7 +39758,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_middleware.KinveyMiddleware);
 
 /***/ },
-/* 325 */
+/* 334 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38297,15 +39770,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _device = __webpack_require__(278);
+	var _device = __webpack_require__(287);
 
-	var _device2 = __webpack_require__(326);
+	var _device2 = __webpack_require__(335);
 
-	var _angular = __webpack_require__(309);
+	var _angular = __webpack_require__(318);
 
 	var _angular2 = _interopRequireDefault(_angular);
 
-	var _package = __webpack_require__(328);
+	var _package = __webpack_require__(337);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -38321,6 +39794,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @private
 	 */
+
 	var Device = exports.Device = function (_PhoneGapDevice) {
 	  _inherits(Device, _PhoneGapDevice);
 
@@ -38362,7 +39836,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_device.Device);
 
 /***/ },
-/* 326 */
+/* 335 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -38374,7 +39848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _package = __webpack_require__(327);
+	var _package = __webpack_require__(336);
 
 	var _package2 = _interopRequireDefault(_package);
 
@@ -38422,7 +39896,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 327 */
+/* 336 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -38436,18 +39910,18 @@ return /******/ (function(modules) { // webpackBootstrap
 					"spec": ">=3.0.0 <4.0.0",
 					"type": "range"
 				},
-				"/Users/franciosdelpech/Documents/GIT/angular-sdk"
+				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
 		"_from": "kinvey-html5-sdk@>=3.0.0 <4.0.0",
-		"_id": "kinvey-html5-sdk@3.0.0",
+		"_id": "kinvey-html5-sdk@3.0.1",
 		"_inCache": true,
 		"_installable": true,
 		"_location": "/kinvey-html5-sdk",
 		"_nodeVersion": "5.9.0",
 		"_npmOperationalInternal": {
-			"host": "packages-16-east.internal.npmjs.com",
-			"tmp": "tmp/kinvey-html5-sdk-3.0.0.tgz_1468614571043_0.9649507517460734"
+			"host": "packages-12-west.internal.npmjs.com",
+			"tmp": "tmp/kinvey-html5-sdk-3.0.1.tgz_1469821155599_0.541389717021957"
 		},
 		"_npmUser": {
 			"email": "opensource@kinvey.com",
@@ -38467,11 +39941,11 @@ return /******/ (function(modules) { // webpackBootstrap
 			"/",
 			"/kinvey-phonegap-sdk"
 		],
-		"_resolved": "http://se-maven.cloudapp.net/nexus/content/groups/mobile-plugins/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.0.tgz",
-		"_shasum": "aad825d5e81d0b70fbc3803e2c30fd2a3659e5c9",
+		"_resolved": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.1.tgz",
+		"_shasum": "8e6a963d7446abbae32496add85be7f760a81809",
 		"_shrinkwrap": null,
 		"_spec": "kinvey-html5-sdk@^3.0.0",
-		"_where": "/Users/franciosdelpech/Documents/GIT/angular-sdk",
+		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey"
 		},
@@ -38492,7 +39966,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		],
 		"dependencies": {
 			"es6-promise": "^3.2.1",
-			"kinvey-javascript-sdk-core": "*",
+			"kinvey-javascript-sdk-core": "^3.0.0",
 			"lodash": "^4.8.2",
 			"parse-headers": "^2.0.1",
 			"regenerator-runtime": "^0.9.5"
@@ -38543,8 +40017,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"directories": {},
 		"dist": {
-			"shasum": "aad825d5e81d0b70fbc3803e2c30fd2a3659e5c9",
-			"tarball": "http://se-maven.cloudapp.net/nexus/content/groups/mobile-plugins/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.0.tgz"
+			"shasum": "8e6a963d7446abbae32496add85be7f760a81809",
+			"tarball": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.0.1.tgz"
 		},
 		"engines": {
 			"node": ">=4.0"
@@ -38583,7 +40057,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				"space-before-function-paren": "off"
 			}
 		},
-		"gitHead": "e9967e9402c607d801898b7eaf2cba523de6a3ba",
+		"gitHead": "ca4d3326bd2845b59eb114827a27c3b146776ad8",
 		"homepage": "http://www.kinvey.com",
 		"keywords": [
 			"Kinvey",
@@ -38605,7 +40079,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		"name": "kinvey-html5-sdk",
 		"optionalDependencies": {},
 		"peerDependencies": {
-			"kinvey-javascript-sdk-core": "*"
+			"kinvey-javascript-sdk-core": "^3.0.0"
 		},
 		"readme": "ERROR: No README data found!",
 		"repository": {
@@ -38617,16 +40091,16 @@ return /******/ (function(modules) { // webpackBootstrap
 			"test:jenkins": "istanbul cover _mocha -- --reporter tap --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test > test.tap && istanbul report clover",
 			"test:watch": "./node_modules/mocha/bin/mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test"
 		},
-		"version": "3.0.0"
+		"version": "3.0.1"
 	};
 
 /***/ },
-/* 328 */
+/* 337 */
 /***/ function(module, exports) {
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.0.0",
+		"version": "3.0.1",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -38649,13 +40123,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"dependencies": {
 			"kinvey-html5-sdk": "^3.0.0",
-			"kinvey-javascript-sdk-core": "3.0.0-beta.30",
+			"kinvey-javascript-sdk-core": "^3.0.0",
 			"kinvey-phonegap-sdk": "^3.0.0",
 			"regenerator-runtime": "^0.9.5"
 		},
 		"peerDependencies": {
 			"kinvey-html5-sdk": "^3.0.0",
-			"kinvey-javascript-sdk-core": "3.0.0-beta.30",
+			"kinvey-javascript-sdk-core": "^3.0.0",
 			"kinvey-phonegap-sdk": "^3.0.0"
 		},
 		"devDependencies": {
@@ -38751,7 +40225,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 329 */
+/* 338 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38761,17 +40235,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.Popup = undefined;
 
-	var _popup = __webpack_require__(330);
+	var _popup = __webpack_require__(339);
 
-	var _popup2 = __webpack_require__(331);
+	var _popup2 = __webpack_require__(340);
 
-	var _device = __webpack_require__(325);
+	var _device = __webpack_require__(334);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
 	 * @private
 	 */
+
 	var Popup = exports.Popup = function Popup() {
 	  _classCallCheck(this, Popup);
 
@@ -38784,7 +40259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 /***/ },
-/* 330 */
+/* 339 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -38796,15 +40271,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(280);
+	var _events = __webpack_require__(289);
 
-	var _device = __webpack_require__(278);
+	var _device = __webpack_require__(287);
 
 	var _regeneratorRuntime = __webpack_require__(161);
 
 	var _regeneratorRuntime2 = _interopRequireDefault(_regeneratorRuntime);
 
-	var _bind = __webpack_require__(281);
+	var _bind = __webpack_require__(290);
 
 	var _bind2 = _interopRequireDefault(_bind);
 
@@ -38826,7 +40301,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _classCallCheck(this, Popup);
 
 	    // Create some event listeners
-
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Popup).call(this));
 
 	    _this.eventListeners = {
@@ -38961,7 +40435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 331 */
+/* 340 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -38973,7 +40447,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _events = __webpack_require__(280);
+	var _events = __webpack_require__(289);
 
 	var _regeneratorRuntime = __webpack_require__(161);
 

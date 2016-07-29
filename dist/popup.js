@@ -16,6 +16,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /**
  * @private
  */
+
 var Popup = exports.Popup = function Popup() {
   _classCallCheck(this, Popup);
 
