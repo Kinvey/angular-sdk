@@ -59,9 +59,7 @@ gulp.task('bundle', ['build'], () => {
       context: `${__dirname}/dist`,
       entry: ['./index.js'],
       externals: {
-        angular: {
-          var: 'angular'
-        }
+        angular: true
       },
       module: {
         loaders: [
