@@ -70,7 +70,7 @@ gulp.task('bundle', ['build'], () => {
       },
       output: {
         filename: 'kinvey-angular-sdk.js',
-        libraryTarget : 'umd'
+        libraryTarget: 'umd'
       },
       targert: 'web'
     }, webpack))
