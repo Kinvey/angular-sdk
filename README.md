@@ -94,9 +94,9 @@ The workflow for releasing a new version of the sdk is as follows:
 4. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.
 5. Run `gulp bundle` and commit file changes.
 6. Run `gulp tag`.
-6. Make sure all changes are committed on the master branch and push.
-7. Checkout the develop branch and merge the master branch.
-8. __Optional:__ Update Dev Center and Sample apps.
+7. Make sure all changes are committed on the master branch and push.
+8. Checkout the develop branch and merge the master branch.
+9. __Optional:__ Update Dev Center and Sample apps.
 
 *Note: The [Angular Release Job](https://build.kinvey.com/jenkins/view/Libraries/job/angular-sdk-release/) will upload the build to [AWS S3](https://aws.amazon.com/s3/) and publish the [pacakge](https://www.npmjs.com/package/kinvey-angular-sdk) on NPM.*
 
