@@ -1,4 +1,7 @@
 ## Changelog
+### 3.0.3 (2016-08-12)
+* Enhancement: Update `kinvey-javascript-sdk-core`, `kinvey-html5-sdk`, and `kinvey-phonegap-sdk` dependencies to version 3.0.3.
+
 ### 3.0.2 (2016-08-03)
 * Enhancement: Update `kinvey-javascript-sdk-core` dependency.
 * Enhancement: Update `kinvey-html5-sdk` dependency.
