@@ -12,6 +12,9 @@ sample
 es5
 test.tap
 
+# Cordova E2E Test App
+/test/e2e/test/screenshots
+
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 *.iml
 

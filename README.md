@@ -99,19 +99,3 @@ The workflow for releasing a new version of the sdk is as follows:
 9. __Optional:__ Update Dev Center and Sample apps.
 
 *Note: The [Angular Release Job](https://build.kinvey.com/jenkins/view/Libraries/job/angular-sdk-release/) will upload the build to [AWS S3](https://aws.amazon.com/s3/) and publish the [pacakge](https://www.npmjs.com/package/kinvey-angular-sdk) on NPM.*
-
-## License
-
-    Copyright 2016 Kinvey, Inc.
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
