@@ -7,9 +7,7 @@ exports.config = {
   multiCapabilities: [
     {
       browserName: 'chrome',
-      chromeOptions: {
-        args: ['show-fps-counter=true']
-      }
+      chromeOptions: {}
     }
     // { browserName: 'firefox' },
     // { browserName: 'safari' }

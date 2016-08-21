@@ -1,22 +1,19 @@
+import { LoginPage, LogoutPage, MICPage } from './pages';
 import expect from 'expect';
 import regeneratorRuntime from 'regenerator-runtime'; // eslint-disable-line no-unused-vars
 
 describe('User', function() {
   afterEach(async function() {
-    // Open /login
-    browser.get('/#/logout');
+    const logoutPage = new LogoutPage();
+
+    // Open logout page
+    await logoutPage.get();
 
     // Sleep 5 seconds
     await browser.sleep(5000);
 
     // Get the active user
-    const activeUser = await browser.executeScript(function() {
-      try {
-        return JSON.parse(this.localStorage.getItem('kid_HkTD2CJckinvey_user'));
-      } catch (error) {
-        return null;
-      }
-    });
+    const activeUser = await logoutPage.getActiveUser();
 
     // Check that an active user does not exist
     expect(activeUser).toEqual(null);
@@ -26,31 +23,23 @@ describe('User', function() {
     it('should not login a user when provided an incorrect username', async function() {
       const username = 'tester';
       const password = 'tester';
+      const loginPage = new LoginPage();
 
-      // Open /login
-      browser.get('/#/login');
+      // Open login page
+      await loginPage.get();
 
-      // Input username and password
-      const usernameInput = element(by.model('username'));
-      await usernameInput.sendKeys(username);
-      const passwordInput = element(by.model('password'));
-      await passwordInput.sendKeys(password);
+      // Set username and password
+      await loginPage.setUsername(username);
+      await loginPage.setPassword(password);
 
-      // Click the login button
-      const loginButton = browser.findElement(by.id('login'));
-      await loginButton.click();
+      // Login
+      await loginPage.login();
 
       // Sleep 5 seconds
       await browser.sleep(5000);
 
       // Get the active user
-      const activeUser = await browser.executeScript(function() {
-        try {
-          return JSON.parse(this.localStorage.getItem('kid_HkTD2CJckinvey_user'));
-        } catch (error) {
-          return null;
-        }
-      });
+      const activeUser = await loginPage.getActiveUser();
 
       // Check that an active user does not exist
       expect(activeUser).toEqual(null);
@@ -59,31 +48,23 @@ describe('User', function() {
     it('should not login a user when provided an incorrect password', async function() {
       const username = 'test';
       const password = 'tester';
+      const loginPage = new LoginPage();
 
-      // Open /login
-      browser.get('/#/login');
+      // Open login page
+      await loginPage.get();
 
-      // Input username and password
-      const usernameInput = element(by.model('username'));
-      await usernameInput.sendKeys(username);
-      const passwordInput = element(by.model('password'));
-      await passwordInput.sendKeys(password);
+      // Set username and password
+      await loginPage.setUsername(username);
+      await loginPage.setPassword(password);
 
-      // Click the login button
-      const loginButton = browser.findElement(by.id('login'));
-      await loginButton.click();
+      // Login
+      await loginPage.login();
 
       // Sleep 5 seconds
       await browser.sleep(5000);
 
       // Get the active user
-      const activeUser = await browser.executeScript(function() {
-        try {
-          return JSON.parse(this.localStorage.getItem('kid_HkTD2CJckinvey_user'));
-        } catch (error) {
-          return null;
-        }
-      });
+      const activeUser = await loginPage.getActiveUser();
 
       // Check that an active user does not exist
       expect(activeUser).toEqual(null);
@@ -92,31 +73,23 @@ describe('User', function() {
     it('should login a user', async function() {
       const username = 'test';
       const password = 'test';
+      const loginPage = new LoginPage();
 
-      // Open /login
-      browser.get('/#/login');
+      // Open login page
+      await loginPage.get();
 
-      // Input username and password
-      const usernameInput = element(by.model('username'));
-      await usernameInput.sendKeys(username);
-      const passwordInput = element(by.model('password'));
-      await passwordInput.sendKeys(password);
+      // Set username and password
+      await loginPage.setUsername(username);
+      await loginPage.setPassword(password);
 
-      // Click the login button
-      const loginButton = browser.findElement(by.id('login'));
-      await loginButton.click();
+      // Login
+      await loginPage.login();
 
       // Sleep 5 seconds
       await browser.sleep(5000);
 
       // Get the active user
-      const activeUser = await browser.executeScript(function() {
-        try {
-          return JSON.parse(this.localStorage.getItem('kid_HkTD2CJckinvey_user'));
-        } catch (error) {
-          return null;
-        }
-      });
+      const activeUser = await loginPage.getActiveUser();
 
       // Check that the active user exists
       expect(activeUser).toNotEqual(null);
@@ -129,43 +102,27 @@ describe('User', function() {
     it('should login a user', async function() {
       const username = 'test';
       const password = 'test';
+      const loginPage = new LoginPage();
 
-      // Open /login
-      browser.get('/#/login');
+      // Open login page
+      await loginPage.get();
 
-      // Click the loginWithMIC button
-      const loginWithMICButton = browser.findElement(by.id('loginWithMIC'));
-      await loginWithMICButton.click();
-
-      // Switch to the MIC window
-      browser.ignoreSynchronization = true;
-      const handles = await browser.getAllWindowHandles();
-      await browser.switchTo().window(handles[1]);
-
+      // Login with MIC
+      await loginPage.loginWithMIC();
 
       // Login
-      const usernameInput = element(by.name('username'));
-      await usernameInput.sendKeys(username);
-      const passwordInput = element(by.name('password'));
-      await passwordInput.sendKeys(password);
-      const loginButton = browser.findElement(by.tagName('button'));
-      await loginButton.click();
-
-      // Switch to the App window
-      browser.ignoreSynchronization = false;
-      await browser.switchTo().window(handles[0]);
+      const micPage = new MICPage();
+      await micPage.get();
+      await micPage.setUsername(username);
+      await micPage.setPassword(password);
+      await micPage.login();
 
       // Sleep 5 seconds
       await browser.sleep(5000);
 
       // Get the active user
-      const activeUser = await browser.executeScript(function() {
-        try {
-          return JSON.parse(this.localStorage.getItem('kid_HkTD2CJckinvey_user'));
-        } catch (error) {
-          return null;
-        }
-      });
+      await loginPage.switchToContext();
+      const activeUser = await loginPage.getActiveUser();
 
       // Check that the active user exists
       expect(activeUser).toNotEqual(null);

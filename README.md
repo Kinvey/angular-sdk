@@ -3,7 +3,7 @@
 
 This node and bower module makes it very easy to connect your Angular app with Kinvey.
 
-## How to use
+## Install
 
 #### 1. Sign up for Kinvey
 To use the SDK, sign up for Kinvey if you have not already done so. Go to the [sign up](https://console.kinvey.com/#signup) page, and follow the steps provided.
@@ -65,15 +65,14 @@ app.run(['$kinvey', function($kinvey) {
 You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/angular-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/angular-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/angular-v3.0/samples) to go straight to working projects.
 
 ## Build
-The simplest way to build the sdk is by running `gulp`. More advanced tasks are available.
+The simplest way to build the sdk is by running `npm run bundle`. More advanced tasks are available.
 
-* `gulp build`: build the sdk
-* `gulp bump`: bump the pacakge version. Please see [Flags](#Flags).
-* `gulp bundle`: bundle the sdk for dist
-* `gulp clean`: remove files created by the build process
-* `gulp lint`: lint the src files
-* `gulp tag`: create a git tag for the version
-* `gulp upload`: upload dist files to AWS S3
+_Note: Before running any tasks you will need to run `npm install` to install any dependencies required._
+
+* `npm run clean`: remove files created by the build process
+* `npm run lint`: lint the src files
+* `npm run build`: build the sdk
+* `npm run bundle`: bundle the sdk for dist
 
 #### Flags
 The following flags are available when running `gulp bump`:
@@ -82,20 +81,29 @@ The following flags are available when running `gulp bump`:
 * `--version <version>`: Sets the package version to the provided version.
 
 ## Test
+The Kinvey-Angular-SDK is setup to run unit and end to end tests.
 
-You can run the tests using `npm test`.
+_Note: Before running any tests you will need to run `npm install` to install any dependencies required._
 
-## Release
-The workflow for releasing a new version of the sdk is as follows:
+### Unit Tests
+The steps for running the unit tests is as follows:
 
-1. Commit all changes on the develop branch.
-2. Checkout the master branch and merge the develop branch.
-3. Update the [Changelog](CHANGELOG.md).
-4. Run `gulp bump --type <type>` replacing `<type>` with major, minor, patch, or prerelease. See [Flags](#Flags) above.
-5. Run `gulp bundle` and commit file changes.
-6. Run `gulp tag`.
-7. Make sure all changes are committed on the master branch and push.
-8. Checkout the develop branch and merge the master branch.
-9. __Optional:__ Update Dev Center and Sample apps.
+1. Open a terminal window and execute `npm test`.
 
-*Note: The [Angular Release Job](https://build.kinvey.com/jenkins/view/Libraries/job/angular-sdk-release/) will upload the build to [AWS S3](https://aws.amazon.com/s3/) and publish the [pacakge](https://www.npmjs.com/package/kinvey-angular-sdk) on NPM.*
+### End to End Tests
+The steps for running the end to end tests is as follows:
+
+#### Start Selenium Web Server
+1. Open a terminal window.
+2. Change directory to the location of the project.
+3. Execute `npm run e2e:server`. __Keep this terminal window open.__
+
+#### Start App
+1. Open a terminal window.
+2. Change directory to the location of the project.
+3. Execute `npm run e2e:app`. __Keep this terminal window open.__
+
+#### Run End to End Tests
+1. Open a terminal window.
+2. Change directory to the location of the project.
+3. Execute `npm run e2e:test`.
