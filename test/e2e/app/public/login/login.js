@@ -15,6 +15,7 @@ module.config(['$stateProvider', function($stateProvider) {
 }]);
 
 module.controller('LoginCtrl', ['$scope', '$kinvey', function($scope, $kinvey) {
+  console.log($kinvey.Push);
   $scope.username = undefined;
   $scope.password = undefined;
 
