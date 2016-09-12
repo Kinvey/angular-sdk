@@ -1,5 +1,5 @@
 /**
- * kinvey-angular-sdk v3.0.3
+ * kinvey-angular-sdk v3.1.0
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -41971,7 +41971,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.0.3",
+		"version": "3.1.0",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {

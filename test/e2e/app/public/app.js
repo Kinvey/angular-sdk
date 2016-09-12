@@ -1,6 +1,6 @@
 'use strict';
 
-// window.name = 'NG_DEFER_BOOTSTRAP!';
+window.name = 'NG_DEFER_BOOTSTRAP!';
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
