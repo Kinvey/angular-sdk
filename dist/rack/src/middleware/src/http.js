@@ -7,9 +7,7 @@ exports.HttpMiddleware = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
-
-var _middleware = require('kinvey-javascript-sdk-core/dist/rack/middleware');
+var _kinveyJavascriptRack = require('kinvey-javascript-rack');
 
 var _regeneratorRuntime = require('regenerator-runtime');
 
@@ -33,76 +31,71 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // eslint-disable-line import/no-unresolved
 var $injector = _angular2.default.injector(['ng']);
 
-var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
-  _inherits(HttpMiddleware, _KinveyMiddleware);
+var HttpMiddleware = exports.HttpMiddleware = function (_Middleware) {
+  _inherits(HttpMiddleware, _Middleware);
 
   function HttpMiddleware() {
+    var name = arguments.length <= 0 || arguments[0] === undefined ? 'Angular Http Middleware' : arguments[0];
+
     _classCallCheck(this, HttpMiddleware);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(HttpMiddleware).call(this, 'Kinvey Angular Http Middleware'));
+    return _possibleConstructorReturn(this, (HttpMiddleware.__proto__ || Object.getPrototypeOf(HttpMiddleware)).call(this, name));
   }
 
   _createClass(HttpMiddleware, [{
     key: 'handle',
     value: function () {
-      var ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
+      var _ref = _asyncToGenerator(_regeneratorRuntime2.default.mark(function _callee(request) {
         var url, method, headers, body, $http, response;
         return _regeneratorRuntime2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _get(Object.getPrototypeOf(HttpMiddleware.prototype), 'handle', this).call(this, request);
-
-              case 2:
                 url = request.url;
                 method = request.method;
                 headers = request.headers;
                 body = request.body;
                 $http = $injector.get('$http');
-                _context.prev = 7;
-                _context.next = 10;
+                _context.prev = 5;
+                _context.next = 8;
                 return $http({
                   url: url,
                   method: method,
-                  headers: headers.toJSON(),
+                  headers: headers,
                   data: body
                 });
 
-              case 10:
+              case 8:
                 response = _context.sent;
+                return _context.abrupt('return', {
+                  response: {
+                    statusCode: response.status,
+                    headers: response.headers(),
+                    data: response.data
+                  }
+                });
 
-
-                request.response = {
-                  statusCode: response.status,
-                  headers: response.headers(),
-                  data: response.data
-                };
-
-                return _context.abrupt('return', request);
+              case 12:
+                _context.prev = 12;
+                _context.t0 = _context['catch'](5);
+                return _context.abrupt('return', {
+                  response: {
+                    statusCode: _context.t0.status,
+                    headers: _context.t0.headers(),
+                    data: _context.t0.data
+                  }
+                });
 
               case 15:
-                _context.prev = 15;
-                _context.t0 = _context['catch'](7);
-
-                request.response = {
-                  statusCode: _context.t0.status,
-                  headers: _context.t0.headers(),
-                  data: _context.t0.data
-                };
-
-                return _context.abrupt('return', request);
-
-              case 19:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this, [[7, 15]]);
+        }, _callee, this, [[5, 12]]);
       }));
 
-      function handle(_x) {
-        return ref.apply(this, arguments);
+      function handle(_x2) {
+        return _ref.apply(this, arguments);
       }
 
       return handle;
@@ -110,4 +103,4 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
   }]);
 
   return HttpMiddleware;
-}(_middleware.KinveyMiddleware);
+}(_kinveyJavascriptRack.Middleware);

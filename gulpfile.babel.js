@@ -103,35 +103,4 @@ gulp.task('bump', () => {
   return stream;
 });
 
-gulp.task('tag', () => {
-  const stream = gulp.src('./package.json')
-    .pipe(tag())
-    .on('error', errorHandler);
-  return stream;
-});
-
-gulp.task('upload', ['bundle'], () => {
-  const s3 = s3Upload({
-    accessKeyId: process.env.S3_ACCESSKEYID,
-    secretAccessKey: process.env.S3_SECRETACCESSKEY
-  });
-
-  const stream = gulp.src([
-    `dist/kinvey-angular-sdk-${pkg.version}.js`,
-    `dist/kinvey-angular-sdk-${pkg.version}.min.js`,
-  ])
-    .pipe(plumber())
-    .pipe(s3({
-      Bucket: 'kinvey-downloads/js'
-    }, (error, data) => {
-      if (error) {
-        return errorHandler(error);
-      }
-
-      return data;
-    }))
-    .on('error', errorHandler);
-  return stream;
-});
-
 gulp.task('default', ['bundle']);
