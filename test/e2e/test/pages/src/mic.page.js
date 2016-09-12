@@ -8,7 +8,7 @@ export class MICPage {
     // Grab references to elements on page
     this.usernameInput = element(by.name('username'));
     this.passwordInput = element(by.name('password'));
-    this.loginButton = browser.findElement(by.tagName('button'));
+    this.loginButton = element(by.tagName('button'));
   }
 
   async switchToContext() {

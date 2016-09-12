@@ -7,7 +7,7 @@ exports.HttpMiddleware = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _rack = require('kinvey-javascript-sdk-core/dist/rack');
+var _kinveyJavascriptRack = require('kinvey-javascript-rack');
 
 var _regeneratorRuntime = require('regenerator-runtime');
 
@@ -31,13 +31,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // eslint-disable-line import/no-unresolved
 var $injector = _angular2.default.injector(['ng']);
 
-var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
-  _inherits(HttpMiddleware, _KinveyMiddleware);
+var HttpMiddleware = exports.HttpMiddleware = function (_Middleware) {
+  _inherits(HttpMiddleware, _Middleware);
 
   function HttpMiddleware() {
+    var name = arguments.length <= 0 || arguments[0] === undefined ? 'Angular Http Middleware' : arguments[0];
+
     _classCallCheck(this, HttpMiddleware);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(HttpMiddleware).call(this, 'Kinvey Angular Http Middleware'));
+    return _possibleConstructorReturn(this, (HttpMiddleware.__proto__ || Object.getPrototypeOf(HttpMiddleware)).call(this, name));
   }
 
   _createClass(HttpMiddleware, [{
@@ -92,7 +94,7 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
         }, _callee, this, [[5, 12]]);
       }));
 
-      function handle(_x) {
+      function handle(_x2) {
         return _ref.apply(this, arguments);
       }
 
@@ -101,4 +103,4 @@ var HttpMiddleware = exports.HttpMiddleware = function (_KinveyMiddleware) {
   }]);
 
   return HttpMiddleware;
-}(_rack.KinveyMiddleware);
+}(_kinveyJavascriptRack.Middleware);

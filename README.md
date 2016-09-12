@@ -64,21 +64,13 @@ app.run(['$kinvey', function($kinvey) {
 ## What’s next?
 You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/angular-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/angular-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/angular-v3.0/samples) to go straight to working projects.
 
-## Build
-The simplest way to build the sdk is by running `npm run bundle`. More advanced tasks are available.
-
+## Tasks
 _Note: Before running any tasks you will need to run `npm install` to install any dependencies required._
 
 * `npm run clean`: remove files created by the build process
 * `npm run lint`: lint the src files
 * `npm run build`: build the sdk
 * `npm run bundle`: bundle the sdk for dist
-
-#### Flags
-The following flags are available when running `gulp bump`:
-
-* `--type <major|minor|patch|prerelease>`: Bumps the package version using the [Semantic Version 2.0.0](http://semver.org/) spec. Defaults to `patch`.
-* `--version <version>`: Sets the package version to the provided version.
 
 ## Test
 The Kinvey-Angular-SDK is setup to run unit and end to end tests.

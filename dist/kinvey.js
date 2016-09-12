@@ -5,9 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Kinvey = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _kinveyPhonegapSdk = require('kinvey-phonegap-sdk');
 
-var _kinvey = require('kinvey-phonegap-sdk/dist/kinvey');
+var _kinveyJavascriptSdkCore = require('kinvey-javascript-sdk-core');
+
+var _rack = require('./rack');
+
+var _device = require('./device');
+
+var _popup = require('./popup');
 
 var _angular = require('angular');
 
@@ -15,39 +21,21 @@ var _angular2 = _interopRequireDefault(_angular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 // eslint-disable-line import/no-unresolved
 var $injector = _angular2.default.injector(['ng']);
+var $q = $injector.get('$q');
 
-var Kinvey = exports.Kinvey = function (_PhoneGapKinvey) {
-  _inherits(Kinvey, _PhoneGapKinvey);
+// Set CacheRequest rack
+_kinveyJavascriptSdkCore.CacheRequest.rack = new _rack.CacheRack();
 
-  function Kinvey() {
-    _classCallCheck(this, Kinvey);
+// Set NetworkRequest rack
+_kinveyJavascriptSdkCore.NetworkRequest.rack = new _rack.NetworkRack();
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Kinvey).apply(this, arguments));
-  }
+// Add Modules
+_kinveyPhonegapSdk.Kinvey.Device = _device.Device;
+_kinveyPhonegapSdk.Kinvey.HttpMiddleware = _rack.HttpMiddleware;
+_kinveyPhonegapSdk.Kinvey.Popup = _popup.Popup;
+_kinveyPhonegapSdk.Kinvey.Promise = $q;
 
-  _createClass(Kinvey, null, [{
-    key: 'Promise',
-
-    /**
-     * Returns the Promise class.
-     *
-     * @return {Promise} The Promise class.
-     *
-     * @example
-     * var Promise = Kinvey.Promise;
-     */
-    get: function get() {
-      return $injector.get('$q');
-    }
-  }]);
-
-  return Kinvey;
-}(_kinvey.Kinvey);
+// Export
+exports.Kinvey = _kinveyPhonegapSdk.Kinvey;

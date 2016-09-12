@@ -7,9 +7,9 @@ exports.Device = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _device = require('kinvey-phonegap-sdk/dist/device');
+var _kinveyPhonegapSdk = require('kinvey-phonegap-sdk');
 
-var _device2 = require('kinvey-html5-sdk/dist/device');
+var _kinveyHtml5Sdk = require('kinvey-html5-sdk');
 
 var _angular = require('angular');
 
@@ -37,7 +37,7 @@ var Device = exports.Device = function (_PhoneGapDevice) {
   function Device() {
     _classCallCheck(this, Device);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Device).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Device.__proto__ || Object.getPrototypeOf(Device)).apply(this, arguments));
   }
 
   _createClass(Device, null, [{
@@ -47,9 +47,9 @@ var Device = exports.Device = function (_PhoneGapDevice) {
 
       // Get the correct device information
       if (Device.isPhoneGap()) {
-        json = _device.Device.toJSON();
+        json = _kinveyPhonegapSdk.Device.toJSON();
       } else {
-        json = _device2.Device.toJSON();
+        json = _kinveyHtml5Sdk.Device.toJSON();
       }
 
       // Add angular information
@@ -69,4 +69,4 @@ var Device = exports.Device = function (_PhoneGapDevice) {
   }]);
 
   return Device;
-}(_device.Device);
+}(_kinveyPhonegapSdk.Device);
