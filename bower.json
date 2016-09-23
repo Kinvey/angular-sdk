@@ -1,6 +1,5 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.1.0",
   "description": "Kinvey JavaScript Library for AngularJS applications.",
   "homepage": "https://www.kinvey.com",
   "license": "Apache-2.0",
