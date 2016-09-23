@@ -4,62 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _rack = require('./rack');
+var _ngKinvey = require('./ngKinvey');
 
-Object.keys(_rack).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _rack[key];
-    }
-  });
-});
+var _ngKinvey2 = _interopRequireDefault(_ngKinvey);
 
-var _device = require('./device');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-Object.keys(_device).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _device[key];
-    }
-  });
-});
-
-var _kinvey = require('./kinvey');
-
-Object.keys(_kinvey).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _kinvey[key];
-    }
-  });
-});
-
-var _popup = require('./popup');
-
-Object.keys(_popup).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _popup[key];
-    }
-  });
-});
-
-var _provider = require('./provider');
-
-Object.keys(_provider).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _provider[key];
-    }
-  });
-});
+// Set default export
+exports.default = _ngKinvey2.default;

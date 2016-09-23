@@ -3,12 +3,12 @@
 
 This node and bower module makes it very easy to connect your Angular app with Kinvey.
 
-## Install
+## How to use
 
-#### 1. Sign up for Kinvey
+### 1. Sign up for Kinvey
 To use the SDK, sign up for Kinvey if you have not already done so. Go to the [sign up](https://console.kinvey.com/#signup) page, and follow the steps provided.
 
-#### 2. Install the SDK
+### 2. Install the SDK
 You can install the module using npm:
 
 ```bash
@@ -17,60 +17,61 @@ npm install kinvey-angular-sdk --save
 
 or
 
-```bash
-bower install kinvey-angular-sdk --save
-```
+use our [DevCenter Download Page](http://devcenter.kinvey.com/angular/downloads) to download the SDK and save it to a file name `kinvey-angular-sdk.js` in your project.
 
-#### 3. Configure the SDK
-If you installed the SDK with npm, import the sdk in your code using `require`.
+### 3. Configure the SDK
+If you installed the SDK with npm, include the sdk in your code using `require`.
 
 ```javascript
 var Kinvey = require('kinvey-angular-sdk');
 ```
 
-If you installed the SDK with bower, add a script tag to your main html file.
+If you downloaded the SDK and saved it to a file, add a script tag to your main html file to load the SDK.
 
 ```html
-<script src="bower_components/kinvey-angular-sdk/dist/kinvey-angular-sdk.min.js"></script>
+<script src="path/to/kinvey-angular-sdk.js"></script>
 ```
 
 Next, use `Kinvey.init` to configure your app. Replace `<appKey>` and `<appSecret>` with your apps app key and secret. You can find these for your app using the [Kinvey Console App](https://console.kinvey.com).
 
 ```javascript
-var app = angular.module('myApp', ['kinvey']);
-app.config(['$kinveyProvider', function($kinveyProvider) {
-  $kinveyProvider.init({
+Kinvey.init({
     appKey: '<appKey>',
     appSecret: '<appSecret>'
-  });
-}]);
+});
 ```
 
-#### 4. Verify Set Up
+### 4. Verify Set Up
 You can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the SDK can communicate with your app.
 
 ```javascript
-var app = angular.module('myApp', ['kinvey']);
-app.run(['$kinvey', function($kinvey) {
-  var promise = $kinvey.ping();
-  promise.then(function(response) {
-      console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
-  }).catch(function(error) {
-      console.log('Kinvey Ping Failed. Response: ' + error.message);
-  });
-}]);
+Kinvey.ping().then(function(response) {
+  console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
+}).catch(function(error) {
+  console.log('Kinvey Ping Failed. Response: ' + error.message);
+});
 ```
 
 ## What’s next?
-You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/angular-v3.0/guides/users) or [Data store guide](http://devcenter.kinvey.com/angular-v3.0/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/angular-v3.0/samples) to go straight to working projects.
+You are now ready to start building your awesome apps! Next we recommend diving into the [User guide](http://devcenter.kinvey.com/angular/guides/users) or [Data store guide](http://devcenter.kinvey.com/angular/guides/datastore) to learn more about our service, or explore the [sample apps](http://devcenter.kinvey.com/angular/samples) to go straight to working projects.
 
-## Tasks
-_Note: Before running any tasks you will need to run `npm install` to install any dependencies required._
+## Build
+Execute `npm run build` to build the package.
 
-* `npm run clean`: remove files created by the build process
-* `npm run lint`: lint the src files
-* `npm run build`: build the sdk
-* `npm run bundle`: bundle the sdk for dist
+## Release
+[TravisCI](https://travis-ci.org/Kinvey/angular-sdk) will deploy the pacakge to [NPM](https://www.npmjs.com/package/kinvey-angular-sdk).
+
+1. Checkout the master branch.
+2. Update the CHANGELOG.md.
+3. Execute `npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease | from-git]`. See [Version Management](#version-management) for more info on incrementing the version.
+4. Done.
+
+### Version Management
+Updating the package version should follow [Semantic Version 2.0.0](http://semver.org/):
+
+* Major (x.0.0): when making an incompatible API changes.
+* Minor (3.x.0): when adding functionality in a backwards-compatible manner.
+* Patch (3.0.x): when making backwards-compatible bug fixes or enhancements.
 
 ## Test
 The Kinvey-Angular-SDK is setup to run unit and end to end tests.

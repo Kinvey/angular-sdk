@@ -1,4 +1,13 @@
 ## Changelog
+
+## [v3.2.0](https://github.com/Kinvey/angular-sdk/tree/v3.2.0) (2016-09-23)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/3.1.0...3.2.0)<br/>
+[SDK Core Changelog](https://github.com/Kinvey/javascript-sdk-core/blob/master/CHANGELOG.md)
+
+**Implemented enhancements:**
+
+- Removed `Popup`, `Device`, and rack implementations.
+
 ### 3.1.0 (2016-09-12)
 * Enhancement: Restructure files.
 * Enhancement: Export files.

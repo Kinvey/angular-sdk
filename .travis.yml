@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+- '6'
+before_deploy: npm run s3
+deploy:
+  - provider: npm
+    email: thomas.conner@me.com
+    on:
+      tags: true
+      repo: Kinvey/angular-sdk
+    api_key:
+      secure: sIXyeKBEtoFd/Le5xUZw9Rwhgvyqwi7I0tjPvbXmwqLnWELwezO86paIvZDgWAS0lhL8u/2egN7Ukd5kAhc7xatCs/Ua3dhZLuKpG08/TYdd7P7ifOnaxPdTJy+ov5s2qRcYHT8Jt3PcepL/oc2DAOCAlXslsihFe5kLU96teXH2f4Z60J2+wJIMbVEGCsssEmMTUitVvsu/6cjI6sb6LZLghb+sWU/znUU963RLs0WgOQHR8xnifjn877S/66BzJe+rP1g95d8Njy9sp9heEB8iaDKeoqcjumtz5afAu+ZOmOdLXfeEePOMn9eTIrZkvnNQApyEhuYoNv29IWiaXlj/keao4nLSdI1kB6rBAOL8fyuHxXHGDzTIfHC+0i+IjClfRg/4x6ciXnhm25tKPLm/7Kasj56Z4DJ0n1ost9C6W7gm+6Z9PtYgk9VtGTK3/2jYufeZvL+Ej0wqSAADbXQU86UnhYU+WbtLcHYgKHPurGMQhrtjQJFvce6VAY8nUiJvkGyM4m3M0m2ifx3z4YcIg6rWHzwaqZDAXSoaqKPaCxWgFI2rHqVhdntj9wwk/xvirepS3AtLMXJGZnQf71MeW+T40c1qrtQOPw1ladU/ktZgVeAuCBR4JS2hDKY3K//vjA25UHRSzRngksm5iYUVvq4zngbenft9YdBNveg=
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+  slack:
+    on_success: change
+    on_failure: always
+    secure: NJCweBqo9eOU/4l39H1Ceu47aKKnmPjV7QL/Tph8A3IWKGJ9t7ANXpU/qFqGwCNKzeG/SNoXtVX10BamGav9A/oM0If+TpRK2ZOS9/U1HIpIcFXkDjAansyphmLLeBC55WqrkzH8bT+YGnR/V38hrPQKjRTzZ/wDSD117Vh8Vxlf9fB3lslp7Q4RuY7JchXtMwVrFSQK6UQ+xdBbNsSQRlnQZNC2p1Tf3vdq8QfIuMC9T84BjbC1to9dp6tx0jDslpdwNwkVV9ul+rH91wgzcjksIvV+jbsJtHZd4S0ELcWOa3c7xr/sGNMMYYoOYset7LP9qsIRhfFcVFzUB4qW18NyiuPr0eq09B0zjuBZhuvTTZf0jLhiWS+hUYfQGTOTr68Ae0SPPvyrz3JOoKB5vqjFdCVooonwGxtUPtzYBOqR3y47p7mNf91QMtWm8v8P9gLAQvd9ExuDsF/n7EXj8n9d99wt6ONWvRQc/vIixiWEwf24Tp7Ia+QZzt9cy3b9aJf2UR8pyUfloVk3agcpzL6vOE5Gc+e4kFQdbw5BUNwVr8ni1BZZjcHl7OVGPry4t0APZcfD2iB8S1pSB4sXg4S9/kTxf7+XqvHzrt1jc2ErqM0KXnFU6brFoYz+u2DlaNct/IqpGO220hUT/wrejHuAB4oGzDEhY5uge/jqOWE=
+script: npm run cover
+after_success:
+- bash <(curl -s https://codecov.io/bash)
