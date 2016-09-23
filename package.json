@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.2.0",
+  "version": "3.1.0",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -55,7 +55,7 @@
     "express": "^4.14.0",
     "istanbul": "^1.0.0-alpha.2",
     "json-loader": "^0.5.4",
-    "kinvey-phonegap-sdk": "../../PhoneGap/SDK",
+    "kinvey-phonegap-sdk": "3.2.0",
     "mocha": "^2.5.3",
     "nock": "^8.0.0",
     "protractor": "^4.0.3",
