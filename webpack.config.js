@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var pkg = require('./package.json');
 var BANNER = '/**\n'
+  + ' * @preserve\n'
   + ' * ' + pkg.name + ' v' + pkg.version + '\n'
   + ' * ' + pkg.description + '\n'
   + ' * ' + pkg.homepage + '\n'
@@ -15,7 +16,10 @@ var BANNER = '/**\n'
 
 module.exports = {
   context: path.join(__dirname, 'dist'),
-  entry: ['./index.js'],
+  entry: ['core-js/es6/symbol', './index.js'],
+  externals: {
+    angular: true
+  },
   output: {
     filename: pkg.name + '.js',
     libraryTarget: 'umd',
