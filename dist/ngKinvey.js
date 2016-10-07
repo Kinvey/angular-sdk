@@ -27,7 +27,9 @@ var KinveyProvider = function () {
 
   _createClass(KinveyProvider, [{
     key: 'init',
-    value: function init(options) {
+    value: function init() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
       return _kinvey2.default.init(options);
     }
   }, {
