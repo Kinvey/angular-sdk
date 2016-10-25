@@ -1,4 +1,9 @@
 ## Changelog
+## [v3.2.2](https://github.com/Kinvey/angular-sdk/tree/v3.2.2) (2016-10-26)
+
+**Updates:**
+
+- Updated `kinvey-node-sdk` and `kinvey-phonegap-sdk` to latest versions.
 
 ## [v3.2.1](https://github.com/Kinvey/angular-sdk/tree/v3.2.1) (2016-10-07)
 
