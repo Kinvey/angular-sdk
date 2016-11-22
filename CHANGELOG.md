@@ -1,4 +1,11 @@
 ## Changelog
+## [v3.3.0](https://github.com/Kinvey/angular-sdk/tree/v3.3.0) (2016-11-22)
+
+**Packages:**
+
+- Update `kinvey-html5-sdk` to `v3.3.0`.
+- Update `kinvey-phonegap-sdk` to `v3.3.0`.
+
 ## [v3.2.3](https://github.com/Kinvey/angular-sdk/tree/v3.2.3) (2016-11-22)
 
 **Packages:**
