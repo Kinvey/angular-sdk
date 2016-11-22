@@ -6,9 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _kinvey = require('./kinvey');
+var _kinveyPhonegapSdk = require('kinvey-phonegap-sdk');
 
-var _kinvey2 = _interopRequireDefault(_kinvey);
+var _kinveyPhonegapSdk2 = _interopRequireDefault(_kinveyPhonegapSdk);
 
 var _angular = require('angular');
 
@@ -30,12 +30,12 @@ var KinveyProvider = function () {
     value: function init() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      return _kinvey2.default.init(options);
+      return _kinveyPhonegapSdk2.default.init(options);
     }
   }, {
     key: '$get',
     value: function $get() {
-      return _kinvey2.default;
+      return _kinveyPhonegapSdk2.default;
     }
   }]);
 
