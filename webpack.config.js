@@ -32,9 +32,18 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.BannerPlugin(BANNER, { raw: true })
-  ],
-  resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
-  }
+    new webpack.BannerPlugin(BANNER, { raw: true }),
+    new webpack.NormalModuleReplacementPlugin(
+      /kinvey-node-sdk\/dist\/request\/src\/device\.js/,
+      require.resolve(path.resolve(__dirname, 'dist/device.js'))
+    ),
+    new webpack.NormalModuleReplacementPlugin(
+      /kinvey-node-sdk\/dist\/identity\/src\/popup\.js/,
+      require.resolve(path.resolve(__dirname, 'node_modules/kinvey-phonegap-sdk/dist/popup.js'))
+    ),
+    new webpack.NormalModuleReplacementPlugin(
+      /kinvey-node-sdk\/dist\/request\/src\/middleware\/src\/cache\.js/,
+      require.resolve(path.resolve(__dirname, 'node_modules/kinvey-html5-sdk/dist/middleware/src/cache.js'))
+    )
+  ]
 };
