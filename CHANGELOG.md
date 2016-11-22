@@ -1,9 +1,15 @@
 ## Changelog
+## [v3.2.3](https://github.com/Kinvey/angular-sdk/tree/v3.2.3) (2016-11-22)
+
+**Packages:**
+
+- Update `kinvey-phonegap-sdk` to `v3.2.3`.
+
 ## [v3.2.2](https://github.com/Kinvey/angular-sdk/tree/v3.2.2) (2016-10-26)
 
-**Updates:**
+**Packages:**
 
-- Updated `kinvey-node-sdk` and `kinvey-phonegap-sdk` to latest versions.
+- Updated `kinvey-node-sdk` and `kinvey-phonegap-sdk` to `v3.2.2`.
 
 ## [v3.2.1](https://github.com/Kinvey/angular-sdk/tree/v3.2.1) (2016-10-07)
 
@@ -15,7 +21,7 @@
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/3.1.0...3.2.0)<br/>
 [SDK Core Changelog](https://github.com/Kinvey/javascript-sdk-core/blob/master/CHANGELOG.md)
 
-**Implemented enhancements:**
+**Enhancements:**
 
 - Removed `Popup`, `Device`, and rack implementations.
 
