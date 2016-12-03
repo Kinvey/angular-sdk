@@ -1,6 +1,6 @@
 /**
  * @preserve
- * kinvey-angular-sdk v3.3.1
+ * kinvey-angular-sdk v3.3.2
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -33637,7 +33637,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.3.1",
+		"version": "3.3.2",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -33666,7 +33666,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			"lint": "npm run lint:src",
 			"lint:src": "eslint src/**",
 			"lint:test": "eslint test/unit/**",
-			"preversion": "npm test",
+			"preversion": "del node_modules && npm install && npm test",
 			"postversion": "git push && git push --tags",
 			"s3": "npm run build && shjs ./scripts/s3.js",
 			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
