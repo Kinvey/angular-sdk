@@ -41,8 +41,8 @@
     "angular": "^1.5.8",
     "core-js": "^2.4.1",
     "es6-promise": "^4.0.5",
-    "kinvey-html5-sdk": "3.3.1",
-    "kinvey-phonegap-sdk": "3.3.1",
+    "kinvey-html5-sdk": "3.3.3",
+    "kinvey-phonegap-sdk": "3.3.3",
     "lodash": "^4.16.3"
   },
   "devDependencies": {
