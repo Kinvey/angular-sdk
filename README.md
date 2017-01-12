@@ -100,3 +100,10 @@ The steps for running the end to end tests is as follows:
 1. Open a terminal window.
 2. Change directory to the location of the project.
 3. Execute `npm run e2e:test`.
+
+
+## License
+See [LICENSE](LICENSE) for details.
+
+## Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details on reporting bugs and making contributions.
