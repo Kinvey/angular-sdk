@@ -1,50 +1,51 @@
 # Changelog
+## [v3.3.5](https://github.com/Kinvey/angular-sdk/tree/v3.3.5) (2016-01-25)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.4...v3.3.5)<br/>
+
+**Updated Dependencies:**
+- Updated `kinvey-html5-sdk` to `v3.3.5`.
+- Updated `kinvey-phonegap-sdk` to `v3.3.5`.
+
 ## [3.3.4](https://github.com/Kinvey/angular-sdk/tree/v3.3.4) (2017-01-12)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.3...v3.3.4)<br/>
 
-**Updated packages:**
+**Updated Dependencies:**
 - Updated `kinvey-html5-sdk` to `v3.3.4`.
 - Updated `kinvey-phonegap-sdk` to `v3.3.4`.
-
 
 ## [3.3.3](https://github.com/Kinvey/angular-sdk/tree/v3.3.3) (2016-12-16)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.2...v3.3.3)<br/>
 
-**Updated packages:**
+**Updated Dependencies:**
 - Updated `kinvey-html5-sdk` to `v3.3.3`.
 - Updated `kinvey-phonegap-sdk` to `v3.3.3`.
 
 ## [v3.3.2](https://github.com/Kinvey/angular-sdk/tree/v3.3.2) (2016-12-03)
 
-**Packages:**
-
+**Updated Dependencies:**
 - Update `kinvey-html5-sdk` to `v3.3.2`.
 - Update `kinvey-phonegap-sdk` to `v3.3.2`.
 
 ## [v3.3.1](https://github.com/Kinvey/angular-sdk/tree/v3.3.1) (2016-12-02)
 
-**Packages:**
-
+**Updated Dependencies:**
 - Update `kinvey-html5-sdk` to `v3.3.1`.
 - Update `kinvey-phonegap-sdk` to `v3.3.1`.
 
 ## [v3.3.0](https://github.com/Kinvey/angular-sdk/tree/v3.3.0) (2016-11-22)
 
-**Packages:**
-
+**Updated Dependencies:**
 - Update `kinvey-html5-sdk` to `v3.3.0`.
 - Update `kinvey-phonegap-sdk` to `v3.3.0`.
 
 ## [v3.2.3](https://github.com/Kinvey/angular-sdk/tree/v3.2.3) (2016-11-22)
 
-**Packages:**
-
+**Updated Dependencies:**
 - Update `kinvey-phonegap-sdk` to `v3.2.3`.
 
 ## [v3.2.2](https://github.com/Kinvey/angular-sdk/tree/v3.2.2) (2016-10-26)
 
-**Packages:**
-
+**Updated Dependencies:**
 - Updated `kinvey-node-sdk` and `kinvey-phonegap-sdk` to `v3.2.2`.
 
 ## [v3.2.1](https://github.com/Kinvey/angular-sdk/tree/v3.2.1) (2016-10-07)
