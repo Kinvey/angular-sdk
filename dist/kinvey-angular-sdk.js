@@ -1,6 +1,6 @@
 /**
  * @preserve
- * kinvey-angular-sdk v3.3.4
+ * kinvey-angular-sdk v3.3.5
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -22108,7 +22108,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	              throw error;
 	            }
 
-	            var socialIdentities = activeUser._socialIdentity;
+	            var socialIdentities = (0, _utils.isDefined)(activeUser._socialIdentity) ? activeUser._socialIdentity : {};
 	            var sessionKey = Object.keys(socialIdentities).find(function (sessionKey) {
 	              return socialIdentities[sessionKey].identity === _identity.SocialIdentity.MobileIdentityConnect;
 	            });
@@ -26918,25 +26918,25 @@ return /******/ (function(modules) { // webpackBootstrap
 		"_args": [
 			[
 				{
-					"raw": "kinvey-phonegap-sdk@3.3.4",
+					"raw": "kinvey-phonegap-sdk@3.3.5",
 					"scope": null,
 					"escapedName": "kinvey-phonegap-sdk",
 					"name": "kinvey-phonegap-sdk",
-					"rawSpec": "3.3.4",
-					"spec": "3.3.4",
+					"rawSpec": "3.3.5",
+					"spec": "3.3.5",
 					"type": "version"
 				},
 				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
 			]
 		],
-		"_from": "kinvey-phonegap-sdk@3.3.4",
-		"_id": "kinvey-phonegap-sdk@3.3.4",
+		"_from": "kinvey-phonegap-sdk@3.3.5",
+		"_id": "kinvey-phonegap-sdk@3.3.5",
 		"_inCache": true,
 		"_location": "/kinvey-phonegap-sdk",
 		"_nodeVersion": "6.9.4",
 		"_npmOperationalInternal": {
-			"host": "packages-18-east.internal.npmjs.com",
-			"tmp": "tmp/kinvey-phonegap-sdk-3.3.4.tgz_1484254849449_0.5244179673027247"
+			"host": "packages-12-west.internal.npmjs.com",
+			"tmp": "tmp/kinvey-phonegap-sdk-3.3.5.tgz_1485378636686_0.24298815545625985"
 		},
 		"_npmUser": {
 			"name": "thomas.conner",
@@ -26945,21 +26945,21 @@ return /******/ (function(modules) { // webpackBootstrap
 		"_npmVersion": "3.10.10",
 		"_phantomChildren": {},
 		"_requested": {
-			"raw": "kinvey-phonegap-sdk@3.3.4",
+			"raw": "kinvey-phonegap-sdk@3.3.5",
 			"scope": null,
 			"escapedName": "kinvey-phonegap-sdk",
 			"name": "kinvey-phonegap-sdk",
-			"rawSpec": "3.3.4",
-			"spec": "3.3.4",
+			"rawSpec": "3.3.5",
+			"spec": "3.3.5",
 			"type": "version"
 		},
 		"_requiredBy": [
 			"/"
 		],
-		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.3.4.tgz",
-		"_shasum": "db2bdb05a2443582c114438ed196c5086f2f2b37",
+		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.3.5.tgz",
+		"_shasum": "c61881a0a12662c24bd74b48a3f5eeaf5cd36c43",
 		"_shrinkwrap": null,
-		"_spec": "kinvey-phonegap-sdk@3.3.4",
+		"_spec": "kinvey-phonegap-sdk@3.3.5",
 		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
 		"author": {
 			"name": "Kinvey"
@@ -26976,8 +26976,8 @@ return /******/ (function(modules) { // webpackBootstrap
 		"dependencies": {
 			"core-js": "^2.4.1",
 			"es6-promise": "^4.0.5",
-			"kinvey-html5-sdk": "3.3.4",
-			"kinvey-node-sdk": "3.3.4",
+			"kinvey-html5-sdk": "3.3.5",
+			"kinvey-node-sdk": "3.3.5",
 			"local-storage": "^1.4.2",
 			"lodash": "^4.8.2"
 		},
@@ -26996,12 +26996,12 @@ return /******/ (function(modules) { // webpackBootstrap
 			"eslint": "^3.5.0",
 			"eslint-config-airbnb-base": "^7.1.0",
 			"eslint-plugin-import": "^1.15.0",
-			"expect": "^1.20.2",
+			"expect": "1.20.2",
 			"fs-extra": "^0.30.0",
 			"istanbul": "^1.0.0-alpha.2",
 			"json-loader": "^0.5.4",
 			"mocha": "^2.5.3",
-			"nock": "^8.0.0",
+			"nock": "8.2.1",
 			"regenerator-runtime": "^0.9.5",
 			"shelljs": "^0.7.4",
 			"uglify-js": "^2.7.3",
@@ -27013,13 +27013,13 @@ return /******/ (function(modules) { // webpackBootstrap
 		},
 		"directories": {},
 		"dist": {
-			"shasum": "db2bdb05a2443582c114438ed196c5086f2f2b37",
-			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.3.4.tgz"
+			"shasum": "c61881a0a12662c24bd74b48a3f5eeaf5cd36c43",
+			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.3.5.tgz"
 		},
 		"engines": {
 			"node": ">=4.0"
 		},
-		"gitHead": "83b9e255bfb83f151c5f106444bef9582bf15023",
+		"gitHead": "da4ded180342fa610f33bd9897714c55fd570df4",
 		"homepage": "http://www.kinvey.com",
 		"keywords": [
 			"Kinvey",
@@ -27046,7 +27046,7 @@ return /******/ (function(modules) { // webpackBootstrap
 			"build": "npm run clean && npm run transpile && npm run bundle && npm run minify",
 			"bundle": "webpack",
 			"clean": "del coverage dist s3",
-			"cover": "istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
+			"cover": "istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
 			"docs": "esdoc -c esdoc.json",
 			"e2e:build:app:ios": "npm run e2e:prepare:app && npm run build && cd ./test/e2e/app && cordova build ios",
 			"e2e:prepare:app": "cd ./test/e2e/app && cordova prepare",
@@ -27059,12 +27059,12 @@ return /******/ (function(modules) { // webpackBootstrap
 			"postversion": "git push && git push --tags",
 			"preversion": "del node_modules && npm install && npm test",
 			"s3": "npm run build && shjs ./scripts/s3.js",
-			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
+			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
+			"test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
 			"transpile": "babel src --out-dir dist",
 			"version": "npm run build && git add -A dist"
 		},
-		"version": "3.3.4"
+		"version": "3.3.5"
 	};
 
 /***/ },
@@ -34173,7 +34173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.3.4",
+		"version": "3.3.5",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -34214,8 +34214,8 @@ return /******/ (function(modules) { // webpackBootstrap
 			"angular": "^1.5.8",
 			"core-js": "^2.4.1",
 			"es6-promise": "^4.0.5",
-			"kinvey-html5-sdk": "3.3.4",
-			"kinvey-phonegap-sdk": "3.3.4",
+			"kinvey-html5-sdk": "3.3.5",
+			"kinvey-phonegap-sdk": "3.3.5",
 			"lodash": "^4.16.3"
 		},
 		"devDependencies": {
@@ -37137,8 +37137,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'connectIdentity',
-	    value: function connectIdentity(identity, session, options) {
+	    value: function connectIdentity(identity, session) {
 	      var _this3 = this;
+
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
 	      var isActive = this.isActive();
 	      var data = {};
@@ -37162,13 +37164,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'connectWithIdentity',
-	    value: function connectWithIdentity(identity, session, options) {
+	    value: function connectWithIdentity(identity, session) {
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
 	      return this.connectIdentity(identity, session, options);
 	    }
 	  }, {
 	    key: 'connectFacebook',
-	    value: function connectFacebook(clientId, options) {
+	    value: function connectFacebook(clientId) {
 	      var _this4 = this;
+
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	      var facebook = new _identity.Facebook({ client: this.client });
 	      return facebook.login(clientId, options).then(function (session) {
@@ -37177,13 +37183,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'disconnectFacebook',
-	    value: function disconnectFacebook(options) {
+	    value: function disconnectFacebook() {
+	      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	      return this.disconnectIdentity(_identity.Facebook.identity, options);
 	    }
 	  }, {
 	    key: 'connectGoogle',
-	    value: function connectGoogle(clientId, options) {
+	    value: function connectGoogle(clientId) {
 	      var _this5 = this;
+
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	      var google = new _identity.Google({ client: this.client });
 	      return google.login(clientId, options).then(function (session) {
@@ -37192,13 +37202,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'disconnectGoogle',
-	    value: function disconnectGoogle(options) {
+	    value: function disconnectGoogle() {
+	      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	      return this.disconnectIdentity(_identity.Google.identity, options);
 	    }
 	  }, {
 	    key: 'googleconnectLinkedIn',
-	    value: function googleconnectLinkedIn(clientId, options) {
+	    value: function googleconnectLinkedIn(clientId) {
 	      var _this6 = this;
+
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	      var linkedIn = new _identity.LinkedIn({ client: this.client });
 	      return linkedIn.login(clientId, options).then(function (session) {
@@ -37207,13 +37221,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'disconnectLinkedIn',
-	    value: function disconnectLinkedIn(options) {
+	    value: function disconnectLinkedIn() {
+	      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	      return this.disconnectIdentity(_identity.LinkedIn.identity, options);
 	    }
 	  }, {
 	    key: 'disconnectIdentity',
-	    value: function disconnectIdentity(identity, options) {
+	    value: function disconnectIdentity(identity) {
 	      var _this7 = this;
+
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	      var promise = _es6Promise2.default.resolve();
 
@@ -37332,7 +37350,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'signupWithIdentity',
-	    value: function signupWithIdentity(identity, session, options) {
+	    value: function signupWithIdentity(identity, session) {
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
 	      var data = {};
 	      data[socialIdentityAttribute] = {};
 	      data[socialIdentityAttribute][identity] = session;
@@ -37340,20 +37360,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'update',
-	    value: function update(data, options) {
+	    value: function update(data) {
 	      var _this10 = this;
 
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      data = (0, _assign2.default)(this.data, data);
-	      return _datastore.UserStore.update(data, options).then(function () {
-	        _this10.data = data;
-	        return _this10.isActive();
-	      }).then(function (isActive) {
-	        if (isActive) {
-	          return _request.CacheRequest.setActiveUser(_this10.client, _this10.data);
+	      return _datastore.UserStore.update(data, options).then(function (data) {
+	        if (_this10.isActive()) {
+	          return _request.CacheRequest.setActiveUser(_this10.client, data);
 	        }
 
-	        return _this10;
-	      }).then(function () {
+	        return data;
+	      }).then(function (data) {
+	        _this10.data = data;
 	        return _this10;
 	      });
 	    }
@@ -37468,7 +37488,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'login',
-	    value: function login(username, password, options) {
+	    value: function login(username, password) {
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
 	      var user = new this({}, options);
 	      return user.login(username, password, options);
 	    }
@@ -37482,25 +37504,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'connectIdentity',
-	    value: function connectIdentity(identity, session, options) {
+	    value: function connectIdentity(identity, session) {
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
 	      var user = new this({}, options);
 	      return user.connectIdentity(identity, session, options);
 	    }
 	  }, {
 	    key: 'connectFacebook',
-	    value: function connectFacebook(clientId, options) {
+	    value: function connectFacebook(clientId) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      var user = new this({}, options);
 	      return user.connectFacebook(clientId, options);
 	    }
 	  }, {
 	    key: 'connectGoogle',
-	    value: function connectGoogle(clientId, options) {
+	    value: function connectGoogle(clientId) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      var user = new this({}, options);
 	      return user.connectGoogle(clientId, options);
 	    }
 	  }, {
 	    key: 'connectLinkedIn',
-	    value: function connectLinkedIn(clientId, options) {
+	    value: function connectLinkedIn(clientId) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      var user = new this({}, options);
 	      return user.connectLinkedIn(clientId, options);
 	    }
@@ -37519,19 +37549,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'signup',
-	    value: function signup(data, options) {
+	    value: function signup(data) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      var user = new this({}, options);
 	      return user.signup(data, options);
 	    }
 	  }, {
 	    key: 'signupWithIdentity',
-	    value: function signupWithIdentity(identity, session, options) {
+	    value: function signupWithIdentity(identity, session) {
+	      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
 	      var user = new this({}, options);
 	      return user.signupWithIdentity(identity, session, options);
 	    }
 	  }, {
 	    key: 'update',
-	    value: function update(data, options) {
+	    value: function update(data) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      var activeUser = User.getActiveUser(options.client);
 
 	      if ((0, _utils.isDefined)(activeUser)) {
@@ -37542,7 +37578,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  }, {
 	    key: 'me',
-	    value: function me(options) {
+	    value: function me() {
+	      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
 	      var activeUser = User.getActiveUser(options.client);
 
 	      if (activeUser) {
@@ -37643,13 +37681,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	      });
 	    }
 	  }, {
+	    key: 'lookup',
+	    value: function lookup(query) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	      return _datastore.UserStore.lookup(query, options);
+	    }
+	  }, {
 	    key: 'exists',
-	    value: function exists(username, options) {
+	    value: function exists(username) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      return _datastore.UserStore.exists(username, options);
 	    }
 	  }, {
 	    key: 'restore',
-	    value: function restore(id, options) {
+	    value: function restore(id) {
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
 	      return _datastore.UserStore.restore(id, options);
 	    }
 	  }]);
@@ -38854,6 +38903,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _errors = __webpack_require__(64);
 
+	var _utils = __webpack_require__(89);
+
+	var _query = __webpack_require__(197);
+
+	var _query2 = _interopRequireDefault(_query);
+
 	var _networkstore = __webpack_require__(430);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
@@ -38891,6 +38946,45 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  _createClass(UserStore, [{
+	    key: 'lookup',
+	    value: function lookup(query) {
+	      var _this2 = this;
+
+	      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+	      var stream = _utils.KinveyObservable.create(function (observer) {
+	        if ((0, _utils.isDefined)(query) && !(query instanceof _query2.default)) {
+	          return observer.error(new _errors.KinveyError('Invalid query. It must be an instance of the Query class.'));
+	        }
+
+	        var request = new _request.KinveyRequest({
+	          method: _request.RequestMethod.POST,
+	          authType: _request.AuthType.Default,
+	          url: _url2.default.format({
+	            protocol: _this2.client.protocol,
+	            host: _this2.client.host,
+	            pathname: _this2.pathname + '/_lookup',
+	            query: options.query
+	          }),
+	          properties: options.properties,
+	          body: (0, _utils.isDefined)(query) ? query.toPlainObject().filter : null,
+	          timeout: options.timeout,
+	          client: _this2.client
+	        });
+
+	        return request.execute().then(function (response) {
+	          return response.data;
+	        }).then(function (data) {
+	          return observer.next(data);
+	        }).then(function () {
+	          return observer.complete();
+	        }).catch(function (error) {
+	          return observer.error(error);
+	        });
+	      });
+	      return stream;
+	    }
+	  }, {
 	    key: 'create',
 	    value: function create() {
 	      return _es6Promise2.default.reject(new _errors.KinveyError('Please use `User.signup()` to create a user.'));
@@ -38909,7 +39003,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      if (!data._id) {
-	        return _es6Promise2.default.ject(new _errors.KinveyError('User must have an _id.'));
+	        return _es6Promise2.default.reject(new _errors.KinveyError('User must have an _id.'));
 	      }
 
 	      return _get(UserStore.prototype.__proto__ || Object.getPrototypeOf(UserStore.prototype), 'update', this).call(this, data, options);
@@ -38982,6 +39076,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Push = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -38990,6 +39085,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _client = __webpack_require__(60);
 
 	var _entity = __webpack_require__(432);
+
+	var _utils = __webpack_require__(89);
+
+	var _errors = __webpack_require__(64);
 
 	var _device = __webpack_require__(410);
 
@@ -39053,11 +39152,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      return _device2.default.ready().then(function () {
 	        if (_this2.isSupported() === false) {
-	          throw new Error('Kinvey currently only supports push notifications on iOS and Android platforms.');
+	          throw new _errors.KinveyError('Kinvey currently only supports push notifications on iOS and Android platforms.');
 	        }
 
-	        if (typeof global.PushNotification === 'undefined') {
-	          throw new Error('PhoneGap Push Notification Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap/guides/push#ProjectSetUp for help with' + ' setting up your project.');
+	        if ((0, _utils.isDefined)(global.device) === false) {
+	          throw new _errors.KinveyError('Cordova Device Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap/guides/push#ProjectSetUp for help with' + ' setting up your project.');
+	        }
+
+	        if ((0, _utils.isDefined)(global.PushNotification) === false) {
+	          throw new _errors.KinveyError('PhoneGap Push Notification Plugin is not installed.', 'Please refer to http://devcenter.kinvey.com/phonegap/guides/push#ProjectSetUp for help with' + ' setting up your project.');
 	        }
 
 	        return _this2.unregister(options).catch(function () {
@@ -39076,12 +39179,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	          });
 
 	          _this2.phonegapPush.on('error', function (error) {
-	            reject(new Error('An error occurred registering this device for push notifications.', error));
+	            reject(new _errors.KinveyError('An error occurred registering this device for push notifications.', error));
 	          });
 	        });
 	      }).then(function (deviceId) {
-	        if (typeof deviceId === 'undefined') {
-	          throw new Error('Unable to retrieve the device id to register this device for push notifications.');
+	        if ((0, _utils.isDefined)(deviceId) === false) {
+	          throw new _errors.KinveyError('Unable to retrieve the device id to register this device for push notifications.');
 	        }
 
 	        var user = _entity.User.getActiveUser(_this2.client);
@@ -39138,12 +39241,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        });
 	      }).then(function () {
 	        var user = _entity.User.getActiveUser(_this3.client);
-	        var key = user ? _this3.pathname + '_' + user._id : _this3.pathname + '__' + options.userId;
+	        var key = user ? _this3.pathname + '_' + user._id : _this3.pathname + '_' + options.userId;
 	        return _localStorage2.default.get(key);
-	      }).then(function (_ref) {
-	        var deviceId = _ref.deviceId;
+	      }).then(function (pushConfig) {
+	        var deviceId = void 0;
 
-	        if (typeof deviceId === 'undefined') {
+	        if ((0, _utils.isDefined)(pushConfig)) {
+	          deviceId = pushConfig.deviceId;
+	        }
+
+	        if ((0, _utils.isDefined)(deviceId) === false) {
 	          return null;
 	        }
 
@@ -39161,12 +39268,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	            platform: global.device.platform.toLowerCase(),
 	            framework: 'phonegap',
 	            deviceId: deviceId,
-	            userId: user ? null : options.userId
+	            userId: user ? undefined : options.userId
 	          },
 	          timeout: options.timeout,
 	          client: _this3.client
 	        });
-	        return request.execute();
+	        return request.execute().then(function (response) {
+	          return response.data;
+	        });
 	      }).then(function (data) {
 	        var user = _entity.User.getActiveUser(_this3.client);
 	        var key = user ? _this3.pathname + '_' + user._id : _this3.pathname + '_' + options.userId;
@@ -39203,6 +39312,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Export
 
 
+	exports.Push = Push;
 	exports.default = new Push();
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(59), (function() { return this; }())))
 
