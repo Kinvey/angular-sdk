@@ -1,5 +1,5 @@
-import PhoneGapDevice from 'kinvey-phonegap-sdk/dist/device';
-import pkg from '../package.json';
+import { HttpMiddleware } from 'kinvey-phonegap-sdk/dist/middleware';
+import pkg from 'package.json';
 
 // Helper function to detect the browser name and version.
 function browserDetect(ua) {
@@ -10,7 +10,7 @@ function browserDetect(ua) {
   const rChrome = /(chrome)\/([\w]+)/;
   const rFirefox = /(firefox)\/([\w.]+)/;
   const rIE = /(msie) ([\w.]+)/i;
-  const rOpera = /(opera)(?:.*version)?[ \/]([\w.]+)/;
+  const rOpera = /(opera)(?:.*version)?[ /]([\w.]+)/;
   const rSafari = /(safari)\/([\w.]+)/;
 
   return rChrome.exec(ua) || rFirefox.exec(ua) || rIE.exec(ua) ||
@@ -78,8 +78,8 @@ export function deviceInformation() {
   }).join(' ');
 }
 
-export default class Device extends PhoneGapDevice {
-  static toString() {
+export default class AngularHttpMiddleware extends HttpMiddleware {
+  get deviceInformation() {
     return deviceInformation();
   }
 }
