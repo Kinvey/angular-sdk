@@ -1,4 +1,14 @@
 # Changelog
+## [v3.4.0](https://github.com/Kinvey/angular-sdk/tree/v3.4.0) (2016-02-09)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.5...v3.4.0)<br/>
+
+**Changes**
+- Used rack API to replace `CacheMiddleware` and `HttpMiddleware`. [#10](https://github.com/Kinvey/angular-sdk/pull/10)
+
+**Updated Dependencies:**
+- Updated `kinvey-node-sdk` to `v3.4.0`.
+- Updated `kinvey-phonegap-sdk` to `v3.4.0`.
+
 ## [v3.3.5](https://github.com/Kinvey/angular-sdk/tree/v3.3.5) (2016-01-25)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.4...v3.3.5)<br/>
 
