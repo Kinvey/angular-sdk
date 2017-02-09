@@ -10,6 +10,10 @@ var _kinveyPhonegapSdk = require('kinvey-phonegap-sdk');
 
 var _kinveyPhonegapSdk2 = _interopRequireDefault(_kinveyPhonegapSdk);
 
+var _export = require('kinvey-node-sdk/dist/export');
+
+var _middleware = require('./middleware');
+
 var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
@@ -19,6 +23,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // eslint-disable-line import/no-unresolved
+
+// Setup racks
+_kinveyPhonegapSdk2.default.NetworkRack.reset();
+_kinveyPhonegapSdk2.default.NetworkRack.use(new _export.SerializeMiddleware());
+_kinveyPhonegapSdk2.default.NetworkRack.use(new _middleware.HttpMiddleware());
+_kinveyPhonegapSdk2.default.NetworkRack.use(new _export.ParseMiddleware());
+
+// KinveyProvider
 
 var KinveyProvider = function () {
   function KinveyProvider() {

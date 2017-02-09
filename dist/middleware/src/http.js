@@ -8,11 +8,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 exports.deviceInformation = deviceInformation;
 
-var _device = require('kinvey-phonegap-sdk/dist/device');
+var _middleware = require('kinvey-phonegap-sdk/dist/middleware');
 
-var _device2 = _interopRequireDefault(_device);
-
-var _package = require('../package.json');
+var _package = require('../../../package.json');
 
 var _package2 = _interopRequireDefault(_package);
 
@@ -33,7 +31,7 @@ function browserDetect(ua) {
   var rChrome = /(chrome)\/([\w]+)/;
   var rFirefox = /(firefox)\/([\w.]+)/;
   var rIE = /(msie) ([\w.]+)/i;
-  var rOpera = /(opera)(?:.*version)?[ \/]([\w.]+)/;
+  var rOpera = /(opera)(?:.*version)?[ /]([\w.]+)/;
   var rSafari = /(safari)\/([\w.]+)/;
 
   return rChrome.exec(ua) || rFirefox.exec(ua) || rIE.exec(ua) || rOpera.exec(ua) || rSafari.exec(ua) || [];
@@ -108,23 +106,23 @@ function deviceInformation() {
   }).join(' ');
 }
 
-var Device = function (_PhoneGapDevice) {
-  _inherits(Device, _PhoneGapDevice);
+var AngularHttpMiddleware = function (_HttpMiddleware) {
+  _inherits(AngularHttpMiddleware, _HttpMiddleware);
 
-  function Device() {
-    _classCallCheck(this, Device);
+  function AngularHttpMiddleware() {
+    _classCallCheck(this, AngularHttpMiddleware);
 
-    return _possibleConstructorReturn(this, (Device.__proto__ || Object.getPrototypeOf(Device)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AngularHttpMiddleware.__proto__ || Object.getPrototypeOf(AngularHttpMiddleware)).apply(this, arguments));
   }
 
-  _createClass(Device, null, [{
-    key: 'toString',
-    value: function toString() {
+  _createClass(AngularHttpMiddleware, [{
+    key: 'deviceInformation',
+    get: function get() {
       return deviceInformation();
     }
   }]);
 
-  return Device;
-}(_device2.default);
+  return AngularHttpMiddleware;
+}(_middleware.HttpMiddleware);
 
-exports.default = Device;
+exports.default = AngularHttpMiddleware;
