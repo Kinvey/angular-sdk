@@ -1,4 +1,13 @@
 {
+  "plugins": [
+    "inline-dotenv",
+    ["module-resolver", {
+      "alias": {
+        "package.json": "./package.json",
+        "src": "./src"
+      }
+    }]
+  ],
   "presets": [
     "es2015",
     "stage-2"
