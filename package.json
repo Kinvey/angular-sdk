@@ -40,13 +40,13 @@
   "dependencies": {
     "angular": "1.6.2",
     "kinvey-js-sdk": "3.4.2",
-    "kinvey-phonegap-sdk": "file:///Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/PhoneGap/SDK",
+    "kinvey-phonegap-sdk": "3.4.1",
     "lodash": "4.17.4"
   },
   "peerDependencies": {
     "angular": "1.6.2",
     "kinvey-js-sdk": "3.4.2",
-    "kinvey-phonegap-sdk": "file:///Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/PhoneGap/SDK",
+    "kinvey-phonegap-sdk": "3.4.1",
     "lodash": "4.17.4"
   },
   "devDependencies": {
