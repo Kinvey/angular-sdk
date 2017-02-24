@@ -16,7 +16,7 @@ var BANNER = '/**\n'
 
 module.exports = {
   context: path.join(__dirname, 'dist'),
-  entry: ['core-js/es6/symbol', 'es6-promise/auto', './index.js'],
+  entry: ['./index.js'],
   externals: {
     angular: true
   },
