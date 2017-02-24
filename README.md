@@ -1,7 +1,7 @@
 # Kinvey Angular SDK
 [Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.
 
-This node and bower module makes it very easy to connect your Angular app with Kinvey.
+This npm package makes it very easy to connect your AngularJS app with Kinvey.
 
 ## How to use
 
@@ -23,7 +23,7 @@ use our [DevCenter Download Page](http://devcenter.kinvey.com/angular/downloads)
 If you installed the SDK with npm, include the sdk in your code using `require`.
 
 ```javascript
-var Kinvey = require('kinvey-angular-sdk');
+require('kinvey-angular-sdk');
 ```
 
 If you downloaded the SDK and saved it to a file, add a script tag to your main html file to load the SDK.
@@ -32,24 +32,28 @@ If you downloaded the SDK and saved it to a file, add a script tag to your main 
 <script src="path/to/kinvey-angular-sdk.js"></script>
 ```
 
-Next, use `Kinvey.init` to configure your app. Replace `<appKey>` and `<appSecret>` with your apps app key and secret. You can find these for your app using the [Kinvey Console App](https://console.kinvey.com).
+Next, use `$kinvey.initialize` to configure your app. Replace `<appKey>` and `<appSecret>` with your apps app key and secret. You can find these for your app using the [Kinvey Console App](https://console.kinvey.com).
 
 ```javascript
-Kinvey.init({
-    appKey: '<appKey>',
-    appSecret: '<appSecret>'
-});
-```
-
-### 4. Verify Set Up
-You can use the following snippet to verify the app credentials were entered correctly. This function will contact the backend and verify that the SDK can communicate with your app.
-
-```javascript
-Kinvey.ping().then(function(response) {
-  console.log('Kinvey Ping Success. Kinvey Service is alive, version: ' + response.version + ', response: ' + response.kinvey);
-}).catch(function(error) {
-  console.log('Kinvey Ping Failed. Response: ' + error.message);
-});
+var initialized = false;
+var app = angular.module('myApp', ['kinvey']);
+app.run(['$kinvey', '$rootScope', '$location', function($kinvey, $rootScope, $location) {
+  $rootScope.$on('$locationChangeStart', function(event, newUrl) {
+    if (initialized === false) {
+      event.preventDefault(); // Stop the location change
+      // Initialize Kinvey
+      $kinvey.initialize({
+        appKey: '<appKey>',
+        appSecret: '<appSecret>'
+      }).then(function(activeUser) {
+        initialized = true;
+        $location..path($location.url(newUrl).hash); // Go to the page
+      }).catch(function(error) {
+        // ...
+      });
+    }
+  });
+}]);
 ```
 
 ## What’s next?
@@ -74,7 +78,7 @@ Updating the package version should follow [Semantic Version 2.0.0](http://semve
 * Patch (3.0.x): when making backwards-compatible bug fixes or enhancements.
 
 ## Test
-The Kinvey-Angular-SDK is setup to run unit and end to end tests.
+The Kinvey Angular SDK is setup to run unit and end to end tests.
 
 _Note: Before running any tests you will need to run `npm install` to install any dependencies required._
 
