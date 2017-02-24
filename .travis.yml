@@ -1,15 +1,16 @@
 language: node_js
 node_js:
 - '6'
-before_deploy: npm run s3
+before_deploy: npm run build
 deploy:
-  - provider: npm
-    email: thomas.conner@me.com
-    on:
-      tags: true
-      repo: Kinvey/angular-sdk
-    api_key:
-      secure: sIXyeKBEtoFd/Le5xUZw9Rwhgvyqwi7I0tjPvbXmwqLnWELwezO86paIvZDgWAS0lhL8u/2egN7Ukd5kAhc7xatCs/Ua3dhZLuKpG08/TYdd7P7ifOnaxPdTJy+ov5s2qRcYHT8Jt3PcepL/oc2DAOCAlXslsihFe5kLU96teXH2f4Z60J2+wJIMbVEGCsssEmMTUitVvsu/6cjI6sb6LZLghb+sWU/znUU963RLs0WgOQHR8xnifjn877S/66BzJe+rP1g95d8Njy9sp9heEB8iaDKeoqcjumtz5afAu+ZOmOdLXfeEePOMn9eTIrZkvnNQApyEhuYoNv29IWiaXlj/keao4nLSdI1kB6rBAOL8fyuHxXHGDzTIfHC+0i+IjClfRg/4x6ciXnhm25tKPLm/7Kasj56Z4DJ0n1ost9C6W7gm+6Z9PtYgk9VtGTK3/2jYufeZvL+Ej0wqSAADbXQU86UnhYU+WbtLcHYgKHPurGMQhrtjQJFvce6VAY8nUiJvkGyM4m3M0m2ifx3z4YcIg6rWHzwaqZDAXSoaqKPaCxWgFI2rHqVhdntj9wwk/xvirepS3AtLMXJGZnQf71MeW+T40c1qrtQOPw1ladU/ktZgVeAuCBR4JS2hDKY3K//vjA25UHRSzRngksm5iYUVvq4zngbenft9YdBNveg=
+  skip_cleanup: true
+  provider: npm
+  email: thomas.conner@me.com
+  on:
+    tags: true
+    repo: Kinvey/angular-sdk
+  api_key:
+    secure: sIXyeKBEtoFd/Le5xUZw9Rwhgvyqwi7I0tjPvbXmwqLnWELwezO86paIvZDgWAS0lhL8u/2egN7Ukd5kAhc7xatCs/Ua3dhZLuKpG08/TYdd7P7ifOnaxPdTJy+ov5s2qRcYHT8Jt3PcepL/oc2DAOCAlXslsihFe5kLU96teXH2f4Z60J2+wJIMbVEGCsssEmMTUitVvsu/6cjI6sb6LZLghb+sWU/znUU963RLs0WgOQHR8xnifjn877S/66BzJe+rP1g95d8Njy9sp9heEB8iaDKeoqcjumtz5afAu+ZOmOdLXfeEePOMn9eTIrZkvnNQApyEhuYoNv29IWiaXlj/keao4nLSdI1kB6rBAOL8fyuHxXHGDzTIfHC+0i+IjClfRg/4x6ciXnhm25tKPLm/7Kasj56Z4DJ0n1ost9C6W7gm+6Z9PtYgk9VtGTK3/2jYufeZvL+Ej0wqSAADbXQU86UnhYU+WbtLcHYgKHPurGMQhrtjQJFvce6VAY8nUiJvkGyM4m3M0m2ifx3z4YcIg6rWHzwaqZDAXSoaqKPaCxWgFI2rHqVhdntj9wwk/xvirepS3AtLMXJGZnQf71MeW+T40c1qrtQOPw1ladU/ktZgVeAuCBR4JS2hDKY3K//vjA25UHRSzRngksm5iYUVvq4zngbenft9YdBNveg=
 notifications:
   email:
     on_success: change
