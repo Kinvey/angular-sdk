@@ -34,13 +34,8 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin(BANNER, { raw: true }),
     new webpack.NormalModuleReplacementPlugin(
-      /kinvey-node-sdk\/dist\/identity\/src\/popup\.js/,
+      /kinvey-js-sdk\/dist\/identity\/src\/popup\.js/,
       require.resolve(path.resolve(__dirname, 'node_modules/kinvey-phonegap-sdk/dist/popup.js'))
     )
-  ],
-  resolve: {
-    alias: {
-      request$: 'xhr'
-    }
-  }
+  ]
 };
