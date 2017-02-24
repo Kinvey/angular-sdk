@@ -9,7 +9,8 @@ docs
 # Build Files
 .tmp
 tmp
-/s3
+s3
+dist
 
 # Test Files
 coverage
