@@ -10,17 +10,19 @@ docs
 .tmp
 tmp
 s3
-dist
+dist/*
+!dist/kinvey-angular-sdk.js
+!dist/kinvey-angular-sdk.min.js
 
 # Test Files
 coverage
 report.xml
 *.tap
-/test/e2e/app/platforms
-/test/e2e/app/plugins
-/test/e2e/test/screenshots
+test/e2e/app/platforms
+test/e2e/app/plugins
+test/e2e/test/screenshots
 
 # MacOS Files
 .DS_Store
-/shots
-/local.log
+shots
+local.log
