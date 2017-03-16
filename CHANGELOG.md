@@ -1,4 +1,10 @@
 # Changelog
+## [v3.4.1](https://github.com/Kinvey/angular-sdk/tree/v3.4.2) (2016-03-16)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.4.1...v3.4.2)<br/>
+
+**Changes**
+- Update package dependencies.
+
 ## [v3.4.0](https://github.com/Kinvey/angular-sdk/tree/v3.4.0) (2016-02-09)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.3.5...v3.4.0)<br/>
 
