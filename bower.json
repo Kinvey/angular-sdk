@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "description": "Kinvey JavaScript Library for AngularJS applications.",
+  "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "https://www.kinvey.com",
   "license": "Apache-2.0",
   "authors": [
@@ -16,6 +16,9 @@
   "ignore": [
     "**/.*",
     "package.json",
+    "webpack.config.js",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
     "README.md"
   ]
 }
