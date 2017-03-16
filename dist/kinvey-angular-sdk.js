@@ -1,6 +1,6 @@
 /**
  * @preserve
- * kinvey-angular-sdk v3.4.1
+ * kinvey-angular-sdk v3.4.2
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -38419,7 +38419,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	module.exports = {
 		"name": "kinvey-angular-sdk",
-		"version": "3.4.1",
+		"version": "3.4.2",
 		"description": "Kinvey JavaScript SDK for AngularJS applications.",
 		"homepage": "http://www.kinvey.com",
 		"bugs": {
@@ -38467,18 +38467,18 @@ return /******/ (function(modules) { // webpackBootstrap
 			"kinvey-phonegap-sdk": "3.4.3"
 		},
 		"devDependencies": {
-			"babel-cli": "6.23.0",
-			"babel-core": "6.23.1",
+			"babel-cli": "6.24.0",
+			"babel-core": "6.24.0",
 			"babel-eslint": "7.1.1",
 			"babel-plugin-inline-dotenv": "^1.1.1",
 			"babel-plugin-module-resolver": "2.5.0",
 			"babel-polyfill": "6.23.0",
 			"babel-preset-es2015": "^6.9.0",
 			"babel-preset-stage-2": "^6.0.15",
-			"babel-register": "6.23.0",
+			"babel-register": "6.24.0",
 			"del-cli": "^0.2.0",
-			"eslint": "3.16.1",
-			"eslint-config-airbnb-base": "11.1.0",
+			"eslint": "3.17.1",
+			"eslint-config-airbnb-base": "11.1.1",
 			"eslint-import-resolver-babel-module": "3.0.0",
 			"eslint-plugin-import": "2.2.0",
 			"expect": "^1.20.2",
@@ -38486,9 +38486,9 @@ return /******/ (function(modules) { // webpackBootstrap
 			"istanbul": "1.1.0-alpha.1",
 			"json-loader": "^0.5.4",
 			"mocha": "3.2.0",
-			"nock": "9.0.7",
+			"nock": "9.0.9",
 			"protractor": "5.1.1",
-			"regenerator-runtime": "^0.9.5",
+			"regenerator-runtime": "0.10.3",
 			"shelljs": "^0.7.4",
 			"uglify-js": "^2.7.3",
 			"webpack": "^1.13.0"
