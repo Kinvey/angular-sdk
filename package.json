@@ -12,6 +12,8 @@
     "Thomas Conner <thomas@kinvey.com>"
   ],
   "main": "./dist/index.js",
+  "module": "./src/index.js",
+  "typings": "./src/kinvey.d.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:Kinvey/angular-sdk"
@@ -30,7 +32,7 @@
     "lint:src": "eslint src/**",
     "lint:test": "eslint test/unit/**",
     "preversion": "del node_modules && npm install && npm test",
-    "postversion": "git push && git push --tags",
+    "postversion": "npm run build && npm run build && git add dist/kinvey-phonegap-sdk.js && git add dist/kinvey-phonegap-sdk.min.js && git commit -m 'Update dist bundle.' && git push && git push --tags",
     "s3": "npm run build && shjs ./scripts/s3.js",
     "test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
     "test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
