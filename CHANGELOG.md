@@ -1,4 +1,22 @@
-# Changelog
+## [3.5.0](https://github.com/Kinvey/phonegap-sdk/tree/v3.5.0) (2017-04-24)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.4.5...v3.5.0)<br/>
+
+### Added
+_None_
+
+### Removed
+_None_
+
+### Changed
+- Update [kinvey-js-sdk](https://www.npmjs.com/package/kinvey-js-sdk) dependency to [v3.5.0](https://github.com/Kinvey/js-sdk/tree/v3.5.0).
+- Update [kinvey-phonegap-sdk](https://www.npmjs.com/package/kinvey-phonegap-sdk) dependency to [v3.5.0](https://github.com/Kinvey/phonegap-sdk/tree/v3.5.0).
+
+### Merged Pull Requests
+_None_
+
+### Closed Issues
+_None_
+
 ## [v3.4.5](https://github.com/Kinvey/angular-sdk/tree/v3.4.5) (2017-04-13)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.4.4...v3.4.5)<br/>
 
