@@ -1,6 +1,6 @@
 {
   "name": "kinvey-angular-sdk",
-  "version": "3.5.0",
+  "version": "3.4.5",
   "description": "Kinvey JavaScript SDK for AngularJS applications.",
   "homepage": "http://www.kinvey.com",
   "bugs": {
@@ -32,7 +32,7 @@
     "lint:src": "eslint src/**",
     "lint:test": "eslint test/unit/**",
     "preversion": "del node_modules && npm install && npm test",
-    "postversion": "npm run build && npm run build && git add dist/kinvey-phonegap-sdk.js && git add dist/kinvey-phonegap-sdk.min.js && git commit -m 'Update dist bundle.' && git push && git push --tags",
+    "postversion": "npm run build && npm run build && git add dist/kinvey-angular-sdk.js && git add dist/kinvey-angular-sdk.min.js && git commit -m 'Update dist bundle.' && git push && git push --tags",
     "s3": "npm run build && shjs ./scripts/s3.js",
     "test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
     "test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
