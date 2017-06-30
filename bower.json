@@ -19,6 +19,8 @@
     "webpack.config.js",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
-    "README.md"
+    "README.md",
+    "scripts/*"
+    "test/*"
   ]
 }
