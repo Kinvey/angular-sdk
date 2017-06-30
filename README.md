@@ -43,7 +43,7 @@ The Kinvey PhoneGap SDK supports the following browsers and versions of PhoneGap
 
 ## Documentation
 
-For more detailed documentation, see http://devcenter.kinvey.com/phonegap
+For more detailed documentation, see http://devcenter.kinvey.com/angular
 
 ## License
 See [LICENSE](LICENSE) for details.
