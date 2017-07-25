@@ -20,7 +20,7 @@
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "README.md",
-    "scripts/*"
+    "scripts/*",
     "test/*"
   ]
 }
