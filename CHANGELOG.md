@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.5.3](https://github.com/Kinvey/angular-sdk/tree/v3.5.3) (2017-08-01)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.5.2...v3.5.3)<br/>
+
+### Added
+_None_
+
+### Removed
+_None_
+
+### Changed/Fixed
+- Fixed typo in bower.json
+
+### Merged Pull Requests
+_None_
+
+### Closed Issues
+_None_
+
 ## [3.5.2](https://github.com/Kinvey/angular-sdk/tree/v3.5.2) (2017-07-08)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.5.1...v3.5.2)<br/>
 
