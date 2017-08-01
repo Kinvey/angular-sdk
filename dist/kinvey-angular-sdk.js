@@ -1,6 +1,6 @@
 /**
  * @preserve
- * kinvey-angular-sdk v3.5.2
+ * kinvey-angular-sdk v3.5.3
  * Kinvey JavaScript SDK for AngularJS applications.
  * http://www.kinvey.com
  *
@@ -153,7 +153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _export = __webpack_require__(4);
 
-	var _kinveyHtml5Sdk = __webpack_require__(356);
+	var _kinveyHtml5Sdk = __webpack_require__(357);
 
 	var _kinveyHtml5Sdk2 = _interopRequireDefault(_kinveyHtml5Sdk);
 
@@ -220,7 +220,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _datastore2 = _interopRequireDefault(_datastore);
 
-	var _entity = __webpack_require__(344);
+	var _entity = __webpack_require__(345);
 
 	var _identity = __webpack_require__(327);
 
@@ -236,11 +236,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _endpoint = __webpack_require__(354);
+	var _endpoint = __webpack_require__(355);
 
 	var _endpoint2 = _interopRequireDefault(_endpoint);
 
-	var _kinvey = __webpack_require__(355);
+	var _kinvey = __webpack_require__(356);
 
 	var _kinvey2 = _interopRequireDefault(_kinvey);
 
@@ -4331,27 +4331,27 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cachestore2 = _interopRequireDefault(_cachestore);
 
-	var _datastore = __webpack_require__(350);
+	var _datastore = __webpack_require__(351);
 
 	var _datastore2 = _interopRequireDefault(_datastore);
 
-	var _filestore = __webpack_require__(352);
+	var _filestore = __webpack_require__(353);
 
 	var _filestore2 = _interopRequireDefault(_filestore);
 
-	var _networkstore = __webpack_require__(348);
+	var _networkstore = __webpack_require__(349);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
 
-	var _syncstore = __webpack_require__(351);
+	var _syncstore = __webpack_require__(352);
 
 	var _syncstore2 = _interopRequireDefault(_syncstore);
 
-	var _userstore = __webpack_require__(353);
+	var _userstore = __webpack_require__(354);
 
 	var _userstore2 = _interopRequireDefault(_userstore);
 
-	var _sync = __webpack_require__(349);
+	var _sync = __webpack_require__(350);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4426,15 +4426,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _aggregation2 = _interopRequireDefault(_aggregation);
 
-	var _entity = __webpack_require__(344);
+	var _entity = __webpack_require__(345);
 
 	var _utils = __webpack_require__(43);
 
-	var _networkstore = __webpack_require__(348);
+	var _networkstore = __webpack_require__(349);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
 
-	var _sync = __webpack_require__(349);
+	var _sync = __webpack_require__(350);
 
 	var _sync2 = _interopRequireDefault(_sync);
 
@@ -21481,7 +21481,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _google = __webpack_require__(339);
+	var _google = __webpack_require__(340);
 
 	Object.keys(_google).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -21493,7 +21493,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _linkedin = __webpack_require__(340);
+	var _linkedin = __webpack_require__(341);
 
 	Object.keys(_linkedin).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -21505,7 +21505,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _mic = __webpack_require__(341);
+	var _mic = __webpack_require__(342);
 
 	Object.keys(_mic).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -21517,7 +21517,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-	var _windows = __webpack_require__(343);
+	var _windows = __webpack_require__(344);
 
 	Object.keys(_windows).forEach(function (key) {
 	  if (key === "default" || key === "__esModule") return;
@@ -28327,8 +28327,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// setimmediate attaches itself to the global object
 	__webpack_require__(338);
-	exports.setImmediate = setImmediate;
-	exports.clearImmediate = clearImmediate;
+	var global = __webpack_require__(339);
+	exports.setImmediate = global.setImmediate;
+	exports.clearImmediate = global.clearImmediate;
 
 
 /***/ }),
@@ -28526,6 +28527,26 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 339 */
+/***/ (function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {var win;
+
+	if (typeof window !== "undefined") {
+	    win = window;
+	} else if (typeof global !== "undefined") {
+	    win = global;
+	} else if (typeof self !== "undefined"){
+	    win = self;
+	} else {
+	    win = {};
+	}
+
+	module.exports = win;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ }),
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28576,7 +28597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_identity2.default);
 
 /***/ }),
-/* 340 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28627,7 +28648,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_identity2.default);
 
 /***/ }),
-/* 341 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -28647,7 +28668,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _url2 = _interopRequireDefault(_url);
 
-	var _urlJoin = __webpack_require__(342);
+	var _urlJoin = __webpack_require__(343);
 
 	var _urlJoin2 = _interopRequireDefault(_urlJoin);
 
@@ -28962,7 +28983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 342 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (name, context, definition) {
@@ -29017,7 +29038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 343 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29068,7 +29089,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}(_identity2.default);
 
 /***/ }),
-/* 344 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29078,15 +29099,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.User = exports.Metadata = exports.Acl = undefined;
 
-	var _acl = __webpack_require__(345);
+	var _acl = __webpack_require__(346);
 
 	var _acl2 = _interopRequireDefault(_acl);
 
-	var _metadata = __webpack_require__(346);
+	var _metadata = __webpack_require__(347);
 
 	var _metadata2 = _interopRequireDefault(_metadata);
 
-	var _user = __webpack_require__(347);
+	var _user = __webpack_require__(348);
 
 	var _user2 = _interopRequireDefault(_user);
 
@@ -29097,7 +29118,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.User = _user2.default;
 
 /***/ }),
-/* 345 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29314,7 +29335,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Acl;
 
 /***/ }),
-/* 346 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29409,7 +29430,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Metadata;
 
 /***/ }),
-/* 347 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -29460,11 +29481,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _utils = __webpack_require__(43);
 
-	var _acl = __webpack_require__(345);
+	var _acl = __webpack_require__(346);
 
 	var _acl2 = _interopRequireDefault(_acl);
 
-	var _metadata = __webpack_require__(346);
+	var _metadata = __webpack_require__(347);
 
 	var _metadata2 = _interopRequireDefault(_metadata);
 
@@ -30174,7 +30195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 348 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -30676,7 +30697,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 349 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31221,7 +31242,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 350 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31251,7 +31272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _networkstore = __webpack_require__(348);
+	var _networkstore = __webpack_require__(349);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
 
@@ -31259,7 +31280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _cachestore2 = _interopRequireDefault(_cachestore);
 
-	var _syncstore = __webpack_require__(351);
+	var _syncstore = __webpack_require__(352);
 
 	var _syncstore2 = _interopRequireDefault(_syncstore);
 
@@ -31346,7 +31367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 351 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31564,7 +31585,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = SyncStore;
 
 /***/ }),
-/* 352 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31609,7 +31630,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _query2 = _interopRequireDefault(_query);
 
-	var _networkstore = __webpack_require__(348);
+	var _networkstore = __webpack_require__(349);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
 
@@ -31942,7 +31963,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 353 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31981,7 +32002,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _query2 = _interopRequireDefault(_query);
 
-	var _networkstore = __webpack_require__(348);
+	var _networkstore = __webpack_require__(349);
 
 	var _networkstore2 = _interopRequireDefault(_networkstore);
 
@@ -32147,7 +32168,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 354 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32232,7 +32253,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 355 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -32259,7 +32280,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _client2 = _interopRequireDefault(_client);
 
-	var _endpoint = __webpack_require__(354);
+	var _endpoint = __webpack_require__(355);
 
 	var _endpoint2 = _interopRequireDefault(_endpoint);
 
@@ -32275,7 +32296,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _datastore2 = _interopRequireDefault(_datastore);
 
-	var _entity = __webpack_require__(344);
+	var _entity = __webpack_require__(345);
 
 	var _identity = __webpack_require__(327);
 
@@ -32405,7 +32426,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49)))
 
 /***/ }),
-/* 356 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32414,7 +32435,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _export2 = _interopRequireDefault(_export);
 
-	var _middleware = __webpack_require__(357);
+	var _middleware = __webpack_require__(358);
 
 	var _popup = __webpack_require__(377);
 
@@ -32433,7 +32454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = _export2.default;
 
 /***/ }),
-/* 357 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32443,11 +32464,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	exports.HttpMiddleware = exports.CacheMiddleware = undefined;
 
-	var _cache = __webpack_require__(358);
+	var _cache = __webpack_require__(359);
 
 	var _cache2 = _interopRequireDefault(_cache);
 
-	var _http = __webpack_require__(368);
+	var _http = __webpack_require__(369);
 
 	var _http2 = _interopRequireDefault(_http);
 
@@ -32457,7 +32478,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.HttpMiddleware = _http2.default;
 
 /***/ }),
-/* 358 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32470,7 +32491,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _export = __webpack_require__(4);
 
-	var _storage = __webpack_require__(359);
+	var _storage = __webpack_require__(360);
 
 	var _storage2 = _interopRequireDefault(_storage);
 
@@ -32504,7 +32525,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = HTML5CacheMiddleware;
 
 /***/ }),
-/* 359 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32523,15 +32544,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _storage2 = _interopRequireDefault(_storage);
 
-	var _indexeddb = __webpack_require__(360);
+	var _indexeddb = __webpack_require__(361);
 
 	var _indexeddb2 = _interopRequireDefault(_indexeddb);
 
-	var _websql = __webpack_require__(361);
+	var _websql = __webpack_require__(362);
 
 	var _websql2 = _interopRequireDefault(_websql);
 
-	var _webstorage = __webpack_require__(362);
+	var _webstorage = __webpack_require__(363);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32583,7 +32604,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = Storage;
 
 /***/ }),
-/* 360 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -32955,7 +32976,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 361 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -33233,7 +33254,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49), (function() { return this; }())))
 
 /***/ }),
-/* 362 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process, global) {'use strict';
@@ -33255,7 +33276,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _keyBy2 = _interopRequireDefault(_keyBy);
 
-	var _merge = __webpack_require__(363);
+	var _merge = __webpack_require__(364);
 
 	var _merge2 = _interopRequireDefault(_merge);
 
@@ -33732,10 +33753,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(49), (function() { return this; }())))
 
 /***/ }),
-/* 363 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseMerge = __webpack_require__(364),
+	var baseMerge = __webpack_require__(365),
 	    createAssigner = __webpack_require__(210);
 
 	/**
@@ -33777,13 +33798,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 364 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var Stack = __webpack_require__(133),
-	    assignMergeValue = __webpack_require__(365),
+	    assignMergeValue = __webpack_require__(366),
 	    baseFor = __webpack_require__(218),
-	    baseMergeDeep = __webpack_require__(366),
+	    baseMergeDeep = __webpack_require__(367),
 	    isObject = __webpack_require__(88),
 	    keysIn = __webpack_require__(247);
 
@@ -33824,7 +33845,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 365 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var baseAssignValue = __webpack_require__(208),
@@ -33850,10 +33871,10 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 366 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assignMergeValue = __webpack_require__(365),
+	var assignMergeValue = __webpack_require__(366),
 	    cloneBuffer = __webpack_require__(250),
 	    cloneTypedArray = __webpack_require__(267),
 	    copyArray = __webpack_require__(251),
@@ -33866,7 +33887,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    isObject = __webpack_require__(88),
 	    isPlainObject = __webpack_require__(297),
 	    isTypedArray = __webpack_require__(160),
-	    toPlainObject = __webpack_require__(367);
+	    toPlainObject = __webpack_require__(368);
 
 	/**
 	 * A specialized version of `baseMerge` for arrays and objects which performs
@@ -33949,7 +33970,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 367 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var copyObject = __webpack_require__(209),
@@ -33987,7 +34008,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 368 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -34000,7 +34021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _export = __webpack_require__(4);
 
-	var _xhr = __webpack_require__(369);
+	var _xhr = __webpack_require__(370);
 
 	var _xhr2 = _interopRequireDefault(_xhr);
 
@@ -34175,11 +34196,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 369 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var window = __webpack_require__(370)
+	var window = __webpack_require__(339)
 	var isFunction = __webpack_require__(371)
 	var parseHeaders = __webpack_require__(372)
 	var xtend = __webpack_require__(375)
@@ -34422,26 +34443,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ }),
-/* 370 */
-/***/ (function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {var win;
-
-	if (typeof window !== "undefined") {
-	    win = window;
-	} else if (typeof global !== "undefined") {
-	    win = global;
-	} else if (typeof self !== "undefined"){
-	    win = self;
-	} else {
-	    win = {};
-	}
-
-	module.exports = win;
-
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ }),
 /* 371 */
 /***/ (function(module, exports) {
 
@@ -34599,165 +34600,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 376 */
 /***/ (function(module, exports) {
 
-	module.exports = {
-		"_args": [
-			[
-				{
-					"raw": "kinvey-html5-sdk@3.5.2",
-					"scope": null,
-					"escapedName": "kinvey-html5-sdk",
-					"name": "kinvey-html5-sdk",
-					"rawSpec": "3.5.2",
-					"spec": "3.5.2",
-					"type": "version"
-				},
-				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK/node_modules/kinvey-phonegap-sdk"
-			]
-		],
-		"_from": "kinvey-html5-sdk@3.5.2",
-		"_id": "kinvey-html5-sdk@3.5.2",
-		"_inCache": true,
-		"_location": "/kinvey-html5-sdk",
-		"_nodeVersion": "6.11.0",
-		"_npmOperationalInternal": {
-			"host": "s3://npm-registry-packages",
-			"tmp": "tmp/kinvey-html5-sdk-3.5.2.tgz_1499539123965_0.31698323553428054"
-		},
-		"_npmUser": {
-			"name": "thomas.conner",
-			"email": "thomas.conner@me.com"
-		},
-		"_npmVersion": "3.10.10",
-		"_phantomChildren": {},
-		"_requested": {
-			"raw": "kinvey-html5-sdk@3.5.2",
-			"scope": null,
-			"escapedName": "kinvey-html5-sdk",
-			"name": "kinvey-html5-sdk",
-			"rawSpec": "3.5.2",
-			"spec": "3.5.2",
-			"type": "version"
-		},
-		"_requiredBy": [
-			"/kinvey-phonegap-sdk"
-		],
-		"_resolved": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.5.2.tgz",
-		"_shasum": "3a79bd14e82a6ad35bb2e8948a4d5917cecda0ed",
-		"_shrinkwrap": null,
-		"_spec": "kinvey-html5-sdk@3.5.2",
-		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK/node_modules/kinvey-phonegap-sdk",
-		"author": {
-			"name": "Kinvey"
-		},
-		"bugs": {
-			"url": "https://github.com/Kinvey/html5-sdk/issues"
-		},
-		"contributors": [
-			{
-				"name": "Thomas Conner",
-				"email": "thomas@kinvey.com"
-			}
-		],
-		"dependencies": {
-			"core-js": "2.4.1",
-			"es6-promise": "4.1.0",
-			"kinvey-js-sdk": "3.5.2",
-			"lodash": "4.17.4",
-			"xhr": "2.3.3"
-		},
-		"description": "Kinvey JavaScript SDK for HTML5 applications.",
-		"devDependencies": {
-			"babel-cli": "6.24.0",
-			"babel-core": "6.24.0",
-			"babel-eslint": "7.1.1",
-			"babel-plugin-inline-dotenv": "^1.1.1",
-			"babel-plugin-module-resolver": "2.5.0",
-			"babel-polyfill": "^6.9.0",
-			"babel-preset-es2015": "6.24.0",
-			"babel-preset-stage-2": "^6.0.15",
-			"babel-register": "6.24.0",
-			"browserstack-local": "^1.2.0",
-			"eslint": "3.17.1",
-			"eslint-config-airbnb-base": "11.1.1",
-			"eslint-import-resolver-babel-module": "3.0.0",
-			"eslint-plugin-import": "2.2.0",
-			"expect": "^1.20.2",
-			"fs-extra": "2.1.1",
-			"istanbul": "1.1.0-alpha.1",
-			"json-loader": "^0.5.4",
-			"mocha": "3.2.0",
-			"nock": "9.0.9",
-			"regenerator-runtime": "0.10.3",
-			"selenium-standalone": "6.0.1",
-			"shelljs": "0.7.7",
-			"uglify-js": "2.8.12",
-			"wdio-mocha-framework": "0.5.9",
-			"wdio-spec-reporter": "0.1.0",
-			"webdriverio": "^4.4.0",
-			"webpack": "^1.13.0"
-		},
-		"directories": {},
-		"dist": {
-			"shasum": "3a79bd14e82a6ad35bb2e8948a4d5917cecda0ed",
-			"tarball": "https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.5.2.tgz"
-		},
-		"engines": {
-			"node": ">=4.0"
-		},
-		"gitHead": "98fd878864132fca22e649683b0f8a3ec829b676",
-		"homepage": "http://www.kinvey.com",
-		"keywords": [
-			"Kinvey",
-			"JavaScript",
-			"HTML5"
-		],
-		"license": "Apache-2.0",
-		"main": "./dist/index.js",
-		"maintainers": [
-			{
-				"name": "kinvey",
-				"email": "opensource@kinvey.com"
-			},
-			{
-				"name": "thomas.conner",
-				"email": "thomas.conner@me.com"
-			}
-		],
-		"name": "kinvey-html5-sdk",
-		"optionalDependencies": {},
-		"peerDependencies": {
-			"kinvey-js-sdk": "3.5.2"
-		},
-		"readme": "# Overview [![Build Status](https://travis-ci.org/Kinvey/html5-sdk.svg?branch=master)](https://travis-ci.org/Kinvey/html5-sdk) [![Code Climate](https://codeclimate.com/github/Kinvey/html5-sdk/badges/gpa.svg)](https://codeclimate.com/github/Kinvey/html5-sdk)\n\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\n## Installation\n\n#### Using npm\nInstall and save the Kinvey HTML5 SDK:\n\n```javascript\nnpm install --save kinvey-html5-sdk\n```\n\nImport the Kinvey HTML5 SDK (ES6/TypeScript):\n\n```javascript\nimport Kinvey from 'kinvey-html5-sdk';\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is included in the distribution and will automatically be picked up by the TypeScript compiler.\n\n#### Using the Kinvey CDN\n\n```html\n<script src=\"https://download.kinvey.com/js/kinvey-html5-sdk-3.5.0.min.js\"></script>\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is available at\n\n```html\nhttps://download.kinvey.com/js/kinvey-html5-sdk-3.5.0.d.ts\n```\n\nYou will then be able to access Kinvey HTML5 SDK via `window.Kinvey`.\n\n## Browser Compatibility\n\nThe Kinvey HTML5 SDK supports the following browsers:\n\n- On macOS: Safari, Chrome, Firefox\n- On iOS: Safari, Chrome\n- On Windows: Chrome, Firefox, Edge, Internet Explorer 11\n- On Android: Chrome (Performance depends on device)\n\n## Documentation\n\nFor more detailed documentation, see http://devcenter.kinvey.com/html5\n\n## License\nSee [LICENSE](LICENSE) for details.\n\n## Contributing\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on reporting bugs and making contributions.\n",
-		"readmeFilename": "README.md",
-		"repository": {
-			"type": "git",
-			"url": "git+ssh://git@github.com/Kinvey/html5-sdk.git"
-		},
-		"scripts": {
-			"build": "npm run clean && npm run transpile && npm run bundle && npm run minify",
-			"bundle": "webpack --config webpack.config.js",
-			"clean": "rm -rf dist && rm -rf coverage && rm -rf s3",
-			"cover": "istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"docs": "esdoc -c esdoc.json",
-			"e2e:app": "npm run build && shjs ./scripts/e2e.js && node ./test/e2e/app",
-			"e2e:server": "selenium-standalone install --version=3.0.1 && selenium-standalone start",
-			"e2e:test": "wdio ./test/e2e/wdio.conf",
-			"e2e:test:browserstack": "wdio ./test/e2e/browserstack.conf",
-			"lint": "npm run lint:src",
-			"lint:src": "eslint src/**",
-			"lint:test": "eslint test/unit/**",
-			"minify": "uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-html5-sdk.min.js -- ./dist/kinvey-html5-sdk.js ",
-			"postversion": "git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3",
-			"preversion": "rm -rf node_modules && npm install && npm test",
-			"s3": "npm run build && shjs ./scripts/s3.js",
-			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"transpile": "babel src --out-dir dist",
-			"version": "npm run build && git add dist/kinvey-html5-sdk.js && git add dist/kinvey-html5-sdk.min.js && git commit -m 'Update dist bundle.'"
-		},
-		"version": "3.5.2"
-	};
+	module.exports = {"_args":[[{"raw":"kinvey-html5-sdk@3.5.2","scope":null,"escapedName":"kinvey-html5-sdk","name":"kinvey-html5-sdk","rawSpec":"3.5.2","spec":"3.5.2","type":"version"},"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK/node_modules/kinvey-phonegap-sdk"]],"_from":"kinvey-html5-sdk@3.5.2","_id":"kinvey-html5-sdk@3.5.2","_inCache":true,"_location":"/kinvey-html5-sdk","_nodeVersion":"6.11.0","_npmOperationalInternal":{"host":"s3://npm-registry-packages","tmp":"tmp/kinvey-html5-sdk-3.5.2.tgz_1499539123965_0.31698323553428054"},"_npmUser":{"name":"thomas.conner","email":"thomas.conner@me.com"},"_npmVersion":"3.10.10","_phantomChildren":{},"_requested":{"raw":"kinvey-html5-sdk@3.5.2","scope":null,"escapedName":"kinvey-html5-sdk","name":"kinvey-html5-sdk","rawSpec":"3.5.2","spec":"3.5.2","type":"version"},"_requiredBy":["/kinvey-phonegap-sdk"],"_resolved":"https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.5.2.tgz","_shasum":"3a79bd14e82a6ad35bb2e8948a4d5917cecda0ed","_shrinkwrap":null,"_spec":"kinvey-html5-sdk@3.5.2","_where":"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK/node_modules/kinvey-phonegap-sdk","author":{"name":"Kinvey"},"bugs":{"url":"https://github.com/Kinvey/html5-sdk/issues"},"contributors":[{"name":"Thomas Conner","email":"thomas@kinvey.com"}],"dependencies":{"core-js":"2.4.1","es6-promise":"4.1.0","kinvey-js-sdk":"3.5.2","lodash":"4.17.4","xhr":"2.3.3"},"description":"Kinvey JavaScript SDK for HTML5 applications.","devDependencies":{"babel-cli":"6.24.0","babel-core":"6.24.0","babel-eslint":"7.1.1","babel-plugin-inline-dotenv":"^1.1.1","babel-plugin-module-resolver":"2.5.0","babel-polyfill":"^6.9.0","babel-preset-es2015":"6.24.0","babel-preset-stage-2":"^6.0.15","babel-register":"6.24.0","browserstack-local":"^1.2.0","eslint":"3.17.1","eslint-config-airbnb-base":"11.1.1","eslint-import-resolver-babel-module":"3.0.0","eslint-plugin-import":"2.2.0","expect":"^1.20.2","fs-extra":"2.1.1","istanbul":"1.1.0-alpha.1","json-loader":"^0.5.4","mocha":"3.2.0","nock":"9.0.9","regenerator-runtime":"0.10.3","selenium-standalone":"6.0.1","shelljs":"0.7.7","uglify-js":"2.8.12","wdio-mocha-framework":"0.5.9","wdio-spec-reporter":"0.1.0","webdriverio":"^4.4.0","webpack":"^1.13.0"},"directories":{},"dist":{"shasum":"3a79bd14e82a6ad35bb2e8948a4d5917cecda0ed","tarball":"https://registry.npmjs.org/kinvey-html5-sdk/-/kinvey-html5-sdk-3.5.2.tgz"},"engines":{"node":">=4.0"},"gitHead":"98fd878864132fca22e649683b0f8a3ec829b676","homepage":"http://www.kinvey.com","keywords":["Kinvey","JavaScript","HTML5"],"license":"Apache-2.0","main":"./dist/index.js","maintainers":[{"name":"kinvey","email":"opensource@kinvey.com"},{"name":"thomas.conner","email":"thomas.conner@me.com"}],"name":"kinvey-html5-sdk","optionalDependencies":{},"peerDependencies":{"kinvey-js-sdk":"3.5.2"},"readme":"# Overview [![Build Status](https://travis-ci.org/Kinvey/html5-sdk.svg?branch=master)](https://travis-ci.org/Kinvey/html5-sdk) [![Code Climate](https://codeclimate.com/github/Kinvey/html5-sdk/badges/gpa.svg)](https://codeclimate.com/github/Kinvey/html5-sdk)\n\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\n## Installation\n\n#### Using npm\nInstall and save the Kinvey HTML5 SDK:\n\n```javascript\nnpm install --save kinvey-html5-sdk\n```\n\nImport the Kinvey HTML5 SDK (ES6/TypeScript):\n\n```javascript\nimport Kinvey from 'kinvey-html5-sdk';\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is included in the distribution and will automatically be picked up by the TypeScript compiler.\n\n#### Using the Kinvey CDN\n\n```html\n<script src=\"https://download.kinvey.com/js/kinvey-html5-sdk-3.5.0.min.js\"></script>\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is available at\n\n```html\nhttps://download.kinvey.com/js/kinvey-html5-sdk-3.5.0.d.ts\n```\n\nYou will then be able to access Kinvey HTML5 SDK via `window.Kinvey`.\n\n## Browser Compatibility\n\nThe Kinvey HTML5 SDK supports the following browsers:\n\n- On macOS: Safari, Chrome, Firefox\n- On iOS: Safari, Chrome\n- On Windows: Chrome, Firefox, Edge, Internet Explorer 11\n- On Android: Chrome (Performance depends on device)\n\n## Documentation\n\nFor more detailed documentation, see http://devcenter.kinvey.com/html5\n\n## License\nSee [LICENSE](LICENSE) for details.\n\n## Contributing\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on reporting bugs and making contributions.\n","readmeFilename":"README.md","repository":{"type":"git","url":"git+ssh://git@github.com/Kinvey/html5-sdk.git"},"scripts":{"build":"npm run clean && npm run transpile && npm run bundle && npm run minify","bundle":"webpack --config webpack.config.js","clean":"rm -rf dist && rm -rf coverage && rm -rf s3","cover":"istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","docs":"esdoc -c esdoc.json","e2e:app":"npm run build && shjs ./scripts/e2e.js && node ./test/e2e/app","e2e:server":"selenium-standalone install --version=3.0.1 && selenium-standalone start","e2e:test":"wdio ./test/e2e/wdio.conf","e2e:test:browserstack":"wdio ./test/e2e/browserstack.conf","lint":"npm run lint:src","lint:src":"eslint src/**","lint:test":"eslint test/unit/**","minify":"uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-html5-sdk.min.js -- ./dist/kinvey-html5-sdk.js ","postversion":"git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3","preversion":"rm -rf node_modules && npm install && npm test","s3":"npm run build && shjs ./scripts/s3.js","test":"mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","test:watch":"mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","transpile":"babel src --out-dir dist","version":"npm run build && git add dist/kinvey-html5-sdk.js && git add dist/kinvey-html5-sdk.min.js && git commit -m 'Update dist bundle.'"},"version":"3.5.2"}
 
 /***/ }),
 /* 377 */
@@ -36332,7 +36175,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	exports.deviceInformation = deviceInformation;
 
-	var _middleware = __webpack_require__(357);
+	var _middleware = __webpack_require__(358);
 
 	var _package = __webpack_require__(412);
 
@@ -36456,162 +36299,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 412 */
 /***/ (function(module, exports) {
 
-	module.exports = {
-		"_args": [
-			[
-				{
-					"raw": "kinvey-phonegap-sdk@3.5.2",
-					"scope": null,
-					"escapedName": "kinvey-phonegap-sdk",
-					"name": "kinvey-phonegap-sdk",
-					"rawSpec": "3.5.2",
-					"spec": "3.5.2",
-					"type": "version"
-				},
-				"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"
-			]
-		],
-		"_from": "kinvey-phonegap-sdk@3.5.2",
-		"_id": "kinvey-phonegap-sdk@3.5.2",
-		"_inCache": true,
-		"_location": "/kinvey-phonegap-sdk",
-		"_nodeVersion": "6.11.0",
-		"_npmOperationalInternal": {
-			"host": "s3://npm-registry-packages",
-			"tmp": "tmp/kinvey-phonegap-sdk-3.5.2.tgz_1499539756412_0.16095222881995142"
-		},
-		"_npmUser": {
-			"name": "thomas.conner",
-			"email": "thomas.conner@me.com"
-		},
-		"_npmVersion": "3.10.10",
-		"_phantomChildren": {},
-		"_requested": {
-			"raw": "kinvey-phonegap-sdk@3.5.2",
-			"scope": null,
-			"escapedName": "kinvey-phonegap-sdk",
-			"name": "kinvey-phonegap-sdk",
-			"rawSpec": "3.5.2",
-			"spec": "3.5.2",
-			"type": "version"
-		},
-		"_requiredBy": [
-			"/"
-		],
-		"_resolved": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.5.2.tgz",
-		"_shasum": "3247fe8c0d5338de9b18e56b543131abcaaf9a65",
-		"_shrinkwrap": null,
-		"_spec": "kinvey-phonegap-sdk@3.5.2",
-		"_where": "/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK",
-		"author": {
-			"name": "Kinvey"
-		},
-		"bugs": {
-			"url": "https://github.com/Kinvey/phonegap-sdk/issues"
-		},
-		"contributors": [
-			{
-				"name": "Thomas Conner",
-				"email": "thomas@kinvey.com"
-			}
-		],
-		"dependencies": {
-			"core-js": "2.4.1",
-			"es6-promise": "4.1.0",
-			"kinvey-html5-sdk": "3.5.2",
-			"kinvey-js-sdk": "3.5.2",
-			"lodash": "4.17.4"
-		},
-		"description": "Kinvey JavaScript SDK for PhoneGap/Cordova applications.",
-		"devDependencies": {
-			"babel-cli": "6.24.0",
-			"babel-core": "6.24.0",
-			"babel-eslint": "7.1.1",
-			"babel-plugin-inline-dotenv": "^1.1.1",
-			"babel-plugin-module-resolver": "2.5.0",
-			"babel-polyfill": "6.23.0",
-			"babel-preset-es2015": "^6.9.0",
-			"babel-preset-stage-2": "^6.0.15",
-			"babel-register": "6.24.0",
-			"cordova": "^6.3.1",
-			"eslint": "3.17.1",
-			"eslint-config-airbnb-base": "11.1.1",
-			"eslint-import-resolver-babel-module": "3.0.0",
-			"eslint-plugin-import": "2.2.0",
-			"expect": "1.20.2",
-			"fs-extra": "2.1.1",
-			"istanbul": "1.1.0-alpha.1",
-			"json-loader": "^0.5.4",
-			"mocha": "3.2.0",
-			"nock": "9.0.9",
-			"regenerator-runtime": "0.10.3",
-			"request": "2.81.0",
-			"shelljs": "^0.7.4",
-			"uglify-js": "^2.7.3",
-			"wdio-dot-reporter": "0.0.7",
-			"wdio-mocha-framework": "0.5.9",
-			"wdio-spec-reporter": "0.1.0",
-			"webdriverio": "^4.2.5",
-			"webpack": "^1.13.0"
-		},
-		"directories": {},
-		"dist": {
-			"shasum": "3247fe8c0d5338de9b18e56b543131abcaaf9a65",
-			"tarball": "https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.5.2.tgz"
-		},
-		"engines": {
-			"node": ">=4.0"
-		},
-		"gitHead": "02ba046dfd1aed0641587e6c0cd7f4c42f86dad6",
-		"homepage": "http://www.kinvey.com",
-		"keywords": [
-			"Kinvey",
-			"JavaScript",
-			"PhoneGap",
-			"Cordova"
-		],
-		"license": "Apache-2.0",
-		"main": "./dist/index.js",
-		"maintainers": [
-			{
-				"name": "thomas.conner",
-				"email": "thomas.conner@me.com"
-			}
-		],
-		"module": "./src/index.js",
-		"name": "kinvey-phonegap-sdk",
-		"optionalDependencies": {},
-		"peerDependencies": {
-			"kinvey-html5-sdk": "3.5.2",
-			"kinvey-js-sdk": "3.5.2"
-		},
-		"readme": "# Kinvey PhoneGap SDK [![Build Status](https://travis-ci.org/Kinvey/phonegap-sdk.svg?branch=master)](https://travis-ci.org/Kinvey/phonegap-sdk) [![Code Climate](https://codeclimate.com/github/Kinvey/phonegap-sdk/badges/gpa.svg)](https://codeclimate.com/github/Kinvey/phonegap-sdk)\n\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\n## Installation\n\n#### Using npm\nInstall and save the Kinvey PhoneGap SDK:\n\n```javascript\nnpm install --save kinvey-phonegap-sdk\n```\n\nImport the Kinvey PhoneGap SDK (ES6/TypeScript):\n\n```javascript\nimport Kinvey from 'kinvey-phonegap-sdk';\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is included in the distribution and will automatically be picked up by the TypeScript compiler.\n\n#### Using the Kinvey CDN\n\n```html\n<script src=\"https://download.kinvey.com/js/kinvey-phonegap-sdk-3.5.0.min.js\"></script>\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is available at\n\n```html\nhttps://download.kinvey.com/js/kinvey.d.ts\n```\n\nYou will then be able to access Kinvey PhoneGap SDK via `window.Kinvey`.\n\n## Browser Compatibility\n\nThe Kinvey PhoneGap SDK supports the following browsers and versions of PhoneGap/Cordova:\n\n- On macOS: Safari, Chrome, Firefox\n- On iOS: Safari, Chrome\n- On Windows: Chrome, Firefox, Edge, Internet Explorer 11\n- On Android: Chrome (Performance depends on device)\n- On PhoneGap/Cordova: 5.x+\n\n## Documentation\n\nFor more detailed documentation, see http://devcenter.kinvey.com/phonegap\n\n## License\nSee [LICENSE](LICENSE) for details.\n\n## Contributing\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on reporting bugs and making contributions.\n\n",
-		"readmeFilename": "README.md",
-		"repository": {
-			"type": "git",
-			"url": "git+ssh://git@github.com/Kinvey/phonegap-sdk.git"
-		},
-		"scripts": {
-			"build": "npm run clean && npm run transpile && npm run bundle && npm run minify",
-			"bundle": "webpack",
-			"clean": "rm -rf dist && rm -rf coverage && rm -rf s3",
-			"cover": "istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
-			"docs": "esdoc -c esdoc.json",
-			"lint": "npm run lint:src",
-			"lint:src": "eslint src/**",
-			"lint:test": "eslint test/unit/**",
-			"minify": "uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-phonegap-sdk.min.js -- ./dist/kinvey-phonegap-sdk.js ",
-			"postversion": "git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3",
-			"preversion": "rm -rf node_modules && npm install && npm test",
-			"s3": "npm run build && shjs ./scripts/s3.js",
-			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
-			"test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit",
-			"transpile": "babel src --out-dir dist",
-			"version": "npm run build && git add dist/kinvey-phonegap-sdk.js && git add dist/kinvey-phonegap-sdk.min.js && git commit -m 'Update dist bundle.'"
-		},
-		"typings": "./src/kinvey.d.ts",
-		"version": "3.5.2"
-	};
+	module.exports = {"_args":[[{"raw":"kinvey-phonegap-sdk@3.5.2","scope":null,"escapedName":"kinvey-phonegap-sdk","name":"kinvey-phonegap-sdk","rawSpec":"3.5.2","spec":"3.5.2","type":"version"},"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK"]],"_from":"kinvey-phonegap-sdk@3.5.2","_id":"kinvey-phonegap-sdk@3.5.2","_inCache":true,"_location":"/kinvey-phonegap-sdk","_nodeVersion":"6.11.0","_npmOperationalInternal":{"host":"s3://npm-registry-packages","tmp":"tmp/kinvey-phonegap-sdk-3.5.2.tgz_1499539756412_0.16095222881995142"},"_npmUser":{"name":"thomas.conner","email":"thomas.conner@me.com"},"_npmVersion":"3.10.10","_phantomChildren":{},"_requested":{"raw":"kinvey-phonegap-sdk@3.5.2","scope":null,"escapedName":"kinvey-phonegap-sdk","name":"kinvey-phonegap-sdk","rawSpec":"3.5.2","spec":"3.5.2","type":"version"},"_requiredBy":["/"],"_resolved":"https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.5.2.tgz","_shasum":"3247fe8c0d5338de9b18e56b543131abcaaf9a65","_shrinkwrap":null,"_spec":"kinvey-phonegap-sdk@3.5.2","_where":"/Users/Thomas/Documents/Kinvey/Development/SDKs/JavaScript/Angular/SDK","author":{"name":"Kinvey"},"bugs":{"url":"https://github.com/Kinvey/phonegap-sdk/issues"},"contributors":[{"name":"Thomas Conner","email":"thomas@kinvey.com"}],"dependencies":{"core-js":"2.4.1","es6-promise":"4.1.0","kinvey-html5-sdk":"3.5.2","kinvey-js-sdk":"3.5.2","lodash":"4.17.4"},"description":"Kinvey JavaScript SDK for PhoneGap/Cordova applications.","devDependencies":{"babel-cli":"6.24.0","babel-core":"6.24.0","babel-eslint":"7.1.1","babel-plugin-inline-dotenv":"^1.1.1","babel-plugin-module-resolver":"2.5.0","babel-polyfill":"6.23.0","babel-preset-es2015":"^6.9.0","babel-preset-stage-2":"^6.0.15","babel-register":"6.24.0","cordova":"^6.3.1","eslint":"3.17.1","eslint-config-airbnb-base":"11.1.1","eslint-import-resolver-babel-module":"3.0.0","eslint-plugin-import":"2.2.0","expect":"1.20.2","fs-extra":"2.1.1","istanbul":"1.1.0-alpha.1","json-loader":"^0.5.4","mocha":"3.2.0","nock":"9.0.9","regenerator-runtime":"0.10.3","request":"2.81.0","shelljs":"^0.7.4","uglify-js":"^2.7.3","wdio-dot-reporter":"0.0.7","wdio-mocha-framework":"0.5.9","wdio-spec-reporter":"0.1.0","webdriverio":"^4.2.5","webpack":"^1.13.0"},"directories":{},"dist":{"shasum":"3247fe8c0d5338de9b18e56b543131abcaaf9a65","tarball":"https://registry.npmjs.org/kinvey-phonegap-sdk/-/kinvey-phonegap-sdk-3.5.2.tgz"},"engines":{"node":">=4.0"},"gitHead":"02ba046dfd1aed0641587e6c0cd7f4c42f86dad6","homepage":"http://www.kinvey.com","keywords":["Kinvey","JavaScript","PhoneGap","Cordova"],"license":"Apache-2.0","main":"./dist/index.js","maintainers":[{"name":"thomas.conner","email":"thomas.conner@me.com"}],"module":"./src/index.js","name":"kinvey-phonegap-sdk","optionalDependencies":{},"peerDependencies":{"kinvey-html5-sdk":"3.5.2","kinvey-js-sdk":"3.5.2"},"readme":"# Kinvey PhoneGap SDK [![Build Status](https://travis-ci.org/Kinvey/phonegap-sdk.svg?branch=master)](https://travis-ci.org/Kinvey/phonegap-sdk) [![Code Climate](https://codeclimate.com/github/Kinvey/phonegap-sdk/badges/gpa.svg)](https://codeclimate.com/github/Kinvey/phonegap-sdk)\n\n[Kinvey](http://www.kinvey.com) (pronounced Kin-vey, like convey) makes it ridiculously easy for developers to setup, use and operate a cloud backend for their mobile apps. They don't have to worry about connecting to various cloud services, setting up servers for their backend, or maintaining and scaling them.\n\n## Installation\n\n#### Using npm\nInstall and save the Kinvey PhoneGap SDK:\n\n```javascript\nnpm install --save kinvey-phonegap-sdk\n```\n\nImport the Kinvey PhoneGap SDK (ES6/TypeScript):\n\n```javascript\nimport Kinvey from 'kinvey-phonegap-sdk';\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is included in the distribution and will automatically be picked up by the TypeScript compiler.\n\n#### Using the Kinvey CDN\n\n```html\n<script src=\"https://download.kinvey.com/js/kinvey-phonegap-sdk-3.5.0.min.js\"></script>\n```\n\nA [TypeScript](https://www.typescriptlang.org/) type definition file is available at\n\n```html\nhttps://download.kinvey.com/js/kinvey.d.ts\n```\n\nYou will then be able to access Kinvey PhoneGap SDK via `window.Kinvey`.\n\n## Browser Compatibility\n\nThe Kinvey PhoneGap SDK supports the following browsers and versions of PhoneGap/Cordova:\n\n- On macOS: Safari, Chrome, Firefox\n- On iOS: Safari, Chrome\n- On Windows: Chrome, Firefox, Edge, Internet Explorer 11\n- On Android: Chrome (Performance depends on device)\n- On PhoneGap/Cordova: 5.x+\n\n## Documentation\n\nFor more detailed documentation, see http://devcenter.kinvey.com/phonegap\n\n## License\nSee [LICENSE](LICENSE) for details.\n\n## Contributing\nSee [CONTRIBUTING.md](CONTRIBUTING.md) for details on reporting bugs and making contributions.\n\n","readmeFilename":"README.md","repository":{"type":"git","url":"git+ssh://git@github.com/Kinvey/phonegap-sdk.git"},"scripts":{"build":"npm run clean && npm run transpile && npm run bundle && npm run minify","bundle":"webpack","clean":"rm -rf dist && rm -rf coverage && rm -rf s3","cover":"istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit","docs":"esdoc -c esdoc.json","lint":"npm run lint:src","lint:src":"eslint src/**","lint:test":"eslint test/unit/**","minify":"uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-phonegap-sdk.min.js -- ./dist/kinvey-phonegap-sdk.js ","postversion":"git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3","preversion":"rm -rf node_modules && npm install && npm test","s3":"npm run build && shjs ./scripts/s3.js","test":"mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit","test:watch":"mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/index test/unit","transpile":"babel src --out-dir dist","version":"npm run build && git add dist/kinvey-phonegap-sdk.js && git add dist/kinvey-phonegap-sdk.min.js && git commit -m 'Update dist bundle.'"},"typings":"./src/kinvey.d.ts","version":"3.5.2"}
 
 /***/ }),
 /* 413 */
@@ -37332,90 +37020,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 419 */
 /***/ (function(module, exports) {
 
-	module.exports = {
-		"name": "kinvey-angular-sdk",
-		"version": "3.5.2",
-		"description": "Kinvey JavaScript SDK for AngularJS applications.",
-		"homepage": "http://www.kinvey.com",
-		"bugs": {
-			"url": "https://github.com/Kinvey/angular-sdk/issues"
-		},
-		"license": "Apache-2.0",
-		"author": "Kinvey",
-		"contributors": [
-			"Thomas Conner <thomas@kinvey.com>"
-		],
-		"main": "./dist/index.js",
-		"module": "./src/index.js",
-		"typings": "./src/kinvey.d.ts",
-		"repository": {
-			"type": "git",
-			"url": "git@github.com:Kinvey/angular-sdk"
-		},
-		"scripts": {
-			"build": "npm run clean && npm run transpile && npm run bundle && npm run minify",
-			"bundle": "webpack",
-			"clean": "rm -rf dist && rm -rf coverage && rm -rf s3",
-			"minify": "uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-angular-sdk.min.js -- ./dist/kinvey-angular-sdk.js ",
-			"cover": "istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"docs": "esdoc -c esdoc.json",
-			"lint": "npm run lint:src",
-			"lint:src": "eslint src/**",
-			"lint:test": "eslint test/unit/**",
-			"preversion": "rm -rf node_modules && npm install && npm test",
-			"version": "npm run build && git add dist/kinvey-angular-sdk.js && git add dist/kinvey-angular-sdk.min.js && git commit -m 'Update dist bundle.'",
-			"postversion": "git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3",
-			"s3": "npm run build && shjs ./scripts/s3.js",
-			"test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
-			"transpile": "babel src --out-dir dist"
-		},
-		"dependencies": {
-			"angular": "^1.6.3",
-			"kinvey-js-sdk": "3.5.2",
-			"kinvey-phonegap-sdk": "3.5.2",
-			"lodash": "4.17.4"
-		},
-		"peerDependencies": {
-			"kinvey-js-sdk": "3.5.2",
-			"kinvey-phonegap-sdk": "3.5.2"
-		},
-		"devDependencies": {
-			"babel-cli": "6.24.0",
-			"babel-core": "6.24.0",
-			"babel-eslint": "7.1.1",
-			"babel-plugin-inline-dotenv": "^1.1.1",
-			"babel-plugin-module-resolver": "2.5.0",
-			"babel-polyfill": "6.23.0",
-			"babel-preset-es2015": "^6.9.0",
-			"babel-preset-stage-2": "^6.0.15",
-			"babel-register": "6.24.0",
-			"eslint": "3.17.1",
-			"eslint-config-airbnb-base": "11.1.1",
-			"eslint-import-resolver-babel-module": "3.0.0",
-			"eslint-plugin-import": "2.2.0",
-			"expect": "^1.20.2",
-			"express": "^4.14.0",
-			"istanbul": "1.1.0-alpha.1",
-			"json-loader": "^0.5.4",
-			"mocha": "3.2.0",
-			"nock": "9.0.9",
-			"protractor": "5.1.1",
-			"regenerator-runtime": "0.10.3",
-			"shelljs": "^0.7.4",
-			"uglify-js": "^2.7.3",
-			"webpack": "^1.13.0"
-		},
-		"engines": {
-			"node": ">=6.0"
-		},
-		"keywords": [
-			"Kinvey",
-			"JavaScript",
-			"AngularJS",
-			"Ionic"
-		]
-	};
+	module.exports = {"name":"kinvey-angular-sdk","version":"3.5.3","description":"Kinvey JavaScript SDK for AngularJS applications.","homepage":"http://www.kinvey.com","bugs":{"url":"https://github.com/Kinvey/angular-sdk/issues"},"license":"Apache-2.0","author":"Kinvey","contributors":["Thomas Conner <thomas@kinvey.com>"],"main":"./dist/index.js","module":"./src/index.js","typings":"./src/kinvey.d.ts","repository":{"type":"git","url":"git@github.com:Kinvey/angular-sdk"},"scripts":{"build":"npm run clean && npm run transpile && npm run bundle && npm run minify","bundle":"webpack","clean":"rm -rf dist && rm -rf coverage && rm -rf s3","minify":"uglifyjs --screw-ie8 --compress warnings=false --mangle --comments --output ./dist/kinvey-angular-sdk.min.js -- ./dist/kinvey-angular-sdk.js ","cover":"istanbul cover _mocha -- --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","docs":"esdoc -c esdoc.json","lint":"npm run lint:src","lint:src":"eslint src/**","lint:test":"eslint test/unit/**","preversion":"rm -rf node_modules && npm install && npm test","version":"npm run build && git add dist/kinvey-angular-sdk.js && git add dist/kinvey-angular-sdk.min.js && git commit -m 'Update dist bundle.'","postversion":"git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3","s3":"npm run build && shjs ./scripts/s3.js","test":"mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","test:watch":"mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit","transpile":"babel src --out-dir dist"},"dependencies":{"angular":"^1.6.3","kinvey-js-sdk":"3.5.2","kinvey-phonegap-sdk":"3.5.2","lodash":"4.17.4"},"peerDependencies":{"kinvey-js-sdk":"3.5.2","kinvey-phonegap-sdk":"3.5.2"},"devDependencies":{"babel-cli":"6.24.0","babel-core":"6.24.0","babel-eslint":"7.1.1","babel-plugin-inline-dotenv":"^1.1.1","babel-plugin-module-resolver":"2.5.0","babel-polyfill":"6.23.0","babel-preset-es2015":"^6.9.0","babel-preset-stage-2":"^6.0.15","babel-register":"6.24.0","eslint":"3.17.1","eslint-config-airbnb-base":"11.1.1","eslint-import-resolver-babel-module":"3.0.0","eslint-plugin-import":"2.2.0","expect":"^1.20.2","express":"^4.14.0","istanbul":"1.1.0-alpha.1","json-loader":"^0.5.4","mocha":"3.2.0","nock":"9.0.9","protractor":"5.1.1","regenerator-runtime":"0.10.3","shelljs":"^0.7.4","uglify-js":"^2.7.3","webpack":"^1.13.0"},"engines":{"node":">=6.0"},"keywords":["Kinvey","JavaScript","AngularJS","Ionic"]}
 
 /***/ })
 /******/ ])
