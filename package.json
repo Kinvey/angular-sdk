@@ -30,7 +30,7 @@
     "lint:test": "eslint test/unit/**",
     "preversion": "rm -rf node_modules && npm install && npm test",
     "version": "npm run build && git add dist/kinvey-angular-sdk.js && git add dist/kinvey-angular-sdk.min.js && git commit -m 'Update dist bundle.'",
-    "postversion": "git push && git push --tags && rm -rf dist && rm -rf coverage && rm -rf s3",
+    "postversion": "git push && git push --tags",
     "s3": "npm run build && shjs ./scripts/s3.js",
     "test": "mocha --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
     "test:watch": "mocha -w --compilers js:babel-core/register -r babel-polyfill -s 100 --recursive test/unit/setup test/unit",
