@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "angular": "^1.6.3",
-    "kinvey-js-sdk": "3.5.2",
-    "kinvey-phonegap-sdk": "3.5.2",
+    "kinvey-js-sdk": "3.8.0",
+    "kinvey-phonegap-sdk": "3.8.0",
     "lodash": "4.17.4"
   },
   "peerDependencies": {
-    "kinvey-js-sdk": "3.5.2",
-    "kinvey-phonegap-sdk": "3.5.2"
+    "kinvey-js-sdk": "3.8.0",
+    "kinvey-phonegap-sdk": "3.8.0"
   },
   "devDependencies": {
     "babel-cli": "6.24.0",
