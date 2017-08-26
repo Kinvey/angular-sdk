@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.8.1](https://github.com/Kinvey/angular-sdk/tree/v3.8.1) (2017-08-25)
+[Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.8.0...v3.8.1)<br/>
+
+### Added
+_None_
+
+### Removed
+_None_
+
+### Changed/Fixed
+- Updated [kinvey-js-sdk](https://github.com/Kinvey/js-sdk) dependency to [3.8.1](https://github.com/Kinvey/js-sdk/tree/v3.8.1)
+- Updated [kinvey-phonegap-sdk](https://github.com/Kinvey/phonegap-sdk) dependency to [3.8.1](https://github.com/Kinvey/phonegap-sdk/tree/v3.8.1)
+
+### Merged Pull Requests
+_None_
+
+### Closed Issues
+_None_
+
 ## [3.8.0](https://github.com/Kinvey/angular-sdk/tree/v3.8.0) (2017-08-24)
 [Full Changelog](https://github.com/Kinvey/angular-sdk/compare/v3.5.3...v3.8.0)<br/>
 
