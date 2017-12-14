@@ -1,5 +1,5 @@
 {
-  "version": "3.9.3-beta.3",
+  "version": "3.9.3",
   "name": "kinvey-angular-sdk",
   "description": "Kinvey JavaScript SDK for Angular/Ionic applications.",
   "author": "Kinvey, Inc.",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "main": "kinvey-angular-sdk.min.js",
   "files": [
-    "kinvey-angular-sdk.min.js",
-    "kinvey-angular-sdk.min.js.map"
+    "kinvey-angular-sdk.js",
+    "kinvey-angular-sdk.js.map"
   ]
 }
